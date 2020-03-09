@@ -1,0 +1,394 @@
+/***** liste des couleurs  de base
+
+#ccc  &   #cccccc
+black
+white
+red
+#21bd18
+#fcb912
+#e5e5e5
+#b2b2b2
+#393939
+#f03917
+
+****/
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+
+/***************** general ******************/
+
+/** transition 200ms **/
+.t200all{
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
+}
+
+#ro_front_formulaire input, #ro_front_formulaire select{
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+border-style: solid;
+
+border-top: 1px solid #cccccc;
+
+border-bottom: 1px solid #ccc;
+
+border-left: 1px solid #cccccc;
+
+border-right: 1px solid #ccc;
+}
+
+#ro_front_formulaire .btn{
+border:1px solid black;
+background-color:black;
+color:white;
+}
+
+
+#ro_front_formulaire .btn:hover{
+background-color:white;
+color:black;
+border:1px solid black;
+}
+
+
+.input_error{
+	color:red;
+	background-color:white;
+}
+.input_valid{
+	color:#21bd18;
+	background-color:white;
+}
+.input_info{
+	color:#fcb912;
+	background-color:white;
+}
+
+/***************** mobile first design **************/
+
+.step_item{
+	background-color:#e5e5e5;
+	border-left:1px solid white;
+	border-right:1px solid white;
+	color:black;
+}
+
+#steps_navigation .not_active_yet {
+background-color: #cccccc;
+color: white;
+}
+
+.step_item.active .step_number{
+color:white;
+}
+.step_item.active .step_text{
+color:white;
+}
+.step_item.active,.step_item:hover{
+color:#cccccc;
+background-color:black;
+}
+
+/********** ETAPE 1 : CHOIX LIEU **********/
+
+#step1_content .place{
+	border:1px solid black;
+	background-color:black;
+	color:white;
+}
+
+#step1_content .place:hover{
+	background-color:white;
+	color:black;
+	border:1px solid black;
+}
+
+#step1_content .place.active{
+	background-color:white;
+	color:black;
+	border:1px solid black;
+}
+
+
+/********** ETAPE 2 : CHOIX SERVICE **********/
+
+#step2_content .service{
+	color:white;
+}
+
+#step2_content .service:hover{
+	color:white;
+}
+
+#step2_content .service_content{
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#step2_content .service:hover .service_content{
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/********** ETAPE 3 : CHOIX DATE **********/
+
+/***** CALENDRIER *****/
+
+/***** CRENEAU *****/
+
+#step3_2{}
+
+#step3_2 .creneau{
+background-color:white;
+border:1px solid black;
+}
+
+#step3_2 .morning_title, #step3_2 .afternoon_title{
+	background-color:white;
+}
+
+#step3_2 .creneau:hover{
+background-color:black;
+color:white;
+}
+
+#step3_2 .creneau.active{
+background-color:black;
+color:white;
+}
+
+#step3_2 .creneau.not_avalaible{
+background-color:#cccccc;
+background: repeating-linear-gradient(  45deg,  #cccccc,  #cccccc 10px,  #b2b2b2 10px,  #b2b2b2 20px);
+color:white;
+}
+
+/***** PRICE *****/
+
+#step3_3{}
+
+#step3_3 .price{
+background-color:white;
+border:1px solid black;
+}
+
+#step3_3 .price_quantity_input{
+border:1px solid black;
+}
+
+/***** EXTRA *****/
+
+#step3_4 .extra{
+background-color:white;
+border:1px solid black;
+}
+
+#step3_4 .extra_quantity_input{
+border:1px solid black;
+}
+
+#step3_4 .extra_quantity_minus_btn, #step3_4 .extra_quantity_plus_btn{
+background-color:black;
+color:white;
+}
+
+#step3_4 .extra_quantity_minus_btn:hover, #step3_4 .extra_quantity_plus_btn:hover{
+background-color:white;
+color:black;
+border:1px solid black;
+}
+
+#step3_4 .extra_add_to_cart .extra_add_btn{
+background-color:black;
+color:white;
+}
+
+#step3_4 .extra_add_to_cart .extra_add_btn:hover{
+background-color:white;
+color:black;
+border:1px solid black;
+}
+
+#step3_4 .extra_add_to_cart .extra_add_btn:hover{
+background-color:white;
+color:black;
+border:1px solid black;
+}
+
+/********** ETAPE 4 : Informations personnelles **********/
+
+/********** ETAPE 5 : RECAP **********/
+
+.order_recap_left .order_recap_price_quantity{
+    background-color: #e5e5e5;
+}
+.order_recap_left .order_recap_price_quantity_separator{
+    background-color: #e5e5e5;
+}
+.order_recap_center .order_recap_price_title{
+    background-color: #e5e5e5;
+}
+.order_recap_right .order_recap_price_total{
+    background-color: #e5e5e5;
+}
+
+/***** Client information *****/
+	
+#step5 .clients_informations{
+	background-color:#cccccc;
+}
+
+/********** ETAPE 6 : RECAP & paiement **********/
+
+/**** ETAPE 6_1 : RECAPITULATIF ****/
+
+/**** ETAPE 6_2 : PAIEMENT ****/
+
+#step6_2{
+	background-color:#e5e5e5;
+}
+
+#step6_2 .paiement_text{
+background-color:white;
+}
+
+#step6_2 .paiement_methods form .method{
+background-color:white;
+}
+
+#step6_2 .paiement_validation_form{
+background-color:white;
+}
+
+#step6_2 .paiement_validation_btn{
+background-color:black;
+color:white;
+}
+#step6_2 .paiement_validation_btn:hover{
+background-color:#393939;
+color:white;
+}
+
+/********** ETAPE 7 : Confirmation **********/
+
+/********** CART **********/
+#cart{
+background-color:#e5e5e5;
+}
+#cart .service_title{
+border-bottom:1px solid black;
+}
+
+/** tarif **/
+#cart .cart_row{
+background-color:white;
+}
+
+/** supprimer **/
+#cart .cart_row .delete_price .delete_price_btn{
+color:#f03917;
+background-color:#e5e5e5;
+}
+
+/** reduction **/
+#cart .reduction_row{
+background-color:white;
+}
+
+/** sous total **/
+#cart .creneau_sous_total{
+color:black; 
+}
+#cart .cart_total{
+color:white; 
+background-color:black;
+}
+
+/***** NAVIGATION ENTRE ETAPES *****/
+
+#next_step_nav a{
+	background-color:#e5e5e5;
+}
+#next_step_nav a:hover{
+	background-color:#cccccc;
+}
+
+/***************************************
+---------      CSS GRID        ---------
+***************************************/
+
+@supports(display:grid){
+ @media screen and (min-width: 500px) {
+	
+	.step_item::before{
+		border:1px solid black;
+	}
+	.step_item.not_active_yet::before{
+		border:1px solid #cccccc;
+	}
+	
+	#steps_navigation .step_item, #steps_navigation .step_item:hover, #steps_navigation .step_item.not_active_yet{
+		background-color:transparent;
+	}
+	
+	#steps_navigation .step_item.active{
+		background-color:transparent;
+	}
+
+	#steps_navigation .step_item{
+		background-color:inherit;
+	}
+	
+	.step_item .step_number{
+		background-color:#e5e5e5;
+		color:black;
+		font-family: 'Roboto', sans-serif;
+	}	
+	
+	.step_item.active .step_text, .step_item:hover .step_text{
+		color:black;
+	}
+	
+    .step_item.active .step_number,.step_item:hover .step_number{
+		background-color:black;
+		color:white;
+	}
+	
+	.step_item.not_active_yet .step_number, .step_item.not_yet_active:hover .step_number {
+		background-color:#cccccc;
+		color:white;
+	}
+	
+	#steps_navigation .step_item .step_text{
+		font-size:0.8em;
+		font-family: 'Roboto', sans-serif;
+		color:black;
+	}	
+	
+	#steps_navigation .step_item.not_active_yet .step_text{
+		color:#cccccc;
+	}	
+
+	#step3_3 .price{
+		background-color:#e5e5e5;		
+	}
+
+	#step3_4 .extra{
+		background-color:#e5e5e5;	
+	}
+
+	
+	#cart .cart_row .date{
+		background-color:#e5e5e5;
+	}
+	#cart .cart_row .creneau{
+		background-color:#e5e5e5;
+	}
+
+ }
+}

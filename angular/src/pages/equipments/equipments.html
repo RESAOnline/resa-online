@@ -1,0 +1,108 @@
+<div id="page_content" class="container p-sm-2" *ngIf="settings" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="shadow-lg p-5 bg-white rounded" *ngIf="noEquipmentsLoaded">
+    <h1 class="display-4">Le matériel</h1>
+    <p class="lead">
+      Dans vos paramètres d'installations, vous avez indiqué que vous vouliez décompter du matériel à chaque réservations.
+    </p>
+    <hr class="my-4">
+    <p>
+      Créez les différents matériels qui seront décomptés sur les tarifs de vos activités.<br />
+      Les matériels servent au calcul de votre capacité d'acceuil (lorsqu'il n'y a plus de matériels disponibles, il n'y a plus de places réservables).<br />
+    </p>
+    <button class="btn btn-success btn-lg" (click)="addEquipment(content)">Créer mon premier matériel</button>
+  </div>
+  <div *ngIf="!noEquipmentsLoaded">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+      <h1>Matériels ({{ equipments.length }})<span *ngIf="getToSave()">*</span></h1>
+      <div>
+        <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+      </div>
+    </div>
+    <div class="align-items-center d-flex pb-3 mb-3 border-bottom">
+      Créez les différents matériels qui seront décomptés sur les tarifs de vos activités.<br />
+      Les matériels servent au calcul de votre capacité d'acceuil (lorsqu'il n'y a plus de matériels disponibles, il n'y a plus de places réservables).<br />
+    </div>
+    <div class="align-items-center d-flex mb-3">
+      <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+      <select [(ngModel)]="global.currentLanguage" class="custom-select bg-light w-auto">
+        <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+      </select>
+      <div class="ml-2">
+        <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+      </div>
+    </div>
+    <input class="form-control mt-md-3" id="member_search" type="text" placeholder="Recherche..." [(ngModel)]="formEquipments.search" (ngModelChange)="calculateDisplayEquipments()">
+    <table class="table mt-3" id="members_list">
+      <thead>
+        <tr>
+          <th><a href="javascript:void(0)" (click)="displayEquipmentsOrderBy('position')">Position</a></th>
+          <th><a href="javascript:void(0)" (click)="displayEquipmentsOrderBy('name')">Name</a></th>
+          <th>Description</th>
+          <th><a href="javascript:void(0)" (click)="displayEquipmentsOrderBy('numbers')">Nombre</a></th>
+          <th *ngIf="settings.places.length > 0">Lieux</th>
+          <th>Tarifs associés</th>
+          <th class="text-right">
+            <button type="button" class="btn btn-sm btn-outline-success" (click)="addEquipment(content)">+ Nouveau matériel</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of displayEquipments">
+          <th><input class="form-control position" type="number" [(ngModel)]="equipment.editPosition" (blur)="updatePosition(equipment)" /></th>
+          <th scope="row">{{ equipment.name[global.currentLanguage] }}</th>
+          <td>{{ equipment.presentation[global.currentLanguage] | htmlSpecialDecode }}</td>
+          <td>{{ equipment.numbers }}</td>
+          <td *ngIf="settings.places.length > 0"><span *ngFor="let idPlace of equipment.places">{{ getPlaceName(idPlace) }}<br /></span></td>
+          <td>
+            <span *ngFor="let service of services">
+              <span [hidden]="!isAssociatedWithActivityPrice(equipment, servicePrice)"  *ngFor="let servicePrice of service.prices">
+              <span *ngIf="service.places.length > 0">[<span *ngFor="let idPlace of service.places; index as i"><span *ngIf="i > 0">, </span>{{ getPlaceName(idPlace) }}</span>] </span>{{ service.name[global.currentLanguage ]}} > {{ servicePrice.name[global.currentLanguage]}} ({{servicePrice.slug}})<br />
+              </span>
+            </span>
+          </td>
+          <td class="text-right" nowrap>
+            <button class="btn btn-sm btn-outline-info m-1" (click)="modifyEquipment(content, equipment)">Modifier</button>
+            <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateEquipment(content, equipment)">Dupliquer</button>
+            <button *ngIf="equipment.isDeletable" class="btn btn-sm btn-outline-danger m-1" (click)="deleteEquipment(equipment)">Supprimer</button>
+            <span *ngIf="!equipment.isDeletable" ngbTooltip="Ce matériel est associé à un tarif, il ne peut pas être supprimé sans l'enlever du tarif !">Non supprimable</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        <span *ngIf="formEquipment.id > -1">Modifier</span>
+        <span *ngIf="formEquipment.id == -1">Ajouter</span> le matériel {{ formEquipment.name[global.currentLanguage] }}
+      </h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="d()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="formMName" class="font-weight-bold">Nom du matériel*</label>
+        <input type="text" class="form-control" id="formMName" placeholder="Nom du matériel" [(ngModel)]="formEquipment.name[global.currentLanguage]" />
+      </div>
+      <div class="form-group">
+        <label for="formMPresentation" class="font-weight-bold">Présentation</label>
+        <textarea class="form-control" rows="3" id="formMPresentation" placeholder="Présentation du matériel (utile que pour vous)" [(ngModel)]="formEquipment.presentation[global.currentLanguage]"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="formMNumbers" class="font-weight-bold">Nombre de matériels*</label>
+        <input type="text" class="form-control" id="formMNumbers" placeholder="" [(ngModel)]="formEquipment.numbers" />
+      </div>
+      <div class="form-group" *ngIf="settings.places.length > 0">
+        <label class="font-weight-bold">Lieux</label>
+        <div class="form-check" *ngFor="let place of settings.places">
+          <input class="form-check-input" id="formInput_{{ place.id }}" type="checkbox" value="{{ place.id }}" [checked]="formEquipment.places.indexOf(place.id) != -1" (change)="switchPlace(place.id)" />
+          <label class="form-check-label" for="formInput_{{ place.id }}">{{ place.name[global.currentLanguage]}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" type="button" (click)="closeEquipmentModal(c)">Sauvegarder</button>
+    </div>
+  </ng-template>
+</div>
+<div id="page_content" class="container p-sm-2" *ngIf="settings == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>
+<div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>

@@ -1,0 +1,579 @@
+<div class="popup popup-booking" *ngIf="displayModal && settings">
+  <div class="popup_content popup_content--size-xl">
+  <div class="popup_header popup_header--col-2">
+    <div class="modal-header">
+      <h4 class="modal-title mr-3">
+        <span *ngIf="!quotation">Réservation</span>
+        <span *ngIf="quotation">Devis</span>
+      </h4>
+      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example" data-pg-collapsed>
+        <button type="button" class="btn" [ngClass]="{'btn-success': !quotation, 'btn-outline-success': quotation}" (click)="quotation=false">Réservation</button>
+        <button type="button" class="btn" [ngClass]="{'btn-primary': quotation, 'btn-outline-primary': !quotation}" (click)="quotation=true">Devis</button>
+      </div>
+      <div class="btn-group btn-group-sm float-right" role="group" aria-label="Basic example" data-pg-collapsed>
+        <button class="btn btn-danger" type="button"  *ngIf="currentBooking != null" (click)="deleteBooking()">Supprimer</button>
+      </div>
+      <button class="close" type="button" (click)="sendClose()">×</button>
+    </div>
+  </div>
+  <div class="popup_body">
+    <div *ngIf="actionLaunch || reductionsLaunched" class="sLoader_bg"><div class="sLoader"></div></div>
+    <div>
+      <ul class="nav nav-tabs nav-justified" role="tablist" >
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':isTabCustomer()}" (click)="setTabCustomer()" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1">
+            Client <span *ngIf="customer==null" class="badge badge-danger" ngbTooltip="Veuillez sélectionner un client ou créer une fiche client !">!</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':isTabBooking()}" (click)="setTabBooking()" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" >
+            Réservation <span *ngIf="!basket.basketIsOk(true)" class="badge badge-danger" ngbTooltip="Veuillez terminer la réservation !">!</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':isTabNotes()}" (click)="setTabNotes()" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3">Notes</a>
+        </li>
+        <li class="nav-item" *ngIf="!isNewBooking()">
+          <a class="nav-link" [ngClass]="{'active':isTabHistory()}" (click)="setTabHistory()" href="#tab4" data-toggle="tab" role="tab" aria-controls="tab4">Suivi</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" [ngClass]="{'active':isTabCustomer()}" role="tabpanel" aria-labelledby="tab1-tab" id="tab1">
+          <p class="mt-2 text-center text-danger font-weight-bold font-italic" *ngIf="customer==null">
+            Utilisez les différents champs pour faire une recherche de client ou pour créer une fiche client !
+          </p>
+          <div class="form-group mt-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;grid-gap:5px;" >
+            <select [(ngModel)]="modelCustomer.typeAccount" class="custom-select">
+              <option *ngFor="let typeAccount of settings.typesAccounts" [value]="typeAccount.id">{{ global.getTextByLocale(typeAccount.name) }}</option>
+            </select>
+            <input class="form-control" [(ngModel)]="modelCustomer.lastName" type="text" placeholder="Nom de famille" (ngModelChange)="searchCustomerChanged()" />
+            <input class="form-control" [(ngModel)]="modelCustomer.firstName" type="text" placeholder="Prénom" (ngModelChange)="searchCustomerChanged()" />
+            <input class="form-control" [(ngModel)]="modelCustomer.company" type="text" placeholder="Entreprise"/>
+            <input class="form-control" [(ngModel)]="modelCustomer.email" type="email" placeholder="Email"/>
+            <input class="form-control" [(ngModel)]="modelCustomer.phone" type="text" placeholder="Téléphone"/>
+          </div>
+          <p class="text-center"><a (click)="customerAdvancedForm = !customerAdvancedForm" href="javascript:void(0)">Afficher / Masquer les informations avancées</a></p>
+          <div [hidden]="!customerAdvancedForm" class="form-group" style="display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto auto;grid-template-areas:'adress adress adress' 'town zipcode country' 'phone2 language .' 'siret status .';grid-gap:5px;" >
+            <input class="form-control" [(ngModel)]="modelCustomer.address" type="text" placeholder="Adresse" style="grid-area:adress;">
+            <input class="form-control" [(ngModel)]="modelCustomer.phone2" type="text" placeholder="Téléphone 2" style="grid-area:phone2;"/>
+            <select class="custom-select" style="grid-area:language;" [(ngModel)]="modelCustomer.locale">
+              <option value="" disabled selected>-- Langue --</option>
+              <option *ngFor="let language of settings.languages" [value]="language">{{ settings.allLanguages[language][0] }}</option>
+            </select>
+            <input class="form-control" [(ngModel)]="modelCustomer.town" type="text" placeholder="Ville" style="grid-area:town;"/>
+            <input class="form-control" [(ngModel)]="modelCustomer.postalCode" type="text" placeholder="Code postal" style="grid-area:zipcode;"/>
+            <select class="custom-select" style="grid-area:country;" [(ngModel)]="modelCustomer.country">
+              <option value="" disabled selected>-- Pays --</option>
+              <option *ngFor="let country of settings.countries" [value]="country.code">{{ country.name }}</option>
+            </select>
+            <input class="form-control" [(ngModel)]="modelCustomer.siret" type="text" placeholder="Numero SIRET" style="grid-area:siret;"/>
+            <input class="form-control" [(ngModel)]="modelCustomer.legalForm" type="text" placeholder="Forme juridique" style="grid-area:status;"/>
+          </div>
+          <div class="form-group">
+            <div class="form-check" *ngIf="!modelCustomer.isWpUser">
+              <input class="form-check-input" id="wp_account_booking" type="checkbox" [(ngModel)]="modelCustomer.createWpAccount" />
+              <label class="form-check-label" for="wp_account_booking">Créer un compte sur le site (email nécessaire)</label>
+            </div>
+            <div class="form-check" *ngIf="modelCustomer.ID == -1">
+              <input class="form-check-input" id="notify_wp_account_booking" type="checkbox" [(ngModel)]="modelCustomer.notify" />
+              <label class="form-check-label" for="notify_wp_account_booking">Notifier le client par email</label>
+            </div>
+          </div>
+          <div class="text-center" *ngIf="modelCustomer!=null">
+            <p class="text-danger font-weight-bold font-italic" *ngIf="modelCustomer.createWpAccount && (modelCustomer.email == null || modelCustomer.email.length == 0)">Veuillez renseigner une adresse email valide pour créer un compte en ligne pour ce client</p>
+            <p class="text-danger font-weight-bold font-italic" *ngIf="!modelCustomer.createWpAccount && !modelCustomer.isWpUser && (modelCustomer.phone == null || modelCustomer.phone.length == 0)">Veuillez renseigner un numéro de téléphone</p>
+            <div class="btn-group" role="group">
+              <button *ngIf="modelCustomer.ID == -1" class="btn btn-success" type="button" [disabled]="!isOkNewCustomer()" (click)="addCustomer()">Créer la fiche client</button>
+              <button *ngIf="modelCustomer.ID != -1" class="btn btn-success" type="button" [disabled]="!isOkNewCustomer()" (click)="editCustomer()">Editer la fiche client</button>
+            </div>
+          </div>
+          <div *ngIf="searchCustomerDone">
+            <h6 class="font-weight-bold">Résultats de la recherche</h6>
+            <p class="text-center text-danger font-weight-bold font-italic" *ngIf="customers.length == 0 && searchCustomerDone">Ce client n'existe pas !</p>
+            <table class="table client_table" *ngIf="getSearchCustomer().length > 0 && customers.length > 0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nom de famille</th>
+                  <th>Prénom</th>
+                  <th>Email</th>
+                  <th>Téléphone</th>
+                  <th>Entreprise</th>
+                  <th>Type de compte</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr [ngClass]="{'active' : customer!=null && customer.ID == localCustomer.ID}" (click)="setCustomer(localCustomer);
+                setTabBooking()" *ngFor="let localCustomer of customers; let num = index">
+                  <th scope="row">{{ num + 1 }}</th>
+                  <td>{{ localCustomer.lastName }}</td>
+                  <td>{{ localCustomer.firstName }}</td>
+                  <td>{{ localCustomer.email }}</td>
+                  <td>
+                    <div *ngIf="localCustomer.phone.length > 0">{{ localCustomer.phone }}</div>
+                    <div *ngIf="localCustomer.phone2.length > 0">{{ localCustomer.phone2 }}</div>
+                  </td>
+                  <td>{{ localCustomer.company }}</td>
+                  <td>{{ getTypeAccountName(localCustomer) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':isTabBooking()}"  role="tabpanel" aria-labelledby="tab2-tab" id="tab2">
+          <div class="mt-2">
+            <div class="d-flex justify-content-between mb-3 mt-2" data-pg-collapsed>
+              <div class="bg-light p-2 w-100">
+                <h5>Etat : </h5>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Etat">
+                  <button type="button" class="btn btn-success" (click)="setAllStates('ok')">Confirmé</button>
+                  <button type="button" class="btn btn-warning" (click)="setAllStates('waiting')">Non confirmé</button>
+                  <button class="btn btn-secondary" type="button" (click)="setAllStates('cancelled')">Annulé</button>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mb-3 mt-2" data-pg-collapsed>
+              <div class="bg-light p-2 w-100">
+                <h5>Rendez-vous : </h5>
+                <div class="d-flex flex-wrap">
+                  <div class="bookings_this_date m-2" *ngFor="let mapDateToServiceParameters of basket.getArray()">
+                    <p class="date">{{ mapDateToServiceParameters.date | parseDate | date:'EEEE dd MMMM yyyy':'':'fr'}}</p>
+                    <div (click)="setCurrentServiceParameters(serviceParameters)" class="bookings" *ngFor="let serviceParameters of mapDateToServiceParameters.servicesParameters" [ngStyle]="{'border-left': '5px solid ' + serviceParameters.service.color}">
+                      <p class="time">
+                        <span (click)="removeServiceParameters(serviceParameters)" class="dashicons dashicons-no-alt dashicons-sm text-danger float-left" ngbTooltip="Retirer cette activité"></span>
+                        <span (click)="setCurrentServiceParameters(serviceParameters); customTimeslotDialog(contentCustomTimeslot)">
+                          <span *ngIf="!serviceParameters.noEnd">{{ serviceParameters.dateStart | parseDate | date:'HH:mm':'':'fr'}} - {{ serviceParameters.dateEnd | parseDate | date:'HH:mm':'':'fr'}}</span>
+                          <span *ngIf="serviceParameters.noEnd">A partir de {{ serviceParameters.dateStart | parseDate | date:'HH:mm':'':'fr'}}</span>
+                          <span class="dashicons dashicons-edit dashicons-sm"></span>
+                        </span>
+                      </p>
+                      <div class="cd_rdv" [ngClass]="{'active':currentServiceParameters!=null && (serviceParameters.id == currentServiceParameters.id || (synchronizedDays && serviceParameters.idServiceParametersLink == currentServiceParameters.idServiceParametersLink))}">
+                        <div class="cd_rdv_head">
+                          <ng-template #tipContent>
+                            <h4>Participants</h4>
+                            <span [hidden]="numberPrice.number == 0" *ngFor="let numberPrice of serviceParameters.numberPrices">
+                              <table class="table" *ngIf="getParticipantsParameter(numberPrice.price.participantsParameter)!=null">
+                                <thead>
+                                  <tr>
+                                    <th *ngFor="let field of getParticipantsParameter(numberPrice.price.participantsParameter).fields">
+                                      {{ global.getTextByLocale(field.name) }}
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let participant of numberPrice.participants"><td *ngFor="let field of getParticipantsParameter(numberPrice.price.participantsParameter).fields">{{ global.getTextByLocale(field.prefix) }}{{ getParticipantFieldName(participant, field) }}{{ global.getTextByLocale(field.suffix) }}</td></tr>
+                                </tbody>
+                                <!--
+                                <tfoot *ngIf="backendCtrl.isDisplaySum(editBookingCtrl.getParticipantsParameter(numberPrice.price.participantsParameter).fields)">
+                                  <tr>
+                                    <td ng-repeat="field in editBookingCtrl.getParticipantsParameter(numberPrice.price.participantsParameter).fields"><span *ngIf="field.displaySum">Somme : {{ editBookingCtrl.getTextByLocale(field.prefix,'<?php echo get_locale(); ?>') }}{{ backendCtrl.getDisplaySum(field, numberPrice.participants) }}{{ editBookingCtrl.getTextByLocale(field.suffix,'<?php echo get_locale(); ?>') }}</span></td>
+                                  </tr>
+                                </tfoot>
+                                //-->
+                              </table>
+                            </span>
+                          </ng-template>
+                          <span class="cd_resa_id"><span *ngIf="serviceParameters.place.length > 0">[{{ global.getTextByLocale(getPlaceById(serviceParameters.place).name) }}] </span>{{ global.getTextByLocale(serviceParameters.service.name) }}</span>
+                          <span *ngIf="serviceParameters.needSelectParticipants()" (click)="setCurrentServiceParameters(serviceParameters); participantsDialog(contentParticipants)" class="dashicons dashicons-groups dashicons-sm" [ngbTooltip]="tipContent" tooltipClass="tooltip-participants"></span>
+                          <ng-template #tipContentState>
+                            <b *ngIf="serviceParameters.state == 'ok'">Confirmé</b>
+                            <b *ngIf="serviceParameters.state == 'waiting'">En attente</b>
+                            <b *ngIf="serviceParameters.state == 'cancelled' || serviceParameters.state =='abandonned'">Annulé</b><br />
+                            Cliquer pour changer l'état du rendez-vous !
+                          </ng-template>
+                          <span (click)="statesDialog(contentStatesEditor)" class="ml-2 cd_rdv_state valid" *ngIf="serviceParameters.state == 'ok'" [ngbTooltip]="tipContentState"></span>
+                          <span (click)="statesDialog(contentStatesEditor)" class="ml-2 cd_rdv_state not_confirmed" *ngIf="serviceParameters.state == 'waiting'" [ngbTooltip]="tipContentState"></span>
+                          <span (click)="statesDialog(contentStatesEditor)" class="ml-2 cd_rdv_state cancelled" *ngIf="serviceParameters.state == 'cancelled' || serviceParameters.state == 'abandonned'" [ngbTooltip]="tipContentState"></span>
+                        </div>
+                        <div class="cd_rdv_prices">
+                          <div class="cd_rdv_price" [hidden]="numberPrice.number == 0" *ngFor="let numberPrice of serviceParameters.numberPrices">
+                            <span class="cd_price_nb">{{ numberPrice.number }} </span>
+                            <span class="cd_price_name">{{ global.getTextByLocale(numberPrice.price.name) }} </span>
+                            <span class="cd_price_price" *ngIf="serviceParameters.canCalculatePrice(numberPrice)">
+                              <span *ngIf="numberPrice.price.notThresholded">{{ round(numberPrice.price.price * numberPrice.number)|number:'1.2':'fr' }}</span>
+                              <span *ngIf="!numberPrice.price.notThresholded">{{ round(serviceParameters.getPriceNumberPrice(numberPrice))|number:'1.2':'fr' }}</span> {{ settings.currency }}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="cd_rdv_members" *ngIf="serviceParameters.staffs.length > 0">
+                          <span *ngFor="let staff of serviceParameters.staffs; index as i"><span *ngIf="i > 0">, </span>{{ staff.nickname }}</span>
+                        </div>
+                        <div class="cd_rdv_tags">
+                          <div [hidden]="!getTagById(idTag)"  class="cd_rdv_tag {{ getTagById(idTag).color }}" *ngFor="let idTag of serviceParameters.tags">{{ global.getTextByLocale(getTagById(idTag).title) }}</div>
+                        </div>
+                        <div class="cd_rdv_reductions" *ngIf="mapIdClientObjectReduction['id' + serviceParameters.id] != null && mapIdClientObjectReduction['id' + serviceParameters.id].length > 0">
+                          <div class="cd_rdv_reduction" *ngFor="let params of mapIdClientObjectReduction['id' + serviceParameters.id]; index as i">
+                            <span class="cd_reduction_number">{{ params.number }} </span>
+                            <span class="cd_reduction_name">{{ global.getTextByLocale(getReductionById(params.idReduction).name) }} </span>
+                            <span class="cd_reduction_value mr-1">
+                              <span *ngIf="params.type == 0">{{ params.value|negative }}{{ settings.currency }}</span>
+                              <span *ngIf="params.type == 1">{{ params.value|negative }}%</span>
+                              <span *ngIf="params.type == 2">{{ params.value|negative }}{{ settings.currency }} unitaire</span>
+                              <span *ngIf="params.type == 3">{{ params.value }}{{ settings.currency }}
+                                <del> {{ serviceParameters.getNumberPriceByIdPrice(params.idsPrice[0]).price.price }}{{ settings.currency }}</del></span>
+                              <span *ngIf="params.type == 4">{{ params.value }} quantité offerte</span>
+                              <span *ngIf="params.type == 5">{{ params.value }}</span>
+                            </span>
+                            <span class="cd_reduction_actions ml-1" *ngIf="params.promoCode.length > 0">
+                              <a class="text-danger" href="javascript:void(0)" *ngIf="params.promoCode.length > 0" (click)="deleteCoupon(params.promoCode)">Supprimer</a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cd_rdv_total" *ngIf="serviceParameters.getPriceWithDefaultSlugServicePrice() > 0" >
+                        Total : {{ getTotalPriceServicesParameters(serviceParameters)|number:'1.2':'fr' }} {{ settings.currency }}
+                      </div>
+                      <div class="cd_rdv_error cursor-pointer" *ngIf="serviceParameters.getPriceWithDefaultSlugServicePrice() == 0" >
+                        Veuillez sélectionner un tarif
+                      </div>
+                      <div class="cd_rdv_error cursor-pointer" (click)="participantsDialog(contentParticipants)" *ngIf="!serviceParameters.participantsIsSelected(settings.form_participants_parameters)" >
+                        Veuillez renseigner les participants
+                      </div>
+                    </div>
+                  </div>
+                  <div (click)="addNewSelection()" class="bookings_this_date m-2 text-center p-2" style="border-left:1px solid black" ngbTooltip="Retour sur le planning puis sélectionnez le créneau que vous voulez ajouter à la réservation.">
+                    Nouveau rendez-vous<br />
+                    <img src="assets/image/add.png" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-light mb-2 p-2 text-warning" *ngIf="currentServiceParameters != null && currentServiceParameters.service != null && currentServiceParameters.service.oldService && currentServiceParameters.idAppointment > -1">
+              Nous détectons que cette activité a été mise à jour depuis cette réservation. Si vous voulez utiliser la nouvelle version de ce service et des tarifs associé <a href="javascript:void" (click)="updateServiceInCurrentServiceParameters()">cliquez-ici</a> (non obligatoire). Attention, il vous faudra resélectionner les tarifs.
+            </div>
+            <div class="d-flex flex-wrap bg-light" *ngIf="currentServiceParameters != null && isTypeManyDays(currentServiceParameters.service)">
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="synchronizedDaysCheckbox" [(ngModel)]="synchronizedDays" >
+                <label class="form-check-label" for="synchronizedDaysCheckbox" ngbTooltip="Cocher cette case afin de pouvoir répéter ces informations sur les jours associés">Synchroniser sur plusieurs jours.</label>
+              </div>
+            </div>
+            <div class="bg-light mb-2 p-2 text-warning" *ngIf="currentServiceParameters != null && !isTypeManyDays(currentServiceParameters.service) &&  isSynchronized(currentServiceParameters.idServiceParametersLink)">
+              Nous détectons que cette activité est synchronisée avec d'autres. Cependant, le paramétrage n'autorise pas une telle synchronisation. Pour les désynchroniser <a href="javascript:void" (click)="desynchronisetServiceParameters(currentServiceParameters.idServiceParametersLink)">cliquez-ici</a> (non obligatoire)
+            </div>
+            <div class="d-flex flex-wrap bg-light" id="booking-edit"  *ngIf="currentServiceParameters != null">
+              <div class="flex-grow-1 mb-3 mt-2 prices_selection p-2 w-100">
+                <h5>Tarifs <button class="btn btn-success cursor-pointer" *ngIf="currentServiceParameters.needSelectParticipants()" (click)="participantsDialog(contentParticipants)">Définir les participants</button> </h5>
+                <div>
+                  <div class="d-flex align-items-center price"  *ngFor="let numberPrice of currentServiceParameters.numberPrices; index as i">
+                    <h5 class="p-2 flex-grow-1 m-0">{{ global.getTextByLocale(numberPrice.price.name) }}<span *ngIf="numberPrice.price.private"> (privé)</span></h5>
+                    <p class="p-2 flex-grow-1 m-0 text-center">
+                      <span class="font-italic" *ngIf="numberPrice.price.mandatory">Tarif défini comme requis !<br /></span>
+                      <span class="font-italic text-danger" *ngIf="numberPrice.price.slug == currentServiceParameters.service.defaultSlugServicePrice">Extra définie comme montant par défaut !<br /></span>
+                      <small *ngIf="numberPrice.price.presentation != null && global.getTextByLocale(numberPrice.price.presentation).length > 0" ngbTooltip="{{ global.getTextByLocale(numberPrice.price.presentation) }}" container="body">Description...</small>
+                      <br />
+                      <!-- Slug : {{ numberPrice.price.slug }}<br /> //-->
+                      <span class="font-italic" *ngIf="currentServiceParameters.equipmentsActivated && numberPrice.price.equipments.length > 0">
+                        {{ global.getTextByLocale(getEquipmentById(numberPrice.price.equipments[0]).name)
+                      }} restant : <span class="font-weight-bold">{{ currentServiceParameters.getMaxEquipmentsCanChoose(i) - numberPrice.number }}</span>
+                      </span>
+                    </p>
+                    <div>
+                      <span *ngIf="numberPrice.number == 0">
+                        {{ round(currentServiceParameters.getMinThresholdPrice(numberPrice)) }} {{ settings.currency }}
+                      </span>
+                      <span *ngIf="numberPrice.number > 0">
+                        <span *ngIf="numberPrice.price.notThresholded">{{ round(numberPrice.price.price) }}</span>
+                        <span *ngIf="!numberPrice.price.notThresholded">{{ round(currentServiceParameters.getPriceNumberPrice(numberPrice)) }}</span> {{ settings.currency }}
+                      </span>
+                    </div>
+                    <div class="input-group select_number p-2">
+                      <span class="input-group-btn" (click)="currentServiceParameters.addNumberInNumberPrice(numberPrice, -1); numberPrice.number = minMaxValue(numberPrice.number, 0, 9999); setParticipantIfNecessary(numberPrice); synchronizeBasket('numberPrices');"> <button class="btn btn-warning" type="button">-</button> </span>
+                      <input type="number" class="form-control" [(ngModel)]="numberPrice.number" placeholder="0" (blur)="numberPrice.number = minMaxValue(numberPrice.number, 0, 9999); setParticipantIfNecessary(numberPrice); synchronizeBasket('numberPrices');" />
+                      <span class="input-group-btn" (click)="currentServiceParameters.addNumberInNumberPrice(numberPrice, 1); numberPrice.number = minMaxValue(numberPrice.number, getMinNumberPrice(currentServiceParameters, numberPrice), 9999); setParticipantIfNecessary(numberPrice); synchronizeBasket('numberPrices');"> <button class="btn btn-success" type="button">+</button> </span>
+                    </div>
+                  </div>
+                  <div class="text-center" *ngIf="isDisplayAllPricesOfActivity()">
+                    <button class="btn btn-small btn-success" (click)="displayAllPricesOfServices()" ngbTooltip="Permet d'afficher tous les tarifs/extras de cette activités même ceux non définie dans le créneau">Afficher tous les tarifs</button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-grow-1 mb-3 mt-2 members_selection p-2 w-100" *ngIf="currentServiceParameters != null && !settings.groups_management_actived && settings.staff_management_actived">
+                <h5>{{ global.getTextByLocale(settings.staff_word_many) }}</h5>
+                <div class="btn-group p-2" data-toggle="buttons" (click)="currentServiceParameters.staffs = []; synchronizeBasket('members');">
+                  <label class="btn btn-secondary active text-danger bg-white border-danger">
+                    <input type="radio" [checked]="currentServiceParameters.staffs.length == 0"> Automatique
+                  </label>
+                </div>
+                <div>
+                  <div class="d-flex align-items-center member" *ngFor="let memberUsed of currentServiceParameters.getMemberUsedMembers(0)" [ngClass]="{'member_selection_not_active':currentServiceParameters.getStaff(memberUsed.id) == null, 'member_selection_not_available':memberUsed.capacity == 0}">
+                    <h5 class="p-2 flex-grow-1 m-0">
+                      {{ memberUsed.nickname }}
+                      {{ currentServiceParameters.assignNumber(currentServiceParameters.getStaff(memberUsed.id)) }} / {{ memberUsed.capacity - memberUsed.usedCapacity }}
+                    </h5>
+                    <div class="p-2">
+                      <span [hidden]="currentServiceParameters.getStaff(memberUsed.id) == null" class="btn btn-secondary active text-danger bg-white border-danger m-0" (click)="currentServiceParameters.assignStaff(memberUsed); synchronizeBasket('members');"> Pas attribuer </span>
+                      <span [hidden]="currentServiceParameters.getStaff(memberUsed.id) != null"  class="btn btn-secondary bg-success border-success m-0" (click)="currentServiceParameters.assignStaff(memberUsed); synchronizeBasket('members');"> Attribuer </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-grow-1 mb-3 mt-2 p-2 w-50 edit_tags">
+                <h5>Tags</h5>
+                <div *ngIf="currentServiceParameters != null">
+                  <div class="tag" [ngClass]="{'active':currentServiceParameters.haveTag(tag.id)}" *ngFor="let tag of settings.custom_tags" (click)="currentServiceParameters.switchTag(tag.id); synchronizeBasket('tags');">
+                    <div class="content_tag {{ tag.color }}">{{ global.getTextByLocale(tag.title) }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="total_line" *ngIf="basket.getAllServicesParameters().length > 0 && haveGlobalReductions()">
+              <span>Sous-total <span *ngIf="!quotation">réservation</span><span *ngIf="quotation">devis</span> : {{ getSubTotalPrice(basket.getAllServicesParameters())|number:'1.2':'fr' }}{{ settings.currency }}</span>
+            </div>
+            <div class="mt-2 mb-2 p-2 row text-center border-top border-bottom border-dark d-flex justify-content-center align-items-center" [hidden]="params.promoCode.length == 0" *ngFor="let params of mapIdClientObjectReduction['id0']">
+              <div class="col-sm">
+                <button class="btn btn-danger" *ngIf="params.promoCode.length > 0" (click)="deleteCoupon(params.promoCode)">Supprimer</button>
+              </div>
+              <div class="col-sm">
+                {{params.promoCode}} - {{ global.getTextByLocale(getReductionById(params.idReduction).name) }}
+              </div>
+              <div class="col-sm">
+                {{ global.getTextByLocale(getReductionById(params.idReduction).presentation) }}
+              </div>
+              <div class="col-sm">
+                <span *ngIf="params.type == 0">{{ params.value|negative }}{{ settings.currency }}</span>
+                <span *ngIf="params.type == 1">{{ params.value|negative }}%</span>
+                <span *ngIf="params.type == 2">{{ params.value|negative }}{{ settings.currency }} par tarifs</span>
+                <span *ngIf="params.type == 5">{{ params.value }}</span>
+              </div>
+            </div>
+            <div class="mt-2 mb-2 row text-center" [hidden]="params.promoCode.length > 0" *ngFor="let params of mapIdClientObjectReduction['id0']">
+              <div class="col-sm">
+                <button class="btn btn-danger" *ngIf="params.promoCode.length > 0" (click)="deleteCoupon(params.promoCode)">Supprimer</button>
+              </div>
+              <div class="col-sm">
+                {{ global.getTextByLocale(getReductionById(params.idReduction).name) }}
+              </div>
+              <div class="col-sm">
+                {{ global.getTextByLocale(getReductionById(params.idReduction).presentation) }}
+              </div>
+              <div class="col-sm">
+                <span *ngIf="params.type == 0">{{ params.value|negative }}{{ settings.currency }}</span>
+                <span *ngIf="params.type == 1">{{ params.value|negative }}%</span>
+                <span *ngIf="params.type == 2">{{ params.value|negative }}{{ settings.currency }} par tarifs</span>
+                <span *ngIf="params.type == 5">{{ params.value }}</span>
+              </div>
+            </div>
+            <div class="text-center text-danger" *ngIf="reductionsLaunched">
+              Calcul réductions en cours, veuillez patienter...
+            </div>
+            <div *ngIf="basket.getAllServicesParameters().length > 0 && currentPromoCodes.length > 0" class="form-inline p-3 d-flex justify-content-center">
+              <select class="form-control" [(ngModel)]="voucherLocal">
+                <option value="" disabled selected>-- Coupon --</option>
+                <option *ngFor="let voucher of currentPromoCodes" [value]="voucher">{{ voucher }}</option>
+              </select>
+              <button [disabled]="reductionsLaunched" class="btn btn-success" type="button" (click)="getReductions(voucherLocal)">Ajouter<span *ngIf="reductionsLaunched">...</span></button>
+            </div>
+            <div id="total_line" *ngIf="haveGlobalReductions()">
+              <span>Total : {{ getTotalPriceWithoutCustomReductions()|number:'1.2':'fr' }}{{ settings.currency }}</span>
+            </div>
+            <div class="text-center p-3">
+              <button class="btn btn-success" (click)="customReductionsDialog(contentCustomReduction)">Ajouter une réduction personnalisée</button>
+              <div class="" *ngFor="let customReduction of customReductions; index as i" class="custom_line">
+        				<div class="custom_line-content">
+                  {{ customReduction.description }} (TVA : {{ customReduction.vatValue }}%)
+                  {{ customReduction.amount|number:'1.2':'fr' }}{{ settings.currency }}
+        				</div>
+                <button class="btn btn-primary" (click)="customReductionsDialog(contentCustomReduction, i)">Modifier</button>
+                <button class="btn btn-danger" (click)="removeCustomReduction(i)">Supprimer</button>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane pt-2" [ngClass]="{'active':isTabNotes()}" role="tabpanel" aria-labelledby="tab3-tab" id="tab3">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:auto auto;grid-template-areas:'public private member' 'client client client';grid-gap:10px;">
+            <div class="form-group" style="grid-area:public;">
+              <label for="formPublicNote">Note publique</label>
+              <textarea class="form-control" rows="3" id="formPublicNote" [(ngModel)]="notes.public" placeholder="Note visible par tout le monde"></textarea>
+            </div>
+            <div class="form-group" style="grid-area:private;">
+              <label for="formPrivateNote">Note privée</label>
+              <textarea class="form-control" rows="3" id="formPrivateNote" [(ngModel)]="notes.private" placeholder="Note visible que par les RESA Manager"></textarea>
+            </div>
+            <div class="form-group" style="grid-area:member;">
+              <label for="formMembersNote">Note {{ global.getTextByLocale(settings.staff_word_many) }}</label>
+              <textarea class="form-control" rows="3" id="formMembersNote" [(ngModel)]="notes.members" placeholder="Note visible que les {{ global.getTextByLocale(settings.staff_word_many) }}"></textarea>
+            </div>
+            <div class="form-group" style="grid-area:client;">
+              <label for="formCustomerNote">Remarque cliente</label>
+              <textarea class="form-control" rows="3" id="formCustomerNote" [(ngModel)]="notes.customer" placeholder="Remarque du client"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':isTabHistory()}" role="tabpanel" aria-labelledby="tab4-tab" id="tab4" *ngIf="!isNewBooking()">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let line of history">
+                <td>{{ line.creationDate | parseDate | date:'EEEE dd MMMM yyyy':'':'fr' }}</td>
+                <td>{{ line.creationDate | parseDate | date:'HH\'h\'mm':'':'fr' }}</td>
+                <td><span [innerHtml]="line.text"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isOkNewCustomer() || isTabBooking()" id="total_line" class="mt-2">
+      <span>Total : {{ getTotalPrice()|number:'1.2':'fr' }}{{ settings.currency }}</span>
+    </div>
+  </div>
+  <div class="popup_footer">
+    <div class="text-danger" *ngIf="customer==null">Veuillez sélectionner un client ou créer une fiche client.</div>
+    <div class="text-danger" *ngIf="!basket.basketIsOk(true)">Veuillez terminer la réservation.</div>
+    <div class="mb-2 text-right">
+      <button [disabled]="!formIsOk()" class="btn m-1 btn-outline-success" (click)="validForm()">Enregistrer</button>
+      <button class="btn btn-outline-danger m-1" (click)="sendClose()">Fermer</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<ng-template #contentStatesEditor let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Nouvel état</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <button type="button" class="btn btn-success btn-lg btn-block" (click)="c('ok')">Confirmé</button>
+    <button type="button" class="btn btn-warning btn-lg btn-block" (click)="c('waiting')">Non confirmé</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block" (click)="c('cancelled')">Annulé</button>
+  </div>
+  <div class="modal-footer">
+  </div>
+</ng-template>
+
+<ng-template #contentCustomTimeslot let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Créneau personnalisé</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body text-center">
+    <h4>Créneau du {{ currentServiceParameters.dateStart | parseDate | date:'EEEE dd MMMM yyyy':'':'fr' }}</h4>
+    Début <input class="form-control s_input mr-2 ml-2" type="number" placeholder="HH" [(ngModel)]="customTimeslot.startTime.hour" />h<input class="form-control s_input mr-2 ml-2" type="number" placeholder="MM" [(ngModel)]="customTimeslot.startTime.minute" /><br />
+    Fin <input class="form-control s_input mr-2 ml-2" type="number" placeholder="HH" [(ngModel)]="customTimeslot.endTime.hour" />h<input class="form-control s_input mr-2 ml-2" type="number" placeholder="MM"  [(ngModel)]="customTimeslot.endTime.minute" /><br />
+    <div class="form-check mt-2" ngbTooltip="Aucune heure de fin ne sera affichée. Par défaut sur le calendrier la réservation occupera 30 min si rien n'est renseigné.">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="customTimeslot.noEnd" id="noEndHours">
+      <label class="form-check-label" for="noEndHours">
+        Pas d'heure de fin
+      </label>
+    </div><br />
+    <h4>Scénario de réservation</h4>
+    <div class="mr-2" *ngFor="let parameter of settings.states_parameters; index as i;" ngbTooltip="{{ parameter.description }}">
+      <input class="form-check-input" type="radio" name="customParametersTimeslot" id="formInput_tpc{{ i }}" [(ngModel)]="customTimeslot.idParameter" [value]="parameter.id">
+      <label class="form-check-label" for="formInput_tpc{{ i }}">{{ parameter.name }}</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline-primary" (click)="c('planning')">Choisir un autre creneau</button>
+    <button class="btn btn-success" [disabled]="!isGoodNewCustomTimeslot()" (click)="c(true)">Valider</button>
+    <button class="btn btn-danger" (click)="d()">Annuler</button>
+  </div>
+</ng-template>
+
+<ng-template #contentCustomReduction let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Réduction personnalisée</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="customReductionDescription">Description</label>
+      <input type="text" class="form-control" id="customReductionDescription" placeholder="Description" [(ngModel)]="currentCustomReduction.description">
+    </div>
+    <div class="form-group">
+      <label for="customReductionAmount">Montant</label>
+      <input type="number" class="form-control" id="customReductionAmount" placeholder="0" [(ngModel)]="currentCustomReduction.amount">
+    </div>
+    <div class="form-group">
+      <label for="customReductionVat">TVA</label>
+      <select class="form-control" id="customReductionVat" [(ngModel)]="currentCustomReduction.vatValue">
+        <option *ngFor="let vat of settings.vat_list" [value]="vat.value">{{ global.getTextByLocale(vat.name) }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" [disabled]="!isOkCustomerReduction()" (click)="c(true)">Valider</button>
+    <button class="btn btn-danger" (click)="d()">Annuler</button>
+  </div>
+</ng-template>
+
+
+<ng-template #contentParticipants let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Sélection des participants</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div [hidden]="numberPrice.number == 0 || numberPrice.price.participantsParameter == null || numberPrice.price.participantsParameter.length == 0" *ngFor="let numberPrice of currentServiceParameters.numberPrices" class="clients_infos_tarif">
+      <div class="m-2">{{ global.getTextByLocale(numberPrice.price.name) }} - {{ numberPrice.number }} participant(s)</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <td></td>
+            <td></td>
+            <td *ngFor="let field of getParticipantsParameter(numberPrice.price.participantsParameter).fields; index as j">{{ global.getTextByLocale(field.name) }}</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let number of currentServiceParameters.getRepeatNumberByNumber(numberPrice.number); index as i">
+            <td>{{ i + 1 }}</td>
+            <td><button class="btn btn-success" type="button" (click)="participantDialog(contentSelectOneParticipant, getParticipantsParameter(numberPrice.price.participantsParameter).fields, numberPrice, i)">Sélectionner</button></td>
+            <td *ngFor="let field of getParticipantsParameter(numberPrice.price.participantsParameter).fields; index as j">
+              <input class="form-control" *ngIf="field.type == 'text'"  type="{{ field.type }}" [(ngModel)]="numberPrice.participants[i][field.varname]" placeholder="{{ global.getTextByLocale(field.name) }}" [ngbTypeahead]="searchByField(field.varname)" />
+              <input class="form-control" *ngIf="field.type == 'number'"  type="{{ field.type }}" [(ngModel)]="numberPrice.participants[i][field.varname]" placeholder="{{ global.getTextByLocale(field.name) }}" />
+              <span *ngIf="field.type == 'select'">
+                <select class="form-control" style="color: black;"  [(ngModel)]="numberPrice.participants[i][field.varname]" id="formInput{{ currentServiceParameters.id }}_{{ i }}_{{ j }}" >
+                  <option *ngFor="let option of field.options" [value]="option.id">{{ global.getTextByLocale(option.name) }}</option>
+                </select>
+              </span>
+            </td>
+            <td><button (click)="currentServiceParameters.removeParticipant(numberPrice, i); synchronizeBasket('numberPrices')" class="btn btn-danger" type="button">Enlever</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="mr-auto">
+      <button class="btn btn-outline-primary" [disabled]="currentServiceParameters.getNumber() == 0" (click)="setCopyCurrentServiceParameters(currentServiceParameters)">Copier</button>
+      <button class="btn btn-outline-primary ml-2" [disabled]="copyCurrentServiceParameters == null" (click)="launchPasteParticipants()">Coller</button>
+    </div>
+    <button class="btn btn-success" (click)="c(true)">Valider</button>
+  </div>
+</ng-template>
+
+<ng-template #contentSelectOneParticipant let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Sélection un participant</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let field of selectorParticipants.fields">{{ global.getTextByLocale(field.name) }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cursor-pointer" (click)="c(participant)" *ngFor="let participant of selectorParticipants.participants">
+          <td (click)="c(participant)" *ngFor="let field of selectorParticipants.fields">
+            {{ global.getTextByLocale(field.prefix)}}
+            {{ getParticipantFieldName(participant, field) }}
+            {{ global.getTextByLocale(field.suffix) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" (click)="d()">Annuler</button>
+  </div>
+</ng-template>

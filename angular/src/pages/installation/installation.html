@@ -1,0 +1,216 @@
+<div id="page_content" class="container p-sm-2" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div id="header" class="d-flex justify-content-center">
+    <img src="assets/image/logo-resa-online.png" class="m-0 p-0 pr-1 d-block" height="39" width="66">
+  </div>
+  <div *ngIf="!isBrowserCompatibility()" class="text-center text-danger font-weight-bold">
+    RESA Online est optimisé pour <i>Firefox</i> et <i>Google Chome</i>, nous vous invitons à utiliser l'un de ces deux navigateurs pour le bon fonctionnement de RESA Online.
+  </div>
+  <ul class="nav nav-fill mb-2" role="tablist">
+    <li lass="nav-item">
+      <a class="nav-link" [ngClass]="{'bg-white':tabNumber == 1}" (click)="tabNumber = 1" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1" aria-expanded="true" ngbTooltip="Bienvenue">
+        <span class="mr-1 badge" [ngClass]="{'badge-secondary':tabNumber != 1, 'badge-success': tabNumber == 1}">1</span>
+        <span *ngIf="tabNumber == 1">Bienvenue</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'bg-white':tabNumber == 2}"  (click)="tabNumber = 2" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" aria-expanded="true" ngbTooltip="Entreprise">
+        <span class="mr-1 badge" [ngClass]="{'badge-secondary':tabNumber != 2, 'badge-success': tabNumber == 2}">2</span>
+        <span *ngIf="tabNumber == 2">Entreprise</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'bg-white':tabNumber == 3}"  (click)="tabNumber = 3" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3" aria-expanded="true" ngbTooltip="Pages RESA Online">
+        <span class="mr-1 badge" [ngClass]="{'badge-secondary':tabNumber != 3, 'badge-success': tabNumber == 3}">3</span>
+        <span *ngIf="tabNumber == 3">Pages RESA Online</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'bg-white':tabNumber == 4}"  (click)="tabNumber = 4" href="#tab4" data-toggle="tab" role="tab" aria-controls="tab4" aria-expanded="true"  ngbTooltip="Contraintes de réservation">
+        <span class="mr-1 badge" [ngClass]="{'badge-secondary':tabNumber != 4, 'badge-success': tabNumber == 4}">4</span>
+        <span *ngIf="tabNumber == 4">Contraintes de réservation</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'bg-white':tabNumber == 5}"  (click)="tabNumber = 5" href="#tab5" data-toggle="tab" role="tab" aria-controls="tab5" aria-expanded="true"  ngbTooltip="Moyens de paiement">
+        <span class="mr-1 badge" [ngClass]="{'badge-secondary':tabNumber != 5, 'badge-success': tabNumber == 5}">5</span>
+        <span *ngIf="tabNumber == 5">Moyens de paiement</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'bg-white':tabNumber == 6}" (click)="tabNumber = 6" href="#tab6" data-toggle="tab" role="tab" aria-controls="tab6" aria-expanded="true"  ngbTooltip="Fin">
+        <span class="mr-1 badge" [ngClass]="{'badge-secondary':tabNumber != 6, 'badge-success': tabNumber == 6}">6</span>
+        <span *ngIf="tabNumber == 6">Fin</span>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content" *ngIf="settings">
+    <div class="tab-pane shadow bg-light" [ngClass]="{'active':tabNumber == 1}" role="tabpanel" aria-labelledby="tab1-tab" id="tab1">
+      <section class="p-2 mt-2 mb-2">
+        <h3> Bienvenue sur RESA-Online.</h3>
+        <p class="text-center font-size-18">Encore quelques petits détails avant d'utiliser RESA Online.</p>
+        <div class="text-center">
+          <tutoButton [url]="'https://youtu.be/yemNDR79FFs'"></tutoButton>
+        </div>
+        <div class="text-center m-5">
+          <button class="font-size-20 btn btn-sm btn-success" (click)="nextStep()">C'est parti !</button>
+        </div>
+      </section>
+    </div>
+    <div class="tab-pane shadow bg-light" [ngClass]="{'active':tabNumber == 2}" role="tabpanel" aria-labelledby="tab2-tab" id="tab2">
+      <section class="p-2 mt-2 mb-2">
+        <h3>Votre entreprise</h3>
+        <p class="text-center font-size-18">Informations utilisées pour les reçu et les clients.</p>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formCompanyName" data-html="false">Nom de la société</label>
+          <input class="form-control" id="formCompanyName" type="text" placeholder="Nom de la société" [(ngModel)]="settings.company_name" (ngModelChange)="setToSave(true)" />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formCompanyLogo" data-html="false">Logo de la société (peut être défini plus tard)</label><br />
+          <img (click)="openImageSelectorDialog(contentImage)" *ngIf="settings.company_logo" [src]="settings.company_logo" />
+          <button class="btn btn-success" (click)="openImageSelectorDialog(contentImage)" *ngIf="!settings.company_logo">Cliquez ici pour définir l'image</button><br />
+          <button class="btn btn-danger" *ngIf="settings.company_logo" (click)="deleteImage()">Enlever</button>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formCompanyAddress" data-html="false">Adresse</label>
+          <input class="form-control" id="formCompanyAddress" type="text" placeholder="Adresse"  [(ngModel)]="settings.company_address" (ngModelChange)="setToSave(true)" />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formCompanyPhone" data-html="false">Numéro de téléphone</label>
+          <input class="form-control" id="formCompanyPhone" type="text" placeholder="Téléphone" [(ngModel)]="settings.company_phone" (ngModelChange)="setToSave(true)"  />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formCompanyType" data-html="false">Statut</label>
+          <input class="form-control" id="formCompanyType" type="text" placeholder="SA, SAS, SARL, EURL, EI..." [(ngModel)]="settings.company_type" (ngModelChange)="setToSave(true)" />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formCompanySIRET" data-html="false">N° SIRET</label>
+          <input class="form-control" id="formCompanySIRET" type="text" placeholder="Votre numéro SIRET"  [(ngModel)]="settings.company_siret" (ngModelChange)="setToSave(true)" />
+        </div>
+      </section>
+      <div class="d-flex justify-content-between p-3">
+        <button [hidden]="!havePreviousStep()" type="button" (click)="previousStep()" class="btn btn-sm btn-success">Précédent</button>
+        <button [hidden]="!haveNextStep()" type="button" (click)="nextStep()" class="btn btn-sm btn-success">Suivant</button>
+      </div>
+      <ng-template #contentImage let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Sélection de l'image</h4>
+          <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+        </div>
+        <div class="modal-body">
+          <image-selector (imageSelected)="setImageLogo($event, c)"></image-selector>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </ng-template>
+    </div>
+    <div class="tab-pane shadow bg-light" [ngClass]="{'active':tabNumber == 3}" role="tabpanel" aria-labelledby="tab3-tab" id="tab3">
+      <section class="p-2 mt-2 mb-2 bg-light">
+        <h3>Pages RESA Online</h3>
+        <p class="text-center font-size-18">Page "Réservation" et page "Compte client".</p>
+        <button *ngIf="settings.customer_booking_url.length == 0 || settings.customer_account_url.length == 0" (click)="createPages()" class="btn btn-success">
+          Créer les pages nécessaires
+        </button>
+        <div *ngIf="settings.customer_booking_url.length > 0 && settings.customer_account_url.length > 0">
+          <div class="mb-4">Les pages sont déjà créées :</div>
+          <ul>
+            <li><b>Réservation : </b><a href="{{ settings.customer_booking_url }}" target="_blank">{{ settings.customer_booking_url }}</a></li>
+            <li><b>Compte client : </b><a href="{{ settings.customer_account_url }}" target="_blank">{{ settings.customer_account_url }}</a></li>
+          </ul>
+        </div>
+      </section>
+      <div class="d-flex justify-content-between p-3">
+        <button [hidden]="!havePreviousStep()" type="button" (click)="previousStep()" class="btn btn-sm btn-success">Précédent</button>
+        <button [hidden]="!haveNextStep()" type="button" (click)="nextStep()" class="btn btn-sm btn-success">Suivant</button>
+      </div>
+    </div>
+    <div class="tab-pane shadow bg-light" [ngClass]="{'active':tabNumber == 4}" role="tabpanel" aria-labelledby="tab4-tab" id="tab4">
+      <section class="p-2 mt-2 mb-2">
+        <h3>Vos contraintes de réservation</h3>
+        <div>
+          <p>Souhaitez-vous décompter du matériel pour chaque réservation prise ?</p>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="equipmentsManagement" id="equipmentsManagementYes" [(ngModel)]="settings.equipments_management_actived" [value]="true">
+            <label class="form-check-label" for="equipmentsManagementYes">Oui</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="equipmentsManagement" id="equipmentsManagementNo" [(ngModel)]="settings.equipments_management_actived" [value]="false">
+            <label class="form-check-label" for="equipmentsManagementNo">Non</label>
+          </div>
+        </div>
+        <div class="mt-3">
+          <p>Voulez-vous attribuer du personnel aux réservations (guide / moniteur...) ?</p>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="staffManagement" id="staffManagementYes" [(ngModel)]="settings.staff_management_actived" [value]="true">
+            <label class="form-check-label" for="staffManagementYes">Oui</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="staffManagement" id="staffManagementNo" [(ngModel)]="settings.staff_management_actived" [value]="false">
+            <label class="form-check-label" for="staffManagementNo">Non</label>
+          </div>
+        </div>
+      </section>
+      <div class="d-flex justify-content-between p-3">
+        <button [hidden]="!havePreviousStep()" type="button" (click)="previousStep()" class="btn btn-sm btn-success">Précédent</button>
+        <button [hidden]="!haveNextStep()" type="button" (click)="nextStep()" class="btn btn-sm btn-success">Suivant</button>
+      </div>
+    </div>
+    <div class="tab-pane shadow bg-light" [ngClass]="{'active':tabNumber == 5}" role="tabpanel" aria-labelledby="tab5-tab" id="tab5">
+      <section class="p-2 mt-2 mb-2 bg-light">
+        <h3>Moyens de paiement</h3>
+        <div>
+          <p>Quels moyens de paiement voulez-vous proposer lors de la réservation ?</p>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" id="formOnTheSpot" type="checkbox" [(ngModel)]="settings.on_the_spot" (ngModelChange)="setToSave(true)" />
+              <label class="form-check-label" for="formOnTheSpot"><b>Autoriser le paiement sur place</b></label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" id="formLater" type="checkbox" [(ngModel)]="settings.later" (ngModelChange)="setToSave(true)" />
+              <label class="form-check-label" for="formLater"><b>Autoriser le paiement plus tard</b></label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" id="formTransfer" type="checkbox" [(ngModel)]="settings.transfer" (ngModelChange)="setToSave(true)" />
+              <label class="form-check-label" for="formTransfer"><b>Autoriser le paiement par virement bancaire</b></label>
+            </div>
+            <textarea class="form-control" rows="3" [(ngModel)]="settings.transfer_text[global.currentLanguage]" (ngModelChange)="setToSave(true)"></textarea>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" id="formCheque" type="checkbox" [(ngModel)]="settings.cheque" (ngModelChange)="setToSave(true)" />
+              <label class="form-check-label" for="formCheque"><b>Autoriser le paiement par envoie de chèques</b></label>
+            </div>
+            <textarea class="form-control" rows="3" [(ngModel)]="settings.cheque_text[global.currentLanguage]" (ngModelChange)="setToSave(true)"></textarea>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" id="formOnline" type="checkbox" [(ngModel)]="settings.online" (ngModelChange)="setToSave(true)" />
+              <label class="form-check-label" for="formOnline"><b>Paiement en ligne avec (à configurer plus tard)</b></label>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="d-flex justify-content-between p-3">
+        <button [hidden]="!havePreviousStep()" type="button" (click)="previousStep()" class="btn btn-sm btn-success">Précédent</button>
+        <button [hidden]="!haveNextStep()" type="button" (click)="nextStep()" class="btn btn-sm btn-success">Suivant</button>
+      </div>
+    </div>
+    <div class="tab-pane shadow bg-light" [ngClass]="{'active':tabNumber == 6}" role="tabpanel" aria-labelledby="tab6-tab" id="tab6">
+      <section class="p-2 mt-2 mb-2">
+        <h3>Voila c'est terminé !</h3>
+        <p class="text-center">
+          Il est tant de paramétrer votre activité !<br />
+          Vous pouvez à tout moment modifier ces paramètres dans les réglages avancés.<br />
+        </p>
+      </section>
+      <div class="d-flex justify-content-between p-3">
+        <button [hidden]="!havePreviousStep()" type="button" (click)="previousStep()" class="btn btn-sm btn-success">Précédent</button>
+        <button type="button" class="btn btn-sm btn-success" [disabled]="haveActionLaunch()" (click)="save()"> Terminer </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="settings == null || haveActionLaunch()" class="sLoader_bg"><div class="sLoader"></div></div>

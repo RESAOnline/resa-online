@@ -1,0 +1,2788 @@
+# Copyright (C) 2019 Resa Online
+# This file is distributed under the same license as the Resa Online package.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Resa Online 1.7.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/resa-online\n"
+"POT-Creation-Date: 2020-01-14 19:09+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 2.2.4\n"
+
+#: api/forms/forms.controller.php:111
+#: api/installation/installation.controller.php:134
+msgid "customer_form_page_name"
+msgstr ""
+
+#: api/installation/installation.controller.php:122
+msgid "customer_account_page_name"
+msgstr ""
+
+#: api/settings/settings.controller.php:139
+msgid "Green_word"
+msgstr ""
+
+#: api/settings/settings.controller.php:140
+msgid "Yellow_word"
+msgstr ""
+
+#: api/settings/settings.controller.php:141
+msgid "Orange_word"
+msgstr ""
+
+#: api/settings/settings.controller.php:142
+msgid "Brown_word"
+msgstr ""
+
+#: api/settings/settings.controller.php:143
+msgid "Red_word"
+msgstr ""
+
+#: api/settings/settings.controller.php:144
+msgid "Blue_word"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:105
+#: controller/RESA_AdminMainController.php:146
+msgid "resa_custom_user_data_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:109
+#: controller/templates/RESA_askAccount.php:24
+#: controller/templates/RESA_newAccount.php:482
+#: controller/templates/RESA_newform.php:359 includes/RESA_GDPRManager.php:34
+msgid "company_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:113
+msgid "company_account_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:117
+#: controller/templates/RESA_askAccount.php:27
+#: controller/templates/RESA_newAccount.php:485
+#: controller/templates/RESA_newform.php:362 includes/RESA_GDPRManager.php:35
+msgid "phone_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:121
+msgid "private_notes_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:125
+#: controller/templates/RESA_askAccount.php:33
+#: controller/templates/RESA_newAccount.php:491
+#: controller/templates/RESA_newform.php:368 includes/RESA_GDPRManager.php:36
+msgid "address_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:129
+#: controller/templates/RESA_askAccount.php:36
+#: controller/templates/RESA_newAccount.php:494
+#: controller/templates/RESA_newform.php:371 includes/RESA_GDPRManager.php:37
+msgid "postal_code_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:133
+#: controller/templates/RESA_askAccount.php:39
+#: controller/templates/RESA_newAccount.php:497
+#: controller/templates/RESA_newform.php:374 includes/RESA_GDPRManager.php:38
+msgid "town_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:137
+#: controller/templates/RESA_askAccount.php:43
+#: controller/templates/RESA_newAccount.php:500
+#: controller/templates/RESA_newform.php:377 includes/RESA_GDPRManager.php:39
+msgid "country_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:150
+msgid "see_settings_field_title"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:163
+msgid "Pour la première installation et les réglages de RESA Online c'est par ici"
+msgstr ""
+
+#: controller/RESA_AdminMainController.php:177
+#: controller/RESA_BackendController.php:1137
+msgid "can_not_delete_customer_error"
+msgstr ""
+
+#: controller/RESA_BackendController.php:12
+msgid "bookings_title"
+msgstr ""
+
+#: controller/RESA_BackendController.php:720
+#: controller/RESA_BackendController.php:891
+#: controller/RESA_BackendController.php:1020
+#: controller/RESA_BackendController.php:1105
+#: controller/RESA_BackendController.php:1108
+#: controller/RESA_BackendController.php:1144
+#: controller/RESA_BackendController.php:1222
+#: controller/RESA_BackendController.php:1616
+#: controller/RESA_GlobalController.php:415
+#: controller/RESA_GlobalController.php:518
+#: controller/RESA_GlobalController.php:528
+#: controller/RESA_GlobalController.php:586
+#: controller/RESA_GlobalController.php:597
+#: controller/RESA_GlobalController.php:634
+#: controller/RESA_GlobalController.php:747
+#: controller/RESA_GlobalController.php:776
+#: controller/RESA_GlobalController.php:816
+msgid "Error_word"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1053
+#: controller/RESA_BackendController.php:1062
+#: controller/RESA_GlobalController.php:615
+#: controller/RESA_GlobalController.php:800
+msgid "phone_already_exist_error"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1054
+#: controller/RESA_BackendController.php:1084
+#: controller/RESA_GlobalController.php:155
+#: controller/RESA_GlobalController.php:631
+#: controller/RESA_GlobalController.php:801
+msgid "email_already_exist_error"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1055
+#: controller/RESA_BackendController.php:1085
+#: controller/RESA_GlobalController.php:156
+#: controller/RESA_GlobalController.php:632
+#: controller/RESA_GlobalController.php:802
+msgid "login_already_exist_error"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1102
+#: controller/RESA_GlobalController.php:148
+#: controller/RESA_GlobalController.php:162
+msgid "authentication_or_register_error"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1124
+msgid "Ok"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1390
+#: controller/RESA_BackendController.php:1392
+msgid "can_not_cancel_payment_error"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1611
+msgid "caisse_online_not_installed"
+msgstr ""
+
+#: controller/RESA_BackendController.php:1790
+#: controller/RESA_BackendController.php:1859
+#: controller/RESA_GlobalController.php:249
+#: controller/RESA_GlobalController.php:498
+#: controller/RESA_GlobalController.php:568
+msgid "create_new_version_bookings_error"
+msgstr ""
+
+#: controller/RESA_GlobalController.php:125
+#: controller/RESA_GlobalController.php:707
+msgid "payment_online_error"
+msgstr ""
+
+#: controller/RESA_GlobalController.php:158
+#: controller/RESA_GlobalController.php:664
+#: controller/RESA_GlobalController.php:667
+#: controller/RESA_GlobalController.php:669
+msgid "authentication_error"
+msgstr ""
+
+#: controller/RESA_GlobalController.php:165
+#: controller/RESA_GlobalController.php:205
+msgid "authentication_or_register_reload_error"
+msgstr ""
+
+#: controller/RESA_GlobalController.php:168
+msgid "not_validate_account_error"
+msgstr ""
+
+#: controller/RESA_GlobalController.php:692
+#: controller/RESA_GlobalController.php:694
+#: controller/RESA_PublicMainController.php:84
+msgid "no_bill_error"
+msgstr ""
+
+#: controller/RESA_GlobalController.php:763
+#: controller/RESA_GlobalController.php:765
+#: controller/RESA_GlobalController.php:771
+msgid "customer_not_found_words"
+msgstr ""
+
+#: controller/RESA_GlobalController.php:808
+#: controller/RESA_GlobalController.php:810
+msgid "register_error"
+msgstr ""
+
+#: controller/RESA_ParentController.php:63
+#: controller/RESA_ParentController.php:68
+#: controller/templates/RESA_backend.php:3049
+msgid "calendar_link_title"
+msgstr ""
+
+#: controller/RESA_ParentController.php:74
+#: controller/RESA_ParentController.php:79
+msgid "add_booking_link_title"
+msgstr ""
+
+#: controller/RESA_ParentController.php:85
+#: controller/RESA_ParentController.php:90
+msgid "customers_title"
+msgstr ""
+
+#: controller/RESA_ParentController.php:102
+msgid "add_resa_shortcode_title_link"
+msgstr ""
+
+#: controller/RESA_PublicMainController.php:100
+#: controller/RESA_PublicMainController.php:102
+msgid "shortcode_price_error"
+msgstr ""
+
+#: controller/RESA_PublicMainController.php:163
+msgid "expired_token_error_feedback"
+msgstr ""
+
+#: controller/RESA_ReductionsController.php:12
+msgid "reductions_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:4
+#: controller/templates/RESA_newAccount.php:11
+#: controller/templates/RESA_newAccount.php:33
+#: controller/templates/RESA_newform.php:38
+#: controller/templates/RESA_newform.php:70
+msgid "Hello_word"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:5
+msgid "need_deconnection_for_ask_account_sentence"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:5
+#: controller/templates/RESA_newAccount.php:34
+#: controller/templates/RESA_newform.php:71
+msgid "logout_link_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:8
+msgid "create_account_request_sentence"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:10
+#: controller/templates/RESA_newAccount.php:474
+#: controller/templates/RESA_newform.php:345 includes/RESA_GDPRManager.php:32
+#: includes/RESA_InstallManager.php:188
+msgid "last_name_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:11
+#: controller/templates/RESA_askAccount.php:14
+#: controller/templates/RESA_askAccount.php:19
+#: controller/templates/RESA_askAccount.php:21
+#: controller/templates/RESA_askAccount.php:25
+#: controller/templates/RESA_askAccount.php:28
+#: controller/templates/RESA_askAccount.php:31
+#: controller/templates/RESA_askAccount.php:34
+#: controller/templates/RESA_askAccount.php:37
+#: controller/templates/RESA_askAccount.php:40
+#: controller/templates/RESA_askAccount.php:46
+#: controller/templates/RESA_askAccount.php:49
+#: controller/templates/RESA_askAccount.php:52
+#: controller/templates/RESA_newAccount.php:467
+#: controller/templates/RESA_newAccount.php:469
+#: controller/templates/RESA_newAccount.php:475
+#: controller/templates/RESA_newAccount.php:478
+#: controller/templates/RESA_newAccount.php:483
+#: controller/templates/RESA_newAccount.php:486
+#: controller/templates/RESA_newAccount.php:489
+#: controller/templates/RESA_newAccount.php:492
+#: controller/templates/RESA_newAccount.php:495
+#: controller/templates/RESA_newAccount.php:498
+#: controller/templates/RESA_newAccount.php:503
+#: controller/templates/RESA_newAccount.php:506
+#: controller/templates/RESA_newAccount.php:509
+#: controller/templates/RESA_newform.php:346
+#: controller/templates/RESA_newform.php:349
+#: controller/templates/RESA_newform.php:354
+#: controller/templates/RESA_newform.php:356
+#: controller/templates/RESA_newform.php:360
+#: controller/templates/RESA_newform.php:363
+#: controller/templates/RESA_newform.php:366
+#: controller/templates/RESA_newform.php:369
+#: controller/templates/RESA_newform.php:372
+#: controller/templates/RESA_newform.php:375
+#: controller/templates/RESA_newform.php:380
+#: controller/templates/RESA_newform.php:384
+#: controller/templates/RESA_newform.php:387
+msgid "required_word"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:11
+#: controller/templates/RESA_askAccount.php:14
+#: controller/templates/RESA_askAccount.php:25
+#: controller/templates/RESA_askAccount.php:28
+#: controller/templates/RESA_askAccount.php:31
+#: controller/templates/RESA_askAccount.php:34
+#: controller/templates/RESA_askAccount.php:37
+#: controller/templates/RESA_askAccount.php:40
+#: controller/templates/RESA_askAccount.php:46
+#: controller/templates/RESA_askAccount.php:49
+#: controller/templates/RESA_askAccount.php:52
+#: controller/templates/RESA_newAccount.php:475
+#: controller/templates/RESA_newAccount.php:478
+#: controller/templates/RESA_newAccount.php:483
+#: controller/templates/RESA_newAccount.php:486
+#: controller/templates/RESA_newAccount.php:489
+#: controller/templates/RESA_newAccount.php:492
+#: controller/templates/RESA_newAccount.php:495
+#: controller/templates/RESA_newAccount.php:498
+#: controller/templates/RESA_newAccount.php:503
+#: controller/templates/RESA_newAccount.php:506
+#: controller/templates/RESA_newAccount.php:509
+#: controller/templates/RESA_newform.php:346
+#: controller/templates/RESA_newform.php:349
+#: controller/templates/RESA_newform.php:360
+#: controller/templates/RESA_newform.php:363
+#: controller/templates/RESA_newform.php:366
+#: controller/templates/RESA_newform.php:369
+#: controller/templates/RESA_newform.php:372
+#: controller/templates/RESA_newform.php:375
+#: controller/templates/RESA_newform.php:380
+#: controller/templates/RESA_newform.php:384
+#: controller/templates/RESA_newform.php:387
+msgid "facultative_word"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:13
+#: controller/templates/RESA_newAccount.php:477
+#: controller/templates/RESA_newform.php:348 includes/RESA_GDPRManager.php:33
+#: includes/RESA_InstallManager.php:188
+msgid "first_name_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:16
+#: controller/templates/RESA_newAccount.php:16
+#: controller/templates/RESA_newAccount.php:480
+#: controller/templates/RESA_newform.php:48
+#: controller/templates/RESA_newform.php:336
+#: controller/templates/RESA_newform.php:351
+msgid "email_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:17
+#: controller/templates/RESA_newform.php:352
+msgid "not_an_email_address_sentence"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:18
+#: controller/templates/RESA_newAccount.php:17
+#: controller/templates/RESA_newAccount.php:466
+#: controller/templates/RESA_newform.php:49
+#: controller/templates/RESA_newform.php:337
+#: controller/templates/RESA_newform.php:353
+msgid "password_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:20
+#: controller/templates/RESA_newAccount.php:468
+#: controller/templates/RESA_newform.php:355
+msgid "confirm_password_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:22
+#: controller/templates/RESA_newAccount.php:470
+#: controller/templates/RESA_newform.php:357
+msgid "not_same_password_words"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:30
+#: controller/templates/RESA_newAccount.php:488
+#: controller/templates/RESA_newform.php:365
+msgid "phone2_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:48
+#: controller/templates/RESA_newAccount.php:505
+#: controller/templates/RESA_newform.php:383
+msgid "siret_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:51
+#: controller/templates/RESA_newAccount.php:508
+#: controller/templates/RESA_newform.php:386
+msgid "legal_form_field_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:54
+#: controller/templates/RESA_newAccount.php:511
+#: controller/templates/RESA_newform.php:381
+msgid "gdpr_accept_to_save_data"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:57
+#: controller/templates/RESA_newAccount.php:252
+#: controller/templates/RESA_newform.php:389
+#: controller/templates/RESA_newform.php:725
+msgid "ok_link_title"
+msgstr ""
+
+#: controller/templates/RESA_askAccount.php:63
+msgid "create_account_request_done_sentence"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2
+#: controller/templates/RESA_newAccount.php:121
+#: controller/templates/RESA_newAccount.php:342
+#: controller/templates/RESA_newform.php:422
+#: controller/templates/RESA_newform.php:570
+msgid "persons_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3
+#: controller/templates/RESA_newAccount.php:121
+#: controller/templates/RESA_newAccount.php:342
+#: controller/templates/RESA_newform.php:422
+#: controller/templates/RESA_newform.php:570
+msgid "person_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:4
+#: controller/templates/RESA_backend.php:562
+#: controller/templates/RESA_backend.php:885
+#: controller/templates/RESA_backend.php:1004
+#: controller/templates/RESA_backend.php:1037
+#: controller/templates/RESA_backend.php:1047
+#: controller/templates/RESA_backend.php:1257
+#: controller/templates/RESA_backend.php:1391
+#: controller/templates/RESA_backend.php:1423
+#: controller/templates/RESA_backend.php:1433
+#: controller/templates/RESA_backend.php:1877
+#: controller/templates/RESA_backend.php:2318
+#: controller/templates/RESA_backend.php:2559
+#: controller/templates/RESA_backend.php:2738
+#: controller/templates/RESA_backend.php:3463
+#: controller/templates/RESA_backend.php:4191
+#: controller/templates/RESA_backend.php:4627
+#: controller/templates/RESA_bookingDetails.php:116
+#: controller/templates/RESA_newAccount.php:104
+#: controller/templates/RESA_newAccount.php:116
+#: controller/templates/RESA_newAccount.php:325
+#: controller/templates/RESA_newAccount.php:337
+#: controller/templates/RESA_newform.php:171
+#: controller/templates/RESA_newform.php:206
+#: controller/templates/RESA_newform.php:241
+#: controller/templates/RESA_newform.php:407
+#: controller/templates/RESA_newform.php:416
+#: controller/templates/RESA_newform.php:555
+#: controller/templates/RESA_newform.php:564
+#: controller/templates/RESA_newform.php:756
+#: controller/templates/RESA_newform.php:765
+#: controller/templates/RESA_receipt.php:63
+#: controller/templates/RESA_receipt.php:72 includes/RESA_GDPRManager.php:95
+msgid "begin_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:5
+#: controller/templates/RESA_bookingDetails.php:480
+#: controller/templates/RESA_newAccount.php:212
+#: controller/templates/RESA_newform.php:538
+#: controller/templates/RESA_newform.php:678
+#: controller/templates/RESA_newform.php:866
+#: controller/templates/RESA_receipt.php:148
+msgid "Total_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:6 includes/RESA_Algorithms.php:1640
+msgid "no_payment_state"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:7 includes/RESA_Algorithms.php:1643
+msgid "incomplete_payment_state"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:8 includes/RESA_Algorithms.php:1646
+msgid "complete_payment_state"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:9
+msgid "Assigned_to_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:10
+msgid "have_a_note_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:11
+#: controller/templates/RESA_backend.php:15
+#: controller/templates/RESA_backend.php:2444
+msgid "delete_info_calendar_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:12
+#: controller/templates/RESA_backend.php:2445
+msgid "delete_info_calendar_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:13
+#: controller/templates/RESA_backend.php:2446
+msgid "delete_info_calendar_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:14
+#: controller/templates/RESA_backend.php:2447
+msgid "delete_info_calendar_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:16
+#: controller/templates/RESA_backend.php:2525
+msgid "delete_service_constraint_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:17
+#: controller/templates/RESA_backend.php:2526
+msgid "delete_service_constraint_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:18
+#: controller/templates/RESA_backend.php:2527
+msgid "delete_service_constraint_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:257
+msgid "merge_customer_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:264
+msgid "ask_delete_customer_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:265
+msgid "ask_delete_customer_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:266
+msgid "ask_delete_customer_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:267
+msgid "ask_delete_customer_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:268
+msgid "delete_customer_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:388
+msgid "cancel_payment_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:389
+msgid "cancel_payment_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:390
+msgid "cancel_payment_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:391
+msgid "cancel_payment_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:461
+#: controller/templates/RESA_backend.php:1795
+#: controller/templates/RESA_backend.php:2222
+#: controller/templates/RESA_backend.php:3370
+#: controller/templates/RESA_backend.php:4102
+#: controller/templates/RESA_bookingDetails.php:102
+#: includes/RESA_Variables.php:239
+msgid "cancelled_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:510
+#: controller/templates/RESA_backend.php:864
+#: controller/templates/RESA_backend.php:1845
+#: controller/templates/RESA_backend.php:2272
+#: controller/templates/RESA_backend.php:3420
+#: controller/templates/RESA_backend.php:4152
+msgid "by_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:558
+#: controller/templates/RESA_backend.php:881
+#: controller/templates/RESA_backend.php:1001
+#: controller/templates/RESA_backend.php:1034
+#: controller/templates/RESA_backend.php:1044
+#: controller/templates/RESA_backend.php:1253
+#: controller/templates/RESA_backend.php:1388
+#: controller/templates/RESA_backend.php:1420
+#: controller/templates/RESA_backend.php:1430
+#: controller/templates/RESA_backend.php:1873
+#: controller/templates/RESA_backend.php:2314
+#: controller/templates/RESA_backend.php:2555
+#: controller/templates/RESA_backend.php:2734
+#: controller/templates/RESA_backend.php:3459
+#: controller/templates/RESA_backend.php:4187
+#: controller/templates/RESA_backend.php:4623
+#: controller/templates/RESA_bookingDetails.php:115
+#: controller/templates/RESA_newAccount.php:103
+#: controller/templates/RESA_newAccount.php:115
+#: controller/templates/RESA_newAccount.php:324
+#: controller/templates/RESA_newAccount.php:336
+#: controller/templates/RESA_newform.php:167
+#: controller/templates/RESA_newform.php:202
+#: controller/templates/RESA_newform.php:239
+#: controller/templates/RESA_newform.php:406
+#: controller/templates/RESA_newform.php:415
+#: controller/templates/RESA_newform.php:554
+#: controller/templates/RESA_newform.php:563
+#: controller/templates/RESA_newform.php:755
+#: controller/templates/RESA_newform.php:764
+#: controller/templates/RESA_receipt.php:23
+#: controller/templates/RESA_receipt.php:60
+#: controller/templates/RESA_receipt.php:69 includes/RESA_GDPRManager.php:93
+msgid "to_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:686
+#: controller/templates/RESA_backend.php:1687
+msgid "ask_delete_booking_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:687
+#: controller/templates/RESA_backend.php:1688
+msgid "ask_delete_booking_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:688
+#: controller/templates/RESA_backend.php:1689
+msgid "ask_delete_booking_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:689
+#: controller/templates/RESA_backend.php:1690
+msgid "ask_delete_booking_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:968
+#: controller/templates/RESA_backend.php:1335
+#: controller/templates/RESA_shortcodeWindow.php:117
+msgid "Services_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1010
+#: controller/templates/RESA_backend.php:1013
+#: controller/templates/RESA_backend.php:1397
+#: controller/templates/RESA_backend.php:1400
+#: controller/templates/RESA_newform.php:175
+#: controller/templates/RESA_newform.php:210
+msgid "positions_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1077
+#: controller/templates/RESA_backend.php:1463
+#: controller/templates/RESA_receipt.php:53
+msgid "Price_list_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1206
+#: controller/templates/RESA_backend.php:1226
+#: controller/templates/RESA_backend.php:1608
+#: controller/templates/RESA_backend.php:1638
+#: controller/templates/RESA_bookingDetails.php:166
+#: controller/templates/RESA_bookingDetails.php:203
+#: controller/templates/RESA_bookingDetails.php:281
+#: controller/templates/RESA_bookingDetails.php:305
+#: controller/templates/RESA_bookingDetails.php:385
+#: controller/templates/RESA_bookingDetails.php:412
+#: controller/templates/RESA_newAccount.php:158
+#: controller/templates/RESA_newAccount.php:179
+#: controller/templates/RESA_newAccount.php:379
+#: controller/templates/RESA_newAccount.php:400
+#: controller/templates/RESA_newform.php:466
+#: controller/templates/RESA_newform.php:485
+#: controller/templates/RESA_newform.php:507
+#: controller/templates/RESA_newform.php:606
+#: controller/templates/RESA_newform.php:625
+#: controller/templates/RESA_newform.php:648
+#: controller/templates/RESA_newform.php:796
+#: controller/templates/RESA_newform.php:815
+#: controller/templates/RESA_newform.php:838
+msgid "on_price_list_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1209
+#: controller/templates/RESA_backend.php:1228
+#: controller/templates/RESA_bookingDetails.php:179
+#: controller/templates/RESA_bookingDetails.php:216
+#: controller/templates/RESA_newAccount.php:160
+#: controller/templates/RESA_newAccount.php:181
+#: controller/templates/RESA_newAccount.php:381
+#: controller/templates/RESA_newAccount.php:402
+#: controller/templates/RESA_newform.php:468
+#: controller/templates/RESA_newform.php:608
+#: controller/templates/RESA_newform.php:798
+msgid "offer_quantity_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1321
+#: controller/templates/RESA_backend.php:1574
+msgid "add_in_basket_success"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1624
+#: controller/templates/RESA_bookingDetails.php:468
+msgid "custom_line_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1652
+msgid "Value_coupon_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1653
+#: controller/templates/RESA_newform.php:861
+msgid "add_coupon_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1659
+#: controller/templates/RESA_backend.php:2435
+msgid "description_field_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1662
+msgid "add_custom_reductions_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1957
+msgid "ask_send_email_creation_account_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1958
+msgid "ask_send_email_creation_account_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1959
+msgid "ask_send_email_creation_account_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:1960
+msgid "ask_send_email_creation_account_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2119
+msgid "ask_send_email_to_customer_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2120
+msgid "ask_send_email_to_customer_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2121
+msgid "ask_send_email_to_customer_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2122
+msgid "ask_send_email_to_customer_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2415
+msgid "add_info_calendar_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2416
+msgid "edit_info_calendar_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2469
+msgid "add_service_constraint_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2470
+msgid "edit_service_constraint_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2524
+msgid "delete_service_constraint_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2642
+msgid "change_members_group_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2643
+msgid "change_members_group_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2644
+msgid "change_members_group_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2645
+msgid "change_members_group_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2647
+msgid "change_members_group_place_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2648
+msgid "change_members_group_place_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2649
+msgid "change_members_group_place_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2650
+msgid "change_members_group_place_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2698
+msgid "change_participants_group_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2699
+msgid "change_participants_group_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2700
+msgid "change_participants_group_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2701
+msgid "change_participants_group_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2748
+msgid "delete_group_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2749
+msgid "delete_group_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2750
+msgid "delete_group_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2751
+msgid "delete_group_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2795
+msgid "remove_member_group_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2796
+msgid "remove_member_group_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2797
+msgid "remove_member_group_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2798
+msgid "remove_member_group_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2816
+msgid "change_member_group_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2817
+msgid "change_member_group_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2818
+msgid "change_member_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2819
+msgid "change_member_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2821
+msgid "change_member_place_group_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2822
+msgid "change_member_place_group_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2823
+msgid "change_member_place_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2824
+msgid "change_member_place_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2878
+msgid "add_payment_for_customer_sentence"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2879
+msgid "add_repayment_for_customer_sentence"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2880
+#: controller/templates/RESA_backend.php:2947
+#: controller/templates/RESA_receipt.php:157
+msgid "amount_field_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2885 includes/RESA_Variables.php:144
+msgid "cash_payment_type_radio_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2889 includes/RESA_Variables.php:145
+#: includes/RESA_Variables.php:175
+msgid "cheque_payment_type_radio_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2893 includes/RESA_Variables.php:146
+msgid "card_payment_type_radio_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2897
+msgid "transfer_payment_type_radio_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2901 includes/RESA_Variables.php:152
+msgid "paypal_payment_type_radio_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2905 includes/RESA_Variables.php:157
+msgid "systempay_payment_type_radio_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2941
+msgid "attach_booking_for_customer_sentence"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2942
+msgid "associated_booking_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2943
+msgid "Booking_of_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2949
+msgid "payment_type_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2961
+msgid "merge_customer_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2973
+msgid "pay_booking_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2984
+msgid "advance_payment_title_form"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:2991
+#: controller/templates/RESA_newAccount.php:242
+#: controller/templates/RESA_newform.php:714
+msgid "advance_payment_amount_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3050
+msgid "bookings_list_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3215
+#: controller/templates/RESA_backend.php:3994
+msgid "No_tag_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3239
+#: controller/templates/RESA_backend.php:3256
+#: controller/templates/RESA_backend.php:4372
+msgid "today_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3240
+#: controller/templates/RESA_backend.php:3257
+#: controller/templates/RESA_backend.php:4373
+msgid "tomorrow_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3241
+#: controller/templates/RESA_backend.php:3258
+#: controller/templates/RESA_backend.php:4374
+msgid "in_seven_days_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3242
+#: controller/templates/RESA_backend.php:3259
+#: controller/templates/RESA_backend.php:4375
+msgid "yesterday_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3247
+#: controller/templates/RESA_backend.php:3248
+#: controller/templates/RESA_backend.php:3265
+#: controller/templates/RESA_backend.php:3268
+#: controller/templates/RESA_backend.php:4381
+#: controller/templates/RESA_backend.php:4384
+#: controller/templates/RESA_receipt.php:6
+#: controller/templates/RESA_reductions.php:231
+#: controller/templates/RESA_reductions.php:318
+#: controller/templates/RESA_reductions.php:482
+#: controller/templates/RESA_shortcodeWindow.php:66
+#: controller/templates/RESA_shortcodeWindow.php:76
+#: controller/templates/RESA_shortcodeWindow.php:102
+#: controller/templates/RESA_shortcodeWindow.php:128
+#: controller/templates/RESA_shortcodeWindow.php:145
+#: controller/templates/RESA_shortcodeWindow.php:163
+msgid "Close_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3247
+#: controller/templates/RESA_backend.php:3248
+#: controller/templates/RESA_backend.php:3265
+#: controller/templates/RESA_backend.php:3268
+#: controller/templates/RESA_backend.php:4381
+#: controller/templates/RESA_backend.php:4384
+#: controller/templates/RESA_reductions.php:231
+#: controller/templates/RESA_reductions.php:318
+#: controller/templates/RESA_reductions.php:482
+msgid "Clear_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3247
+#: controller/templates/RESA_backend.php:3248
+#: controller/templates/RESA_backend.php:3265
+#: controller/templates/RESA_backend.php:3268
+#: controller/templates/RESA_backend.php:4381
+#: controller/templates/RESA_backend.php:4384
+#: controller/templates/RESA_reductions.php:231
+#: controller/templates/RESA_reductions.php:318
+#: controller/templates/RESA_reductions.php:482
+msgid "Today_word"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3296
+#: controller/templates/RESA_backend.php:4032
+#: controller/templates/RESA_backend.php:4399
+msgid "reinitialize_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3308
+#: controller/templates/RESA_backend.php:3559
+#: controller/templates/RESA_backend.php:3835
+#: controller/templates/RESA_backend.php:4040
+#: controller/templates/RESA_backend.php:4405
+#: controller/templates/RESA_backend.php:4566
+#: controller/templates/RESA_backend.php:4599
+#: controller/templates/RESA_backend.php:4727
+msgid "previous_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3308
+#: controller/templates/RESA_backend.php:3561
+#: controller/templates/RESA_backend.php:3836
+#: controller/templates/RESA_backend.php:4040
+#: controller/templates/RESA_backend.php:4406
+#: controller/templates/RESA_backend.php:4567
+#: controller/templates/RESA_backend.php:4599
+#: controller/templates/RESA_backend.php:4727
+msgid "next_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3318
+#: controller/templates/RESA_backend.php:4050
+#: controller/templates/RESA_backend.php:4609
+#: controller/templates/RESA_backend.php:4737
+msgid "by_page_words"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3560
+msgid "today_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3566
+#: controller/templates/RESA_backend.php:4572
+msgid "month_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3567
+#: controller/templates/RESA_backend.php:4573
+msgid "week_link_title"
+msgstr ""
+
+#: controller/templates/RESA_backend.php:3568
+#: controller/templates/RESA_backend.php:4574
+msgid "day_link_title"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:9
+#: includes/RESA_GDPRManager.php:91
+msgid "date_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:10
+#: includes/RESA_GDPRManager.php:93 includes/RESA_GDPRManager.php:95
+msgid "hours_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:12
+msgid "staff_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:15
+msgid "place_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:17
+#: includes/RESA_GDPRManager.php:97
+msgid "service_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:18
+msgid "price_list_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:19
+#: includes/RESA_GDPRManager.php:98
+msgid "number_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:21
+msgid "total_price_ht_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:22
+msgid "tva_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:24
+msgid "total_price_ttc_table_header"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:105
+#: includes/RESA_Variables.php:238
+msgid "waiting_word"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:108
+#: includes/RESA_Variables.php:240
+msgid "abandonned_word"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:172
+#: controller/templates/RESA_bookingDetails.php:209
+msgid "new_price_list_words"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:346
+#: controller/templates/RESA_newAccount.php:194
+#: controller/templates/RESA_newAccount.php:415
+#: controller/templates/RESA_newAccount.php:433
+#: controller/templates/RESA_newform.php:497
+#: controller/templates/RESA_newform.php:637
+#: controller/templates/RESA_newform.php:827
+#: controller/templates/RESA_receipt.php:127
+msgid "Sub_total_word"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:482
+msgid "Total_advance_payment_word"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:507
+msgid "Advance_payment_words"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:521
+msgid "Payment_of_words"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:524
+msgid "Repayment_of_words"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:541
+msgid "Remaining_to_pay_words"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:548
+msgid "staff_note_words"
+msgstr ""
+
+#: controller/templates/RESA_bookingDetails.php:551
+#: controller/templates/RESA_newAccount.php:78
+#: controller/templates/RESA_newAccount.php:299
+msgid "note_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:4
+#: controller/templates/RESA_newform.php:10
+msgid "browser_not_compatible_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:7
+msgid "loading_customer_data_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:11
+msgid "already_customer_here_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:12
+#: controller/templates/RESA_newform.php:39
+msgid "If_yes_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:12
+#: controller/templates/RESA_newform.php:39
+msgid "connect_you_to_account_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:18
+#: controller/templates/RESA_newform.php:50
+#: controller/templates/RESA_newform.php:338
+msgid "to_login_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:20
+#: controller/templates/RESA_newform.php:52
+msgid "forgotten_password_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:21
+#: controller/templates/RESA_newform.php:53
+msgid "forgotten_password_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:22
+#: controller/templates/RESA_newform.php:54
+msgid "forgotten_password_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:23
+#: controller/templates/RESA_newform.php:55
+msgid "forgotten_password_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:24
+#: controller/templates/RESA_newform.php:56
+msgid "forgotten_password_inputPlaceholder_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:25
+#: controller/templates/RESA_newform.php:57
+#: controller/templates/RESA_newform.php:58
+msgid "fotgotten_password_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:34
+#: controller/templates/RESA_newform.php:71
+msgid "you_is_not_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:40
+msgid "my_reservations"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:41
+msgid "my_quotations"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:42 includes/RESA_GDPRManager.php:28
+msgid "my_personal_informations"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:45
+msgid "see_bookings"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:48
+#: controller/templates/RESA_newAccount.php:53
+#: controller/templates/RESA_newAccount.php:274
+#: controller/templates/RESA_newAccount.php:279
+msgid "to_come"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:49
+#: controller/templates/RESA_newAccount.php:54
+#: controller/templates/RESA_newAccount.php:275
+#: controller/templates/RESA_newAccount.php:280
+msgid "past"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:50
+#: controller/templates/RESA_newAccount.php:55
+#: controller/templates/RESA_newAccount.php:276
+#: controller/templates/RESA_newAccount.php:281
+msgid "all_feminin"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:63 includes/RESA_GDPRManager.php:64
+msgid "Booking_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:63
+#: controller/templates/RESA_newAccount.php:290
+msgid "booking_first_date_link_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:65
+msgid "booking_created_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:67
+#: controller/templates/RESA_newAccount.php:294
+#: controller/templates/RESA_receipt.php:32
+msgid "booking_status_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:68
+#: controller/templates/RESA_receipt.php:33 includes/RESA_GDPRManager.php:68
+msgid "booking_status_ok_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:69
+msgid "payment_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:69
+msgid "expired_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:70
+#: controller/templates/RESA_receipt.php:35 includes/RESA_GDPRManager.php:69
+#: includes/RESA_GDPRManager.php:70
+msgid "booking_status_cancelled_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:72
+msgid "payment_status_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:73
+msgid "payment_status_complete_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:74 includes/RESA_GDPRManager.php:76
+msgid "payment_status_advancePayment_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:75 includes/RESA_GDPRManager.php:75
+#: includes/RESA_GDPRManager.php:77
+msgid "payment_status_noPayment_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:82
+#: controller/templates/RESA_newAccount.php:303
+#: controller/templates/RESA_newform.php:684
+msgid "Customer_note_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:85
+msgid "See_booking_details_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:99
+#: controller/templates/RESA_newAccount.php:111
+#: controller/templates/RESA_newAccount.php:320
+#: controller/templates/RESA_newAccount.php:332
+#: controller/templates/RESA_receipt.php:78
+#: controller/templates/RESA_receipt.php:83
+msgid "waiting_status_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:100
+#: controller/templates/RESA_newAccount.php:112
+#: controller/templates/RESA_newAccount.php:321
+#: controller/templates/RESA_newAccount.php:333
+#: controller/templates/RESA_receipt.php:79
+#: controller/templates/RESA_receipt.php:84
+msgid "ok_status_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:101
+#: controller/templates/RESA_newAccount.php:113
+#: controller/templates/RESA_newAccount.php:322
+#: controller/templates/RESA_newAccount.php:334
+#: controller/templates/RESA_receipt.php:80
+#: controller/templates/RESA_receipt.php:85
+msgid "cancelled_status_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:107
+#: controller/templates/RESA_newAccount.php:328
+#: controller/templates/RESA_receipt.php:44
+msgid "Date_and_hours_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:108
+#: controller/templates/RESA_newAccount.php:329
+#: controller/templates/RESA_receipt.php:45
+msgid "Dates_and_hours_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:137
+#: controller/templates/RESA_newAccount.php:358
+#: controller/templates/RESA_newform.php:582
+#: includes/RESA_InstallManager.php:177
+msgid "Participants_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:215
+msgid "Paid_this_booking_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:218
+#: controller/templates/RESA_newform.php:689
+#: includes/RESA_InstallManager.php:177
+msgid "Payment_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:221
+#: controller/templates/RESA_newform.php:693
+msgid "Payment_methods_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:238
+#: controller/templates/RESA_newform.php:710
+msgid "not_to_pay_advance_payment_amount_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:245
+#: controller/templates/RESA_newform.php:717
+msgid "Validation_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:253
+#: controller/templates/RESA_newform.php:734
+msgid "redict_to_payment_page_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:262
+msgid "See_the_receipt_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:271
+msgid "see_quotations"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:290
+#: controller/templates/RESA_receipt.php:39 includes/RESA_GDPRManager.php:65
+msgid "quotation_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:292
+msgid "quotation_created_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:295
+msgid "booking_status_quotation_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:296
+msgid "booking_status_quotation_request_word"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:306
+msgid "See_quotation_details_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:436
+msgid "accept_quotation_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:437
+msgid "accept_quotation_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:438
+msgid "accept_quotation_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:439
+msgid "accept_quotation_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:440
+msgid "accept_quotation_success_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:441
+msgid "accept_quotation_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:444
+msgid "refuse_quotation_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:445
+msgid "refuse_quotation_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:446
+msgid "refuse_quotation_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:447
+msgid "refuse_quotation_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:448
+msgid "refuse_quotation_success_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:449
+msgid "refuse_quotation_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:451
+msgid "See_the_quotation_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:460
+msgid "Modify_your_personal_informations_words"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:464
+msgid "Modify_your_password"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:513
+msgid "modify_your_informations_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:514
+msgid "modify_your_informations_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:515
+msgid "modify_your_informations_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:516
+msgid "modify_your_informations_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:517
+msgid "modify_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:517
+msgid "modification_in_progress_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newAccount.php:520
+msgid "gdpr_account_informations"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:2
+msgid "voucher_error_feedback"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:4
+msgid "loading_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:16
+msgid "participant_selector_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:38
+msgid "already_customer_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:40
+msgid "else_continue_your_first_booking_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:43
+msgid "need_connection_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:74
+msgid "can_not_display_form_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:150
+msgid "Before_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:151
+msgid "After_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:153
+msgid "from2_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:154
+msgid "to2_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:155
+msgid "absent_definition_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:162
+msgid "Morning_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:178
+#: controller/templates/RESA_newform.php:213
+msgid "remaining_positions_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:181
+#: controller/templates/RESA_newform.php:216
+msgid "Full_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:197
+msgid "Afternoon_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:256
+#: controller/templates/RESA_newform.php:293
+msgid "from_price_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:262
+#: controller/templates/RESA_newform.php:300
+msgid "in_total_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:273
+#: controller/templates/RESA_newform.php:311
+msgid "select_mandatory_price_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:282
+msgid "addons_and_extras_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:305
+msgid "Quantity_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:328
+msgid "connected_with_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:330
+msgid "is_not_you_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:330
+msgid "to_logout_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:334
+msgid "already_register_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:343
+msgid "create_account_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:397
+msgid "Complementary_informations_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:434
+msgid "participants_list_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:435
+msgid "form_participants_sentence"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:437
+msgid "Participant_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:443
+msgid "Select_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:459
+#: controller/templates/RESA_newform.php:599
+#: controller/templates/RESA_newform.php:789
+msgid "error_service_parameters_deprecated_form"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:459
+#: controller/templates/RESA_newform.php:599
+#: controller/templates/RESA_newform.php:789
+msgid "remove_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:468
+#: controller/templates/RESA_newform.php:608
+#: controller/templates/RESA_newform.php:798
+msgid "offer_quantities_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:519
+#: controller/templates/RESA_newform.php:660
+#: controller/templates/RESA_newform.php:862
+msgid "Coupon_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:524
+#: controller/templates/RESA_newform.php:665
+msgid "on_sub_total_words"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:718
+msgid "Send_quotation_request_word"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:727
+msgid "customer_error_feedback"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:728
+msgid "basket_error_feedback"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:729
+msgid "checkbox_payment_error_feedback"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:730
+msgid "type_payment_error_feedback"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:733
+msgid "valid_form_process_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:740
+msgid "Redirection_word_form"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:747
+msgid "basket_recapitulative_form_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:785
+#: controller/templates/RESA_newform.php:858
+msgid "delete_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:863
+msgid "add_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:864
+msgid "process_reductions_feedback"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:875
+msgid "previous_step_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:878
+msgid "next_step_link_title"
+msgstr ""
+
+#: controller/templates/RESA_newform.php:881
+msgid "empty_field_participant_form_error"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:7 includes/RESA_Algorithms.php:1524
+msgid "print_link_title"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:23
+msgid "created_on_words"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:34 includes/RESA_GDPRManager.php:71
+#: includes/RESA_GDPRManager.php:72
+msgid "booking_status_waiting_word"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:40
+msgid "online_receipt_words"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:47
+msgid "status_word"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:49
+#: includes/RESA_InstallManager.php:177
+msgid "Activity_word"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:50
+msgid "Activities_word"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:52
+msgid "Tax_es_word"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:112
+msgid "IVAT_word"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:152
+msgid "Your_payments_words"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:155
+#: controller/templates/RESA_reductions.php:221
+#: includes/RESA_InstallManager.php:177
+msgid "Date_word"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:156
+msgid "payment_method_title"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:168
+msgid "amount_to_be_paid_words"
+msgstr ""
+
+#: controller/templates/RESA_receipt.php:176
+msgid "pub_resa_words"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:13
+msgid "saved_alert_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:16
+#: controller/templates/RESA_reductions.php:553
+msgid "add_reduction_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:35
+msgid "to_define_words"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:44
+msgid "ask_delete_reduction_text_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:45
+msgid "ask_delete_reduction_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:46
+msgid "ask_delete_reduction_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:47
+msgid "ask_delete_reduction_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:61
+msgid "activated_checkbox_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:72
+msgid "general_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:80
+#: controller/templates/RESA_reductions.php:81
+msgid "name_field_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:96
+msgid "presentation_field_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:106
+msgid "conditions_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:110
+msgid "conditions_description_reduction"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:120
+msgid "Condition_word"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:125
+#: controller/templates/RESA_reductions.php:396
+msgid "if_on_words_reductions"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:128
+msgid "merge_appointments_field_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:133
+#: controller/templates/RESA_reductions.php:403
+#: controller/templates/RESA_reductions.php:516
+msgid "there_are_words"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:137
+#: controller/templates/RESA_reductions.php:409
+msgid "and_word"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:155
+#: controller/templates/RESA_reductions.php:178
+#: controller/templates/RESA_reductions.php:206
+#: controller/templates/RESA_reductions.php:226
+#: controller/templates/RESA_reductions.php:244
+#: controller/templates/RESA_reductions.php:301
+#: controller/templates/RESA_reductions.php:313
+#: controller/templates/RESA_reductions.php:427
+#: controller/templates/RESA_reductions.php:477
+msgid "equals_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:156
+#: controller/templates/RESA_reductions.php:179
+#: controller/templates/RESA_reductions.php:428
+msgid "not_equals_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:160
+msgid "code_here_sentence"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:164
+msgid "maximum_usage_checkbox_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:189
+#: controller/templates/RESA_reductions.php:437
+msgid "all_prices_list_checkbox_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:201
+#: controller/templates/RESA_reductions.php:449
+msgid "and_quantity_words"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:205
+#: controller/templates/RESA_reductions.php:300
+#: controller/templates/RESA_reductions.php:453
+#: controller/templates/RESA_reductions.php:465
+msgid "more_or_equals_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:207
+#: controller/templates/RESA_reductions.php:302
+#: controller/templates/RESA_reductions.php:454
+#: controller/templates/RESA_reductions.php:466
+msgid "less_than_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:208
+#: controller/templates/RESA_reductions.php:455
+msgid "bracket_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:225
+#: controller/templates/RESA_reductions.php:243
+#: controller/templates/RESA_reductions.php:312
+#: controller/templates/RESA_reductions.php:476
+msgid "before_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:227
+#: controller/templates/RESA_reductions.php:245
+#: controller/templates/RESA_reductions.php:314
+#: controller/templates/RESA_reductions.php:478
+msgid "after_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:239
+msgid "Time_word"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:257
+msgid "days_field_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:271
+msgid "add_date_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:274
+msgid "add_time_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:277
+msgid "add_days_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:283
+msgid "add_service_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:287
+msgid "custom_quantity_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:288
+msgid "added_more_or_equals_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:289
+msgid "mutual_more_or_equals_to_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:290
+msgid "mutual_bracket_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:328
+msgid "for_company_account_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:329
+msgid "not_for_company_account_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:341
+#: controller/templates/RESA_reductions.php:512
+msgid "And_word"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:344
+msgid "add_conditions_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:351
+#: controller/templates/RESA_reductions.php:364
+msgid "reduction_applications_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:355
+msgid "reduction_applications_description"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:369
+msgid "Reduction_word"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:375
+msgid "value_word"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:389
+msgid "apply_reduction_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:403
+#: controller/templates/RESA_reductions.php:516
+msgid "Or_word"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:405
+msgid "remove_case_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:488
+msgid "begin_before_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:489
+msgid "after_before_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:539
+msgid "add_application_link_title"
+msgstr ""
+
+#: controller/templates/RESA_reductions.php:549
+#: controller/templates/RESA_reductions.php:557
+msgid "update_reductions_link_title"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:11
+msgid "add_resa_form_shortcode_title_link"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:12
+msgid "add_resa_page_shortcode_title_link"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:13
+msgid "add_resa_price_shortcode_title_link"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:14
+msgid "add_form_link_shortcode_title_link"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:15
+msgid "ask_account_form_shortcode_title_link"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:22
+msgid "form_shortcode_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:65
+#: controller/templates/RESA_shortcodeWindow.php:144
+msgid "form_shortcode_dialog_button"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:70
+msgid "form_shortcode_game_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:71
+msgid "form_shortcode_game_dialog_description1"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:72
+msgid "form_shortcode_game_dialog_description2"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:74
+msgid "form_shortcode_game_account_dialog_button"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:75
+msgid "form_shortcode_game_bill_button"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:80
+msgid "form_shortcode_price_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:81
+msgid "form_shortcode_price_dialog_description"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:101
+msgid "form_shortcode_price_dialog_button"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:106
+msgid "form_shortcode_link_form_dialog_title"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:107
+msgid "form_shortcode_link_form_dialog_description"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:109
+msgid "link_form_words"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:110
+msgid "link_name_words"
+msgstr ""
+
+#: controller/templates/RESA_shortcodeWindow.php:127
+msgid "form_shortcode_link_form_dialog_button"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:9
+msgid "Import_progress_words"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:14
+msgid "cancel_link_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:20
+msgid "data_and_saveguard_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:23
+msgid "extract_for_new_intall_checkbox_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:24
+msgid "extract_all_data_link_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:28
+msgid "load_options_checkbox_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:30
+msgid "load_customers_checkbox_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:32
+msgid "import_all_data_link_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:37
+msgid "ask_delete_bookings_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:38
+msgid "ask_delete_bookings_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:39
+msgid "ask_delete_bookings_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:40
+msgid "ask_delete_bookings_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:41
+msgid "delete_all_bookings_link_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:43
+msgid "delete_wp_resa_customers_checkbox_title"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:45
+msgid "ask_clear_all_data_title_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:46
+msgid "ask_clear_all_data_text_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:47
+msgid "ask_clear_all_data_confirmButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:48
+msgid "ask_clear_all_data_cancelButton_dialog"
+msgstr ""
+
+#: controller/templates/RESA_systemInfo.php:49
+#: controller/templates/RESA_systemInfo.php:50
+msgid "clear_all_data_link_title"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:347 includes/RESA_Algorithms.php:355
+#: includes/RESA_Algorithms.php:360
+msgid "need_participants_informations_error"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:369
+msgid "save_booking_error_unknown_price"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:371
+msgid "save_booking_error_price_not_activated"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:373
+msgid "save_booking_error_price_not_for_type_account"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:375
+msgid "save_booking_error_price_unavailable"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:378
+msgid "save_booking_error_number_price"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:383
+msgid "no_mandatory_price_error_number_price"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:398
+msgid "save_booking_error_max_capacity_reach"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:401
+msgid "error_no_price_list_capacity_reach"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:488
+msgid "save_booking_error_person_attribution"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:492
+msgid "save_booking_error_timeslot_not_found"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:496
+msgid "save_booking_error_empty_form"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:619
+msgid "number_word"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:620
+msgid "total_price_word"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:1515
+msgid "bill_title"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:1517
+msgid "bill_advance_payment_title"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:1533 includes/RESA_Algorithms.php:1537
+msgid "Customer_word"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:1534
+msgid "your_bookings_words"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:1566 includes/RESA_Variables.php:197
+msgid "transfer_payment_title"
+msgstr ""
+
+#: includes/RESA_Algorithms.php:1578 includes/RESA_Variables.php:199
+#: includes/RESA_Variables.php:231
+msgid "cheque_payment_title"
+msgstr ""
+
+#: includes/RESA_Crons.php:22
+msgid "Once every five minutes"
+msgstr ""
+
+#: includes/RESA_GDPRManager.php:47
+msgid "participants_field_title"
+msgstr ""
+
+#: includes/RESA_GDPRManager.php:99
+msgid "price_table_header"
+msgstr ""
+
+#: includes/RESA_GDPRManager.php:123
+msgid "gdpr_message_item_deleted"
+msgstr ""
+
+#: includes/RESA_GDPRManager.php:126
+msgid "gdpr_message_no_item_deleted"
+msgstr ""
+
+#: includes/RESA_GDPRManager.php:152 includes/RESA_GDPRManager.php:160
+msgid "Comment Location Plugin"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:21
+msgid "accept_the_general_condition_sentence"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:42
+msgid "Members_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:43
+msgid "Member_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:177
+msgid "Place_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:177
+msgid "Informations_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:177
+msgid "Confirmation_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:179
+msgid "add_an_another_date_link_title"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:180
+msgid "add_another_activity_link_title"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:188
+msgid "Default_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:193
+msgid "Absent_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:194
+msgid "Type_account_customer_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:195
+msgid "Type_account_company_word"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:509
+msgid "automatic_validation_parameter_words"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:510
+msgid "automatic_validation_parameter_description_words"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:525
+msgid "payment_validation_parameter_words"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:526
+msgid "payment_validation_parameter_description_words"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:541
+msgid "payment_booking_validation_parameter_words"
+msgstr ""
+
+#: includes/RESA_InstallManager.php:542
+msgid "payment_booking_validation_parameter_description_words"
+msgstr ""
+
+#: includes/RESA_Variables.php:162
+msgid "monetico_payment_type_radio_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:167
+msgid "stripe_payment_type_radio_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:172
+msgid "paybox_payment_type_radio_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:173 includes/RESA_Variables.php:225
+msgid "customer_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:174 includes/RESA_Variables.php:228
+msgid "defer_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:181
+msgid "none_payments_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:182
+msgid "incomplete_payments_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:183
+msgid "complete_payments_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:184
+msgid "repayment_incompleted_payments_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:185
+msgid "repayment_completed_payments_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:191
+msgid "on_the_spot_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:194
+msgid "later_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:201
+msgid "paypal_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:205
+msgid "systempay_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:210
+msgid "monetico_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:215
+msgid "stripe_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:220
+msgid "paybox_payment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:237
+msgid "ok_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:237
+msgid "filter_ok_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:238
+msgid "filter_waiting_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:239
+msgid "filter_cancelled_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:240
+msgid "filter_abandonned_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:241
+msgid "deleted_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:242
+msgid "updated_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:243
+msgid "pending_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:258
+msgid "all_booking_option"
+msgstr ""
+
+#: includes/RESA_Variables.php:259
+msgid "same_date_option"
+msgstr ""
+
+#: includes/RESA_Variables.php:260
+msgid "same_appointment_option"
+msgstr ""
+
+#: includes/RESA_Variables.php:261
+msgid "all_bookings_of_customer_option"
+msgstr ""
+
+#: includes/RESA_Variables.php:267
+msgid "promo_code_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:268
+msgid "services_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:269
+msgid "booking_amount_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:270
+msgid "booking_register_date_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:271
+msgid "customer_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:277
+msgid "fixed_amount_on_sub_total_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:278
+msgid "purcent_on_sub_total_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:279
+msgid "fixed_amount_on_price_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:280
+msgid "change_price_list_value_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:281
+msgid "quatity_given_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:282
+msgid "custom_text_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:288
+msgid "sub_total_of_booking_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:289
+msgid "on_the_conditions_reduction_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:290
+msgid "anothers_cases_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:296
+msgid "on_same_date_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:297
+msgid "on_same_appointment_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:298
+msgid "on_the_booking_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:304
+msgid "service_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:305
+msgid "appointment_amount_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:306
+msgid "appointment_date_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:307
+msgid "appointment_time_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:308
+msgid "days_title"
+msgstr ""
+
+#: includes/RESA_Variables.php:314
+msgid "capacity_alert_name"
+msgstr ""
+
+#: includes/RESA_Variables.php:314
+msgid "capacity_alert_description"
+msgstr ""
+
+#: includes/RESA_Variables.php:315
+msgid "reductions_alert_name"
+msgstr ""
+
+#: includes/RESA_Variables.php:315
+msgid "reductions_alert_description"
+msgstr ""
+
+#: includes/RESA_Variables.php:316
+msgid "timeslot_alert_name"
+msgstr ""
+
+#: includes/RESA_Variables.php:316
+msgid "timeslot_alert_description"
+msgstr ""
+
+#: includes/RESA_Variables.php:322
+msgid "day_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:324
+msgid "days_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:333
+msgid "January_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:334
+msgid "February_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:335
+msgid "March_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:336
+msgid "April_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:337
+msgid "May_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:338
+msgid "June_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:339
+msgid "July_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:340
+msgid "August_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:341
+msgid "September_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:342
+msgid "October_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:343
+msgid "November_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:344
+msgid "December_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:351
+msgid "Sunday_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:352
+msgid "Monday_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:353
+msgid "Tuesday_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:354
+msgid "Wednesday_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:355
+msgid "Thursday_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:356
+msgid "Friday_word"
+msgstr ""
+
+#: includes/RESA_Variables.php:357
+msgid "Saturday_word"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Resa Online"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://resa-online.fr"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "RESA Online logiciel de réservation et gestion de planning"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "360-online"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://360-online.fr/"
+msgstr ""

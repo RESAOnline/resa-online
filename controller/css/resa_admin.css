@@ -1,0 +1,5005 @@
+/*** a supprimer  ***/
+/*
+html{
+	font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+*/
+/*** fin a supprimer ***/
+
+/* reset wordpress */
+.resa_page_resa_parameters #wpcontent{
+	padding-left: 0px;
+}
+
+.resa_page_resa_parameters [role="main"] {
+    padding-top: 0px;
+}
+.resa_page_resa_parameters.wp-admin select {
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.resa_page_resa_parameters input[type=checkbox], .resa_page_resa_parameters input[type=radio]{
+	    margin: 0px 4px 0 -20px;
+}
+
+.resa_page_resa_parameters  input[type=number]{
+	height: 38px;
+    line-height: 24px;
+
+}
+
+.resa_page_resa_parameters  input[type=number].resa-slot-hour{
+	width: 40px;
+    height: 55px;
+    margin-top: -7px;
+    margin-bottom: -7px;
+
+	border: none;
+    box-shadow: none;
+}
+
+/**/
+
+#planningService {
+	width: 100%;
+}
+
+
+#resa_online_admin a{
+	cursor:pointer;
+}
+
+#resa_online_admin .wrap{
+	margin:0px;
+}
+
+#resa_online_admin{
+	padding:10px;
+	max-width:1700px;
+	margin:auto;
+	position:relative;
+}
+/*
+#resa_online_admin > div{
+	position:relative;
+}
+*/
+/*** resa header ***/
+
+.resa_header{
+	display:grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+	"resa_header_logo resa_header_raccourcis resa_header_infos"
+	"resa_header_logo notif_center_wrapper resa_header_infos";
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	background-color:#28b673;
+	padding:5px;
+	box-sizing:border-box;
+	margin:0px 0px 0px 0px;
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	z-index:190;
+}
+
+.resa_header_logo{
+	grid-area:resa_header_logo;
+	align-self:center;
+	text-align:center;
+}
+.resa_header_logo .resa_logo{
+	width:80px;
+}
+
+.resa_header_raccourcis{
+	grid-area:resa_header_raccourcis;
+	text-align:center;
+	align-self:center;
+	display:flex;
+	flex-flow: row wrap;
+	justify-content:center;
+}
+.resa_header_raccourcis a{
+	display:block;
+	align-items: center;
+	margin:2px;
+	text-transform:uppercase;
+	font-weight:bold;
+	padding:5px;
+	text-decoration:none;
+	background-color:#28b673;
+	color:white;
+	border:1px solid white;
+	box-sizing:border-box;
+	-webkit-transition: all 100ms ease-in-out;
+	-moz-transition: all 100ms ease-in-out;
+	-ms-transition: all 100ms ease-in-out;
+	-o-transition: all 100ms ease-in-out;
+	transition: all 100ms ease-in-out;
+}
+.resa_header_raccourcis a:hover{
+	background-color:white;
+	color:#28b673;
+}
+.resa_header_raccourcis a.active{
+	background-color:white;
+	color:#28b673;
+	text-decoration:underline;
+}
+
+.resa_header_raccourcis a.retour{
+	background-color:#30d27a;
+}
+
+.resa_header_infos{
+	grid-area:resa_header_infos;
+	text-align:center;
+	align-self:center;
+    color:white;
+	font-size:14px;
+	line-height:1em;
+	font-style:italic;
+}
+.resa_header_infos p{
+	margin:0px;
+	padding:0px;
+	line-height:1em;
+	font-size:14px;
+}
+.resa_header_infos a{
+    color:white;
+	font-weight:lighter;
+}
+.resa_header_infos .infos_user{
+	margin:0px;
+	padding:0px;
+}
+
+
+/*** resa Content  ***/
+
+#resa_content{
+padding-top:50px;
+margin-top:0px;
+}
+
+#resa_content .loading_infos{
+	text-align:center;
+	font-weight:bold;
+	font-size:14px;
+	line-height:1em;
+	margin:0px;
+	padding:5px;
+	background-color:#292929;
+	color:white;
+}
+
+#resa_reservation{
+	padding-top:15px;
+}
+
+.wrap .resa_views_menu h2.nav-tab-wrapper{
+	text-align:center;
+}
+.wrap .resa_views_menu .nav-tab-wrapper .nav-tab{
+	float:inherit;
+	padding:7px 20px 3px 20px;
+	cursor:pointer;
+}
+
+/*** resa actions  (boutons ajouter une reservation etc...) ***/
+.resa_actions{
+	margin:15px 0px 10px 0px;
+	text-align:center;
+	display:block;
+}
+.resa_actions::after{
+	display:block;
+	content:'';
+	clear:both;
+}
+
+
+/******** resa_view ********/
+
+.resa_views{
+	display:grid;
+	grid-template-columns: minmax(150px,1fr) 5fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas:
+	"resa_filters_left resa_filters_top"
+	"resa_filters_left resa_view_content";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding-top:15px;
+	align-content:start;
+}
+
+.resa_filters_top{
+	align-content:start  ;
+}
+.resa_filters_left{
+	grid-area:resa_filters_left;
+}
+.resa_view_content{
+	grid-area:resa_view_content;
+	align-self: start;
+}
+
+/*** filtres ****/
+
+.filter_type_title{
+	padding:4px 4px 6px 4px;
+	margin:0px;
+	position:relative;
+	text-align:right;
+	border-bottom:1px solid #f1f1f1;
+	font-size: 15px;
+    letter-spacing: -0.5px;
+}
+.filter_type .filter_type_title::before{
+	/*content:'\25B6';
+	display:block;
+	position:absolute;
+	left:-15px;
+	top:0px;
+	font-size:12px;
+	z-index:10;*/
+}
+/*.filter_type:hover .filter_type_title::before{
+	content:'\25BC';
+	display:block;
+	position:absolute;
+	left:-15px;
+	top:0px;
+	font-size:12px;
+	z-index:10;
+}*/
+
+.filter_type_title .filter_input{
+float:left;
+font-size:13px;
+}
+.filter_category .filter_input{
+float:right;
+font-size:13px;
+margin-left:15px;
+margin-bottom:8px;
+}
+
+.filter_type{
+	min-height:40px;
+	padding:5px;
+	margin:2px;
+	box-sizing:border-box;
+	background-color:#e5e5e5;
+	border:1px solid #cccccc;
+}
+.filter_type_filters{
+	background-color:#e5e5e5;
+	padding:5px;
+	margin:2px 0px;
+	background-color:#e5e5e5;
+	border:#cccccc;
+}
+.filter_type .filter_type_title{
+	border-bottom: 0px solid #f1f1f1;
+}
+.filter_type:hover .filter_type_title{
+	border-bottom: 1px solid #f1f1f1;
+}
+
+.filter_type .filter_type_filters{
+	padding:0px;
+	/*display:none;*/
+	max-height: 0px;
+	height:0px;
+    overflow: auto;
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
+}
+.filter_type:hover .filter_type_filters{
+	padding:5px;
+	max-height: 200px;
+	height:auto;
+    overflow: auto;
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
+}
+
+.filter{
+	display:block;
+	width:100%;
+	float:none;
+	clear:both;
+	display:flex;
+	flex-flow: row wrap;
+	justify-content:start;
+	margin:1px;
+}
+.filter_category{
+	font-size:14px;
+	text-align:right;
+	margin:5px 0px;
+}
+
+.filter .filter_name{
+flex:3;
+line-height:1.4em;
+font-size:12px;
+text-align:right;
+padding-right:15px;
+box-sizing:border-box;
+margin-bottom:8px;
+}
+
+
+.filter_type_filters label{
+	display:block;
+	margin:0px;
+}
+
+.resa_views .resa_filters_top{
+	grid-area:resa_filters_top;
+	display:grid;
+	/*grid-template-columns: auto auto minmax(190px, auto) minmax(90px, auto) minmax(135px, auto);*/ /* avec détails */
+	grid-template-columns: auto auto minmax(190px, auto) minmax(135px, auto);
+	grid-template-rows: auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 0px;
+	padding-top:2px;
+	margin-bottom:10px;
+	width:100%;
+}
+
+.resa_filters_top .filter_type{
+	padding:5px;
+	text-align:left;
+	align-self:start;
+
+	min-height:45px;
+	margin:2px;
+	box-sizing:border-box;
+	background-color:#e5e5e5;
+	border:1px solid #cccccc;
+}
+
+.resa_filters_top .filters_autres{
+	align-self:center;
+	text-align:center;
+}
+
+.resa_filters_top .filters_autres .participant_filter{
+	display: inline-block;
+    height: 15px;
+    width: 54px;
+}
+/*
+.filters_date #filters_date_trigger{
+
+}
+.filters_date{
+	position:relative;
+}
+.filters_date #filters_date_content{
+	display:none;
+	position:absolute;
+	top:40px;
+	width:50vw;
+	box-sizing:border-box;
+	background-color:#e5e5e5;
+	border:1px solid #cccccc;
+	padding:5px;
+}
+.filters_date:hover #filters_date_content{
+	display:block;
+	z-index:150;
+	display:grid;
+	grid-template-columns: 1fr 3fr;
+	grid-template-rows: auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+#filters_date_content .date_selectors{
+	padding:10px;
+}
+#filters_date_content .date_selector{
+	display:block;
+	width:100%;
+	box-sizing:border-box;
+}
+*/
+
+.resa_filters_top .filter_type.filters_date select{
+	font-size:12px;
+	min-width:100px;
+}
+.resa_filters_top .filter_type.filters_name input{
+	font-size:12px;
+	width:100%;
+	min-width:100px;
+}
+.resa_filters_top .filter_type.filters_date input{
+	font-size:12px;
+	min-width:100px;
+}
+
+.resa_filters_top .filter_type.filters_infos{
+	text-align:center;
+	line-height:15px;
+	font-size:12px;
+	background-color:#292929;
+	color:white;
+	border:none;
+}
+
+.resa_filters_top .filter_type.light_mode{
+	display:flex;
+	text-align:center;
+	justify-content:center;
+}
+.light_mode .light_mode_title, .light_mode .light_mode_input{
+	padding:0px 4px;
+	align-self: center;
+}
+
+.resa_filters_top .filters_autres .btn{
+	margin-top:1px;
+}
+
+/**** vue calendrier ****/
+
+.resa_view_calendar{
+
+}
+.resa_calendar{
+max-width:78vw;
+}
+.resa_calendar img{
+	width:100%;
+}
+
+#resa_online_admin .resa_calendar .btn-group{
+text-align:center;
+}
+
+#resa_online_admin .resa_calendar > div:nth-child(3){
+float:left;
+}
+#resa_online_admin .resa_calendar > div:nth-child(2) {
+float:right;
+}
+
+#resa_online_admin .resa_calendar .btn-group .btn{
+text-align:center;
+padding:4px 8px;
+min-width:70px;
+}
+
+#resa_online_admin .btn-default{
+	background-color:#1392e2;
+	color:white;
+	border:1px solid white;
+	padding:5px 10px;
+}
+
+
+#resa_online_admin .resa_calendar .cal-slide-box {
+display:none !important;
+}
+
+
+/**** calendrier ****/
+/** creneau jour **/
+#resa_online_admin .resa_calendar .cal-day-box .cal-hours{
+display:none !important;
+}
+#resa_online_admin .resa_calendar .cal-day-box .day-highlight{
+}
+
+.background_stripes {
+	background-image: repeating-linear-gradient(45deg, #ccc, #ccc 30px, #dbdbdb 30px, #dbdbdb 60px);
+}
+
+.resa_calendar .creneau{
+	width:100%;
+	height:100%;
+	box-sizing:border-box;
+	color:white;
+	position:relative;
+	font-family:arial,'sans-serif';
+	font-size:12px;
+	float:left;
+}
+
+.resa_calendar .creneau:hover{
+}
+.resa_calendar .creneau_content{
+	border-top:2px solid transparent;
+}
+.resa_calendar .creneau:hover .creneau_content{
+	border-top:2px dashed white;
+}
+.resa_calendar .creneau.active .creneau_content{
+	border-top:2px dashed white;
+}
+.resa_calendar .creneau_state{
+	border-radius:30px;
+	width:10px;
+	height:10px;
+	border:1px solid black;
+	position:absolute;
+	right:8px;
+	top:7px;
+}
+.resa_calendar .creneau_state.valid{
+	background-color:#27b673;
+}
+.resa_calendar .creneau_state.pending{
+	background-color:#efb20e;
+}
+.resa_calendar .creneau_time{
+
+}
+.resa_calendar .creneau_service{
+	font-size:14px;
+	line-height:15px;
+	padding-bottom:5px;
+}
+.resa_calendar .creneau_client{
+	background-color:rgba(0,0,0,0.2);
+	padding:3px 4px;
+	box-sizing:border-box;
+}
+.resa_calendar .creneau_client .client_name{
+	font-weight:bold;
+	font-style:italic;
+	font-size:14px;
+	line-height:15px;
+}
+.resa_calendar .creneau_client .client_number{
+	line-height:15px;
+}
+.resa_calendar .creneau_resa_price{
+	padding:5px 0px;
+	font-style:italic;
+	line-height:18px;
+	font-size:14px;
+}
+.resa_calendar .creneau_members{
+
+}
+.resa_calendar .creneau_members .creneau_members_title{
+	text-decoration:underline;
+	line-height:12px;
+	padding-bottom:3px;
+}
+.resa_calendar .creneau_members .creneau_member{
+	line-height:12px;
+	padding-left:3px;
+	font-weight:bold;
+}
+.resa_calendar .creneau_note{
+	line-height:14px;
+	font-size:13px;
+	padding:5px 5px;
+	margin:5px 0px 0px 0px;
+	background-color:rgba(0,0,0,0.2);
+}
+.resa_calendar .creneau_alert{
+	line-height:14px;
+	font-size:12px;
+	padding:3px 2px;
+	margin:5px 0px 0px 0px;
+	background-color:rgba(220,0,0,1);
+	font-weight:bold;
+}
+
+.resa_calendar .day-event{
+	border:1px solid white !important;
+}
+
+
+/**** vue semaine ***/
+
+.resa_calendar .cal-week-box {
+
+}
+
+.resa_calendar .cal-week-box .creneau .creneau_content{
+	border:none;
+	text-align:center;
+}
+.resa_calendar .cal-week-box .creneau:hover .creneau_content{
+	border:none;
+}
+.resa_calendar .cal-week-box .creneau .creneau_content .creneau_time{
+	padding:2px 2px;
+	line-height:12px;
+	font-size:12px;
+}
+
+.resa_calendar .cal-week-box .creneau .creneau_content .creneau_service{
+	font-size:14px;
+	line-height:14px;
+	padding-bottom:5px;
+}
+
+
+
+
+/*** vue mois ***/
+
+.resa_calendar .cal-month-box .badge-important{
+	    background-color: #ff0000;
+		width:20px;
+		height:20px;
+		border-radius:40px;
+		font-weight:bold;
+		font-size:14px;
+		line-height:20px;
+		padding:0px;
+		text-align:center;
+		color:white;
+}
+
+.resa_calendar .cal-month-box .event{
+	width: 22px;
+    height: 22px;
+	line-height:22px;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-size: 1.3em;
+    font-weight: bolder;
+    letter-spacing: -0.4px;
+	text-decoration:none;
+	padding:0px;
+	border:none;
+}
+
+/**** vue liste reservation ****/
+
+.resa_view_reservations{
+padding: 0px 0px 25px 0px;
+}
+
+.resa_pagination{
+	grid-area:resa_pagination;
+	padding-bottom:0px;
+	display:flex;
+	justify-content: space-between;
+}
+
+
+.resa_pagination .pagination_left{
+
+}
+.resa_pagination .pagination_right{
+
+}
+
+.resa_pagination .pagination {
+    display:block;
+    margin: 0px;
+}
+
+.resa_pagination .pagination > li {
+    display: inline;
+}
+
+.resa_pagination .pagination > li a{
+    z-index: 2;
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
+	padding: 5px 10px;
+	position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.resa_pagination .pagination > li a:hover{
+    z-index: 2;
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
+}
+.resa_pagination .pagination > li.active a{
+	z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;}
+
+.resa_pagination .pagination > li:first-child > a {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.resa_view_reservations .resa_list{
+	grid-area:resa_list;
+	min-height:400px;
+}
+
+.resa_reservation{
+	background-color:white;
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"reservation_client reservation_states reservation_notes reservation_suivi reservation_actions"
+	"reservation_bookings reservation_bookings reservation_bookings reservation_bookings reservation_bookings";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:8px 2px 0px 2px;
+	color:#292929;
+	margin-bottom:20px;
+	margin-top:15px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.add_reservation .resa_reservation{
+	grid-template-columns: 4fr 1fr 1fr 1fr 2fr;
+}
+
+.resa_reservation .reservation_client{
+	align-self:start;
+	justify-self:start;
+	grid-area:reservation_client;
+	padding-left:8px;
+}
+.resa_reservation .reservation_states{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:reservation_states;
+}
+.resa_reservation .reservation_notes{
+	align-self:center;
+	justify-self: center;
+	grid-area:reservation_notes;
+}
+.resa_reservation .reservation_suivi{
+	align-self:center;
+	justify-self: center;
+	grid-area:reservation_suivi;
+}
+.resa_reservation .reservation_actions{
+	align-self:center;
+	justify-self: end;
+	padding-right:4px;
+	grid-area:reservation_actions;
+}
+.resa_reservation .reservation_bookings{
+	grid-area:reservation_bookings;
+}
+
+.reservation_actions .btn{
+	padding:10px 10px;
+}
+
+.reservation_actions .btn:hover{
+	padding:10px 10px;
+}
+
+
+.reservation_client .client_name{
+	font-weight:600;
+}
+
+.states_paiement{
+	padding:0px;
+	margin:2px;
+	display:block;
+	width:100%;
+}
+.state_paiement{
+	padding:0px 4px;
+	text-align:center;
+	color:white;
+	background-color:black;
+	font-size:12px;
+	line-height:12px;
+	display:none;
+}
+
+
+.state_paiement.paiement_none{
+	background-color:#ff0000;
+}
+.state_paiement.paiement_incomplete{
+	background-color:#dfb70c;
+}
+.state_paiement.paiement_done{
+	background-color:#27b673;
+}
+.state_paiement.paiement_overpaiement{
+	background-color:#e88758;
+}
+.state_paiement.paiement_remboursement{
+	background: repeating-linear-gradient(  45deg,  rgba(100,100,100, 0.6),  rgba(100,100,100, 0.6) 10px,  rgba(100,100,100, 0.9) 10px,   rgba(100,100,100, 0.9) 20px);
+}
+.state_paiement.paiement_remboursement_done{
+	background: repeating-linear-gradient(  45deg,  rgba(155,193,27, 0.6),  rgba(155,193,27, 0.6) 10px,  rgba(155,193,27, 0.9) 10px,   rgba(155,193,27, 0.9) 20px);
+}
+
+
+.paiement_none .state_paiement.paiement_none{
+	display:inline;
+}
+.paiement_incomplete .state_paiement.paiement_incomplete{
+	display:inline;
+}
+.paiement_done .state_paiement.paiement_done{
+	display:inline;
+}
+.paiement_overpaiement .state_paiement.paiement_overpaiement{
+	display:inline;
+}
+.paiement_remboursement .state_paiement.paiement_remboursement{
+	display:inline;
+}
+.paiement_remboursement_done .state_paiement.paiement_remboursement_done{
+	display:inline;
+}
+
+
+
+
+.states_paiement_value{
+	text-align:center;
+	font-weight:bolder;
+}
+
+.reservation_suivi{
+	display:flex;
+}
+
+.suivi_title{
+	text-align:right;
+	padding-right:5px;
+	white-space:nowrap;
+}
+.suivi_content{
+	text-align:left;
+	white-space:nowrap;
+	color:#28b673;
+}
+
+
+.resa_reservation .booking{
+	display:grid;
+	/*grid-template-columns: repeat(9, 1fr);*/
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"booking_date booking_hour booking_nb_people booking_states booking_place booking_service booking_prices booking_members booking_tags";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	margin-bottom:2px;
+	min-height:40px;
+}
+
+/* afficher les participants */
+.resa_reservation .booking.show_participants{
+	display:grid;
+	/*grid-template-columns: repeat(9, 1fr);*/
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+	"booking_date booking_hour booking_nb_people booking_states booking_place booking_service booking_prices booking_members booking_tags"
+	"table_participant table_participant table_participant table_participant table_participant table_participant table_participant table_participant table_participant" ;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	margin-bottom:2px;
+	min-height:40px;
+}
+.booking .table_participant{
+	display:none;
+}
+.booking.show_participants .table_participant{
+	display:block;
+	grid-area:table_participant;
+	min-width:300px;
+	width:100%;
+	margin:auto;
+	background-color: rgba(0, 0, 0, 0.1);
+	padding:0px;
+}
+
+.booking .table_participant table{
+	width:100%;
+	margin:2px;
+}
+
+.booking .table_participant tr{
+	border-bottom:1px solid white;
+}
+
+.booking .table_participant td{
+	line-height:9px;
+	padding:1px 8px;
+	font-size:11px;
+}
+
+
+
+.booking .booking_date{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_date;
+}
+.booking .booking_hour{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_hour;
+}
+.booking .booking_nb_people{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_nb_people;
+}
+.booking .booking_states{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_states;
+}
+.booking .booking_place{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_place;
+}
+.booking .booking_service{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_service;
+}
+.booking .booking_prices{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_prices;
+	min-height:50px;
+}
+.booking .booking_members{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_members;
+}
+.booking .booking_tags{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_tags;
+}
+
+.booking_nb_people{
+	font-weight:bold;
+}
+
+.booking.confirmed{
+	background-color:#d4ffeb;
+}
+.booking.not_confirmed{
+	background-color:#fff7e0;
+}
+.booking.cancelled .booking_date, .booking.cancelled .booking_hour, .booking.cancelled .booking_place, .booking.cancelled .booking_service, .booking.cancelled .booking_members{
+	text-decoration:line-through;
+}
+.booking.cancelled{
+	background-color:#b0b0b0;
+	background: repeating-linear-gradient(  45deg,  rgba(0,0,0, 0.1),  rgba(0,0,0, 0.1) 10px,  rgba(176, 176 ,176, 0.1) 10px,   rgba(176, 176 ,176, 0.1) 20px);
+}
+.booking.abandonned{
+	background-color:#b0978a;
+}
+.booking.quote{
+	background-color:#d4eeff;
+}
+.booking.inerror{
+	background-color:#ff9c9c;
+}
+.booking.incomplete{
+	background-color:#b0b0b0;
+}
+
+
+.booking .states_state{display:none;}
+
+.booking.confirmed .states_state.state_confirmed{display:block;}
+
+.booking.not_confirmed .states_state.state_not_confirmed{display:block;}
+
+.booking.cancelled .states_state.state_cancelled{display:block;}
+
+.booking.inerror .states_state.state_inerror{display:block;}
+
+.booking.incomplete .states_state.state_incomplete{display:block;}
+
+
+.reservation_states .states_state{display:none;}
+
+.resa_reservation.valid .reservation_states .state_valid{display:block;}
+
+.resa_reservation.pending .reservation_states .state_pending{display:block;}
+
+.resa_reservation.cancelled .reservation_states .state_cancelled{display:block;}
+
+.resa_reservation.abandonned .reservation_states .state_abandonned{display:block;}
+
+.resa_reservation.quote .reservation_states .state_quote{display:block;}
+
+.resa_reservation.inerror .reservation_states .state_inerror{display:block;}
+
+.resa_reservation.incomplete .reservation_states .state_incomplete{display:block;}
+
+
+.prices_price{
+	background-color:#292929;
+	color:white;
+	padding:2px 5px;
+	margin:2px 0px;
+	white-space:nowrap;
+}
+.booking_prices .price_nb{
+	font-weight:bolder;
+	padding:0px 4px;
+}
+.booking_prices .price_name{
+	font-style:italic;
+}
+.booking_prices .price_value{
+	font-style:italic;
+}
+
+.booking_tags{
+	background-color: rgba(255, 255, 255, 0.8);
+}
+.booking_tags .tag{
+	border-left:3px solid grey;
+	margin:3px;
+	white-space:nowrap;
+	font-size:14px;
+	font-weight:bold;
+	line-height:11px;
+	font-style:italic;
+	color:grey;
+	padding-left:5px;
+	text-align:left;
+}
+
+.states_state{
+	padding:2px 10px;
+	text-align:center;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	color:white;
+	background-color:black;
+	font-size:12px;
+	line-height:12px;
+	margin:2px;
+	box-sizing:border-box;
+}
+
+.state_valid,.state_confirmed{	background-color:#28b673;}
+.state_pending,.state_not_confirmed{	background-color:#efb20e;}
+.state_cancelled{
+	background: repeating-linear-gradient(  45deg,  rgba(50,50,50, 0.5),  rgba(50,50,50, 0.5) 10px,  rgba(94, 94 ,94, 0.5) 10px,   rgba(94, 94 ,94, 0.5) 20px);
+	}
+.state_abandonned{	background-color:#765337;}
+.state_quote{	background-color:#1492e2;}
+.state_inerror{	background-color:#d62d2d;}
+.state_incomplete{	background-color:#787878;}
+
+
+
+/**** light mode  ****/
+
+.resa_view_reservations.light .resa_reservation{
+	display:grid;
+	grid-template-columns: 2fr 1fr 4fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"reservation_client reservation_states reservation_actions"
+	"reservation_bookings reservation_bookings reservation_bookings";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:8px 2px 0px 2px;
+	background-color:white;
+	color:#292929;
+	margin-bottom:20px;
+	border:1px solid #cccccc;
+	margin-top:15px;
+}
+.light .client_note, .light .states_paiement_value, .light .reservation_suivi, .light .reservation_notes, .light .reservation_states .states_state, .light .booking_tags{
+	display:none;
+}
+
+.light .client_name, .light .client_company{
+	display:inline;
+	padding-right:7px;
+}
+.light .reservation_actions .btn{
+	display:inline;
+	padding:10px 10px;
+}
+.light .reservation_actions .btn:hover{
+	display:inline;
+	padding:10px 10px;
+}
+
+.light .reservation_bookings .booking{
+	display:grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: auto;
+	grid-template-areas:
+	"booking_date booking_hour booking_nb_people booking_states booking_place booking_service booking_prices booking_members";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	margin-bottom:2px;
+	min-height:40px;
+}
+/*** fin light mode **/
+
+/**** popin ***/
+.popin{
+	position:fixed;
+	left:15%;
+	top:15%;
+	bottom:15%;
+	right:15%;
+	border: 1px solid black;
+	background-color:white;
+	z-index:60;
+	padding:0px;
+	box-sizing:border-content;
+}
+.popin_content{
+	position:absolute;
+	left:15px;
+	top:15px;
+	bottom:15px;
+	right:15px;
+	overflow:auto;
+	padding:10px;
+}
+
+/*** popin particpants ***/
+.participants_informations_content{
+
+}
+
+.participant_information_titles{
+	display:flex;
+	flex-wrap: nowrap
+}
+.participant_information_titles h5{
+	flex:1;
+	font-size:15px;
+}
+
+.participant_information{
+	padding:4px 5px;
+	background-color:rgba(0, 0, 0, 0.1);
+	display:flex;
+	flex-wrap: nowrap;
+	text-decoration:underline;
+	cursor:pointer;
+	font-size:14px;
+	margin-bottom:2px;
+}
+.participant_information:hover{
+	background-color:rgba(0, 0, 0, 0.2);
+}
+.participant_information span{
+	flex:1;
+}
+
+
+/***** popup ******/
+
+.resa_popup{
+	position:fixed;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	right:0px;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index:300;
+	padding:15px;
+}
+
+.resa_popup_wrapper{
+	background-color:#f1f1f1;
+	position:absolute;
+	left:15px;
+	top:15px;
+	bottom:15px;
+	right:15px;
+	overflow:auto;
+	padding:10px;
+}
+
+.resa_popup_content{
+	max-width:1700px;
+	margin:auto;
+}
+
+.popup_header{
+	position:fixed;
+	left:0px;
+	right:0px;
+	top:0px;
+	background-color:#27b673;
+	z-index:70;
+}
+
+.resa_popup_header_wrapper{
+	max-width:1700px;
+	margin:auto;
+	box-sizing:border-box;
+	display:flex;
+	padding:15px;
+}
+
+.popup_header_title{
+	flex:2;
+}
+.popup_header_title h2{
+	padding:0px;
+	margin:0px;
+	color:white;
+	font-size:19px;
+	line-height:1.4em;
+}
+.popup_header_menu{
+	flex:4;
+	text-align:right;
+	font-weight:bold;
+}
+
+.popup_content{
+	margin-top:55px;
+}
+
+
+/* masquer alerte wordpress dans header */
+.popup_header_title .error{
+	display:none;
+}
+
+
+/***** popup a4 ******/
+
+.resa_popupa4{
+	position:fixed;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	right:0px;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index:500;
+	padding:0px;
+	overflow:auto;
+}
+
+.resa_popupa4 .resa_popup_wrapper{
+	max-width:210mm;
+	width:210mm;
+	min-height:297mm;
+	margin:auto;
+	padding:15mm;
+
+	background-color:white;
+	position:relative;
+}
+
+.resa_popupa4 .resa_popup_content{
+	background-color:white;
+	height:100%;
+	width:100%;
+	margin:0px;
+	padding:0px;
+}
+
+.resa_popupa4 .btn_close_popup{
+	float:right;
+}
+.resa_popupa4 .btn_close_popup:after{
+	content:'';
+	display:block;
+	position:realitve;
+	clear:both;
+}
+
+
+
+/***** popup ticket ******/
+
+.resa_popupticket{
+	position:fixed;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	right:0px;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index:500;
+	padding:0px;
+	overflow:auto;
+}
+
+.resa_popupticket .resa_popup_wrapper{
+	background-color:white;
+	position:relative;
+	margin:auto;
+	padding:3mm;
+	max-width:80mm;
+	width:80mm;
+	min-height:120mm;
+}
+
+.resa_popupticket .resa_popup_content{
+	box-sizing:border-box;
+	background-color:white;
+	height:100%;
+	width:100%;
+	margin:0px;
+	padding:0px;
+}
+
+.resa_popupticket .btn_close_popup{
+	float:right;
+}
+.resa_popupticket .btn_close_popup.after{
+	content:'';
+	display:block;
+	position:relative;
+	clear:both;
+}
+
+/***** Sous popup ******/
+
+.resa_sous_popup{
+	position:fixed;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	right:0px;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index:400;
+}
+
+.resa_sous_popup_wrapper{
+	background-color:white;
+	position:absolute;
+	left:50px;
+	top:50px;
+	bottom:50px;
+	right:50px;
+	overflow:auto;
+	padding:10px 20px;
+}
+
+.resa_sous_popup_content{
+	margin:auto;
+}
+
+/** popup changer etat paiement ***/
+.resa_sous_popup_content.changer_etat_paiement{
+	margin:auto;
+	text-align:center;
+	padding:10%;
+	line-height:1.6em;
+}
+
+.resa_sous_popup_close{
+	position:relative;
+	text-align:right;
+	margin:0px;
+}
+
+
+/**** menu_popup calendar ****/
+#calendar_resa_infos_menu{
+	text-align:center;
+	padding:22px 10px;
+	position:fixed;
+	z-index:150;
+	top:0px;
+	left:0px;
+	right:0px;
+    box-sizing: border-box;
+	height:auto;
+	background-color:black;
+}
+.calendar_resa_infos_menu_content{
+	box-sizing: border-box;
+    max-width: 1700px;
+	width:auto;
+	margin:auto;
+	text-align:center;
+	display:block;
+}
+
+#calendar_resa_infos_menu h3{
+	color:white;
+}
+
+
+/*** ADD Reservation ***/
+
+/* search / add client */
+.search_client{
+	padding:15px;
+	/*border:1px solid #cccccc;*/
+	background-color:#efefef;
+}
+/*
+.search_client.valid{
+	border:1px solid #24bb6b;
+}
+.search_client.not_valid{
+	border:1px solid #ff0000;
+}*/
+.search_client.valid .search_client_title{
+	color:#24bb6b;
+}
+.search_client.valid .search_client_infos{
+	margin:4px auto;
+	text-align:center;
+}
+.search_client.not_valid #search_client_title{
+	color:#ff0000;
+}
+
+#search_client_title{
+font-size:17px;
+line-height:1.8em;
+}
+
+.search_client .search_client_input{
+	width:300px;
+	display:block;
+	margin:5px auto;
+}
+
+.search_client .search_client_result{}
+
+.reservation_client #client_results{
+	position: relative;
+}
+.reservation_client #client_results .client_results_content{
+	position: absolute;
+    z-index: 100;
+    background-color: white;
+    min-width: 50vw;
+    max-width: 90vw;
+    width: 100%;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	max-height:300px;
+	overflow:auto;
+}
+
+
+
+.client_results_content{
+	/*max-height:300px;
+	overflow:auto;*/
+}
+
+.client_results_title{
+	display:grid;
+	grid-template-columns:repeat(5,2fr);
+	grid-template-rows:auto;
+	grid-template-areas:"lastname_title firstname_title email_title company_title phone_title nb_resa_title";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	background-color:#e5e5e5;
+	padding:5px 0px;
+}
+
+.lastname_title{
+	grid-area:lastname_title;
+	text-transform:uppercase;
+}
+.firstname_title{
+	grid-area:firstname_title;
+	text-transform:capitalize;
+}
+.email_title{
+	text-transform: lowercase;
+	grid-area:email_title;
+}
+.company_title{
+	grid-area:company_title;
+}
+.phone_title{
+	grid-area:phone_title;
+}
+.nb_resa_title{
+	grid-area:nb_resa_title;
+}
+
+.client_result{
+	display:grid;
+	grid-template-columns:repeat(5,2fr);
+	grid-template-rows:auto;
+	grid-template-areas:"lastname firstname email company phone nb_resa";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	vertical-align:middle;
+	border: 1px solid transparent;
+	border-bottom:1px solid #e5e5e5;
+}
+
+
+.lastname{
+	grid-area:lastname;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+.firstname{
+	grid-area:firstname;
+	font-weight:bold;
+	text-transform:capitalize;
+}
+.email{
+	grid-area:email;
+	text-transform:lowercase;
+}
+.company{
+	grid-area:company;
+}
+.phone{
+	grid-area:phone;
+}
+.nb_resa{
+	grid-area:nb_resa;
+}
+.client_result:hover{
+	cursor:pointer;
+	border: 1px solid #292929;
+}
+
+.client_result.active{
+	cursor:pointer;
+	color:white;
+	background-color:#292929;
+}
+
+.client_result span{
+	line-height:35px;
+	vertical-align:middle;
+}
+
+.add_new_client{
+	display:flex;
+	flex-direction:column;
+	text-align:center;
+	padding:10px;
+	background-color:white;
+	position:fixed;
+	z-index:1500;
+	left:10vw;
+	right:10vw;
+	top:10vh;
+	bottom:10vh;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	overflow:auto;
+	padding:15px
+}
+
+.add_new_client input{
+	max-width:300px;
+	margin:3px auto;
+	width: 100%;
+}
+
+.add_new_client input[type="button"]{
+	min-height:35px;
+}
+
+.add_new_client select{
+	margin:3px auto;
+	width:300px;
+	min-height: 30px;
+}
+
+.warning{
+	color:orange;
+}
+
+.add_new_client #lastname{
+	font-weight:normal;
+	text-transform:uppercase;
+}
+
+.add_new_client #firstname{
+	font-weight:normal;
+	text-transform:capitalize;
+}
+
+.add_new_client #email{
+	font-weight:normal;
+	text-transform:lowercase;
+}
+
+
+.company_account{
+	grid-area:company_account;
+	margin: 3px auto;
+    text-align: left;
+    max-width: 300px;
+    width: 100%;
+}
+.wp_account{
+	grid-area:wp_account;
+	margin: 3px auto;
+    text-align: left;
+    max-width: 300px;
+    width: 100%;
+}
+
+.wp_account input[type="checkbox"]{
+	min-width: 16px;
+	width: 16px;
+}
+
+
+.notify_wp_account{
+	grid-area:notify_wp_account;
+    margin: 3px auto;
+    text-align: left;
+    max-width: 300px;
+    width: 100%;
+}
+
+
+.notify_wp_account input[type="checkbox"]{
+	min-width: 16px;
+	width: 16px;
+}
+
+/* add booking */
+.reservation_content{
+	margin-top:10px;
+	padding:15px 5px;
+	background-color:#f1f1f1;
+}
+.reservation_content .resa_reservation{
+	/*background-color:transparent;*/
+}
+
+/*
+.reservation_content.valid{
+	border:1px solid #24bb6b;
+}
+.reservation_content.not_valid{
+	border:1px solid #ff0000;
+}
+.reservation_content.incoherence{
+	border:1px solid #dfb70c;
+}*/
+.reservation_content.valid .add_booking_title{
+	color:#24bb6b;
+}
+.reservation_content.not_valid .add_booking_title{
+	color:#ff0000;
+}
+.reservation_content.incoherence .add_booking_title{
+	color:#dfb70c;
+}
+
+.reservation_content .btn.btn_switch_resa{
+	font-size:13px;
+	opacity:0.5;
+}
+
+.reservation_content .btn.btn_switch_resa.active{
+	font-size:13px;
+	font-weight:bold;
+	opacity:1;
+}
+
+.popup_content h2.add_booking_title{
+line-height:1.6em;
+margin-bottom:5px;
+}
+
+.reservation_content .booking{
+	display:grid;
+	grid-template-columns: repeat(9, 2fr) 1fr;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+	"booking_date booking_hour booking_nb_people booking_states booking_place booking_service booking_prices booking_members booking_tags booking_total"
+	"booking_edit booking_edit booking_edit booking_edit booking_edit booking_edit booking_edit booking_edit booking_edit booking_edit";
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    margin-bottom: 2px;
+    min-height: 40px;
+	cursor:pointer;
+}
+
+.reservation_content .reservation_bookings{
+	background-color:#efefef;
+}
+
+.reservation_content .reservation_actions h4{
+margin:0px 0px 5px 0px;
+padding:0px;
+text-align:center;
+background-color:#262626;
+color:white;
+}
+
+.booking_total{
+	grid-area:booking_total;
+	font-weight:bold;
+	text-align:center;
+	font-size:15px;
+	align-self:center;
+}
+
+
+.editing .booking_edit_content{
+	display:grid;
+}
+
+.content_line{
+	border-left:4px solid #262626;
+	background-color:white;
+}
+
+.content_line > div{
+	border:1px solid transparent;
+}
+.content_line > .booking:hover {
+	border:1px solid #262626;
+}
+.content_line .editing{
+	border:1px solid #262626;
+}
+
+
+
+.booking_edit{
+	grid-area:booking_edit;
+}
+
+.booking_edit_content{
+	display: none;
+	grid-template-columns: 2fr 5fr 4fr 2fr 2fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"recap_menu_action recap_menu_action recap_menu_action recap_menu_action recap_menu_action"
+	"col_place_service col_date col_prices col_members col_state_tag"
+	"col_place_service col_clients_infos col_clients_infos col_clients_infos col_clients_infos"
+	"col_recap_total col_recap_total col_recap_total col_recap_total col_recap_total";
+	grid-column-gap: 4px;
+	grid-row-gap: 4px;
+	margin:10px 5px 10px 5px;
+	cursor:initial;
+	border-top:2px solid #cccccc;
+	padding:4px 0px;
+}
+
+.recap_menu_actions_top{
+	grid-area:recap_menu_action;
+}
+.booking_edit .recap_menu_actions_top h3{
+	border:none;
+}
+
+.col_place_service{
+	grid-area:col_place_service;
+}
+.col_date{
+	grid-area:col_date;
+}
+.col_prices{
+	grid-area:col_prices;
+}
+.col_members{
+	grid-area:col_members;
+}
+.col_state_tag{
+	grid-area:col_state_tag;
+}
+.col_clients_infos{
+	grid-area:col_clients_infos;
+}
+.col_recap_total{
+	grid-area:col_recap_total;
+}
+
+.booking_edit .edit_bloc{
+	background-color: rgba(208,208,208, 0.7);
+	padding:10px;
+	margin-bottom:4px;
+}
+
+.booking_edit .infos{
+	color:white;
+	font-style:italic;
+	font-size:12px;
+	background-color:#ff0000;
+	padding:1px;
+	text-align:center;
+	margin:2px 0px;
+}
+
+.booking_edit .infos::before{
+	content:"!";
+	display:block;
+	float:left;
+	margin-left:1px;
+	margin-top:1px;
+	border-radius:50px;
+	background-color:#262626;
+	width:13px;
+	height:13px;
+	line-height:13px;
+	font-weight:bold;
+	color:white;
+	border:1px solid white;
+}
+
+.edit_place{
+
+}
+
+.edit_service{
+
+}
+
+.popup_content h2{
+	text-align:center;
+	font-size:26px;
+	line-height:30px;
+	font-weight:bold;
+	margin:0px;
+}
+
+.booking_edit h3{
+	font-size:17px;
+	line-height:24px;
+	text-align:center;
+	border-bottom:1px solid #262626;
+	margin:-4px -4px 5px -4px;
+	padding:5px 0px;
+}
+
+.booking_edit h4{
+	margin:7px 0px;
+	font-size:14px;
+	line-height:20px;
+	text-align:center;
+}
+
+.edit_service .service, .edit_place .place{
+	padding:5px;
+	text-align:center;
+	background-color:white;
+	margin:3px 0px;
+	cursor:pointer;
+	border:1px solid white;
+}
+.edit_service .service:hover, .edit_place .place:hover{
+	border:1px solid #262626;
+}
+.edit_service .service.active, .edit_place .place.active{
+	background-color:#292929;
+	color:white;
+}
+
+.edit_date{
+
+}
+.edit_date .several_date{
+	text-align:center;
+	padding:5px;
+	background-color:white;
+	line-height:18px;
+	margin:5px 0px;
+}
+
+.date_creneaux{
+	display:grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+	grid-column-gap: 2px;
+	grid-row-gap: 0px;
+	margin:5px 0px;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	background-color:white;
+}
+
+.date_creneaux div{
+	position:relative;
+}
+
+.date_creneaux .creneaux_week{
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.date_creneaux .creneau{
+	padding:3px;
+	text-align:center;
+	border:1px solid white;
+	color:white;
+	background-color:#28b673;
+	margin:1px 0px;
+	cursor:pointer;
+}
+
+.date_creneaux .creneau p{
+	font-size:12px;
+	padding:0px;
+	margin:0px;
+	text-align:center;
+	line-height:13px;
+}
+
+.date_creneaux .creneau:hover{
+	border:1px solid #262626;
+}
+
+.date_creneaux .creneau.active{
+	background-color:#262626;
+	color:white;
+	font-weight:bolder;
+	font-size:15px;
+}
+
+.date_creneaux .creneau.custom{
+	background-color:white;
+	color:black;
+}
+.date_creneaux .creneau.custom.active{
+	background-color:#262626;
+	color:white;
+	font-weight:bolder;
+	font-size:15px;
+}
+
+.date_creneaux .creneau.full{
+	background-color:#d62d2d;
+	color:white;
+}
+
+.date_creneaux .creneau.almost_full{
+	background-color:#dfb70c;
+	color:white;
+}
+.date_creneaux .creneau.almost_full.active, .date_creneaux .creneau.full.active{
+	border:1px solid #262626;
+}
+
+.edit_date .creneaux_date_title input{
+margin-top:8px;
+width:100%;
+text-align:center;
+}
+
+
+.creneaux_date_before_title, .creneaux_date_after_title{
+	display:flex;
+}
+
+.creneaux_date_before_title .jmoinsun{
+	flex:3;
+	margin:auto;
+	font-weight:bold;
+	box-sizing:border-box;
+	padding-right:10%;
+}
+.creneaux_date_after_title .jplusun{
+	flex:3;
+	margin:auto;
+	font-weight:bold;
+	padding-left:10%;
+}
+
+.creneaux_date_before_title .arrow_left, .creneaux_date_after_title .arrow_right{
+	flex:1;
+	text-align:center;
+}
+
+.edit_date .creneau_custom{
+	background-color:white;
+	padding:5px;
+	text-align:center;
+}
+.edit_date .creneau_custom .input_nb{
+	width:50px;
+}
+.edit_date .creneau_custom input.btn{
+	width:100%;
+	margin-top:8px;
+}
+.edit_date .creneau_custom .creneau_custom_sans_fin{
+	margin:5px 0px;
+}
+.edit_date .creneau_custom .creneau_custom_fin{
+	margin-left:22px;
+}
+
+.edit_date .creneau_recap{
+	margin:5px 0px;
+	background-color:white;
+	padding:5px;
+	text-align:center;
+}
+
+.edit_prices{
+}
+
+.edit_prices .price{
+	display:grid;
+	grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+	grid-template-rows: auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	padding:5px;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	background-color:white;
+	margin:3px 0px;
+}
+
+.edit_prices .price.active{
+	background-color:#262626;
+	color:white;
+}
+
+.edit_prices .price div{
+	align-self:center;
+}
+.edit_prices .price .price_nb_add, .edit_prices .price .price_nb_less{
+	font-weight:bold;
+	font-size:20px;
+	color:black;
+	padding: 3px 0px 7px 0px;
+	margin-right:2px;
+}
+.edit_prices .price .price_nb_add:hover, .edit_prices .price .price_nb_less:hover{
+	color:white;
+}
+.edit_prices .price .price_quantity{
+	width:50px;
+}
+
+.edit_members{
+
+}
+.edit_members .member{
+	display:flex;
+	text-align:center;
+	background-color:white;
+	margin:3px 0px;
+	line-height:1.1em;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	cursor:pointer;
+	border:1px solid white;
+}
+
+.edit_members .member:hover{
+	border:1px solid #262626;
+}
+.edit_members .member.active{
+	background-color:#262626;
+	color:white;
+}
+
+.edit_members .member .name{
+	flex:4;
+	padding:7px 0px;
+}
+
+.edit_members .member .capacity{
+	flex:1;
+	padding:7px 0px;
+	color:white;
+	background-color:#28b673;
+}
+
+.edit_members .member.full .capacity{
+	background-color:#d62d2d;
+	color:white;
+}
+
+.edit_members .member.custom{
+	background-color:#e5e5e5;
+}
+
+.edit_members .member.custom.active{
+	background-color:#262626;
+	color:white;
+}
+
+.edit_state{
+}
+.edit_state .states .states_state{
+	display:block;
+	padding:5px 0px;
+	margin:5px 0px;
+	border:2px solid transparent;
+	cursor:pointer;
+}
+.edit_state .states .states_state:hover{
+	border:2px solid #262626;
+}
+.edit_state .states .states_state.active{
+	border:2px solid #262626;
+}
+
+
+.edit_tags{
+}
+.edit_tags .booking_tags .untag .tag{
+	font-size:14px;
+	line-height:1.6em;
+	margin:4px 0px;
+	cursor:pointer;
+}
+.edit_tags .booking_tags .untag{
+	border:1px solid transparent;
+	padding:3px;
+	margin:4px 0px;
+}
+.edit_tags .booking_tags .untag:hover{
+	border:1px solid #262626;
+}
+.edit_tags .booking_tags .untag.active{
+	/*border:2px solid #262626;*/
+	background-color:#262626;
+	font-weight:bold;
+}
+
+
+.edit_clients_infos .client_info{
+	display:flex;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	margin-bottom:5px;
+	align-items:flex-start;
+	margin:0px;
+	padding:0px;
+}
+
+.edit_clients_infos .client_info span{
+}
+
+.edit_clients_infos .client_info .number{
+	font-weight: bold;
+    font-size: 16px;
+    padding: 6px 5px;
+}
+.edit_clients_infos .client_info .btn{
+	height: 28px;
+    line-height: 16px;
+    padding: 0px 10px;
+    margin: 1px;
+}
+
+.edit_clients_infos .client_info span select{
+}
+
+
+.clients_infos_tarif{
+	padding:0px 0px 5px 0px;
+}
+.clients_infos_tarif_title{
+	padding:5px;
+	background-color:black;
+	color:white;
+}
+
+/*
+.edit_clients_infos .client_info .number{
+	flex-grow:0;
+	padding:0px 5px;
+	font-size:17px;
+	font-weight:bold;
+	flex:1;
+}
+
+.edit_clients_infos .client_info .firstname{
+	flex-grow:1;
+	height:30px;
+	width:80px;
+	flex:1
+}
+.edit_clients_infos .client_info .lastname{
+	flex-grow:1;
+	height:30px;
+	width:80px;
+	flex:1
+}
+.edit_clients_infos .client_info .age{
+	flex-grow:0;
+	height:30px;
+	max-width:60px;
+	flex:1
+}
+.edit_clients_infos .client_info .level{
+	flex-grow:0;
+	height:30px;
+	flex:1
+}*/
+
+
+/* recap */
+
+.recap_total{
+	padding:5px;
+	box-sizing:border-box;
+}
+.recap_total .sous_total{
+	display:flex;
+	background-color:#262626;
+	color:white;
+	flex:1;
+	text-align:center;
+	justify-content:space-between;
+	padding:5px 15px;
+	margin:2px 0px;
+	font-weight:bold;
+}
+
+.col_recap_total .reductions .reduction{
+	background-color:white;
+}
+.reductions .reduction{
+	display:flex;
+	border-bottom:1px solid #cccccc;
+	text-align:center;
+	justify-content:space-between;
+	padding:5px;
+	margin:2px 0px;
+}
+.reductions .reduction.not_active{
+	background-color: rgba(229,229,229,0.5);
+	border:1px solid #e5e5e5;
+}
+.reductions .reduction .btn{
+	display:block;
+}
+.reductions .reduction.not_active .action_desactivate{
+	display:none;
+}
+.reductions .reduction.not_active .reduction_title,.reductions .reduction.not_active .reduction_description, .reductions .reduction.not_active .reduction_value{
+	text-decoration:line-through;
+}
+.reductions .reduction.not_active .action_activate{
+	display:block;
+}
+.reductions .reduction .action_activate{
+	display:none;
+}
+
+.reductions .reduction .reduction_title{
+	flex:2;
+	font-weight:bold;
+	align-self:center;
+	padding:3px;
+}
+
+.reductions .reduction .reduction_description{
+	flex:4;
+	text-align:justify;
+	line-height:1.2em;
+	padding:3px;
+}
+.reductions .reduction .reduction_value{
+	flex:1;
+	font-weight:bold;
+	align-self:center;
+}
+.reductions .reduction .reduction_action{
+	flex:1;
+	font-weight:bold;
+	align-self:center;
+}
+
+.recap_total .total{
+	display:flex;
+	background-color:#262626;
+	color:white;
+	flex:1;
+	text-align:center;
+	justify-content:space-between;
+	padding:10px 15px;
+	margin:2px 0px;
+	font-size:19px;
+	font-weight:bolder;
+}
+
+/** total global resa **/
+
+.reservation_content .resa_sub_total_line{
+	display:flex;
+	border-right:4px solid black;
+	flex:1;
+	text-align:center;
+	justify-content:space-between;
+	padding:10px 15px;
+	margin:40px 0px 40px 0px;
+	font-weight:bold;
+	font-size:15px;
+	line-height:20px;
+	align-items: center;
+	background-color:white;
+}
+
+.reservation_content .content_line .resa_sub_total_line{
+	padding:10px 15px;
+	margin: 0px;
+}
+
+.resa_total_line{
+	display:flex;
+	background-color:#262626;
+	color:white;
+	flex:1;
+	text-align:center;
+	justify-content:space-between;
+	padding:5px 15px;
+	margin:10px 0px 10px 0px;
+	font-weight:bold;
+	font-size:24px;
+	line-height:30px;
+	align-items: center;
+}
+
+#add_appointment_in_booking{
+font-weight:18px;
+font-weight:bold;
+text-transform:uppercase;
+padding:10px 20px;
+}
+
+.resa_coupon_line{
+	display:flex;
+	background-color:#e6e6e6;
+	flex:1;
+	text-align:center;
+	justify-content:space-between;
+	padding:5px 15px;
+	margin:0px 0px 2px 0px;
+	font-weight:bold;
+	align-items: center;
+}
+
+.resa_custom_line{
+	display:flex;
+	background-color:#e6e6e6;
+	flex:1;
+	text-align:center;
+	justify-content:space-between;
+	padding:5px 15px;
+	margin:0px 0px 2px 0px;
+	font-weight:bold;
+	align-items: center;
+}
+
+.resa_reduction_line{
+	display:flex;
+	background-color:#e6e6e6;
+	flex:1;
+	text-align:center;
+	justify-content:space-between;
+	padding:5px 15px;
+	margin:0px 0px 2px 0px;
+	font-weight:bold;
+	align-items: center;
+}
+
+
+/* coupon et ligne perso */
+.add_line .coupon, .add_line .custom_line, .add_line .add_service{
+	padding:4px;
+	border:none;
+	margin:auto;
+	text-align:center;
+	margin:5px 0px;
+}
+
+/* ajouter une ligne */
+.add_line_menu{
+	text-align:center;
+}
+
+/* notes */
+.add_notes{
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	padding:5px;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	margin:3px 0px;
+}
+.add_notes .note{
+	padding:10px;
+	box-sizing:border-box;
+}
+.add_notes textarea{
+	width:100%;
+	min-height:70px;
+}
+
+/* footer */
+.popup_footer{
+	text-align:center;
+	margin:20px 5px;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: #27b673;
+}
+
+.recap_menu_actions{
+	display:flex;
+	max-width:600px;
+	margin:auto;
+}
+
+
+.reservation_history{
+	margin-top:10px;
+	padding:15px 5px;
+	border:1px solid #262626;
+}
+
+.history_title{
+	display:grid;
+	grid-template-columns: repeat(3, 1fr) 3fr;
+	grid-template-rows: auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	padding:5px;
+	align-self:center;
+	text-align:left;
+	justify-self: center;
+	background-color:#e6e6e6;
+	border:1px solid #e6e6e6;
+}
+.history_content{
+	display:grid;
+	grid-template-columns: repeat(3, 1fr) 3fr;
+	grid-template-rows: auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	padding:5px;
+	align-self:center;
+	text-align:left;
+	justify-self: center;
+	background-color:white;
+	border:1px solid #e6e6e6;
+}
+
+.history_content_action_important{
+	font-weight:bold;
+}
+
+
+
+
+/** Notification **/
+
+.client_notifications{
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:5px;
+
+}
+
+
+.notifications_email, .notifications_sms{
+border:1px solid #e6e6e6;
+padding:10px;
+text-align:center;
+}
+.notifications_email_title, .notifications_sms_title{
+text-align:center;
+}
+
+.notifications_email .notification, .notifications_sms .notification{
+	display:flex;
+	padding:5px;
+	border:1px solid #e6e6e6;
+	justify-content:center;
+	align-items:center;
+}
+.notifications_email .notification .notif_title, .notifications_sms .notification .notif_title{
+	flex:2;
+	text-align:center;
+}
+.notifications_email .notification .notif_btn, .notifications_sms .notification .notif_btn{
+	flex:1;
+	text-align:center;
+}
+
+
+
+/* fiche Client */
+
+.fiche_client{
+	display:grid;
+	grid-template-columns: 3fr 7fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"client_informations client_historic"
+	"client_solde client_historic"
+	"client_reservations client_reservations";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:5px;
+}
+
+/** infos clients **/
+.client_informations{
+	grid-area:client_informations;
+}
+.client_informations .client_information_line{
+	display:flex;
+	line-height:22px;
+}
+.client_informations .client_information_line.center{
+	justify-content: center;
+	margin:5px 0px;
+}
+.client_informations .client_information_line label{
+	width:30%;
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	text-align:right;
+}
+.client_informations .client_information_line div{
+	width:70%;
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	font-weight:bold;
+	text-align:left;
+}
+.client_informations .client_information_line input{
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	font-weight:bold;
+	text-align:left;
+}
+.client_informations .client_information_line select{
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	max-width: 201px;
+	font-weight:bold;
+	text-align:left;
+}
+
+.client_informations .client_information_line.reverse label{
+	width:70%;
+	text-align:left;
+}
+.client_informations .client_information_line.reverse div{
+	width:30%;
+	text-align:right;
+}
+
+.client_informations .warning{
+	color:orange;
+}
+.client_informations .info{
+	color:#00BFFF;
+}
+
+
+/** solde client **/
+.client_solde{
+	grid-area:client_solde;
+}
+.client_solde .client_balance{
+	line-height:2em;
+	padding:10px 10px;
+	text-align:center;
+	color:white;
+	font-size:24px;
+	font-weight:600;
+	margin:5px 0px;
+}
+
+
+/** historique clients **/
+.client_historic{
+	grid-area:client_historic;
+	border:1px solid #e6e6e6;
+	padding:10px;
+	text-align:center;
+}
+
+.client_historic_title{
+text-align:center;
+}
+
+#historic_filter{
+	display:flex;
+	justify-content:center;
+}
+#historic_filter div{
+	cursor:pointer;
+	padding:8px 15px;
+	font-weight:600px;
+	font-size:15px;
+}
+#historic_filter div.active{
+	text-decoration:underline;
+}
+
+#historic_content{
+	max-height:60vh;
+	overflow:auto;
+}
+
+#historic_content table{
+	width:100%;
+	border-collapse:collapse;
+}
+#historic_content th{
+	padding:4px;
+	border:1px solid #cccccc;
+	background-color: #cccccc;
+}
+
+#historic_content tr{
+	border-bottom:1px solid #cccccc;
+	background-color:white;
+}
+#historic_content td{
+	padding:9px 4px;
+}
+
+
+
+
+
+
+.client_reservations{
+	grid-area:client_reservations;
+}
+
+.client_informations{
+border:1px solid #e6e6e6;
+padding:10px;
+text-align:center;
+}
+.client_informations_title{
+text-align:center;
+}
+.client_informations .wp_account, .client_informations .company_account{
+text-align:center;
+}
+
+.client_informations .client_note textarea{
+	width:100%;
+	height:100px;
+}
+
+.client_informations .client_informations_view .btn, .client_informations .client_informations_edit .btn{
+	text-align:center;
+	padding: 10px 10px ;
+}
+
+.paiements_operations{
+
+}
+.paiements_operations_content{
+	max-height:400px;
+	overflow:auto;
+}
+.paiements_operations_title{
+	display:grid;
+	grid-template-columns: 3fr 1fr 2fr 2fr 3fr 1fr 2fr;
+	grid-template-rows: auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:5px;
+	background-color:#e6e6e6;
+}
+.paiement_operation{
+	display:grid;
+	grid-template-columns: 4fr 1fr 3fr 3fr 4fr 1fr 2fr;
+	grid-template-rows: auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:5px;
+	text-align:center;
+	border-bottom:1px solid #e6e6e6;
+}
+.paiement_operation .date{
+	text-align:left;
+}
+
+.paiement_operation .paiement_sync{
+	color:#27b673;
+}
+
+.paiements_recap{
+
+}
+
+.paiements_recap .recap_client_balance .client_balance{
+	font-size:21px;
+	line-height:28px;
+	border:1px solid #e6e6e6;
+	padding:10px;
+	margin:3px;
+	color:white;
+}
+
+.balance_null{
+	background-color:#27b673;
+}
+.balance_negative{
+	background-color:#d62c2c;
+}
+.balance_positive{
+	background-color:#dfb70c;
+}
+
+.client_reservations{
+	grid-area:client_reservations;
+	border:1px solid #e6e6e6;
+	padding:10px;
+	text-align:center;
+	background-color:#f1f1f1;
+}
+
+/* demande de paiement */
+.ask_paiement{
+	margin:auto;
+}
+.ask_paiement .value{
+	font-size:17px;
+	font-weight: bold;
+	margin:20px 0px;
+	padding:15px;
+	background-color:#262626;
+	color:white;
+	display:inline-block;
+}
+.ask_paiement .account_value{
+	font-size:15px;
+	font-weight: bold;
+	margin:10px 0px;
+	padding:10px;
+	background-color:#262626;
+	color:white;
+	display:inline-block;
+}
+
+.ask_paiement h3{
+	font-size:24px;
+	margin:15px 0px;
+	text-align:center;
+}
+
+.ask_paiement h4{
+	font-size:17px;
+	margin:15px 0px;
+}
+
+.ask_paiement_options{
+	display:flex;
+}
+
+.ask_paiement_options .ask_paiement_metods{
+	padding:5px 10px;
+	flex:1;
+}
+.ask_paiement_options .ask_paiement_account{
+	padding:5px 10px;
+	flex:1;
+}
+
+.notification_content_options{
+	padding:10px;
+	margin:5px;
+	border:1px solid #cccccc;
+}
+.notification_content_render{
+	padding:10px;
+	margin:5px;
+	border:1px solid #cccccc;
+}
+.notification_content_render h3{
+	font-size:24px;
+	margin:15px 0px;
+	text-align:center;
+}
+
+.content_render_subject{
+	text-align:center;
+}
+.content_render_subject input{
+	min-width:50vw;
+}
+
+.content_render_template{
+	margin:10px 0px;
+	text-align:center;
+}
+.content_render_editor{
+	border:1px solid black;
+	padding:10px;
+	margin:5px;
+}
+.content_render_editor #notificationEditor_ifr{
+	min-height:60vh !important;
+}
+.content_render_actions{
+	display:flex;
+}
+.render_actions_send{
+	padding:5px 10px;
+	flex:1;
+	text-align:center;
+}
+.render_actions_test{
+	padding:5px 10px;
+	flex:1;
+	text-align:center;
+}
+
+
+/* Ajout de paiement */
+.add_paiement{
+	margin:auto;
+}
+.add_paiement .value{
+
+}
+
+.add_paiement h3{
+	font-size:24px;
+	margin:15px 0px;
+}
+
+.add_paiement h4{
+	font-size:17px;
+	margin:15px 0px;
+}
+
+.add_paiement_note textarea{
+	width:250px;
+	height:80px;
+	max-width:100%;
+	max-height:300px;
+}
+
+/*** FUSION CLIENT **/
+
+.fusion_client{
+	display:grid;
+	grid-template-columns: 1fr 2fr 1fr ;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"fusion_search fusion_search fusion_search"
+	"fusion_client_1 fusion_client_final fusion_client_2";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:5px;
+}
+.fusion_search{
+	grid-area:fusion_search;
+}
+.fusion_client_1{
+	grid-area:fusion_client_1;
+}
+.fusion_client_final{
+	grid-area:fusion_client_final;
+}
+.fusion_client_2{
+	grid-area:fusion_client_2;
+}
+
+
+
+
+/********* LISTE CLIENTS *********/
+
+#resa_clients_list {
+	padding-top:15px;
+	position:relative;
+}
+
+#resa_clients_list .filter_type{
+	padding:5px;
+	box-sizing:border-box;
+	margin:0px;
+	background-color:#e5e5e5;
+	border:1px solid #cccccc;
+	text-align:left;
+	align-self:start;
+	margin-bottom:15px;
+}
+#resa_clients_list .filter_type.filters_name input{
+	font-size:19px;
+	width:100%;
+	min-width:100px;
+}
+#resa_clients_list .filter_type.filters_name h4{
+	text-align:center;
+	font-size:15px;
+	margin:10px 0px;
+}
+
+#resa_clients_list .add_new_client{
+	margin:15px 0px;
+}
+#resa_clients_list .client_results{
+	margin:15px 0px;
+}
+
+#create_client_btn{
+	padding: 10px 25px;
+    width: 300px;
+	display: block;
+    margin: 10px auto;
+}
+#create_client_btn.dashicons .btn_text{
+    font-family: roboto;
+	padding-left:10px;
+	line-height: 1em;
+    vertical-align: top;
+}
+
+/**** GENERAL ****/
+
+.btn{
+	padding:5px;
+	border:1px solid #cccccc;
+	background-color:#f7f7f7;
+	display:inline-block;
+	cursor:pointer;
+}
+.btn_wide{
+	width:100%;
+	box-sizing:border-box;
+	text-align:center;
+	margin:2px 0px;
+}
+.btn_slim{
+	padding:1px 5px;
+	width:100%;
+	box-sizing:border-box;
+	text-align:center;
+	margin:2px 0px;
+}
+
+.btn:hover{
+	border:1px solid #cccccc;
+	background-color:#292929;
+	color:white;
+	display:inline-block;
+}
+
+.btn.active{
+	padding:5px;
+	border:1px solid #cccccc;
+	background-color:#292929;
+	color:white;
+	display:inline-block;
+}
+
+.btn_vert{
+	background-color:#27b673;
+	color:white;
+	border:1px solid white;
+	padding:5px 10px;
+}
+.btn_jaune{
+	background-color:#dfb70c;
+	color:white;
+	border:1px solid white;
+	padding:5px 10px;
+}
+.btn_rouge{
+	background-color:#d62c2c;
+	color:white;
+	border:1px solid white;
+	padding:5px 10px;
+}
+.btn_bleu{
+	background-color:#1392e2;
+	color:white;
+	border:1px solid white;
+	padding:5px 10px;
+}
+.btn_cancel{
+	background-color:#b0b0b0;
+	background: repeating-linear-gradient(  45deg,  rgba(0,0,0, 0.1),  rgba(0,0,0, 0.1) 10px,  rgba(176, 176 ,176, 0.1) 10px,   rgba(176, 176 ,176, 0.1) 20px);
+	color:black;
+	border:1px solid #b0b0b0;
+	padding:5px 10px;
+}
+.btn_vert:hover , .btn_vert.active{
+	background-color:#18c473;
+	padding:5px 10px;
+}
+.btn_jaune:hover, .btn_jaune.active{
+	background-color:#ebbe00;
+	padding:5px 10px;
+}
+.btn_rouge:hover, .btn_rouge.active{
+	background-color:#e61c1c;
+	padding:5px 10px;
+}
+.btn_bleu:hover, .btn_bleu.active{
+	background-color:#22a1ec;
+	padding:5px 10px;
+}
+.btn_cancel:hover, .btn_cancel.active{
+	background-color:#292929;
+	background: repeating-linear-gradient(  45deg,  rgba(0,0,0, 0.2),  rgba(0,0,0, 0.2) 10px,  rgba(176, 176 ,176, 0.2) 10px,   rgba(176, 176 ,176, 0.2) 20px);
+	color:black;
+	padding:5px 10px;
+}
+.btn_vert.active, .btn_jaune.active, .btn_rouge.active, .btn_bleu.active, .btn_cancel.active{
+	/*display:none;*/
+}
+
+.btn_locked, .btn_locked:hover{
+	background: repeating-linear-gradient(  45deg,  rgba(180,180,180, 1),  rgba(180,180,180, 1) 10px,  rgba(150, 150 ,150, 1) 10px,   rgba(150, 150 ,150, 1) 20px);
+	color:#686868;
+	border:1px solid #b4b4b4;
+	padding:5px 10px;
+	cursor:not-allowed;
+}
+
+.bg_rouge{
+	background-color:#d62c2c;
+	color:white;
+	padding:2px 3px;
+}
+.bg_vert{
+	background-color:#18c473;
+	color:white;
+	padding:2px 3px;
+}
+.bg_jaune{
+	background-color:#ebbe00;
+	color:white;
+	padding:2px 3px;
+}
+.bg_bleu{
+	background-color:#22a1ec;
+	color:white;
+	padding:2px 3px;
+}
+.bg_gris{
+	background-color:#b4b4b4;
+	color:white;
+	padding:2px 3px;
+}
+
+
+.on {
+	color:#27b673;
+}
+.off {
+	color:#a1a1a1;
+	text-decoration:line-through;
+}
+
+.booking_tags .tag_vert{ color:#28b673; border-color:#28b673;}
+.booking_tags .tag_jaune{ color:#efb20e; border-color:#efb20e;}
+.booking_tags .tag_orange{ color:#e28d14; border-color:#e28d14;}
+.booking_tags .tag_marron{ color:#765337; border-color:#765337;}
+.booking_tags .tag_rouge{ color:#d62d2d; border-color:#d62d2d;}
+.booking_tags .tag_bleu{ color:#1492e2; border-color:#1492e2;}
+
+.b0{
+	font-weight:300;
+}
+.b1{
+	font-weight:600;
+}
+.b2{
+	font-weight:900;
+}
+
+#resa_online_admin .no{
+	display:none;
+}
+
+
+.important{
+	color: white;
+    font-style: italic;
+    font-size: 12px;
+    background-color: #ff0000;
+    padding: 1px;
+    text-align: center;
+    margin: 2px 0px;
+}
+
+.flex{
+	display:flex;
+}
+
+/************* Rapport client ********/
+
+.resa_reports{
+	margin-top:20px;
+}
+
+.resa_reports .report{
+	padding:10px 7px;
+	border:1px solid #e6e6e6;
+	background-color:white;
+	margin:5px 0px;
+}
+
+
+/*** par service ***/
+.service_report{
+	margin-top:20px;
+	display:grid;
+	grid-template-columns:4fr 1fr;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"service_report_headline service_report_members"
+	"service_report_content service_report_members";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.service_report_headline{
+	grid-area:service_report_headline;
+	display:grid;
+	grid-template-columns:1fr 1fr 1fr 1fr;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"service_report_headline service_report_members"
+	"service_report_content service_report_members";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+
+/** par membre **/
+
+
+.member_report_headline{
+	grid-area:service_report_headline;
+	display:grid;
+	grid-template-columns:2fr 1fr 1fr 1fr;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"service_report_headline service_report_members"
+	"service_report_content service_report_members";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.report_content_booking_infos .service{
+	font-weight:bold;
+	font-size:14px;
+	padding-left:10px;
+	align-self:center;
+}
+
+.members_report_content .resa_reservation{
+	padding:2px;
+}
+
+
+
+.report_actions{
+	text-align:right;
+}
+
+.report_title{
+	font-size:21px;
+}
+
+.service_report_members{
+	grid-area:service_report_members;
+	border-left:1px solid #e6e6e6;
+	padding-left:10px;
+}
+.service_report_content{
+	grid-area:service_report_content;
+}
+
+
+.report_content_titles{
+	display:grid;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"infos nom prenom cutsom1 custom2 custom3 custom4"
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	font-weight:bold;
+}
+
+.report_content_booking .resa_reservation{
+	display:grid;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"infos liste"
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	background-color:#e5e5e5;
+	margin:3px 0px;
+}
+
+.report_content_booking_participants .participant{
+	display:grid;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"infos liste"
+	grid-column-gap:0px;
+	grid-row-gap:0px;
+}
+
+
+.report_content_booking_infos{
+	display:flex;
+}
+.resa_reservation .report_content_booking_infos  .reservation_states{
+	align-self: flex-start;
+	padding-left:7px;
+}
+
+
+.modify_member{
+	display:flex;
+}
+.modify_member .member_input{
+	width:60%;
+}
+
+.service_report_members{
+	text-align:center;
+}
+
+.report_members_title, .report_members_capacity{
+	margin:0px;
+	padding:3px 0px;
+}
+
+.report_members_list{
+	text-align:left;
+}
+
+.report_members_list .member{
+	font-weight:bolder;
+	font-size:15px;
+	padding:3px;
+}
+
+.report_members_list_group{
+	text-align:left;
+}
+
+.report_members_list_group .a_group{
+	font-size:12px;
+	padding:3px;
+	line-height:1.4em;
+	margin:2px 0px;
+	text-align:left;
+	border: 1px solid #e6e6e6;
+    margin: 5px;
+    padding: 7px;
+}
+.report_members_list_group .a_group .a_group_name{
+	font-weight:bold;
+}
+
+/**** report grid ****/
+
+/** grille 2 infos participant **/
+.grid2 .report_content_titles{
+	grid-template-columns:3fr 1fr 1fr;
+}
+
+.grid2 .resa_reservation{
+	grid-template-columns:3fr 2fr;
+}
+
+.grid2 .report_content_booking_participants .participant{
+	grid-template-columns:repeat(3,1fr);
+}
+/** grille 3 infos participant **/
+.grid3 .report_content_titles{
+	grid-template-columns:3fr 1fr 1fr 1fr;
+}
+
+.grid3 .resa_reservation{
+	grid-template-columns:3fr 3fr;
+}
+
+.grid3 .report_content_booking_participants .participant{
+	grid-template-columns:repeat(4,1fr);
+}
+/** grille 4 infos participant **/
+.grid4 .report_content_titles{
+	grid-template-columns:3fr 1fr 1fr 1fr 1fr;
+}
+
+.grid4 .resa_reservation{
+	grid-template-columns:3fr 4fr;
+}
+
+.grid4 .report_content_booking_participants .participant{
+	grid-template-columns:repeat(5,1fr);
+}
+/** grille 5 infos participant **/
+.grid5 .report_content_titles{
+	grid-template-columns:3fr 1fr 1fr 1fr 1fr 1fr;
+}
+.grid5 .resa_reservation{
+	grid-template-columns:3fr 5fr;
+}
+.grid5 .report_content_booking_participants .participant{
+	grid-template-columns:repeat(6,1fr);
+}
+/** grille 6 infos participant **/
+.grid6.report_content_titles{
+	grid-template-columns:3fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.grid6 .resa_reservation{
+	grid-template-columns:3fr 6fr;
+}
+.grid6 .report_content_booking_participants .participant{
+	grid-template-columns:repeat(7,1fr);
+}
+/** grille 7 infos participant **/
+.grid7 .report_content_titles{
+	grid-template-columns:3fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.grid7 .resa_reservation{
+	grid-template-columns:3fr 7fr;
+}
+.grid7 .report_content_booking_participants .participant{
+	grid-template-columns:repeat(8,1fr);
+}
+
+/** grille 8 infos participant **/
+.grid8 .report_content_titles{
+	grid-template-columns:3fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.grid8 .resa_reservation{
+	grid-template-columns:3fr 8fr;
+}
+.grid8 .report_content_booking_participants .participant{
+	grid-template-columns:repeat(9,1fr);
+}
+
+
+/*** helbox ***/
+
+.helpbox{
+	position:relative;
+	top:0px;
+	z-index:1;
+}
+.helpbox:hover{
+	z-index:100;
+}
+
+.helpbox::after{
+	content:'?';
+	display:inline-block;
+	width:13px;
+	height:13px;
+	color:green;
+	background-color:white;
+	border: 1px solid green;
+	text-align:center;
+	line-height:13px;
+	font-size:11px;
+	border-radius:50px;
+	z-index:4;
+}
+.helpbox:hover .helpbox_content{
+	color:black;
+	font-size:14px;
+	font-weight:normal;
+	line-height:17px;
+	text-align:justify;
+	display:block;
+	padding:10px;
+	box-sizing:border-box;
+	position:absolute;
+	left:-100px;
+	top:25px;
+	width:550px;
+	background-color:white;
+	border:1px solid #262626;
+	-webkit-box-shadow: 0 0 5px 0 #000000;
+	box-shadow: 0 0 5px 0 #000000;
+	z-index:100;
+}
+
+.helpbox .helpbox_content h4, .helpbox .helpbox_content p{
+	margin:0px;
+	padding:0px;
+}
+.helpbox .helpbox_content table{
+	width:100%;
+	font-size:12px;
+}
+.helpbox .helpbox_content table td{
+	min-width:70px;
+	text-align: left;
+}
+.helpbox .helpbox_content table thead tr td{
+	border-bottom: 1px solid grey !important;
+	text-align: left;
+	line-height: 1em;
+}
+
+
+
+.helpbox .helpbox_content{
+	display:none;
+	z-index:100;
+}
+
+
+/*** title_box ***/
+
+.title_box{
+	position:relative;
+	top:0px;
+	z-index:1;
+}
+.title_box:hover{
+	z-index:100;
+}
+.title_box:hover .title_box_content{
+	color:white;
+	font-size:12px;
+	font-family:roboto;
+	font-weight:normal;
+	line-height:1.2em;
+	text-align:center;
+	display:block;
+	padding:px;
+	box-sizing:border-box;
+	position:absolute;
+	left: calc(-60px + 50%);
+    bottom: calc(100% + 10px);
+    width: 120px;
+	background-color:#525252;
+	border:1px solid #525252;
+	z-index:100;
+	border-radius:5px;
+}
+
+.title_box .title_box_content h4, .title_box .title_box_content p{
+	margin:0px;
+	padding:0px;
+}
+
+.title_box .title_box_content{
+	display:none;
+	z-index:100;
+}
+
+
+/* bouton */
+#resa_online_admin .resa_btn {
+	display:inline-block;
+}
+
+#resa_online_admin .resa_btn.plus_ico{
+	position:relative;
+	padding-left:38px;
+}
+#resa_online_admin .resa_btn.plus_ico::before{
+	content:"+";
+	display:block;
+	height:100%;
+	width:30px;
+	font-weight:bolder;
+	font-size:20px;
+	line-height:10px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	padding:5px;
+	box-sizing:border-box;
+	background-color:#cccccc;
+}
+#resa_online_admin .resa_btn:hover.plus_ico::before{
+	background-color:inherit;
+}
+
+#resa_online_admin .resa_inbg1{
+	background-color:#cccccc;
+	padding:1px 4px;
+	color:white;
+}
+#resa_online_admin .resa_inbg2{
+	background-color:#e5e5e5;
+	padding:1px 4px;
+	color:black;
+}
+
+#resa_online_admin .gras1{
+	font-weight:600;
+}
+#resa_online_admin .gras2{
+	font-weight:900;
+}
+#resa_online_admin .italic{
+	font-style:italic;
+}
+
+
+.filter_type .tgl, .light_mode .tgl {
+  display: none;
+}
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+  box-sizing: border-box;
+}
+.tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+  background: none;
+}
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+  background: none;
+}
+.tgl + .tgl-btn {
+  outline: 0;
+  display: block;
+  width: 3em;
+  height: 1.5em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.tgl + .tgl-btn:after {
+  left: 0;
+}
+.tgl + .tgl-btn:before {
+  display: none;
+}
+.tgl:checked + .tgl-btn:after {
+  left: 50%;
+}
+
+.tgl-light + .tgl-btn {
+  background: #f0f0f0;
+  border-radius: 2em;
+  padding: 2px;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+.tgl-light + .tgl-btn:after {
+  border-radius: 50%;
+  background: #fff;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+.tgl-light:checked + .tgl-btn {
+  background: #9FD6AE;
+}
+
+
+
+/** loader **/
+
+.loader_box{
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	background-color: rgba(39,182,115, 0.8);
+	z-index:10000;
+}
+
+.loader_content{
+	position: absolute;
+	height:100%;
+	width:100%;
+	max-height:100vh;
+	max-width:100vw;
+}
+
+.loader{
+	position: absolute;
+	top: calc(50% - 40px);
+	left: calc(50% - 20px);
+}
+
+.loader .box {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  animation: animate .5s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+}
+
+.loader .link {
+	display:block;
+	font-size:14px;
+	font-weight:bold;
+	text-align:center;
+	color:white;
+	position: absolute;
+	top: calc(50% + 100px);
+	left: calc(50% - 18px);
+	background-color:#27b673;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	padding:7px;
+}
+
+.loader::after{
+	content:'Chargement...';
+	display:block;
+	font-size:14px;
+	font-weight:bold;
+	text-align:center;
+	color:white;
+	position: absolute;
+	top: calc(50% + 80px);
+	left: calc(50% - 22px);
+}
+
+
+@keyframes animate {
+  17% { border-bottom-right-radius: 3px; }
+  25% { transform: translateY(9px) rotate(22.5deg); }
+  50% {
+    transform: translateY(18px) scale(1,.9) rotate(45deg) ;
+    border-bottom-right-radius: 40px;
+  }
+  75% { transform: translateY(9px) rotate(67.5deg); }
+  100% { transform: translateY(0) rotate(90deg); }
+}
+.loader .shadow {
+  width: 50px;
+  height: 5px;
+  background: black;
+  opacity: 0.4;
+  position: absolute;
+  top: 59px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow .5s linear infinite;
+}
+@keyframes shadow {
+  50% {
+    transform: scale(1.2,1);
+  }
+}
+
+
+/****** RESA PLANNING ******/
+
+#resa_planning{
+	padding-top:15px;
+}
+
+
+.planning_groups .service_groups{
+	padding:10px 7px;
+	border:1px solid #e6e6e6;
+	background-color:white;
+	margin:5px 0px;
+}
+
+
+.planning_groups{
+	margin-top:20px;
+}
+
+.planning_group_headline{
+	grid-area:service_report_headline;
+	display:grid;
+	grid-template-columns:1fr 1fr 1fr 1fr;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"service_report_headline service_report_members"
+	"service_report_content service_report_members";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.planning_group_content::after{
+	content:'';
+	clear:both;
+	display:block;
+}
+
+.group{
+	border:1px solid #e6e6e6;
+	margin:5px;
+	padding:7px;
+	width:calc(25% - 10px);
+	max-width:240px;
+	height:auto;
+	display:inline-block;
+	cursor:pointer;
+}
+
+.group h3.group_title{
+	margin:0px;
+	padding:3px 0px;
+}
+.group .group_description{
+	margin:0px;
+	padding:3px 0px;
+}
+.group .group_edit{
+	font-size:12px;
+	line-height:1.2em;
+	padding:3px 5px;
+	float:right;
+}
+
+.group .group_description{
+	text-align:justify;
+}
+.group .group_participant{
+	font-weight:bold;
+	font-size:1em;
+}
+.group .member_title{
+	margin-top:8px;
+	font-weight:bold;
+	font-size:1em;
+}
+.group .member, .group_members .member{
+	margin:2px;
+	padding:2px 5px;
+	background-color:#18c473;
+	color:white;
+	display:inline-block;
+}
+
+.popup_header_title h3{
+	margin:0px;
+	padding:0px;
+}
+
+
+.edit_group_content{
+	display:grid;
+	grid-template-columns:1fr 4fr;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"edit_group_group_list edit_group_group_edition";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.edit_group_group_list{
+	grid-area:edit_group_group_list;
+	display:block;
+	width:250px;
+	padding:0px 10px;
+}
+
+.edit_group_group_list .group{
+	border:1px solid #e6e6e6;
+	margin:10px 0px;
+	padding:7px;
+	width:calc(100% - 15px);
+	max-width:240px;
+	height:auto;
+	clear:both;
+	display:block;
+}
+.edit_group_group_list .group:hover, .edit_group_group_list .group:hover{
+	-webkit-box-shadow: 0 0 3px 0 #000000;
+	box-shadow: 0 0 3px 0 #000000;
+}
+
+textarea.group_description{
+	width:100%;
+	min-height:70px
+}
+.edit_group_group_list .group_title{
+	width:100%;
+}
+
+.edit_group_group_edition{
+	grid-area:edit_group_group_edition;
+	display:grid;
+	grid-template-columns:1fr 2fr;
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_edition_members{
+
+}
+
+.table{
+
+}
+.table_titles{
+	padding:3px;
+	background-color:#cccccc;
+	margin:1px 0px;
+	text-align:center;
+	font-weight:bold;
+}
+.table_titles a{
+	color:black;
+	cursor:pointer;
+	text-decoration:underline;
+}
+.table_line{
+	padding:3px;
+	background-color:#e6e6e6;
+	margin:1px 0px;
+	text-align:center;
+}
+.table_line.bg_rouge{
+	padding:3px;
+	background-color:#d62c2c;
+	color:white;
+	margin:1px 0px;
+	text-align:center;
+}
+
+.add_selection_to{
+	margin:5px;
+	text-align:right;
+}
+
+/** membres **/
+
+.group_edition_members{
+	padding: 0px 5px 5px 5px;
+}
+.group_edition_members h3{
+	text-align:center;
+}
+
+.group_members_table .table_titles, .group_members_table .table_line{
+	display:grid;
+	grid-template-columns:1fr 2fr 2fr 2fr;
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+/** Participants **/
+
+.group_edition_participants{
+	padding: 0px 5px 5px 5px;
+}
+.group_edition_participants h3{
+	text-align:center;
+}
+
+.edition_participants_type{
+	margin-bottom:40px;
+}
+
+.group_participant_table.grid3 .table_titles, .group_participant_table.grid3 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(2, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+
+.group_participant_table.grid4 .table_titles, .group_participant_table.grid4 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(3, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+
+.group_participant_table.grid5 .table_titles, .group_participant_table.grid5 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(4, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table.grid6 .table_titles, .group_participant_table.grid6 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(5, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table.grid7 .table_titles, .group_participant_table.grid7 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(6, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table.grid8 .table_titles, .group_participant_table.grid8 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(7, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table.grid9 .table_titles, .group_participant_table.grid9 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(8, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table.grid10 .table_titles, .group_participant_table.grid10 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(9, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table.grid11 .table_titles, .group_participant_table.grid11 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(10, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table.grid12 .table_titles, .group_participant_table.grid12 .table_line{
+	display:grid;
+	grid-template-columns:1fr repeat(11, 2fr);
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_participant_table a{
+	text-decoration:underline;
+}
+
+
+.advanced_filter{
+	position:relative;
+	display:block;
+}
+.advanced_filter_content{
+	text-align:left;
+	background-color:white;
+	padding:0px 5px;
+    display:none;
+	left:-30px;
+	right:-30px;
+	border:1px solid #cccccc;
+	border-top:none;
+}
+.advanced_filter_content ul li.checked{
+	color:black;
+}
+.advanced_filter_content ul li.checked::before{
+	content:"✔";
+	display:block;
+	float:left;
+	width:15px;
+	height:15px;
+	font-size:14px;
+	color:black;
+}
+.advanced_filter_content ul li.unchecked{
+	color:#818181;
+}
+.advanced_filter_content ul li.unchecked::before{
+	content:"✘";
+	display:block;
+	float:left;
+	width:15px;
+	height:15px;
+	font-size:14px;
+	color:#818181;
+}
+
+.table_title .advanced_filter:hover .advanced_filter_content{
+	display:block;
+	position:absolute;
+	z-index:50;
+}
+
+
+/** view group **/
+
+.group_content{
+	padding:15px 0px;
+	display:grid;
+	grid-template-columns:1fr 3fr;
+	grid-template-rows:auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+.group_content .member{
+	font-size:1.4em;
+	padding:10px 10px;
+	display:block;
+	color:black;
+	background-color:transparent;
+	border-bottom:1px solid #e6e6e6;
+}
+
+.group_participants, .group_members{
+		margin:15px;
+}
+
+.group_participants table{
+		border-collapse:collapse;
+		min-width:50%;
+}
+.group_participants table td{
+		padding:8px 15px;
+		font-size:1.2em;
+		border-bottom:1px solid #cccccc;
+}
+
+.edit_group_infos{
+	padding:1px 10px 10px 10px;
+	background-color:#e6e6e6;
+}
+.edit_group_sync{
+	padding:1px 10px 10px 10px;
+	background-color:#e6e6e6;
+}
+
+.edit_group_sync .groups_sync{
+	display:flex;
+	background-color:white;
+}
+
+.edit_group_sync .groups_sync .group_sync{
+	padding:10px;
+}
+
+.edit_group_sync .groups_sync .jour_actuel{
+	font-weight:bold;
+}
+
+
+
+
+
+
+
+
+
+/******** planning member ****/
+
+/******** test 1 sans grid avec variable ***************/
+
+:root {
+  --HourStart:540; 	/* minutes */
+  --HourEnd:1140; 	/* minutes */
+  --length:calc( var(--HourEnd) - var(--HourStart)); /* 600 */
+}
+
+.planning_members{
+	display:grid;
+	grid-template-columns:10% 90%;
+	grid-template-rows:auto;
+	grid-template-areas:
+	". timeline"
+	"members members";
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+}
+
+.planning_members .planning_members_line {
+	grid-area:members;
+	height: calc(100vh - 290px);
+  overflow: scroll;
+}
+
+
+.planning_members .member_sep_line {
+	display:grid;
+	grid-template-columns:10% 90%;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"members_info members_groups";
+	grid-column-gap: 0px;
+	grid-row-gap: 10px;
+	margin:4px 0px;
+	border-top:2px solid black;
+}
+.planning_members .member_sep_line .member_sep_infos{
+	grid-area:members_info;
+	text-align:center;
+	font-weight:bold;
+	line-height:1.2em;
+	font-size:12px;
+	color:#d62c2c;
+}
+
+
+.planning_members .member_line.not_member .groups{
+	display:flex !important;
+	flex-direction:column !important;
+}
+.planning_members .member_line.not_member .groups .groups_group{
+	width: 100%;
+	max-width:100%;
+	position:static;
+	padding:2px 5px;
+	line-height:1.2em;
+	margin:1px 0px;
+	text-align:center;
+	text-transform:uppercase;
+	font-weight:bold;
+	border:1px solid #cccccc;
+	box-sizing: border-box;
+	cursor:pointer;
+	display:block;
+}
+
+
+
+.planning_members .member_line {
+	display:grid;
+	grid-template-columns:10% 90%;
+	grid-template-rows:auto;
+	grid-template-areas:
+	"members_info members_groups";
+	grid-column-gap: 0px;
+	grid-row-gap: 10px;
+	margin:4px 0px;
+	border-bottom: 1px dashed grey;
+}
+.planning_members .member_line.not_member {
+	border-bottom: none;
+}
+.planning_members .member_line .member_infos{
+	grid-area:members_info;
+	text-align:center;
+}
+.planning_members .member_line .member_infos .member_firstname{
+	text-transform:capitalize;
+	display:none;
+}
+.planning_members .member_line .member_infos .member_lastname	{
+	text-transform:uppercase;
+	display:none;
+}
+.planning_members .member_line .member_infos .member_nickname{
+	font-weight:bold;
+	line-height:2.8em;
+}
+.planning_members .member_line .member_infos .member_options{
+	display:none;
+}
+
+
+.planning_members .planning_members_timeline{
+	grid-area:timeline;
+	display:flex;
+	flex-wrap: nowrap;
+	flex-direction: row ;
+	padding-right:20px;
+}
+
+.planning_members .tl_time {
+	font-weight:bold;
+	flex: 1;
+}
+.planning_members .tl_min {
+	font-size:10px;
+	flex: 1;
+}
+
+.planning_members .tl_hour::after {
+	content:"";
+	border-left:1px dashed #cccccc;
+	position:absolute;
+	display:block;
+	height: calc(100vh - 290px);
+	opacity:0.8;
+}
+.planning_members .tl_min::after {
+	content:"";
+	border-left:1px dashed #cccccc;
+	position:absolute;
+	display:block;
+	height: calc(100vh - 290px);
+	opacity:0.5;
+}
+
+.planning_members .tl_time .th_content{
+	text-align:center;
+	position:relative;
+	left:-50%;
+}
+
+.planning_members .member_line .groups{
+	grid-area:members_groups;
+	position:relative;
+	width:100%;
+	padding:0px;
+	box-sizing: border-box;
+	height:30px;
+}
+
+.planning_members .member_line .groups .groups_group{
+	width: 100%;
+	max-width:100%;
+	position:absolute;
+	padding:5px;
+	text-align:center;
+	text-transform:uppercase;
+	font-weight:bold;
+	border:1px solid #cccccc;
+	box-sizing: border-box;
+	cursor:pointer;
+}
+
+.planning_members .member_line .groups .groups_group .group_name{
+color:black;
+}
+
+
+/* infos planning */
+.planning_members .member_line .title_infos{
+	color:#24bb6b;
+}
+
+.planning_members .member_line .title_not_attribuated{
+	color:#d62c2c;
+}
+
+.planning_members .member_line .groups .groups_group.planning_infos{
+	background-color:#505050;
+	color:white;
+	width: 100%;
+	max-width:100%;
+	padding:3px;
+	text-align:left;
+	border:1px solid black;
+	height:30px;
+	position:relative;
+}
+.planning_members .member_line .groups .groups_group.planning_infos .planning_infos_content{
+	overflow:hidden;
+	width:85%;
+	height:100%;
+	font-size:11px;
+	line-height:1em;
+	text-transform:none;
+	font-weight:normal;
+	float:left;
+}
+
+.planning_members .member_line .groups .groups_group.planning_infos .planning_infos_content{
+	overflow:hidden;
+	width:85%;
+	height:100%;
+	font-size:11px;
+	line-height:1em;
+	text-transform:none;
+	font-weight:normal;
+	float:left;
+}
+
+.planning_members .helpbox:hover .helpbox_content{
+	color:black;
+	font-size:14px;
+	font-weight:normal;
+	line-height:17px;
+	text-align:justify;
+	display:block;
+	padding:10px;
+	box-sizing:border-box;
+	position:absolute;
+	left:-65px;
+	top:25px;
+	width:250px;
+	background-color:white;
+	border:1px solid #262626;
+	-webkit-box-shadow: 0 0 5px 0 #000000;
+	box-shadow: 0 0 5px 0 #000000;
+	z-index:100;
+	text-transform:none;
+}
+
+.planning_members .member_line.not_member .groups{
+	height:auto;
+}
+
+
+body #resa_online_admin .notice {
+	display:none !important;
+	visibility:hidden !important;
+	opacity:0 !important;
+}
+
+
+/**** CENTRE DE NOTIFICATION ****/
+
+#notif_center_wrapper{
+	width: 100vw;
+    max-width: 500px;
+    min-width: 250px;
+    margin: auto;
+    grid-area:notif_center_wrapper;
+	position:relative;
+	align-items:center;
+	top:16px;
+	z-index:100;
+	height:10px;
+}
+
+#notif_center_wrapper:hover #notif_center_content{
+	display:block; /** del **/
+}
+
+#notif_center_button{
+	position: relative;
+    width: 40px;
+    height: 35px;
+    background-color: #27b673;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    margin: auto;
+    top: -16px;
+    padding: 2px;
+	z-index:99;
+	cursor:pointer;
+}
+
+#notif_center_button .icon_notif_center{
+	display:block;
+	color:white;
+	font-size:34px;
+	width: auto;
+    height: auto;
+}
+
+#alert_number{
+	padding:2px;
+	font-size:9px;
+	color:white;
+	background-color:red;
+	position:absolute;
+	bottom:3px;
+	right:3px;
+	border:1px solid white;
+	line-height:1em;
+}
+
+#notif_center_content{
+	width:100%;
+	z-index:98;
+	display:block;
+	position:absolute;
+	top:0px;
+	border: 1px solid #dddfe2;
+	border-top:none;
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#notif_center_content_header{
+	display:grid;
+	grid-template-columns: 4fr 1fr 4fr;
+	grid-template-rows: 40px;
+	grid-template-areas:
+	"all_seen . log_link";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+
+#notif_center_content_header .all_seen{
+	grid-area:all_seen;
+	color:#27b673;
+	text-decoration:underline;
+	font-weight:600;
+	text-align:center;
+	align-self: center;
+}
+
+#notif_center_content_header .log_link{
+	grid-area:log_link;
+	color:#27b673;
+	text-decoration:underline;
+	font-weight:600;
+	text-align:center;
+	align-self: center;
+}
+
+#notif_center_content_tabs .log_link{
+	color:#27b673;
+	text-decoration:underline;
+}
+
+#notif_center_content_tabs{
+	width:100%;
+	height:100%;
+}
+
+#notif_center_historic{
+	width:100%;
+	max-width:800px;
+	height:100%;
+	margin:30px auto 0px;
+	padding:15px;
+	border:1px solid #cccccc;
+}
+
+#notif_center_historic h2{
+	text-align:center;
+}
+
+#tabs_menu{
+	display:flex;
+}
+#tabs_menu .tab_item:first-child{
+	border-right:none;
+}
+
+.tab_item{
+	text-transform:uppercase;
+	border:1px solid #dddfe2;
+	background-color:#f9f9f9;
+	color:#a7a7a7;
+	font-size:14px;
+	font-weight:400;
+	box-sizing:border-box;
+	width:50%;
+	padding:8px;
+	text-align:center;
+	cursor:pointer;
+}
+
+.tab_item.active{
+	background-color:#f1f1f1;
+	color:#565656;
+	border-bottom:none;
+}
+
+#notif_center_content_tabs .tab_content, #notif_center_historic .tab_content{
+	display:none;
+}
+#notif_center_content_tabs .tab_content.active, #notif_center_historic .tab_content.active{
+	display:block;
+	width:100%;
+	padding:0px;
+	margin:0px;
+	box-sizing:border-box;
+	overflow:auto;
+    max-height: calc(80vh - 100px);
+}
+
+#notif_center_content_tabs .tab_content .separator, #notif_center_historic .tab_content .separator{
+	background-color:#f1f1f1;
+	color:#565656;
+	padding:4px;
+	text-transform:uppercase;
+	box-sizing:border-box;
+}
+
+
+#notif_center_content_tabs .tab_content .notif, #notif_center_historic .tab_content .notif{
+	display:grid;
+	grid-template-columns: 1fr 7fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"notif_icon notif_infos"
+	"notif_icon notif_time";
+	grid-column-gap: 0px;
+	grid-row-gap: 5px;
+	border-top:1px solid #dddfe2;
+	border-bottom:1px solid #dddfe2;
+	padding:7px;
+	line-height:1.3em;
+	cursor:pointer;
+}
+
+#notif_center_content_tabs .notif .notif_icon, #notif_center_historic .notif .notif_icon{
+	grid-area:notif_icon;
+	padding:5px;
+	text-align:center;
+	align-self: start;
+	font-size:50px;
+}
+#notif_center_content_tabs .tab_content .notif .notif_icon .icon, #notif_center_historic .tab_content .notif .notif_icon .icon{
+	font-size:55px;
+	width:auto;
+	height:auto;
+}
+
+#notif_center_content_tabs .notif .notif_infos,  #notif_center_historic .notif .notif_infos{
+	grid-area:notif_infos;
+	text-align:left;
+	align-self: start;
+	color:#4f4f4f;
+}
+#notif_center_content_tabs .notif .notif_time,  #notif_center_historic .notif .notif_time{
+	grid-area:notif_time;
+	text-align:left;
+	align-self: start;
+	font-style:italic;
+	color:#898989;
+}
+
+#notif_center_content_tabs .tab_content .notif.priorite_haute,  #notif_center_historic .tab_content .notif.priorite_haute{
+	background-color:#a4ffd4;
+}
+
+#notif_center_content_tabs .tab_content .notif.priorite_basse,  #notif_center_historic .tab_content .notif.priorite_basse{
+	background-color:#ddffef	;
+}
+
+#notif_center_content_tabs .tab_content .notif.vu,  #notif_center_historic  .tab_content .notif.vu{
+	background-color:#ffffff;
+}
+
+#notif_center_content_tabs #not_read, #notif_center_historic #not_read{
+	color:#27b673;
+	text-align:center;
+	cursor:pointer;
+}
+
+
+
+#notif_center_content_tabs #load_more, #notif_center_historic #load_more{
+	color:#27b673;
+	text-decoration:underline;
+	font-weight:600;
+	text-align:center;
+	padding:5px;
+	cursor:pointer;
+}
+
+
+/***********
+ ******* Affichage des resa news
+ *****************/
+
+#resa_news_center_wrapper{
+	width: 100vw;
+	max-width: 500px;
+	min-width: 250px;
+	grid-area: resa_news_center_wrapper;
+	position: absolute;
+	align-items: center;
+	z-index: 100;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background-color: white;
+}
+
+#resa_news_title{
+	text-align: center;
+	color:#27b673;
+	font-weight: bold;
+	height: 30px;
+	border-bottom: 2px solid #dddfe2;
+	line-height: 2.2em;
+	padding: 5px;
+}
+
+#resa_news_center_wrapper .notif{
+	text-align: left;
+	border-top: 1px solid #dddfe2;
+	border-bottom: 1px solid #dddfe2;
+	padding: 7px;
+	line-height: 1.3em;
+}
+
+#resa_news_center_content{
+	display:block;
+	width:100%;
+	padding:0px;
+	margin:0px;
+	box-sizing:border-box;
+	overflow:auto;
+  max-height: calc(80vh - 100px);
+}
+
+
+.resa_news_infos .link-more {
+	display:none;
+}
+
+.resa_news_time .time {
+	font-style: italic;
+	color: #898989;
+}
+
+.resa_news_time .see {
+	display: inline;
+	color:#27b673;
+  background-color: white;
+}
+
+
+
+/** Table **/
+
+.table-planning {
+	height:auto;
+	margin-bottom:25px;
+	box-sizing:border-box;
+	border-bottom:2px solid grey;
+	position:relative;
+}
+
+.table-planning div {
+	display:inline-block;
+}
+
+
+.table-planning .head{
+	font-weight:bolder;
+	padding:5px 0px;
+	width: 100%;
+}
+
+.table-planning .head .timeline{
+	font-weight:bolder;
+}
+
+.table-planning .body{
+	border-bottom:1px solid #e0e0e0;
+	width: 100%;
+}
+
+.table-planning .footer{
+	display:none;
+}
+
+.table-planning .col {
+	text-align: center;
+	width: 9%;
+}
+
+.table-planning .customer_name{
+	font-style:italic;
+	font-weight:bold;
+}
+
+.table-planning .col2 {
+	text-align: center;
+	width: 18%;
+}
+
+.table-planning .timeline{
+	width: 69%;
+	letter-spacing: -0.25em;
+}
+
+.table-planning .timeline .timeline-content{
+	width: 100%;
+	position:relative;
+}
+
+.table-planning div.timeline span{
+	display: block;
+	float: left;
+}
+
+.table-planning .tl_hour,.table-planning .tl_min, .table-planning .body .body .timeline {
+letter-spacing: normal;
+}
+
+.table-planning .body .body .timeline {
+/*margin-left:-4px;*/
+}
+
+
+.table-planning .tl_hour::after {
+	content:"";
+	border-left:1px dashed #cccccc;
+	position:absolute;
+	display:block;
+	height: calc(100% - 10px);
+	opacity:0.8;
+}
+
+.table-planning .tl_min::after {
+	content:"";
+	border-left:1px dashed #cccccc;
+	position:absolute;
+	display:block;
+	height: calc(100% - 10px);
+	opacity:0.5;
+}
+
+.table-planning .hour_txt{
+	margin-left:-15px;
+}
+
+.table-planning .min_txt{
+	margin-left:-10px;
+}
+
+.table-planning .hour_txt{
+    position: relative;
+    z-index: 5;
+    display: block;
+    width: 30px;
+    font-size:14px;
+    text-align: center;
+}
+
+.table-planning .min_txt{
+	margin-left:-10px;
+	position: relative;
+	z-index: 5;
+	color: grey;
+	display: block;
+	width: 20px;
+	font-size:10px;
+	text-align: center;
+}
+
+.table-planning .creneau {
+	font-weight: bold;
+	font-size: 18px;
+	box-sizing: border-box;
+	z-index: 1;
+	position: relative;
+	line-height: 30px;
+}
+
+/**** planning imprimable ***/
+/*
+#planning_print .body .timeline {
+    margin-left: -3px;
+	padding-left: 18px;
+}
+*/
+
+
+/**** FULL SCREEN **/
+
+
+.full_screen .resa_views{
+	display:grid;
+	grid-template-columns: 5fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas:
+	"resa_filters_top"
+	"resa_view_content";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding-top:15px;
+	align-content:start;
+}
+.full_screen .resa_views .resa_filters_left{
+	display:none !important;
+}
+
+.full_screen .resa_actions{
+	display:none;
+}
+
+.full_screen .resa_header_raccourcis a{
+	font-size:12px;
+	height:24px;
+	padding:2px;
+}
+
+.full_screen .resa_header{
+	top:-8px;
+	padding: 5px 0px 0px 0px;
+}
+.full_screen .resa_header .resa_header_infos p{
+	font-size:11px;
+}
+
+.full_screen #notif_center_button .icon_notif_center {
+    font-size:24px
+}
+.full_screen #notif_center_button {
+    top: -20px;
+	height:28px;
+}
+
+.full_screen #resa_content {
+    padding-top: 36px;
+}
+
+.resa_header_raccourcis a.resa_news{
+	margin-left:30px;
+	width:50px;
+}
+
+.resa_header_raccourcis a.resa_news .alert_number{
+	padding: 2px;
+	font-size: 9px;
+	color: white;
+	background-color: red;
+	position: absolute;
+	border: 1px solid white;
+	line-height: 1em;
+}
+
+
+.resa_header_raccourcis a.full_screen{
+	padding:3px 0px 0px 0px;
+	border:none;
+}
+.resa_header_raccourcis a.full_screen img{
+	height:23px;
+}
+
+
+
+
+@media print {
+	.printing{
+		background-color:white;
+	}
+
+	.resa_reservation{
+		background-color: white;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+		grid-template-rows: auto;
+		grid-template-areas: "reservation_client reservation_states reservation_notes reservation_suivi reservation_actions" "reservation_bookings reservation_bookings reservation_bookings reservation_bookings reservation_bookings";
+		grid-column-gap: 5px;
+		grid-row-gap: 5px;
+		padding: 2px 2px 0px 2px;
+		color: #292929;
+		margin-bottom:0px;
+		border-bottom:1px solid black;
+		margin-top:0px;
+		box-shadow: unset;
+	}
+	.resa_reservation .reservation_notes, .resa_reservation .reservation_suivi {
+		line-height: 12px;
+		font-size: 10px;
+	}
+	.resa_reservation .reservation_states{
+		line-height: 12px;
+		font-size:10px;
+	}
+	.states_state{
+		font-size: 10px;
+		padding: 0px 10px;
+		line-height: 12px;
+	}
+	.states_paiement{
+
+	}
+	.resa_reservation .reservation_client{
+		line-height: 12px;
+		font-size: 10px;
+	}
+	.reservation_bookings{
+
+	}
+
+	.resa_reservation .booking{
+		font-size: 10px;
+		line-height: 12px;
+	}
+	.booking .booking_prices{
+		min-height: 10px;
+	}
+
+	.resa_reservation .booking.show_participants{
+		grid-column-gap: 5px;
+		grid-row-gap: 0px;
+		margin-bottom: 0px;
+		min-height: 20px;
+	}
+
+	.table_participant {
+		line-height
+	}
+	.booking .table_participant table {
+		width: 100%;
+		margin: 0px;
+	}
+	.booking .table_participant td{
+		line-height: 9px;
+		padding: 0px 8px;
+		font-size: 11px;
+	}
+
+	.booking.confirmed{
+		background-color:#d4ffeb;
+	}
+	.booking.not_confirmed{
+		background-color:#fff7e0;
+	}
+	.booking.cancelled .booking_date, .booking.cancelled .booking_hour, .booking.cancelled .booking_place, .booking.cancelled .booking_service, .booking.cancelled .booking_members{
+		text-decoration:line-through;
+	}
+	.booking.cancelled{
+		background-color:#b0b0b0;
+		background: repeating-linear-gradient(  45deg,  rgba(0,0,0, 0.1),  rgba(0,0,0, 0.1) 10px,  rgba(176, 176 ,176, 0.1) 10px,   rgba(176, 176 ,176, 0.1) 20px);
+	}
+	.booking.abandonned{
+		background-color:#b0978a;
+	}
+	.booking.quote{
+		background-color:#d4eeff;
+	}
+	.booking.inerror{
+		background-color:#ff9c9c;
+	}
+	.booking.incomplete{
+		background-color:#b0b0b0;
+	}
+
+}

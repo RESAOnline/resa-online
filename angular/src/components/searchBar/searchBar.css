@@ -1,0 +1,21 @@
+input {
+	height: 50px;
+	border-radius: 5px !important;
+}
+
+#result-block {
+  width: 100vw;
+  max-width: 600px;
+  min-width: 250px;
+	min-height: 300px;
+  position: absolute;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background-color: white;
+	padding: 10px;
+}
+
+.line-result {
+	font-size: 13px;
+}

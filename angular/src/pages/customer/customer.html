@@ -1,0 +1,378 @@
+<div id="page_content" class="ml-5 mr-5">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Fiche client</h1>
+  </div>
+  <div *ngIf="customer">
+    <div class="row">
+      <div class="col-4">
+        <div class="client_informations">
+          <div class="p-2 font-weight-bold" style="background-color:#cccccc;">Informations clients</div>
+          <div class="client_information_line">
+            <label>NOM : </label>
+            <div *ngIf="!editionMode">{{ customer.lastName | htmlSpecialDecode }}</div>
+            <input tabindex="1" *ngIf="editionMode" type="text" placeholder="Nom" [(ngModel)]="modelCustomer.lastName" />
+          </div>
+          <div class="client_information_line">
+            <label>Prénom : </label>
+            <div *ngIf="!editionMode">{{ customer.firstName | htmlSpecialDecode }}</div>
+            <input tabindex="2" *ngIf="editionMode" type="text" placeholder="Prénom" [(ngModel)]="modelCustomer.firstName" />
+          </div>
+          <div class="client_information_line">
+            <label>Email : </label>
+            <div *ngIf="!editionMode">{{ customer.email }}</div>
+            <input tabindex="3" *ngIf="editionMode" type="email" placeholder="Email" [(ngModel)]="modelCustomer.email" />
+          </div>
+          <div class="client_information_line">
+            <label>Entreprise : </label>
+            <div *ngIf="!editionMode">{{ customer.company | htmlSpecialDecode }}</div>
+            <input tabindex="4" *ngIf="editionMode" type="text" placeholder="Entreprise" [(ngModel)]="modelCustomer.company" />
+          </div>
+          <div class="client_information_line">
+            <label>Téléphone : </label>
+            <div *ngIf="!editionMode">{{ customer.phone | formatPhone }}</div>
+            <input tabindex="5" *ngIf="editionMode" type="text" placeholder="Téléphone" [(ngModel)]="modelCustomer.phone" />
+          </div>
+          <div class="client_information_line">
+            <label>Téléphone 2 : </label>
+            <div *ngIf="!editionMode">{{ customer.phone2 | formatPhone }}</div>
+            <input tabindex="6" *ngIf="editionMode" type="text" placeholder="Téléphone" [(ngModel)]="modelCustomer.phone2" />
+          </div>
+          <div class="client_information_line">
+            <label>Adresse : </label>
+            <div *ngIf="!editionMode">{{ customer.address | htmlSpecialDecode }}</div>
+            <input tabindex="7" *ngIf="editionMode" type="text" placeholder="Adresse" [(ngModel)]="modelCustomer.address" />
+          </div>
+          <div class="client_information_line">
+            <label>Ville : </label>
+            <div *ngIf="!editionMode">{{ customer.town | htmlSpecialDecode }}</div>
+            <input tabindex="8" *ngIf="editionMode" type="text" placeholder="Ville" [(ngModel)]="modelCustomer.town" />
+          </div>
+          <div class="client_information_line">
+            <label>Code postal : </label>
+            <div *ngIf="!editionMode">{{ customer.postalCode }}</div>
+            <input tabindex="9" *ngIf="editionMode" type="text" placeholder="Code postal" [(ngModel)]="modelCustomer.postalCode" />
+          </div>
+          <div class="client_information_line">
+            <label>Pays : </label>
+            <div *ngIf="!editionMode">{{ customer.country }}</div>
+            <select *ngIf="editionMode" [(ngModel)]="modelCustomer.country" tabindex="10">
+              <option value="" disabled selected>-- Pays --</option>
+              <option *ngFor="let country of settings.countries" value="{{ country.code }}">{{ country.name }}</option>
+            </select>
+          </div>
+          <div class="client_information_line">
+            <label>SIRET : </label>
+            <div *ngIf="!editionMode">{{ customer.siret }}</div>
+            <input tabindex="11" *ngIf="editionMode" type="text" placeholder="SIRET" [(ngModel)]="modelCustomer.siret" />
+          </div>
+          <div class="client_information_line">
+            <label>Forme Juridique : </label>
+            <div *ngIf="!editionMode">{{ customer.legalForm }}</div>
+            <input tabindex="12" *ngIf="editionMode" type="text" placeholder="Forme juridique" [(ngModel)]="modelCustomer.legalForm" />
+          </div>
+          <div class="client_information_line">
+            <label>Langue : </label>
+            <div *ngIf="customer.locale.length > 0 && !editionMode">{{ settings.allLanguages[customer.locale][0] }}</div>
+            <div *ngIf="customer.locale.length == 0 && !editionMode">Non définie</div>
+            <select tabindex="14" *ngIf="editionMode" [(ngModel)]="modelCustomer.locale">
+              <option *ngFor="let language of settings.languages" [value]="language">{{ settings.allLanguages[language][0] }}</option>
+            </select>
+          </div>
+          <div *ngIf="!editionMode" class="client_information_line center">
+            <span class="font-weight-bold font-italic">
+              {{ getTypeAccountName(customer) }}
+              <span *ngIf="customer.idFacebook.length > 0">(Facebook)</span>
+            </span>
+          </div>
+          <div *ngIf="editionMode" class="client_information_line">
+            <label>Type de compte : </label>
+            <select tabindex="14" (ngModelChange)="modelCustomer.companyAccount = false" [(ngModel)]="modelCustomer.typeAccount">
+              <option *ngFor="let typeAccount of settings.typesAccounts" [value]="typeAccount.id">{{ global.getTextByLocale(typeAccount.name) }}</option>
+            </select>
+          </div>
+          <div class="client_information_line reverse" *ngIf="editionMode && !customer.isWpUser && !customer.askAccount">
+            <div><input tabindex="15" id="wp_account" type="checkbox" [(ngModel)]="modelCustomer.createWpAccount" /></div>
+            <label for="wp_account">Créer un compte sur le site (email nécessaire)</label>
+          </div>
+          <div class="client_information_line center" *ngIf="!customer.isWpUser && !customer.askAccount">
+            <span class="font-weight-bold font-italic">Pas de compte sur le site (ne pourra pas voir ses réservations)</span>
+          </div>
+          <div class="client_information_line center text-primary" *ngIf="customer.askAccount">
+            <span class="font-weight-bold font-italic">Demande de compte</span>
+          </div>
+          <div class="client_information_line center" *ngIf="!editionMode">
+            <i *ngIf="customer.sendRequestForOpinion == 'yes'" class="text-success">Demande d'avis activé</i>
+            <i *ngIf="customer.sendRequestForOpinion == 'no'" class="text-warning">Demande d'avis désactivé</i>
+          </div>
+          <div class="client_information_line center reverse" *ngIf="editionMode">
+            <span *ngIf="editionMode" (click)="modelCustomer.sendRequestForOpinion = (modelCustomer.sendRequestForOpinion == 'no'?'yes':'no')">
+              <input tabindex="16" id="company_sendRequestForOpinion" type="checkbox" [checked]="modelCustomer.sendRequestForOpinion == 'yes'" />
+            </span>
+            <label class="w-50" *ngIf="editionMode" for="company_sendRequestForOpinion">Activer demande d'avis ?</label>
+          </div>
+          <div class="client_information_line center" *ngIf="!editionMode">
+            <i *ngIf="customer.registerNewsletters" class="text-success">Abonnné aux newsletters</i>
+            <i *ngIf="!customer.registerNewsletters" class="text-warning">Pas abonnné aux newsletters</i>
+          </div>
+          <div class="client_information_line center reverse" *ngIf="editionMode">
+            <input tabindex="17" id="company_registerNewsletters" type="checkbox" [(ngModel)]="modelCustomer.registerNewsletters"  />
+            <label class="w-50" for="company_registerNewsletters">Abonnné aux newsletters ?</label>
+          </div>
+          <div class="client_information_line center" *ngIf="!editionMode && isRESAManager()">
+            <i *ngIf="isRESAManager() && isSeeSettings()">
+              <span class="text-success" *ngIf="customer.seeSettings">Accès aux réglages (option RESA_Manager)</span>
+              <span class="text-danger" *ngIf="!customer.seeSettings">Pas accès aux réglages (option RESA_Manager)</span>
+            </i>
+          </div>
+          <div class="client_information_line center reverse" *ngIf="editionMode && isRESAManager() && isSeeSettings()">
+            <input tabindex="18" id="customer_see_settings" type="checkbox" [(ngModel)]="modelCustomer.seeSettings"  />
+            <label class="w-50" for="customer_see_settings">Peut modifier les réglages de RESA Online (option RESA_Manager)</label>
+          </div>
+          <div class="client_note">
+            <span class="mb-2" *ngIf="customer.privateNotes.length > 0">Note privée sur le client<br /></span>
+            <span class="font-italic" *ngIf="!editionMode" [innerHTML]="customer.privateNotes|htmlSpecialDecode:true"></span>
+            <textarea rows="8" class="form-control" tabindex="17" *ngIf="editionMode" [(ngModel)]="modelCustomer.privateNotes" placeholder="Note privée"></textarea>
+          </div>
+          <div class="text-center mt-3">
+            <b class="text-warning" *ngIf="editionMode && modelCustomer.createWpAccount && (modelCustomer.email == null || modelCustomer.email.length == 0)">Veuillez renseigner une adresse email correcte ou décocher "Créer un compte sur le site" !<br /></b>
+            <b class="text-warning" *ngIf="editionMode && !modelCustomer.createWpAccount && (modelCustomer.phone == null || modelCustomer.phone.length == 0)">Veuillez renseigner un numéro de téléphone ou cocher "Créer un compte sur le site" !<br /></b>
+            <button *ngIf="!editionMode" class="bg-success btn-dashicons dashicons dashicons-edit" ngbTooltip="Modifier les informations clients" (click)="editionMode = true"></button>
+            <button *ngIf="editionMode" class="btn btn-success" [disabled]="!isOkCustomer()" (click)="modifyCustomer()">Enregistrer</button>
+            <button *ngIf="editionMode" class="btn btn-danger" (click)="editionMode = false">Annuler</button>
+            <button [disabled]="!settings.notification_customer_accepted_account" class="btn btn-primary" *ngIf="customer.askAccount" (click)="acceptAskAccount()">Accepter compte</button>
+            <button class="btn btn-danger" *ngIf="!editionMode && isDeletable()" (click)="deleteCustomerAction()"><span *ngIf="!customer.askAccount">Supprimer</span><span *ngIf="customer.askAccount">Refuser compte</span></button>
+            <div class="text-danger" *ngIf="customer.askAccount && !settings.notification_customer_accepted_account">
+              Vous ne pouvez pas accepter la demande de compte car la notification d'acceptation n'est pas activée
+            </div>
+            <span *ngIf="isSynchronizedCaisseOnline()">Client synchronisé sur Caisse-Online</span>
+            <button *ngIf="!editionMode" class="bg-secondary btn-dashicons dashicons dashicons-email-alt" ngbTooltip="Envoyer une notification" (click)="openNotificationDialog(contentNotification, null, '')"> </button>
+          </div>
+          <div class="text-center text-success" *ngIf="!isDeletable()" ngbTooltip="Vous ne pouvez pas supprimer ce compte client car il possède des réservations ou que ce n'est pas un compte RESA Client.">
+            <span class="helpbox">Non supprimable</span>
+          </div>
+        </div>
+        <div class="">
+          <div class="client_balance" [ngClass]="{'balance_null':balance == 0, 'balance_negative':balance < 0, 'balance_positive':balance > 0}">
+            Solde client : <span *ngIf="balance > 0">+</span>{{ global.round(balance) }}{{ settings.currency }}
+            <button class="btn-dashicons dashicons dashicons-image-rotate" ngbTooltip="Recalculer le solde" (click)="balance = getBalance();"></button>
+          </div>
+          <div *ngIf="isSynchronizedCaisseOnline()" class="client_balance" [ngClass]="{'balance_null':getCaisseOnlineBalance() == 0, 'balance_negative':getCaisseOnlineBalance() < 0, 'balance_positive':getCaisseOnlineBalance() > 0}" ngbTooltip="Une fois que toutes les réservations du client sont encaissées ce montant doit être égal à zéro !">
+            Solde client sur Caisse-Online : {{ getCaisseOnlineBalance() }}{{ settings.currency }}
+          </div>
+        </div>
+      </div>
+      <div class="col-8 client_historic">
+        <h3 class="client_historic_title">
+          Historique
+          <button class="btn btn-success mr-2" [disabled]="launchAction" *ngIf="global.stripeConnect.activated" (click)="getStripeChargeForTransactionId()">
+            <span *ngIf="!launchAction">Charger les paiements Stripe</span>
+            <span *ngIf="launchAction">Chargement en cours</span>
+          </button>
+          <button class="btn btn-success" [disabled]="launchAction" *ngIf="isSynchronizedCaisseOnline()" (click)="getAnotherPayments()">
+            <span *ngIf="!launchAction">Charger les paiements CAISSE-Online</span>
+            <span *ngIf="launchAction">Chargement en cours</span>
+          </button>
+
+          <button class="bg-warning btn-dashicons dashicons dashicons-image-rotate" ngbTooltip="Forcer la récupération d'emails" *ngIf="isSynchronizedEmails()" (click)="forceProcessEmails()"></button>
+        </h3>
+        <div id="historic_filter">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':page == 0}" href="javascript:void(0)" (click)="page = 0">Tous</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':page == 1}" href="javascript:void(0)" (click)="page = 1">Paiements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':page == 2}" href="javascript:void(0)" (click)="page = 2">Notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':page == 3}" href="javascript:void(0)" (click)="page = 3">Emails</a>
+            </li>
+          </ul>
+        </div>
+        <div id="historic_content">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Utilisateur</th>
+                <th>Réservation</th>
+                <th>Infos</th>
+                <th>Note</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr [hidden]="!isDisplayed(line)" *ngFor="let line of historic">
+                <td>
+                  <span *ngIf="line.isPayment">
+                    {{ line.paymentDate | parseDate | date:'dd MMMM yyyy HH:mm':'':'fr'  }}
+                  </span>
+                  <span *ngIf="line.isLogNotification">
+                    {{ line.creationDate | parseDate | date:'dd MMMM yyyy HH:mm':'':'fr' }}
+                  </span>
+                  <span *ngIf="line.isEmailCustomer">
+                    {{ line.creationDate | parseDate | date:'dd MMMM yyyy HH:mm':'':'fr' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="line.isPayment && line.isAskPayment">
+                    Demande de paiement <br />
+                    <span [innerHTML]="isAskPaymentState(payment)"></span>
+                  </span>
+                  <span *ngIf="line.isPayment && !line.isAskPayment">
+                    <span *ngIf="line.isDeposit != null && line.isDeposit && line.value >= 0">Caution</span>
+                    <span *ngIf="line.isReceipt != null && line.isReceipt && line.value >= 0">Acompte</span>
+                    <span *ngIf="line.isReceipt != null && line.isReceipt && line.value < 0">Remboursement acompte</span>
+                    <span *ngIf="(line.isReceipt == null || !line.isReceipt) && !line.isDeposit && line.value >= 0">Encaissement</span>
+                    <span *ngIf="(line.isReceipt == null || !line.isReceipt) && !line.isDeposit && line.value < 0">Remboursement</span>
+                  </span>
+                  <span *ngIf="line.isLogNotification">Notification</span>
+                  <span *ngIf="line.isEmailCustomer">Email</span>
+                </td>
+                <td>
+                  <span *ngIf="line.idUserCreator >= 0">{{ line.name }}</span>
+                  <span *ngIf="line.idSender >= 0">{{ line.name }}</span>
+                  <span *ngIf="line.vendor != null && line.vendor.length > 0">{{ line.vendor }}<span *ngIf="line.vendor!='Stripe'"> (Caisse)</span></span>
+                </td>
+                <td>
+                  <a href="javascript:void(0)" (click)="scrollTo(line.idBookingCreation)" *ngIf="(line.idBookings == null || line.idBookings.length == 0) && line.idBookingCreation!=null && line.idBookingCreation != -1">#{{ line.idBookingCreation }}</a>
+                  <a href="javascript:void(0)" (click)="scrollTo(line.idBooking)" *ngIf="(line.idBookings == null || line.idBookings.length == 0) && line.idBookingCreation == null && line.idBooking != -1">#{{ line.idBooking }}</a>
+                  <span *ngFor="let idBooking of line.idBookings">
+                    <span *ngIf="$index > 0">, </span>
+                    <span *ngIf="idBooking != -1">{{ idBooking }}</span>
+                  </span>
+                </td>
+                <td >
+                  <span *ngIf="line.isPayment && !line.isAskPayment">
+                    <span *ngIf="line.isDeposit != null && line.isDeposit && line.value >= 0">Caution</span>
+                    <span *ngIf="line.isReceipt != null && line.isReceipt && line.value >= 0">Acompte</span>
+                    <span *ngIf="line.isReceipt != null && line.isReceipt && line.value < 0">Remboursement acompte</span>
+                    <span *ngIf="(line.isReceipt == null || !line.isReceipt) && !line.isDeposit && line.value >= 0">Encaissement</span>
+                    <span *ngIf="(line.isReceipt == null || !line.isReceipt) && !line.isDeposit && line.value < 0">Remboursement</span><br />
+                    {{ getPaymentName(line.type, line.name) }} <br />
+                    <b>
+                      Montant : <span *ngIf="line.repayment">{{ (line.value * -1) | number:'1.2':'fr' }}{{ settings.currency }}</span>
+                      <span *ngIf="!line.repayment">{{ line.value | number:'1.2':'fr' }}{{ settings.currency }}</span>
+                    </b>
+                    <span *ngIf="line.idReference != null && line.idReference.length > 0"><br />ref : {{ line.idReference }}</span>
+                    <span class="text-danger" *ngIf="line.state == 'cancelled'"><br />Annulé</span>
+                    <span class="text-warning" *ngIf="line.state == 'pending'"><br />En attente</span>
+                  </span>
+                  <span *ngIf="line.isPayment && line.isAskPayment">{{ getAllPaymentName(line.types) }}</span>
+                </td>
+                <td>
+                  <span *ngIf="line.isPayment && !line.isAskPayment" [innerHTML]="line.note|htmlSpecialDecode"></span>
+                  <span *ngIf="line.isPayment && line.isAskPayment">Demande de paiement <br />expire le <b>{{ line.expiredDate | parseDate | date:'dd MMMM yyyy HH:mm':'':'fr' }}</b></span>
+                  <span *ngIf="line.isLogNotification" [innerHTML]="line.text|htmlSpecialDecode:true"></span>
+                  <span *ngIf="line.isEmailCustomer" [innerHTML]="line.subject|htmlSpecialDecode:true"></span>
+                </td>
+                <td class="d-flex justify-content-center">
+                  <button *ngIf="line.isEmailCustomer" class="btn-dashicons bg-secondary dashicons dashicons-admin-comments" ngbTooltip="Visualiser" (click)="openEmailCustomer(contentReadEmail, line)"></button>
+                  <button *ngIf="line.isEmailCustomer" class="btn-dashicons bg-danger dashicons dashicons-trash" ngbTooltip="Supprimer" (click)="deleteEmailCustomerAction(line.id)"></button>
+                  <button *ngIf="line.isPayment && !line.isAskPayment && line.isCancellable" class="btn btn-danger" (click)="openRefundStripePayment(contentRefundStripePayment, line.idBooking, line.id)">Remboursement</button>
+                  <button *ngIf="line.receipt_url" class="btn-dashicons bg-secondary dashicons dashicons-admin-comments" ngbTooltip="Reçu stripe" (click)="goReceiptURL(line.receipt_url)"></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #contentRefundStripePayment let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Remboursement</h4>
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+          </div>
+          <div class="modal-body" style="max-height:75vh; overflow: auto;">
+            <div class="bg-light p-2">
+              <h5>Sélectionner le motif du remboursement</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="reasonRequested" id="reasonRequested" [value]="'requested_by_customer'" [(ngModel)]="formRefundStripePayment.reason">
+                <label class="form-check-label" for="reasonRequested">Annulation</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="reasonFraude" id="reasonFraude" [value]="'fraudulent'"
+                 [(ngModel)]="formRefundStripePayment.reason">
+                <label class="form-check-label" for="reasonFraude">Fraude</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="reasonDuplicate" id="reasonDuplicate" [value]="'duplicate'"
+                 [(ngModel)]="formRefundStripePayment.reason">
+                <label class="form-check-label" for="reasonDuplicate">Paiement dupliqué</label>
+              </div>
+            </div>
+            <div class="bg-light p-2">
+              <h5>Sélectionner le montant du remboursement</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="reasonAmountTotal" id="reasonAmountTotal" [value]="'all'"
+                 [(ngModel)]="formRefundStripePayment.typeAmount" (ngModelChange)="formRefundStripePayment.amount = formRefundStripePayment.maxAmount">
+                <label class="form-check-label" for="reasonAmountTotal">Rembourser la totalité</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="reasonOtherAmount" id="reasonOtherAmount" [value]="'other'"
+                 [(ngModel)]="formRefundStripePayment.typeAmount">
+                <label class="form-check-label" for="reasonOtherAmount">Autre montant</label>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="number" class="form-control" id="refoundAmount" [disabled]="formRefundStripePayment.typeAmount != 'other'" [(ngModel)]="formRefundStripePayment.amount">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">€</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" [disabled]="!isValidRefundStripePayment()" (click)="confirmRefund(c)">Valider</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="row mt-3 client_reservations text-center">
+      <div class="w-100">
+        Réservation<span *ngIf="bookings.length > 1">s</span> du client
+        <select class="form-control" style="display:inline; width: 300px" *ngIf="bookings.length > 1" [(ngModel)]="bookingsOrderBy" (ngModelChange)="ordinatesBookings()">
+          <option [value]="0">Trier par date d'enregistrement décroissante</option>
+          <option [value]="1">Trier par date d'enregistrement croissante</option>
+          <option [value]="2">Trier par date d'activité décroissante</option>
+          <option [value]="3">Trier par date d'activité croissante</option>
+        </select>
+        <button class="btn btn-success" (click)="goAddBooking()">Ajout une nouvelle réservation</button>
+        <button *ngIf="isSynchronizedCaisseOnline()" [disabled]="launchAction" class="btn btn-primary" (click)="payBookingsCaisseOnline()">
+          Envoyer toutes les réservations sur la caisse
+        </button>
+      </div>
+      <div class="w-100" *ngFor="let booking of bookings">
+        <booking id="{{ booking.idCreation==-1?booking.id:booking.idCreation }}" [booking]="booking" [settings]="settings" (modify)="goEditBooking($event)" (change)="updateBooking($event)" [displayButtons]="{customer:false}"></booking>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+
+<ng-template #contentReadEmail let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Email</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <span *ngIf="emailCustomerDisplayed.idSender != -1 && emailCustomerDisplayed.idSender != customer.ID">Expédié par <b>{{ emailCustomerDisplayed.name }}</b><br /></span>
+    <span *ngIf="emailCustomerDisplayed.idSender != -1 && emailCustomerDisplayed.idSender == customer.ID">Expédié par <b>{{ customer.lastName | htmlSpecialDecode }} {{ customer.firstName | htmlSpecialDecode }}</b><br /></span>
+    <span *ngIf="emailCustomerDisplayed.emailSender.length > 0">Email d'envoie <b>{{ emailCustomerDisplayed.emailSender }}</b><br /></span>
+    Sujet : {{ emailCustomerDisplayed.subject|htmlSpecialDecode }}<br />
+    Message : <br />
+    <div [innerHTML]="emailCustomerDisplayed.message|htmlSpecialDecode"></div>
+    <div *ngIf="emailCustomerDisplayed.attachments.length > 0">
+      Pièces jointes :<br />
+      <span *ngFor="let attachment of emailCustomerDisplayed.attachments">
+        <a target="_blank"  href="{{ attachment.filePath }}">{{ attachment.name|htmlSpecialDecode }}</a><br />
+      </span>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" *ngIf="emailCustomerDisplayed.idSender == customer.ID">Répondre</button>
+    <button class="btn btn-danger" (click)="d()">Fermer</button>
+  </div>
+</ng-template>

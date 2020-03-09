@@ -1,0 +1,188 @@
+<div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+<div class="modal-body">
+  <div class="receipt_btn text-center">
+    <button class="btn btn-danger btn_close_popup" type="button" (click)="close()">Fermer</button>
+    <button class="btn btn_print_popup" (click)="printDiv('to_print_receipt')" type="button">Imprimer</button>
+    <button *ngIf="displayFormatButtons" class="btn btn_print_popup" (click)="setFormat('A4')">Format A4</button>
+    <button *ngIf="displayFormatButtons" class="btn btn_print_popup " (click)="setFormat('ticket')">Format Ticket</button>
+  </div>
+  <div id="to_print_receipt">
+    <div [ngClass]="{'resa_popupa4':format == 'A4', 'resa_popupticket':format == 'ticket'}" id="resa_receipt_resa" *ngIf="settings">
+      <div class="receipt_reservation">
+        <div class="receipt_content">
+          <div *ngIf="settings.company_logo.length > 0" class="receipt_company_logo">
+            <img [src]="settings.company_logo" />
+          </div>
+          <div class="receipt_client_infos space-line" *ngIf="customer">
+            <p>{{ customer.lastName }} {{ customer.firstName }}</p>
+            <p>{{ customer.company | htmlSpecialDecode }}</p>
+            <p>{{ customer.phone|formatPhone }}</p>
+            <p *ngIf="customer.address.length > 0">{{ customer.address }}</p>
+            <p *ngIf="customer.postalCode.length > 0 || customer.town.length > 0">{{ customer.postalCode }} {{ customer.town }}</p>
+            <p *ngIf="customer.country.length > 0">{{ customer.country }}</p>
+            <p *ngIf="customer.siret.length > 0">{{ customer.siret }}</p>
+            <p *ngIf="customer.legalForm.length > 0">{{ customer.legalForm }}</p>
+          </div>
+          <div class="receipt_company_infos space-line">
+            <p class="sep-line">Créer le : {{ booking.creationDate | parseDate |date:'dd MMMM yyyy' }} à {{ booking.creationDate | parseDate |date:'HH:mm' }}</p>
+            <p>{{ settings.company_name| htmlSpecialDecode  }}</p>
+            <p>{{ settings.company_address|htmlSpecialDecode }}</p>
+            <p>{{ settings.company_phone }}</p>
+            <p *ngIf="settings.company_type.length > 0">{{ settings.company_type }}</p>
+            <p *ngIf="settings.company_siret.length > 0">{{ settings.company_siret }}</p>
+          </div>
+          <div class="receipt_resa_state space-line" >
+            <p *ngIf="!booking.quotation">
+              Etat : <br />
+              <b *ngIf="booking.status == 'ok'">Confirmée</b>
+              <b *ngIf="booking.status == 'waiting'">En attente</b>
+              <b *ngIf="booking.status == 'cancelled'">Annulée</b>
+            </p>
+          </div>
+          <div class="receipt_reservation_infos space-line">
+            <h3 *ngIf="booking.quotation">Devis n° {{ booking.realIdCreation }}</h3>
+            <h3 *ngIf="!booking.quotation">Réservation  n° {{ booking.realIdCreation }}</h3>
+            <br />
+            <div class="resa_booking resa_booking_header" [ngClass]="{'no_tax':!settings.tvaActivated}">
+              <div class="date_hour">
+      					<span *ngIf="booking.appointments.length == 1">Date/Heure</span>
+      					<span *ngIf="booking.appointments.length > 1">Dates/Heures</span>
+              </div>
+              <div class="state">Etat</div>
+              <div class="activity">
+      					<span *ngIf="booking.appointments.length == 1">Activité</span>
+      					<span *ngIf="booking.appointments.length > 1">Activités</span>
+              </div>
+              <div *ngIf="settings.tvaActivated" class="tax">TVA</div>
+              <div class="price">Prix</div>
+            </div>
+            <ng-container *ngFor="let appointment of booking.appointments">
+              <div class="resa_booking" *ngIf="isDisplayed(appointment)" [ngClass]="{'no_tax':!settings.tvaActivated}">
+                <div class="date_hour">
+                  <span *ngIf="!isCombinedRow(appointment)">
+                    {{ appointment.startDate | parseDate  | date:'dd MMMM yyyy':'':'fr' }} -
+                    <span *ngIf="!appointment.noEnd">
+                      {{ appointment.startDate | parseDate  | date:'HH:mm':'':'fr' }} à {{ appointment.endDate | parseDate  | date:'HH:mm':'':'fr' }}
+                    </span>
+                    <span *ngIf="appointment.noEnd">
+                      A partir de {{ appointment.startDate | parseDate  | date:'HH:mm':'':'fr'  }}
+                    </span>
+                    <br />
+                  </span>
+                  <span *ngIf="isCombinedRow(appointment)">
+                    <span *ngFor="let displayAppointment of getAppointmentsByInternalIdLink(appointment.internalIdLink)">
+                      {{ displayAppointment.startDate | parseDate  | date:'dd MMMM yyyy':'':'fr' }} /
+                      <span *ngIf="!appointment.noEnd">
+                        {{ displayAppointment.startDate | parseDate  | date:'HH:mm':'':'fr' }} à {{ displayAppointment.endDate | parseDate  | date:'HH:mm':'':'fr' }}
+                      </span>
+                      <span *ngIf="appointment.noEnd">
+                      A partir de {{ displayAppointment.startDate | parseDate  | date:'HH:mm':'':'fr'  }}
+                      </span>
+                      <br />
+                    </span>
+                  </span>
+                </div>
+                <div class="state">
+                  <span *ngIf="!isCombinedRow(appointment)">
+                    <span *ngIf="appointment.state == 'waiting'">En attente</span>
+                    <span *ngIf="appointment.state == 'ok'">Confirmé</span>
+                    <span *ngIf="appointment.state == 'cancelled'">Annulé</span>
+                  </span>
+                  <span *ngIf="isCombinedRow(appointment)">
+                    <span *ngFor="let displayAppointment of getAppointmentsByInternalIdLink(appointment.internalIdLink)">
+                      <span *ngIf="displayAppointment.state == 'waiting'">En attente</span>
+                      <span *ngIf="displayAppointment.state == 'ok'">Confirmé</span>
+                      <span *ngIf="displayAppointment.state == 'cancelled'">Annulé</span>
+                      <br />
+                    </span>
+                  </span>
+                </div>
+                <div class="activity">
+                  {{ getServiceName(getServiceById(appointment.idService)) }}
+                </div>
+                <div *ngIf="settings.tvaActivated"  class="tax">
+                  <span *ngFor="let appointmentNumberPrice of appointment.appointmentNumberPrices">
+                    <span *ngFor="let vatLine of getServicePriceAppointment(getServiceById(appointment.idService), appointmentNumberPrice.idPrice).vatList">
+                      {{ global.getTextByLocale(getVatById(vatLine.idVat).name) }}
+                      ({{ (displayTVA(vatLine, getServicePriceAppointment(getServiceById(appointment.idService), appointmentNumberPrice.idPrice), appointmentNumberPrice.number, 1))|number:'1.2':'fr' }}){{ settings.currency }}<br />
+                    </span>
+                  </span>
+                </div>
+                <div class="price">
+                  <span *ngFor="let appointmentNumberPrice of appointment.appointmentNumberPrices">
+                    <b>{{ appointmentNumberPrice.number }}</b> x {{ global.getTextByLocale(getServicePriceAppointment(getServiceById(appointment.idService), appointmentNumberPrice.idPrice).name)|htmlSpecialDecode
+                  }} <b *ngIf="!appointmentNumberPrice.deactivated">{{ global.round((appointmentNumberPrice.totalPrice * getNumberCombined(appointment))) | number:'1.2':'fr' }}{{ settings.currency }}</b>
+                    <br />
+                  </span>
+                  | <b>{{ global.round(appointment.totalPriceWithoutReductions * getNumberCombined(appointment))|number:'1.2':'fr' }}{{ settings.currency }} TTC</b>
+                </div>
+              </div>
+              <div class="resa_booking_reduction" *ngFor="let appointmentReduction of appointment.appointmentReductions">
+                <div class="reduction_title">{{ global.getTextByLocale(getReductionById(appointmentReduction.idReduction).name)|htmlSpecialDecode }} (x{{ appointmentReduction.number }})</div>
+                <div class="reduction_description" [innerHTML]="global.getTextByLocale(getReductionById(appointmentReduction.idReduction).presentation)"></div>
+                <div class="reduction_price">
+                  <span *ngIf="appointmentReduction.type == 0">{{ (appointmentReduction.value * appointmentReduction.number)|negative|number:'1.2':'fr' }}{{ settings.currency }}</span>
+                  <span *ngIf="appointmentReduction.type == 1">{{ ((getTotalPriceNumberPrice(appointment.idService, getAppointmentNumberPrices(appointment, appointmentReduction.idPrice), appointment) * appointmentReduction.number) * appointmentReduction.value  / 100)|negative|number:'1.2':'fr' }}{{ settings.currency }} </span>
+                  <span *ngIf="appointmentReduction.type == 2">{{ (appointmentReduction.value * appointmentReduction.number)|negative|number:'1.2':'fr' }}{{ settings.currency }}</span>
+                  <span *ngIf="appointmentReduction.type == 3">{{ ((getServicePriceAppointment(getServiceById(appointment.idService), appointmentReduction.idPrice).price - appointmentReduction.value) * appointmentReduction.number)|negative|number:'1.2':'fr' }}{{ settings.currency }}</span>
+                  <span *ngIf="appointmentReduction.type == 4">{{ (getPriceNumberPrice(appointment.idService, getAppointmentNumberPrices(appointment, appointmentReduction.idPrice), appointment) * appointmentReduction.value * appointmentReduction.number)|negative|number:'1.2':'fr' }} {{ settings.currency }}</span>
+                  <span *ngIf="appointmentReduction.type == 5"></span>
+                </div>
+              </div>
+            </ng-container>
+            <div class="resa_booking_subtotal" *ngIf="isDisplayed(appointment)">
+              <div class="subtotal_title"> Sous-total</div>
+              <div class="subtotal_value">{{ global.round(appointment.totalPrice * getNumberCombined(appointment))|number:'1.2':'fr' }} {{ settings.currency }}</div>
+            </div>
+
+            <div class="resa_booking_reduction" *ngFor="let bookingReduction of booking.bookingReductions">
+              <div class="reduction_title">{{ global.getTextByLocale(getReductionById(bookingReduction.idReduction).name)|htmlSpecialDecode }} (x{{ bookingReduction.number }})</div>
+              <div class="reduction_description" [innerHTML]="global.getTextByLocale(getReductionById(bookingReduction.idReduction).presentation)"></div>
+              <div class="reduction_price">
+                <span *ngIf="bookingReduction.type == 0">{{ (bookingReduction.value * bookingReduction.number)|negative }}{{ settings.currency }}</span>
+                <span *ngIf="bookingReduction.type == 1">{{ (bookingReduction.value * bookingReduction.number)|negative }}%</span>
+                <span *ngIf="bookingReduction.type == 2">{{ (bookingReduction.value * bookingReduction.number)|negative }}{{ settings.currency }}</span>
+                <span *ngIf="bookingReduction.type == 5"></span>
+              </div>
+            </div>
+
+            <div class="resa_booking_reduction" *ngFor="let bookingCustomReduction of booking.bookingCustomReductions">
+              <div class="reduction_title">{{ bookingCustomReduction.description }}</div>
+              <div class="reduction_description">{{ bookingCustomReduction.description }}<span *ngIf="settings.tvaActivated"> (TVA {{ bookingCustomReduction.vatValue }}% ({{ vatValue(bookingCustomReduction.amount, bookingCustomReduction.vatValue) | number:'1.2':'fr' }}{{ settings.currency }}))</span>
+              </div>
+              <div class="reduction_price">{{ bookingCustomReduction.amount }}{{ settings.currency }}</div>
+            </div>
+            <div class="resa_booking_total">
+              <div class="total_title">Total</div>
+              <div class="total_value">{{ global.round(booking.totalPrice)|number:'1.2':'fr' }}{{ settings.currency }}</div>
+            </div>
+            <div class="receipt_resa_paiements">
+              <h4 *ngIf="booking.payments.length > 0">Vous paiement</h4>
+              <div class="paiement_table" *ngIf="booking.payments.length > 0">
+                <div class="paiement_table_head">
+                  <div>Date</div>
+                  <div>Méthode</div>
+                  <div>Montant</div>
+                </div>
+                <div class="paiement_table_line" [hidden]="payment.state == 'pending' || payment.state == 'cancelled'" *ngFor="let payment of booking.payments">
+                  <div>{{ payment.paymentDate | parseDate  | date:'dd MMMM yyyy HH:mm':'':'fr' }}</div>
+                  <div><span *ngIf="payment.isReceipt != null && payment.isReceipt">[Acompte]</span>{{ getPaymentName(payment.type, payment.name) }}</div>
+                  <div *ngIf="payment.repayment"><b>{{ payment.value|negative|number:'1.2':'fr' }}{{ settings.currency }}</b></div>
+                  <div *ngIf="!payment.repayment"><b>{{ payment.value|number:'1.2':'fr' }}{{ settings.currency }}</b></div>
+                </div>
+              </div>
+            </div>
+            <div class="receipt_resa_balance" *ngIf="!booking.quotation">
+              <div class="total_balance">Montant : {{ global.round(booking.needToPay)|number:'1.2':'fr' }}{{ settings.currency }}</div>
+            </div>
+            <div class="receipt_footer_infos" *ngIf="!booking.quotation && global.getTextByLocale(settings.informations_on_receipt).length > 0">
+              <span [innerHTML]="global.getTextByLocale(settings.informations_on_receipt)|htmlSpecialDecode:true"></span>
+            </div>
+            <div class="receipt_footer_infos" *ngIf="booking.quotation && global.getTextByLocale(settings.informations_on_quotation).length > 0"><span [innerHTML]="global.getTextByLocale(settings.informations_on_quotation)|htmlSpecialDecode:true"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="resa_brand">Gérez vos réservations avec RESA Online (resa-online.fr)</div>
+    </div>
+  </div>
+</div>

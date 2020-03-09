@@ -1,0 +1,253 @@
+<div id="page_content" class="container p-sm-2" *ngIf="settings" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Notifications email<span *ngIf="!canDeactivate()">*</span></h1>
+    <div>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchAction" (click)="save()"><span *ngIf="!launchAction">Sauvegarder</span><span *ngIf="launchAction">Sauvegarde en cours...</span></button>
+    </div>
+  </div>
+  <div class="align-items-center d-flex pb-3 mb-3 border-bottom">
+    Définissez les différentes notifications nécessaires aux processus de réservation.<br />
+    Pour changer le logo, veuillez aller sur l'onglet "Blocks réutilisables".<br />
+  </div>
+  <div class="align-items-center d-flex mb-3" *ngIf="settings != null && settings.languages">
+    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+    <select [(ngModel)]="global.currentLanguage" class="custom-select bg-light w-auto">
+      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+    </select>
+    <div class="ml-2">
+      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+    </div>
+  </div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1" aria-expanded="true">Modèles par défaut<span *ngIf="getToSave('notifications')">*</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" aria-expanded="true">Modèles personnalisés<span *ngIf="getToSave('templates')">*</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3" aria-expanded="true">Expéditeurs<span *ngIf="getToSave('senders')">*</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#tab4" data-toggle="tab" role="tab" aria-controls="tab4" aria-expanded="true">Blocks réutilisables<span *ngIf="getToSave('blocks')">*</span></a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" role="tabpanel" aria-labelledby="tab1-tab" id="tab1">
+      <input class="form-control mt-md-3" id="service_search" type="text" placeholder="Recherche..." [(ngModel)]="formNotifications.search" (ngModelChange)="calculateDisplayNotifications()">
+      <table class="table mt-3" id="services_list">
+        <thead>
+          <tr>
+            <th class="text-left"><a href="javascript:void(0)" (click)="displayNotificationsOrderBy('activated')">Activé</a></th>
+            <th><a href="javascript:void(0)" (click)="displayNotificationsOrderBy('name')">Nom</a></th>
+            <th><a href="javascript:void(0)" (click)="displayNotificationsOrderBy('receiver')">Destinataire</a></th>
+            <th>Description</th>
+            <th style="width:300px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [ngClass]="{'deactivated': !notification.activated }" *ngFor="let notification of displayNotifications; index as i">
+            <th scope="row" class="text-left">
+              <span class="switch switch-sm">
+                <input class="switch" id="notif{{ i }}" type="checkbox" [(ngModel)]="notification.activated" (change)="setToSave('notifications', true)">
+                <label for="notif{{ i }}" ngbTooltip="Activer / Désactiver"></label>
+              </span>
+            </th>
+            <th scope="row">{{ notification.name }}<span class="text-warning" *ngIf="notification.text[global.currentLanguage] == null || notification.text[global.currentLanguage].length == 0"><br />Non définie</span></th>
+            <td>{{ notification.receiver }}</td>
+            <td>{{ notification.description }}</td>
+            <td class="text-right" nowrap>
+              <button class="btn btn-sm btn-outline-info m-1" (click)="openNotification(content, notification)">Voir / Modifier</button>
+              <button [disabled]="sending" class="btn btn-sm btn-outline-secondary m-1" (click)="sendNotification(notification.subject[global.currentLanguage], notification.text[global.currentLanguage])">Se l'envoyer<span *ngIf="sending">...</span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" role="tabpanel" aria-labelledby="tab2-tab" id="tab2">
+      <input class="form-control mt-md-3" id="category_search" type="text"  placeholder="Recherche..." [(ngModel)]="formNotificationsTemplates.search" (ngModelChange)="calculateDisplayNotificationsTemplates()">
+      <table class="table mt-3" id="services_list">
+        <thead>
+          <tr>
+            <th><a href="javascript:void(0)" (click)="displayNotificationsTemplatesOrderBy('name')">Nom</a></th>
+            <th>Sujet</th>
+            <th class="text-right">
+              <button type="button" class="btn btn-sm btn-outline-success" (click)="addNotificationTemplate(content)">+ Nouveau template</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let template of displayNotificationsTemplates; index as i">
+            <th scope="row">{{ template.name }}</th>
+            <td><span ngbTooltip="{{ template.subject[global.currentLanguage] }}" container="body">{{ getDisplaySubjectPart(template.subject[global.currentLanguage]) }}</span></td>
+            <td class="text-right">
+              <button class="btn btn-sm btn-outline-info m-1" (click)="openNotificationTemplate(content, template)">Voir / Modifier</button>
+              <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateNotificationTemplate(content, template)">Dupliquer</button>
+              <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteNotificationTemplate(template)">Supprimer</button>
+              <button [disabled]="sending" class="btn btn-sm btn-outline-secondary m-1" (click)="sendNotification(template.subject[global.currentLanguage], template.message[global.currentLanguage])">Se l'envoyer<span *ngIf="sending">...</span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" role="tabpanel" aria-labelledby="tab3-tab" id="tab3">
+      <section class="p-2 mt-2">
+        <h3>Informations de l'expéditeur</h3>
+        <p>Nom et adresse affiché quand un client reçoit un email.</p>
+        <button type="button" class="btn btn-sm btn-outline-success" (click)="addRESASender()">+ Ajouter un expéditeur</button>
+        <section class="p-2 mt-2 bg-light" *ngFor="let resaSender of settings.resa_senders; index as i">
+          <div class="form-group">
+            <label class="font-weight-bold" for="formSenderName" ngbTooltip="Nom de l'expéditeur">Nom</label>
+            <input class="form-control" id="formSenderName" type="text" placeholder="Nom de l'expéditeur" [(ngModel)]="resaSender.sender_name" (ngModelChange)="setToSave('senders', true)" />
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formSenderEmail" ngbTooltip="Adresse email de l'expéditeur">Adresse email</label>
+            <input class="form-control" id="formSenderEmail" type="text" placeholder="Adresse email de l'expéditeur" [(ngModel)]="resaSender.sender_email" (ngModelChange)="setToSave('senders', true)" />
+            <span class="text-danger" *ngIf="!global.isEmailValid(resaSender.sender_email)">
+              Cette adresse email n'est pas valide
+            </span>
+            <span class="text-warning" *ngIf="global.isEmailValid(resaSender.sender_email) && !emailOnSameDomainName(resaSender.sender_email)">
+              Nous détectons que l'adresse email entrée ne correspond pas au nom de domaine du site. Cela peut avoir une incidence sur l'arrivée des emails dans la boite mail de vos clients (spam ou bloqué). Nous vous conseillons d'utiliser une adresse mail finissant par : @{{ getDomainName() }}
+            </span>
+          </div>
+          <div class="form-group" *ngIf="settings.places.length > 0">
+            <label class="font-weight-bold" for="formSenderPlace" ngbTooltip="Le lieu associé">Lieu</label>
+            <select class="form-control" id="formSenderPlace" [(ngModel)]="resaSender.idPlace" (ngModelChange)="setToSave('senders', true)">
+              <option *ngFor="let place of settings.places" [value]="place.id">{{ global.getTextByLocale(place.name) }}</option>
+            </select>
+          </div>
+          <button *ngIf="i > 0" (click)="deleteRESASender(i)" type="button" class="btn btn-sm btn-outline-danger">Supprimer cet expéditeur</button>
+        </section>
+      </section>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchAction" (click)="save()"><span *ngIf="!launchAction">Sauvegarder</span><span *ngIf="launchAction">Sauvegarde en cours...</span></button>
+    </div>
+    <div class="tab-pane" role="tabpanel" aria-labelledby="tab4-tab" id="tab4">
+      <section class="p-2 mt-2">
+        <h3>Blocks réutilisables</h3>
+        <p>Ici sont affichés les blocks personnalisables que vous pouvez ajouter à vos notifications</p>
+        <section class="p-2 mt-2 bg-light" *ngFor="let custom_shortcode of settings.custom_shortcodes; index as i">
+          <h5>{{ custom_shortcode.shortcode }}</h5>
+          <div class="form-group" *ngFor="let param of getRepeat(custom_shortcode.params); index as j">
+            <label class="font-weight-bold" for="formParameters{{ i }}_{{ j }}" data-html="false">Paramètre {{ j + 1 }}</label>
+            <input *ngIf="custom_shortcode.params[j].type == 'text'" class="form-control" id="formParameters{{ i }}_{{ j }}" type="text" placeholder="Paramètre {{ j + 1 }}" [(ngModel)]="custom_shortcode.params[j].value" (ngModelChange)="setToSave('blocks', true)" />
+            <div *ngIf="custom_shortcode.params[j].type == 'image'">
+              <img [src]="custom_shortcode.params[j].value" />
+              <button class="button" class="btn btn-sm btn-success" (click)="openImagesCustomShorcodeParams(contentImage, custom_shortcode.params[j])">Modifier image</button>
+              <ng-template #contentImage let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Sélection de l'image</h4>
+                  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <image-selector (imageSelected)="setImageCustomShorcodeParams($event, c)"></image-selector>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </section>
+        <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchAction" (click)="save()"><span *ngIf="!launchAction">Sauvegarder</span><span *ngIf="launchAction">Sauvegarde en cours...</span></button>
+      </section>
+    </div>
+  </div>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        Modèle {{ formNotification.name }}<span *ngIf="formNotification.receiver"> - {{ formNotification.receiver }}</span>
+      </h4>
+      <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="align-items-center d-flex mb-3" *ngIf="settings != null && settings.languages">
+        <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+        <select [(ngModel)]="global.currentLanguage" class="custom-select bg-light w-auto">
+          <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+        </select>
+        <div class="ml-2">
+          <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+        </div>
+      </div>
+      <div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+      <section *ngIf="!editionMode && formPreviewNotification">
+        <div class="mb-3" *ngIf="formNotification.daysAP != null">
+          Nombre de jours à attendre avant d'envoyer l'email après la réservation : <span class="font-weight-bold">{{ formNotification.daysAP }} jour<span *ngIf="formNotification.daysAP > 1">s</span></span>
+        </div>
+        <div *ngIf="formNotification.times != null">
+          Nombre de fois maximum à relancer au client : <span class="font-weight-bold">{{ formNotification.times }} fois</span>
+        </div>
+        <div class="mb-3" *ngIf="formNotification.days != null">
+          Nombre de jours avant la prochaine relance : <span class="font-weight-bold">{{ formNotification.days }} jour<span *ngIf="formNotification.days > 1">s</span></span>
+        </div>
+        <h5>{{ formPreviewNotification.subject[global.currentLanguage] }}</h5>
+        <div [innerHTML]="formPreviewNotification.message[global.currentLanguage]"></div>
+      </section>
+      <section *ngIf="editionMode">
+        <div class="form-group" *ngIf="formNotification.isTemplate">
+          <label class="font-weight-bold" for="formNSubject" data-html="false" title="Nom du template">Nom du template</label>
+          <input class="form-control" id="formNSubject" type="text" placeholder="Nom du template" [(ngModel)]="formNotification.name" />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formNSubject" data-html="false" title="Sujet">Sujet</label>
+          <input class="form-control" id="formNSubject" type="text" placeholder="Sujet" [(ngModel)]="formNotification.subject[global.currentLanguage]" />
+        </div>
+        <div class="form-group" *ngIf="formNotification.emails != null">
+          <label class="font-weight-bold" for="formNEmails" data-html="false" title="Email">Adresses emails des destinataires séparés par une virgule (email1@mail.com,email2@mail.com)</label>
+          <input class="form-control" id="formNEmails" type="text" placeholder="Email" [(ngModel)]="formNotification.emails" />
+        </div>
+        <span *ngIf="formNotification.placesEmails != null">
+          <div class="form-group" *ngFor="let place of settings.places">
+            <label class="font-weight-bold" for="formNPlacesEmails_{{ place.id }}" data-html="false" title="Email">Adresses emails des destinataires séparés par une virgule (email1@mail.com,email2@mail.com) - {{ global.getTextByLocale(place.name) }}</label>
+            <input class="form-control" id="formNPlacesEmails_{{ place.id }}" type="text" placeholder="Email" [(ngModel)]="formNotification.placesEmails[place.id]" />
+          </div>
+        </span>
+        <div class="form-group" *ngIf="formNotification.daysAP != null">
+          <label class="font-weight-bold" for="formNDaysAP" data-html="false" title="Sujet">Nombre de jours à attendre avant d'envoyer l'email après la réservation</label>
+          <select id="formNDaysAP" class="form-control" [(ngModel)]="formNotification.daysAP">
+            <option *ngFor="let item of getRepeat(10); index as i" [value]="(i+1)">{{ (i+1) }} jour<span *ngIf="i > 0">s</span></option>
+          </select>
+        </div>
+        <div class="form-group"  *ngIf="formNotification.times != null">
+          <label class="font-weight-bold" for="formNTimes" data-html="false" title="Sujet">Nombre de fois maximum à relancer au client</label>
+          <select id="formNTimes" class="form-control" [(ngModel)]="formNotification.times">
+            <option *ngFor="let item of getRepeat(5); index as i" [value]="(i+1)">{{ (i+1) }} fois</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="formNotification.days != null">
+          <label class="font-weight-bold" for="formNDays" data-html="false" title="Sujet">Nombre de jours avant la prochaine relance</label>
+          <select id="formNDays" class="form-control" [(ngModel)]="formNotification.days">
+            <option *ngFor="let item of getRepeat(10); index as i" [value]="(i+1)">{{ (i+1) }} jour<span *ngIf="i > 0">s</span></option>
+          </select>
+        </div>
+        <button class="button" (click)="addPicture(contentImage)">Ajouter une photo</button>
+        <div class="form-group" *ngIf="formNotification.text != null">
+          <label class="font-weight-bold" for="formNText" data-html="false" title="Contenu">Contenu</label>
+          <app-tinymce id="formNText" [(ngModel)]="formNotification.text[global.currentLanguage]" #tinymce="tinymce"></app-tinymce>
+        </div>
+        <div class="form-group" *ngIf="formNotification.message != null">
+          <label class="font-weight-bold" for="formNText" data-html="false" title="Contenu">Contenu</label>
+          <app-tinymce id="formNText" [(ngModel)]="formNotification.message[global.currentLanguage]"></app-tinymce>
+        </div>
+        <ng-template #contentImage let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Sélection de l'image</h4>
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+          </div>
+          <div class="modal-body">
+            <image-selector (imageSelected)="insertPicture($event, c)"></image-selector>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </ng-template>
+      </section>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="sending" *ngIf="formNotification.text" class="btn btn-secondary" type="button" (click)="sendNotification(formNotification.subject[global.currentLanguage], formNotification.text[global.currentLanguage])">Se l'envoyer<span *ngIf="sending">...</span></button>
+      <button [disabled]="sending" *ngIf="formNotification.message" class="btn btn-secondary" type="button" (click)="sendNotification(formNotification.subject[global.currentLanguage], formNotification.message[global.currentLanguage])">Se l'envoyer<span *ngIf="sending">...</span></button>
+      <button *ngIf="!editionMode" class="btn btn-success" type="button" (click)="editionMode = true">Modifier</button>
+      <button *ngIf="editionMode" class="btn btn-success" type="button" (click)="c('save')">Sauvegarder</button>
+    </div>
+  </ng-template>
+</div>
+<div id="page_content" class="container p-sm-2" *ngIf="settings == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>
+<div *ngIf="settings == null || launchAction" class="sLoader"></div>

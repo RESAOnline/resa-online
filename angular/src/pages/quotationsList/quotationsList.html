@@ -1,0 +1,24 @@
+<subMenu [date]="global.currentDate" (changeDate)="updateDate($event)"></subMenu>
+<div id="page_content" class="ml-5 mr-5">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Devis</h1>
+  </div>
+  <div>
+    <div class="input-group d-flex justify-content-center mt-2">
+      <ngb-pagination [(page)]="searchForm.page" [pageSize]="searchForm.nbByPage" [collectionSize]="maxBookings" (pageChange)="loadData()" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+      <select style="max-width:80px;" [disabled]="maxBookings < 10" class="form-control mr-2" [(ngModel)]="searchForm.nbByPage" (ngModelChange)="loadData()">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select> par page
+    </div>
+  </div>
+  <div class="mt-3">
+    <div class="w-100" *ngFor="let booking of bookings">
+      <booking [booking]="booking" [settings]="settings" (modify)="goEditBooking($event)"></booking>
+    </div>
+  </div>
+</div>
+<div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>

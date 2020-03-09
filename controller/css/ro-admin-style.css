@@ -1,0 +1,693 @@
+
+/** bouton incohérence **/
+.ro-inconsistencies label{
+	padding:10px 10px;
+	color:white;
+	background-color:red;
+	font-size:1.6em;
+}
+.ro-inconsistencies{
+	margin:10px;
+	text-align:center;
+	padding:10px;
+}
+/** bloc ajouter rdv **/
+.ro-container.ro-add-appointment-bloc{
+	background-color:rgba(255, 157, 21, 0.2);
+}
+
+
+
+.ro-wrapper .event {
+	width:20px;
+	height:20px;
+    border-radius: 15px;
+}
+
+.ro-actions
+{
+    display: none;
+    position: relative;
+    min-width: 350%;
+    margin-top: 15px;
+}
+
+.ro-booking
+{
+    position: relative;
+}
+
+.ro-booking:hover .ro-actions
+{
+    display: block;
+}
+
+.ro-paiement-complete
+{
+    color: white;
+    background-color: green;
+}
+
+.ro-paiement-incomplete
+{
+    color: white;
+    background-color: #fba600;
+}
+
+.ro-paiement-pending
+{
+    color: white;
+    background-color: #e50000;
+}
+
+.ro-popup
+{
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.ro-table td
+{
+	padding:5px 5px !important;
+}
+
+.ro-soustotal
+{
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.ro-soustotal td
+{
+	padding:5px 5px !important;
+}
+
+.ro-total
+{
+    font-weight: 900;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.ro-total td
+{
+	padding:10px 5px !important;
+}
+
+.ro-cancelled, .ro-cancelled td{
+background-color: #919191;
+color: #d3d3d3;
+font-style: italic;
+text-decoration: line-through;
+}
+
+.ro_tarif_barre
+{
+    text-decoration: line-through;
+    font-style: italic;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+.ro-bloc-action
+{
+    padding: 20px 0px 10px 0px;
+    text-align: center;
+}
+
+.ro-table
+{
+}
+
+.ro-table tr
+{
+    border-bottom: 1px solid grey;
+}
+
+.ro-margin-h20
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ro-100width
+{
+    width: 100%;
+}
+
+.ro-bbox *
+{
+    box-sizing: border-box;
+}
+
+.ro-bbox
+{
+    box-sizing: border-box;
+}
+
+.ro-inside-bloc
+{
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid grey;
+    display: table;
+}
+
+.ro-margin-h10
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ro-fright
+{
+    float: right;
+}
+
+.ro-fleft
+{
+    float: left;
+}
+
+.ro-margin-w10
+{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.ro-bold
+{
+    font-weight: 700;
+}
+
+
+/******
+ro-grid
+*****/
+
+.ro-col-1,
+.ro-col-2,
+.ro-col-3,
+.ro-col-4,
+.ro-col-5,
+.ro-col-6
+{
+    box-sizing: border-box;
+    padding: 10px 10px;
+    float: left;
+}
+
+.ro-col-1
+{
+    width: 16.65%;
+}
+
+.ro-col-2
+{
+    width: 33.32%;
+}
+
+.ro-col-3
+{
+    width: 50%;
+}
+
+.ro-col-4
+{
+    width: 66.65%;
+}
+
+.ro-col-5
+{
+    width: 83.32%;
+}
+
+.ro-col-6
+{
+    width: 99.99%;
+}
+
+@media only screen and (max-width:779px)
+{
+/* Force table to not be like tables anymore */
+    table.ro-table, .ro-table thead, .ro-table tbody,.ro-table th,.ro-table td,.ro-table tr
+    {
+        display: block;
+    }
+/* Hide table headers (but not display: none;, for accessibility) */
+    .ro-table thead tr
+    {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .ro-table tr
+    {
+        border: 1px solid #ccc;
+    }
+    .ro-table td, .wp-list-table.ro-creneau-table td
+    {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+    .ro-table td:before
+    {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+/*
+    Label the data
+    */
+    .wp-list-table.ro-table tr:not(.inline-edit-row):not(.no-items) td:not(.column-primary)::before
+    {
+        content: attr(data-colname);
+        display: block;
+        left: 10px;
+        overflow: hidden;
+        position: absolute;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 32%;
+    }
+}
+
+.ro-container
+{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    box-sizing: border-box;
+    display: table;
+    content: " ";
+}
+
+.ro-container *
+{
+    box-sizing: border-box;
+}
+
+.ro-row
+{
+    width: 100%;
+    display: table;
+    content: " ";
+}
+
+.ro-wrapper
+{
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#resa_shortcode_window{
+	background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+	z-index:9999;
+	padding:30px;
+	overflow: auto;
+}
+
+.ro-container{
+	background-color:#f1f1f1;
+	width:100%;
+	height:100%;
+	margin:auto;
+	padding:15px;
+	position:relative;
+}
+
+.ro-modal
+{
+    display: block;
+    position: fixed;
+    top: 50px;
+    left: 180px;
+    right: 20px;
+    bottom: 20px;
+    background-color: white;
+    z-index: 999;
+    -webkit-box-shadow: 0 0 10px 0 #000000;
+    box-shadow: 0 0 10px 0 #000000;
+    overflow: auto;
+}
+
+
+@media only screen and (max-width:959px)
+{
+    .ro-modal
+    {
+        position: fixed;
+        top: 50px;
+        left: 50px;
+        right: 20px;
+        bottom: 20px;
+        background-color: white;
+        z-index: 999;
+        -webkit-box-shadow: 0 0 10px 0 #000000;
+        box-shadow: 0 0 10px 0 #000000;
+    }
+}
+
+@media only screen and (max-width:782px)
+{
+    .ro-modal
+    {
+        position: fixed;
+        top: 60px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        background-color: white;
+        z-index: 999;
+        -webkit-box-shadow: 0 0 10px 0 #000000;
+        box-shadow: 0 0 10px 0 #000000;
+    }
+}
+
+.ro-align-center
+{
+    text-align: center;
+}
+
+.ro-align-left
+{
+    text-align: left;
+}
+
+.ro-bold
+{
+    font-weight: 700;
+}
+
+.ro-link-btn
+{
+    text-align: center;
+    min-width: 25px;
+    min-height: 22px;
+    cursor: pointer;
+    border: 1px solid grey;
+}
+
+@media only screen and (max-width:599px)
+{
+    .ro-col-1,  .ro-col-2,  .ro-col-3,  .ro-col-4,  .ro-col-5,  .ro-col-6
+    {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+.ro-row:after
+{
+    clear: both;
+}
+
+.ro-box
+{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.ro-creneau
+{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    display: inline-block;
+    padding: 4px;
+    text-align: center;
+}
+
+.ro_custom_creneau{
+	background-color:black;
+	color:white;
+	border:2px solid #dc0000;
+	box-sizing:border-box;
+}
+
+.ro-creneau-current.ro_custom_creneau{
+	background-color:#49af51;
+	color:white;
+	border:2px solid #dc0000;
+}
+
+.ro-time
+{
+    text-align: center;
+    font-size: 12px;
+    line-height: 13px;
+    display: block;
+    font-weight: 700;
+}
+
+.ro-capacity
+{
+    display: block;
+}
+
+.ro-member
+{
+    font-size: 11px;
+    line-height: 12px;
+    display: block;
+}
+
+.widefat.ro-align-center tfoot td, .widefat.ro-align-center th, .widefat.ro-align-center thead td
+{
+    text-align: center !important;
+}
+
+.ro-creneau-current
+{
+    background-color: #49af51;
+    color: #ffffff;
+}
+
+.ro-creneau-full
+{
+    background-color: #ff5656;
+    color: #ffffff;
+}
+
+.ro-creneau-almost-full
+{
+    color: #ffffff;
+    background-color: #fd9f39;
+}
+
+.ro-creneau-table td
+{
+    padding: 3px;
+}
+
+.ro-spinner
+{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+.ro-legend
+{
+    width: 30px;
+    height: 18px;
+    display: inline-block;
+    border: 2px solid grey;
+    margin: 0px 5px;
+    margin-bottom: -4px;
+}
+
+.ro-align-right
+{
+    text-align: right;
+}
+
+/*** toooltip ***/
+
+.ro-tooltip
+{
+    position: relative;
+    cursor: help;
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+    opacity: 1;
+}
+
+.ro-tooltip .ro-tooltip_box
+{
+    visibility: hidden;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    z-index: 999;
+    width: 500px;
+    margin-left: -250px;
+    padding: 10px;
+    background-color: #ddd;
+    background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+    box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+    text-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+
+.ro-tooltip:hover
+{
+    border: 0;
+}
+
+.ro-tooltip:hover .ro-tooltip_box
+{
+    visibility: visible;
+}
+
+.ro-tooltip .ro-tooltip_box:before,
+.tro-ooltip .ro-tooltip_box:after
+{
+    content: "";
+    position: absolute;
+    z-index: 1000;
+    bottom: -7px;
+    left: 50%;
+    margin-left: -8px;
+    border-top: 8px solid #ddd;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 0;
+}
+
+.ro-tooltip .ro-tooltip_box:before
+{
+    border-top-color: #ccc;
+    bottom: -8px;
+}
+
+/*** détail rendez-vous du calendrier ***/
+
+.ro_loading{
+color:white;
+font-weight:bolder;
+background-color:#ff9d15;
+padding:4px;
+}
+
+.roundRect {
+	border-radius: 0px;
+}
+
+/** semaine **/
+.cal-week-box .event-item .resa_cal_nom_service{
+	color:white;
+	text-shadow: 0 0 2px #000000;
+}
+
+
+/** mois **/
+
+.cal-month-day .events-list a {
+	width: 22px;
+	height: 22px;
+	border-radius: 0px;
+	-webkit-box-shadow: none;
+    box-shadow: none;
+	font-size:1.3em;
+	font-weight:bolder;
+	letter-spacing:-0.4px;
+}
+
+/** jour **/
+
+.cal-day-box .event-item{
+	display:block;
+	color:white !important;
+	background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.cal-event-list .event-item, .tooltip .tooltip-inner{
+	display:block;
+}
+
+.cal-event-list .event-item p, .tooltip-inner p, .cal-day-box .event-item p{
+	padding:0px;
+	margin:0px;
+	line-height:14px !important;
+}
+
+.resa_cal_nom_service{
+	font-size:15px;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+.resa_cal_client{
+	font-style:italic;
+}
+.resa_cal_nom_client{
+
+
+}
+.resa_cal_prenom_client{
+
+
+}
+
+.resa_cal_creneau{
+	background-color: rgba(145, 145, 145, 0.3) !important;
+	display:inline;
+}
+.resa_cal_creneau_debut{
+
+}
+.resa_cal_creneau_fin{
+
+}
+
+.resa_cal_nb{
+	font-weight:700;
+}
+
+.resa_cal_total{
+
+}
+
+.resa_cal_alert{
+	background-color:red;
+}
+
+.resa_lang{
+	margin:10px 0px;
+	background-color:#d6d6d6;
+}
+.resa_lang span{
+	display:inline-block;
+	margin:10px 5px 10px 0px;
+	padding:10px 15px;
+	cursor:pointer;
+	background-color:#979797;
+}
+.resa_lang span.active_lang{
+	background-color:#29b572;
+}
+.resa_lang span img{
+	width:20px;
+}
+
+.ro_rouge {
+	color: red;
+}
+/*
+@media print {
+ color:red;
+}
+*/

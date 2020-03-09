@@ -1,0 +1,23 @@
+<button class="btn btn-dashicons-outline dashicons dashicons-admin-site-alt3"  ngbTooltip="Nouveautés RESA Online" (click)="switchRESANewsCenter($event)">
+  <span class="alert_number" *ngIf="RESANewsWaitingNumber > 0">{{ RESANewsWaitingNumber }}</span>
+</button>
+<div *ngIf="RESANewsIsOpened()" id="resa_news_center_wrapper">
+  <div id="resa_news_title">
+    Nouveautés de RESA Online
+  </div>
+  <div id="resa_news_center_content">
+    <div *ngIf="RESANewsLaunched" class="sLoader_bg"><div class="sLoader"></div></div>
+    <div *ngIf="RESANews.length == 0">
+      Pas de nouveauté
+    </div>
+    <div *ngFor="let news of RESANews" class="notif">
+      <div class="resa_news_infos">
+        <span [innerHTML]="news.excerpt.rendered|htmlSpecialDecode:true"></span><br />
+      </div>
+      <div class="resa_news_time">
+         <span class="time">{{ news.date | date:'dd MMMM yyyy HH:mm':'':'fr' }}</span>
+         <a class="see ml-2" target="_blank" href="{{ news.link }}">En savoir +</a>
+      </div>
+    </div>
+  </div>
+</div>

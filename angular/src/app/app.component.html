@@ -1,0 +1,127 @@
+<!-- OLD //-->
+<div *ngIf="!isUserNull() && isDisplayMenu() && !global.backendV2Activated && !global.fullScreen"  id="resa_header">
+  <div class="text-center w-100 text-muted" style="z-index: 99;">
+    <p class="mb-0 mt-0" style="font-size: 12px;">
+      Bienvenue <b>{{ getCurrentUser().login }}</b>, vous êtes connecté(e) en tant que : <b>{{ getRoleName() }}</b>
+    </p>
+  </div>
+  <div class="text-center bg-dark shadow-sm w-100" style="z-index: 99;">
+    <div class="flex-wrap ml-auto mr-auto d-md-flex d-block text-center" style="max-width: 1400px;">
+      <div class="align-items-center pr-2 pl-2 d-none d-md-block">
+        <img src="assets/image/logo-resa-online-vert.png" class="m-0 p-0 pr-1 d-block" width="70">
+        <div class="text-white text-center align-items-center" style="font-size: 11px;">
+          version {{ version }}
+          <a class="text-warning" *ngIf="linkNewUpdate.length > 0" target="_self" href="{{ linkNewUpdate }}"><br />Nouvelle version</a>
+        </div>
+        <span *ngIf="global.wpDebugMode" style="font-size: 11px; color:red; font-weight:bold">DEBUG <span *ngIf="global.backendV2Activated"> V2</span></span>
+      </div>
+      <div class="d-flex align-items-center flex-grow-1 pl-2 pr-2 justify-content-md-start justify-content-center">
+        <a class="btn btn-outline-light btn-sm mr-1" href="{{ getRESABackendLink() }}">Réservations</a>
+        <a class="btn btn-outline-light btn-sm mr-1" href="{{ getRESABackendLink() }}&subPage=planning" *ngIf="global.groupsManagement">Planning groupe</a>
+        <a *ngIf="isRESAManager()" class="btn btn-sm btn-outline-light mr-1" href="{{ getRESABackendLink() }}&subPage=quotations">Devis</a>
+        <a *ngIf="isRESAManager()" class="btn btn-sm btn-outline-light mr-1" href="{{ getRESABackendLink() }}&subPage=clients">Clients</a>
+        <a  class="btn btn-sm btn-outline-light mr-1" target="_blank" href="{{ getCaisseOnlineLink() }}"  *ngIf="isRESAManager() && global.caisseOnline.activated">Caisse</a>
+        <a *ngIf="isSeeSettings()" class="btn btn-sm btn-outline-light mr-1" href="javascript:void(0)" (click)="goVouchers()">Coupons</a>
+        <a *ngIf="isRESAManager()" class="btn btn-sm btn-outline-light mr-1"href="javascript:void(0)" (click)="goPlanning()">Planning</a>
+      </div>
+      <div class="d-flex align-items-center justify-content-center mt-md-0 mt-1 flex-grow-1 justify-content-md-end">
+        <div *ngIf="isSeeSettings()" class="dropdown mr-1">
+          <button class="btn dropdown-toggle btn-sm btn-outline-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Réglages </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item" (click)="goActivities()"><span *ngIf="isActivities()">> </span>Fiches activités</button>
+            <button class="dropdown-item" *ngIf="global.staffManagement" (click)="goMembers()"><span *ngIf="isMembers()">> </span>Personnel ({{ global.getTextByLocale(staff_word_many) }})</button>
+            <button class="dropdown-item" *ngIf="global.equipmentsManagement" (click)="goEquipments()"><span *ngIf="isEquipments()">> </span>Matériels</button>
+            <button class="dropdown-item" *ngIf="global.groupsManagement" (click)="goGroups()"><span *ngIf="isGroups()">> </span>Groupes</button>
+            <button class="dropdown-item" (click)="goNotifications()"><span *ngIf="isNotifications()">> </span>Notifications emails</button>
+            <button class="dropdown-item" (click)="goCalendars()"><span *ngIf="isCalendars()">> </span>Calendriers</button>
+            <button class="dropdown-item" (click)="goReductions()"><span *ngIf="isReductions()">> </span>Réductions</button>
+            <button class="dropdown-item" (click)="goForms()"><span *ngIf="isForms()">> </span>Formulaires/Pages</button>
+            <button class="dropdown-item" (click)="goSettings()"><span *ngIf="isSettings()">> </span>Réglages avancés</button>
+          </div>
+        </div>
+        <a class="btn btn-sm mr-1 btn-outline-light" href="{{ getWpBackendLink() }}">Quitter</a>
+        <a class="btn btn-sm btn-success mr-1" target="_blank" href="{{ global.supportURL }}">Support</a>
+        <a class="btn btn-sm btn-success mr-1" target="_blank" href="https://www.facebook.com/RESA-Online-485177045231268/">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isBrowserCompatibility()" class="text-center text-danger font-weight-bold">
+    RESA Online est optimisé pour <i>Firefox</i> et <i>Google Chome</i>, nous vous invitons à utiliser l'un de ces deux navigateurs pour le bon fonctionnement de RESA Online.
+  </div>
+</div>
+<div *ngIf="!isUserNull() && isDisplayMenu() && global.backendV2Activated && !global.fullScreen" id="resa_header">
+  <div class="text-center bg-dark shadow-sm" style="z-index: 99;">
+    <div class="d-md-flex justify-content-between ml-5 mr-5">
+      <div class="d-flex justify-content-center align-items-center">
+        <button class="btn btn-dashicons dashicons dashicons-calendar-alt" ngbTooltip="Réservations / Plannings / Agenda" (click)="goPlanning()"></button>
+        <button *ngIf="isRESAManager()" class="btn btn-dashicons dashicons dashicons-admin-users"  ngbTooltip="Clients" (click)="goCustomers()"></button>
+        <button *ngIf="isRESAManager() && global.caisseOnline.installed && global.caisseOnline.activated" class="btn btn-dashicons dashicons dashicons-cart" ngbTooltip="Caisse Online" (click)="goCaisseOnline()" ngbTooltip="Aller sur Caisse Online"></button>
+        <button *ngIf="isRESAManager() && global.swiklyLink != ''" class="btn btn-dashicons font-weight-bold" ngbTooltip="Swikly" (click)="goSwikly()" ngbTooltip="Aller sur Swikly" style="font-size:30px">S</button>
+        <button *ngIf="isRESAManager() && !global.caisseOnline.installed" class="btn btn-dashicons dashicons dashicons-cart" ngbTooltip="Paiement en ligne" (click)="goStripeConnect()" ngbTooltip="Paiement en ligne"></button>
+        <div *ngIf="isRESAManager()" class="dropdown mr-1" ngbTooltip="Statistiques"  placement="left">
+          <button class="btn btn-dashicons dashicons dashicons-chart-line" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item" (click)="goStatisticsBookings()">
+              <span *ngIf="isStatisticsBookings()">> </span>Statistiques réservations
+            </button>
+            <button class="dropdown-item" (click)="goStatisticsActivities()">
+              <span *ngIf="isStatisticsActivities()">> </span>Statistiques activités
+            </button>
+            <button class="dropdown-item" *ngIf="global.groupsManagement" (click)="goStatisticsMembers()"><span *ngIf="isStatisticsMembers()">> </span>Décompte heures</button>
+            <button class="dropdown-item" (click)="goVouchers()"><span *ngIf="isVouchers()">> </span>Coupons</button>
+          </div>
+        </div>
+        <searchBar *ngIf="isRESAManager()"></searchBar>
+      </div>
+      <logNotificationsCenter class="d-flex align-items-center" *ngIf="global.backendV2Activated && isRESAManager()"></logNotificationsCenter>
+      <div class="d-none d-md-flex justify-content-center align-items-center">
+        <div *ngIf="isSeeSettings()" class="dropdown mr-1" ngbTooltip="Réglages"  placement="left">
+          <button class="btn btn-dashicons-outline dashicons dashicons-admin-settings" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item" (click)="goActivities()"><span *ngIf="isActivities()">> </span>Fiches activités</button>
+            <button class="dropdown-item" *ngIf="global.staffManagement" (click)="goMembers()"><span *ngIf="isMembers()">> </span>Personnel ({{ global.getTextByLocale(staff_word_many) }})</button>
+            <button class="dropdown-item" *ngIf="global.equipmentsManagement" (click)="goEquipments()"><span *ngIf="isEquipments()">> </span>Matériels</button>
+            <button class="dropdown-item" *ngIf="global.groupsManagement" (click)="goGroups()"><span *ngIf="isGroups()">> </span>Groupes</button>
+            <button class="dropdown-item" (click)="goNotifications()"><span *ngIf="isNotifications()">> </span>Notifications emails</button>
+            <button class="dropdown-item" (click)="goCalendars()"><span *ngIf="isCalendars()">> </span>Calendriers</button>
+            <button class="dropdown-item" (click)="goReductions()"><span *ngIf="isReductions()">> </span>Réductions</button>
+            <button class="dropdown-item" (click)="goForms()"><span *ngIf="isForms()">> </span>Formulaires/Pages</button>
+            <button class="dropdown-item" (click)="goSettings()"><span *ngIf="isSettings()">> </span>Réglages avancés</button>
+          </div>
+        </div>
+        <resaNews [RESANewsLastViewNumber]="RESANewsLastViewNumber"></resaNews>
+        <!--
+        <a class="btn btn-dashicons-outline dashicons dashicons-facebook-alt" ngbTooltip="Facebook" target="_blank" href="https://www.facebook.com/RESA-Online-485177045231268/"></a>
+        //-->
+        <a class="btn btn-dashicons-outline dashicons dashicons-editor-help" ngbTooltip="Aide" target="_blank" href="{{ global.supportURL }}"></a>
+        <div style="font-size: 13px; color:white" class=" mr-1 ml-1 d-none d-md-block">
+          Bienvenue {{ getCurrentUser().login }}<br />
+          ({{ getRoleName() }})<br />
+          <a style="color:white; font-size: 12px;" href="{{ getWpBackendLink() }}">Quitter</a>
+        </div>
+        <div class="text-center d-none d-md-block">
+          <img src="assets/image/logo-resa-online-vert.png" width="70">
+          <div class="text-white text-center align-items-center" style="font-size: 11px;">
+            version {{ version }}
+            <a class="text-warning" *ngIf="linkNewUpdate.length > 0" target="_self" href="{{ linkNewUpdate }}"><br />Nouvelle version</a>
+          </div>
+          <a *ngIf="global.backendV2Activated" style="font-size: 11px; color:white" target="_blank" href="{{ getRESABackendLink() }}">
+            Ancienne interface<br />
+          </a>
+          <span *ngIf="global.wpDebugMode" style="font-size: 11px; color:red; font-weight:bold">DEBUG <span *ngIf="global.backendV2Activated"> V2</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="browser-compatibility" *ngIf="!isBrowserCompatibility()" class="text-center text-danger font-weight-bold">
+    RESA Online est optimisé pour <i>Firefox</i> et <i>Google Chome</i>, nous vous invitons à utiliser l'un de ces deux navigateurs pour le bon fonctionnement de RESA Online.
+  </div>
+</div>
+<router-outlet *ngIf="!isUserNull()"></router-outlet>
+<div class="container p-sm-2" *ngIf="isUserNull()">
+  <p *ngIf="initFailed" class="mb-0 mt-0 bg-warning text-center">Erreur de connexion au wordpress, veuillez réessayer : <a href="{{ getWpBackendLink() }}">Retour</a></p>
+  <div *ngIf="!initFailed" class="sLoader_bg"><div class="sLoader"></div></div>
+</div>
+<div id="resa_footer" *ngIf="!isUserNull() && isDisplayFooter()" style="max-width: 1400px; margin-left: auto; margin-right: auto;">
+  <p class="text-left font-italic small">Vous aimez RESA Online ? Veuillez nous laisser une note <a href="https://wordpress.org/support/plugin/resa-online/reviews/" target="_blank">★★★★★</a>. Nous apprécions vraiment votre soutien !</p>
+</div>

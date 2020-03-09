@@ -1,0 +1,81 @@
+<subMenu [date]="global.currentDate" (changeDate)="updateDate($event)"></subMenu>
+<div id="page_content" class="ml-5 mr-5">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Vue du jour</h1>
+  </div>
+  <div>
+    <div class="d-flex justify-content-center">
+      <div class="form-inline">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+        <div *ngIf="states.length > 0" ngbDropdown class="d-inline-block ml-2">
+          <button class="btn btn-primary" id="dropdownStates" ngbDropdownToggle>Etats</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownStates">
+            <div>
+              <div class="text-center">Choix des états</div>
+              <div class="form-check mt-1 text-left ml-2 justify-content-start" *ngFor="let state of states; index as i">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="state.selected" id="stateCheck{{ i }}">
+                <label class="form-check-label" for="stateCheck{{ i }}">
+                  {{ state.name }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button [disabled]="launchAction" class="btn btn-success ml-2" (click)="loadData(0)">Chargement</button>
+        <button [disabled]="launchAction" class="btn btn-secondary ml-2" (click)="printDiv('planning_print')">Imprimer</button>
+      </div>
+    </div>
+  </div>
+  <div id="planning_print" class="mt-3">
+    <div class="table-planning" *ngFor="let group of groupByService">
+      <div class="head">
+        <div class="col2">{{ group.service | htmlSpecialDecode }}</div>
+        <div class="timeline">
+          <ng-container  *ngFor="let num of global.getRepeat(settings.calendar.end_time - settings.calendar.start_time); index as i">
+            <span class="tl_hour" [ngStyle]="{'width':getNumberOfPourcentFloor() + '%'}"><span class="hour_txt">{{ (settings.calendar.start_time*1 + i) }}h</span></span>
+            <span class="tl_min" [ngStyle]="{'width':getNumberOfPourcentFloor() + '%'}" ng-repeat-end><span class="min_txt">30</span></span>
+          </ng-container>
+          <span class="tl_hour">
+            <span class="hour_txt">{{ settings.calendar.end_time }}h</span>
+          </span>
+        </div>
+        <div class="col">Etat</div>
+      </div>
+      <div class="body" *ngFor="let appointment of group.appointments">
+        <span>
+          <div class="body" [hidden]="appointment.members.length == 0" *ngFor="let member of appointment.members">
+            <div class="col">{{ member.name|htmlSpecialDecode }}</div>
+            <div class="col customer_name"><span *ngIf="appointment.customer != null"><span *ngIf="appointment.customer.company.length > 0">{{ appointment.customer.company | htmlSpecialDecode }} </span>{{ appointment.customer.lastName | htmlSpecialDecode }} {{ appointment.customer.firstName | htmlSpecialDecode }}</span></div><div class="timeline"><div  (click)="loadBooking(appointment.id)" class="creneau" [ngStyle]="{'height': 30 + 'px', 'width':getAppointmentWidth(appointment) + '%', 'margin-left': getAppointmentLeft(appointment) + '%', 'background-color':group.color, 'color':'white', 'text-align':'center'}">{{ member.number }}</div></div><div class="col">
+              <span class="text-primary" *ngIf="appointment.quotation">DEVIS </span>
+              <span *ngIf="appointment.state == 'ok'">Confirmé</span>
+              <span *ngIf="appointment.state == 'waiting'">En attente</span>
+              <span *ngIf="appointment.state == 'cancelled'">Annulé</span>
+              <span *ngIf="appointment.state == 'abandonned'">Abandonné</span>
+            </div>
+          </div>
+          <div class="body" *ngIf="appointment.members.length == 0">
+            <div class="col2 customer_name"><span *ngIf="appointment.customer != null"><span *ngIf="appointment.customer.company.length > 0">{{ appointment.customer.company | htmlSpecialDecode }} </span>{{ appointment.customer.lastName | htmlSpecialDecode }} {{ appointment.customer.firstName | htmlSpecialDecode }}</span></div>
+            <div class="timeline">
+              <div  (click)="loadBooking(appointment.id)" class="creneau" [ngStyle]="{'height': 30 + 'px', 'width':getAppointmentWidth(appointment) + '%', 'margin-left': getAppointmentLeft(appointment) + '%', 'background-color':group.color, 'color':'white', 'text-align':'center'}">
+                {{ appointment.numbers }}
+              </div>
+            </div>
+            <div class="col">
+              <span class="text-primary" *ngIf="appointment.quotation">DEVIS </span>
+              <span *ngIf="appointment.state == 'ok'">Confirmé</span>
+              <span *ngIf="appointment.state == 'waiting'">En attente</span>
+              <span *ngIf="appointment.state == 'cancelled'">Annulé</span>
+              <span *ngIf="appointment.state == 'abandonned'">Abandonné</span>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>

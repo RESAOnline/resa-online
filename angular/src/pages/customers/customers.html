@@ -1,0 +1,131 @@
+<div id="page_content" class="container p-sm-2" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Clients ({{ nbTotalCustomers }})</h1>
+    <div>
+      <button type="button" class="btn btn-primary mr-2" (click)="launchExportCustomers(contentExportCustomer)">Exporter Clients</button>
+      <button type="button" class="btn btn-success" (click)="openEditCustomerDialog(contentCustomer)">+ Ajouter une fiche client</button>
+    </div>
+  </div>
+  <input class="form-control mt-md-3" id="member_search" type="text" placeholder="Recherche..." [(ngModel)]="searchForm.search" (ngModelChange)="searchCustomerChanged()">
+  <div class="mt-2">
+    <ngb-pagination class="float-left" [(page)]="searchForm.page" [pageSize]="searchForm.limit" [collectionSize]="nbTotalCustomers" (pageChange)="searchCustomers()" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
+    <div class="float-right form-inline">
+      <select [disabled]="nbTotalCustomers < 10" class="form-control mr-2" [(ngModel)]="searchForm.limit" (ngModelChange)="searchCustomers()" style="width:70px">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select> par page
+    </div>
+  </div>
+  <table class="table table-striped text-center mt-3">
+    <thead>
+      <tr>
+        <th>NOM</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Entreprise</th>
+        <th>Téléphone</th>
+        <th>Type de compte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="cursor-pointer hover-bold" *ngFor="let customer of customers" (click)="goCustomer(customer.ID)">
+        <td>{{ customer.lastName | htmlSpecialDecode }}</td>
+        <td>{{ customer.firstName | htmlSpecialDecode }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.company | htmlSpecialDecode }}</td>
+        <td>{{ customer.phone | formatPhone }}</td>
+        <td>
+          {{ getTypeAccountName(customer) }}<i *ngIf="customer.idFacebook.length > 0">(Facebook)</i>
+          <i *ngIf="!customer.isWpUser && !customer.askAccount" class="isWpUser">(Pas de compte sur le site)<br /></i>
+          <i *ngIf="customer.askAccount" class="isWpUser" style="color:#00BFFF"><br />Demande de compte</i>
+          <i *ngIf="isRESAManager(customer) && isSeeSettings()">
+            <br /><span class="text-success" *ngIf="customer.seeSettings">Accès aux réglages (option RESA_Manager)</span>
+            <span class="text-danger" *ngIf="!customer.seeSettings">Pas accès aux réglages (option RESA_Manager)</span>
+          </i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+
+<ng-template #contentCustomer let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Ajouter une fiche client</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex justify-content-center">
+      <div class="">
+        <div class="form-group"><input class="form-control" type="text" placeholder="NOM" [(ngModel)]="modelCustomer.lastName" /></div>
+        <div class="form-group"><input class="form-control" type="text" placeholder="Prénom" [(ngModel)]="modelCustomer.firstName" /></div>
+        <div class="form-group"><input class="form-control" type="email" placeholder="Email" [(ngModel)]="modelCustomer.email" /></div>
+        <div class="form-group"><input class="form-control" type="text" placeholder="Entreprise" [(ngModel)]="modelCustomer.company" /></div>
+        <div class="form-group"><input class="form-control" type="phone" placeholder="Téléphone" [(ngModel)]="modelCustomer.phone" /></div>
+        <div class="form-group"><input class="form-control" type="phone" placeholder="Téléphone 2" [(ngModel)]="modelCustomer.phone2" /></div>
+        <div class="form-group"><input class="form-control" type="text" placeholder="Adresse" [(ngModel)]="modelCustomer.address" /></div>
+        <div class="form-group"><input class="form-control" type="text" placeholder="Ville" [(ngModel)]="modelCustomer.town" /></div>
+        <div class="form-group"><input class="form-control" type="text" placeholder="Code postal" [(ngModel)]="modelCustomer.postalCode" /></div>
+        <div class="form-group">
+          <select class="form-control" [(ngModel)]="modelCustomer.country">
+            <option value="" disabled selected>-- Pays --</option>
+            <option *ngFor="let country of settings.countries" [value]="country.code">{{ country.name }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" [(ngModel)]="modelCustomer.locale">
+            <option value="" disabled selected>-- Langue --</option>
+            <option *ngFor="let language of settings.languages" [value]="language">{{ settings.allLanguages[language][0] }}</option>
+          </select>
+        </div>
+        <div class="form-group"><input class="form-control" type="text" placeholder="SIRET" [(ngModel)]="modelCustomer.siret" /></div>
+        <div class="form-group"><input class="form-control" type="text" placeholder="Forme Juridique" [(ngModel)]="modelCustomer.legalForm" /></div>
+        <div class="form-group">
+          <label for="company_account_customers">Type de compte</label>
+          <select id="company_account_customers" class="form-control" [(ngModel)]="modelCustomer.typeAccount">
+            <option *ngFor="let typeAccount of settings.typesAccounts" [value]="typeAccount.id">{{ global.getTextByLocale(typeAccount.name) }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="form-check" *ngIf="!modelCustomer.isWpUser">
+            <input class="form-check-input" id="wp_account_booking" type="checkbox" [(ngModel)]="modelCustomer.createWpAccount" />
+            <label class="form-check-label" for="wp_account_booking">Créer un compte sur le site (email nécessaire)</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check" *ngIf="modelCustomer.ID == -1">
+            <input class="form-check-input" id="notify_wp_account_booking" type="checkbox" [(ngModel)]="modelCustomer.notify" />
+            <label class="form-check-label" for="notify_wp_account_booking">Notifier le client par email</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <span class="text-warning" *ngIf="modelCustomer.createWpAccount && (modelCustomer.email == null || modelCustomer.email.length == 0)">Veuillez renseigner une adresse email correcte !<br /></span>
+    <span class="text-warning" *ngIf="!modelCustomer.createWpAccount && (modelCustomer.phone == null || modelCustomer.phone.length == 0)">Veuillez renseigner un numéro de téléphone !<br /></span>
+    <button class="btn btn-success" [disabled]="!isValidCustomer()" (click)="c(true)">Créer client</button>
+    <button class="btn btn-danger" (click)="d()">Annuler</button>
+  </div>
+</ng-template>
+
+<ng-template #contentExportCustomer let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Extraction des clients</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center">
+      <h6>Extraction des clients en cours...</h6>
+      <div>
+        <ngb-progressbar [showValue]="true" type="info" [value]="currentPurcent"></ngb-progressbar>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" (click)="d()">Annuler</button>
+  </div>
+</ng-template>

@@ -1,0 +1,390 @@
+<subMenu *ngIf="!global.fullScreen" [date]="global.currentDate" (changeDate)="updateDate($event)"></subMenu>
+<div id="page_content" [ngClass]="{'ml-5 mr-5':!global.fullScreen, 'page-fullScreen':global.fullScreen}">
+  <div *ngIf="global.fullScreen" class="d-flex flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom justify-content-start">
+    <subMenu  [date]="global.currentDate" (changeDate)="updateDate($event)" [displayLinks]="false"></subMenu>
+  </div>
+  <div *ngIf="processingData" class="sLoader_bg"><div class="sLoader"></div></div>
+  <button class="btn-full-screen btn btn-success" (click)="openConstraintCalendarDialog()" ngbTooltip="Ajouter une nouvelle contrainte sur vos activités ou votre personnel">Contrainte</button>
+  <div id="planning" class="col">
+    <section id="services">
+      <div class="wrapper">
+        <div id="planning_timeline">
+          <div class="timeline_hours d-flex">
+            <h3></h3>
+            <div class="hour_timeline_content" [ngStyle]="{'grid-template-columns': getScaleCSS()}">
+              <div *ngFor="let item of getRepeat(getHours()); index as i" class="hour" [ngStyle]="{'grid-column': (i * getScaleHours() + 1)  +' /  span ' + getScaleHours() }">
+                <span  [ngClass]="{'hour_double_digits':(i + planning.min) >= 10}">{{ i + planning.min }}h</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline_minutes d-flex">
+            <h3></h3>
+            <div class="min_timeline_content" [ngStyle]="{'grid-template-columns': getScaleCSS()}">
+              <div *ngFor="let item of getRepeat(getMinutes()); index as i" class="minuts" [ngClass]="{'sep': i%4 != 0}" [ngStyle]="{'grid-column': (i * getScaleMinutes() + 1)  +' /  span ' + getScaleMinutes() }">
+                <span *ngIf="i%4 == 0">00</span>
+                <span *ngIf="i%4 == 1">15</span>
+                <span *ngIf="i%4 == 2">30</span>
+                <span *ngIf="i%4 == 3">45</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="planning_content" [ngClass]="{'planning-fullScreen':global.fullScreen}">
+          <div class="service d-flex" *ngFor="let member of members; index as i">
+            <h3 class="pl-service-name d-inline-flex align-items-center justify-content-end">{{ member.nickname }}</h3>
+            <div class="content_timeline" [ngStyle]="{'grid-template-columns': getScaleCSS()}">
+              <div id="creneau_{{ i }}_{{ j }}" *ngFor="let appointment of member.appointments; index as j" class="pl_creneau used" [ngClass]="{'pl_selected': selectedIdTimeslot == 'creneau_' + i + '_' + j }" [ngStyle]="{'grid-column': getBeginMinutes(appointment) + ' / span ' + getDurationMinutes(appointment), 'background-color': appointment.color}" (click)="selectTimeslotConstraint(appointment, 'creneau_' + i + '_' + j, member.id)" placement="bottom" [ngbTooltip]="tipContent">
+                <span *ngIf="appointment.type == 'timeslot'">
+                  <ng-template #tipContent>
+                    <div class="text-white">
+                      <span class="nb_places">{{ appointment.attribuated }} / {{ appointment.numbers }}</span><br />
+                      <span class="nb_places">{{ appointment.service | htmlSpecialDecode }} </span>
+                    </div>
+                  </ng-template>
+                  <span class="nb_places">{{ appointment.attribuated }} / {{ appointment.numbers }} </span>
+                  <span class="nb_places">{{ appointment.service | htmlSpecialDecode }} </span>
+                </span>
+                <span *ngIf="appointment.type == 'constraint'">
+                  Contrainte
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="creneau_detail">
+            <div class="cd_nbs" *ngIf="selectedTimeslot && selectedTimeslotOpened">
+              <span class="nb_places">{{ selectedTimeslot.service | htmlSpecialDecode }} </span>
+              <span class="nb_places">{{ selectedTimeslot.attribuated }} / {{ selectedTimeslot.numbers }}</span>
+            </div>
+            <div class="cd_rdvs" *ngIf="selectedTimeslot && selectedTimeslotOpened">
+              <div class="text-center" *ngIf="loadDataAppointmentsLaunched">Chargement...</div>
+              <!-- selected //-->
+              <div id="rdv_{{ appointment.idAppointment }}" class="cd_rdv" (click)="selectAppointment(appointment)" *ngFor="let appointment of appointments">
+                <ng-template #tipContent>
+                  <h4>Participants</h4>
+                  <span *ngFor="let numberPrice of appointment.prices">
+                    <table class="table" *ngIf="getParticipantsParameter(numberPrice.participantsParameter)!=null">
+                      <thead>
+                        <tr>
+                          <th *ngFor="let field of getParticipantsParameter(numberPrice.participantsParameter).fields">
+                            {{ global.getTextByLocale(field.name) }}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let participant of numberPrice.participants"><td *ngFor="let field of getParticipantsParameter(numberPrice.participantsParameter).fields">{{ global.getTextByLocale(field.prefix) }}{{ getParticipantFieldName(participant, field) }}{{ global.getTextByLocale(field.suffix) }}</td></tr>
+                      </tbody>
+                      <!--
+                      <tfoot *ngIf="backendCtrl.isDisplaySum(editBookingCtrl.getParticipantsParameter(numberPrice.price.participantsParameter).fields)">
+                        <tr>
+                          <td ng-repeat="field in editBookingCtrl.getParticipantsParameter(numberPrice.price.participantsParameter).fields"><span *ngIf="field.displaySum">Somme : {{ editBookingCtrl.getTextByLocale(field.prefix,'<?php echo get_locale(); ?>') }}{{ backendCtrl.getDisplaySum(field, numberPrice.participants) }}{{ editBookingCtrl.getTextByLocale(field.suffix,'<?php echo get_locale(); ?>') }}</span></td>
+                        </tr>
+                      </tfoot>
+                      //-->
+                    </table>
+                  </span>
+                </ng-template>
+                <div class="cd_rdv_head">
+                  <span class="cd_resa_id">n°{{ appointment.id }}<span class="cd_resa_nb_appointment">({{ appointment.appointments }})</span>
+                  <span *ngIf="appointment.askParticipants" class="dashicons dashicons-groups dashicons-sm" [ngbTooltip]="tipContent" tooltipClass="tooltip-participants" container="body"></span></span>
+                  <!--span.cd_rdv_state-->
+                  <span class="text-primary" *ngIf="appointment.quotation">DEVIS </span>
+                  <span class="cd_rdv_state valid" *ngIf="appointment.state == 'ok'" ngbTooltip="Confirmé"></span>
+                  <ng-template #waitingStateName>
+                    <span *ngIf="appointment.askPaymentsStatus == 0">Non confirmé</span>
+                    <span *ngIf="appointment.askPaymentsStatus == 1">Paiement en attente</span>
+                    <span *ngIf="appointment.askPaymentsStatus == 2">Paiement expiré</span>
+                  </ng-template>
+                  <span class="cd_rdv_state not_confirmed" *ngIf="appointment.state == 'waiting'" [ngbTooltip]="waitingStateName"></span>
+                  <span class="cd_rdv_state cancelled" *ngIf="appointment.state == 'cancelled' ||  appointment.state == 'abandonned'"  ngbTooltip="Annulé"></span>
+                  <!--span.cd_rdv_state.wait_payment-->
+                  <!--span.cd_rdv_state.payment_expired-->
+                  <!--span.cd_rdv_state.abandonned-->
+                  <span class="cd_rdv_paiement_state no_payment" *ngIf="appointment.paymentState == 'paiement_none'" ngbTooltip="Pas de paiement">NP</span>
+                  <span class="cd_rdv_paiement_state account" *ngIf="appointment.paymentState == 'paiement_incomplete'" ngbTooltip="Acompte/Caution">A/C</span>
+                  <span class="cd_rdv_paiement_state paid" *ngIf="appointment.paymentState == 'paiement_done'" ngbTooltip="Payé">P</span>
+                  <span class="cd_rdv_paiement_state refund" *ngIf="appointment.paymentState == 'paiement_remboursement'" ngbTooltip="Remboursement nécessaire">R</span>
+                  <span class="cd_rdv_paiement_state refund_complete" *ngIf="appointment.paymentState == 'paiement_remboursement_done'" ngbTooltip="Remboursement complet">R</span>
+                </div>
+                <div class="cd_rdv_client" *ngIf="appointment.customer != null">
+                  <span class="cd_client_firstname">{{ appointment.customer.firstName }} </span>
+                  <span class="cd_client_lastname">{{ appointment.customer.lastName }} </span>
+                  <span class="cd_client_company">{{ appointment.customer.company }}</span>
+                </div>
+                <div class="cd_rdv_prices">
+                  <div class="cd_rdv_price" *ngFor="let price of appointment.prices">
+                    <span class="cd_price_nb" *ngIf="price.number != null">{{ price.number }} </span>
+                    <span class="cd_price_name">{{ price.name | htmlSpecialDecode }}</span>
+                  </div>
+                </div>
+                <div class="cd_rdv_members" *ngIf="appointment.members.length > 0">
+                  <span *ngFor="let staff of appointment.members; index as i"><span *ngIf="i > 0">, </span>{{ staff.name | htmlSpecialDecode }}</span>
+                </div>
+                <div class="cd_rdv_tags">
+                  <div [hidden]="getTagById(idTag) == null" class="cd_rdv_tag {{ getTagById(idTag).color }}" *ngFor="let idTag of appointment.tags">{{ global.getTextByLocale(getTagById(idTag).title) }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cd_rdv_actions">
+            <div class="cd_actions_row">
+              <div class="cd_actions">
+                <div class="cd_action_btn edit" ngbTooltip="Modifier le rendez-vous"></div>
+                <div class="cd_action_btn details" ngbTooltip="Voir la réservation" (click)="seeBooking()"></div>
+                <div class="cd_action_btn change_date" ngbTooltip="Modifier la date"></div>
+                <div class="cd_action_btn change_member" ngbTooltip="Modifier moniteur"></div>
+                <div class="cd_action_btn change_price" ngbTooltip="Modifier tarifs"></div>
+                <div class="cd_action_btn delete" ngbTooltip="Supprimer"></div>
+              </div>
+            </div>
+            <div class="cd_actions_row">
+              <div class="cd_actions">
+                <div class="cd_action_btn client" ngbTooltip="Fiche client"></div>
+                <div class="cd_action_btn client_notif" ngbTooltip="Notifications"></div>
+                <div class="cd_action_btn client_cash" ngbTooltip="Encaisser"></div>
+                <div class="cd_action_btn client_reciept" ngbTooltip="Voir le reçu"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="selection_panel" *ngIf="selectedBooking || loadDataBookingLaunched" [ngClass]="{'open':handler}">
+    <div class="panel_content">
+      <div *ngIf="loadDataBookingLaunched" class="sLoader_bg"><div class="sLoader"></div></div>
+      <div *ngIf="selectedBooking!=null && selectedBooking.formatAppointments.length >= 4" class="selection_actions btn-group text-center justify-content-center d-flex" role="group" aria-label="Basic example">
+        <button class="btn btn-danger" type="button" (click)="handler = false">Fermer</button>
+        <button class="btn btn-success" type="button" (click)="goEditBooking(selectedBooking)">Modifier</button>
+      </div>
+      <section id="reservation_detail" *ngIf="selectedBooking && selectedAppointment">
+        <span *ngIf="isRESAManager()" class="ricon-reciept-full ricon rbtn grid-item--self-center rbtn--size-small rbtn--color-green" id="btn_reciept" ngbTooltip="Voir le reçu" container="body" (click)="openReceipt()"></span>
+        <h3 class="titre--size-l grid-item--align-center reservation_header__right_bloc" [ngClass]="{'titre--color-vert':!selectedBooking.quotation, 'titre--color-blue':selectedBooking.quotation}" id="resa_title">
+          {{ selectedBooking.quotation?'Devis':'Réservation' }} n°<span *ngIf="selectedBooking.idCreation > -1">{{ selectedBooking.idCreation }}</span><span *ngIf="selectedBooking.idCreation == -1">{{ selectedBooking.id }}</span>
+        </h3>
+        <span *ngIf="global.backendV2Activated && isRESAManager() && selectedBooking.customer!=null" class="rbtn rbtn--size-small ricon rbtn--color-green ricon-client-full grid-item--self-center" id="btn_client" ngbTooltip="Voir la fiche client" container="body" (click)="goCustomer(selectedBooking.customer.ID)"></span>
+        <span *ngIf="global.backendV2Activated && isRESAManager()" class="rbtn rbtn--size-small ricon rbtn--color-green ricon-message-full grid-item--self-center" id="btn_message" ngbTooltip="Notifier le client" container="body" (click)="openNotificationDialog(contentNotification)"></span>
+        <span *ngIf="global.backendV2Activated  && isRESAManager() && isCaisseOnlineActivated()" class="rbtn rbtn--size-small ricon rbtn--color-green ricon-reload-full grid-item--self-center" id="btn_reload" ngbTooltip="Rafraichir" container="body"(click)="calculateBookingPaymentState()"></span>
+        <span *ngIf="global.backendV2Activated && isRESAManager() && !isCaisseOnlineActivated()" class="rbtn rbtn--size-small ricon rbtn--color-green ricon-reload-full grid-item--self-center" id="btn_reload" ngbTooltip="Changer l'état de paiement" container="body" (click)="openPaymentStateDialog(contentPaymentState)"></span>
+        <span *ngIf="global.backendV2Activated && isRESAManager() && isCaisseOnlineActivated()" class="rbtn rbtn--size-small ricon rbtn--color-green ricon-cart-full grid-item--self-center" id="btn_cart" ngbTooltip="Envoyer sur la caisse" container="body" (click)="payBookingCaisseOnline(selectedBooking)"></span>
+        <div class="client_infos reservation_header__right_bloc" id="client_infos" *ngIf="selectedBooking.customer != null">
+          <div class="client_infos__lastname">{{ selectedBooking.customer.lastName }}</div>
+          <div class="client_infos__firstname">{{ selectedBooking.customer.firstName }}</div>
+          <div class="client_infos__company">{{ selectedBooking.customer.company }}</div>
+        </div>
+        <div class="paiement_infos reservation_header__right_bloc" id="paiement_infos">
+          <div class="reservation_state">Etat
+            <span class="cd_rdv_state valid" *ngIf="selectedBooking.status == 'ok'" ngbTooltip="Confirmé"></span>
+            <ng-template #waitingStateName>
+              <span *ngIf="selectedBooking.waitingSubState == 0">Non confirmé</span>
+              <span *ngIf="selectedBooking.waitingSubState == 1">Paiement en attente</span>
+              <span *ngIf="selectedBooking.waitingSubState == 2">Paiement expiré</span>
+            </ng-template>
+            <span class="cd_rdv_state not_confirmed" *ngIf="selectedBooking.status == 'waiting'" [ngbTooltip]="waitingStateName"></span>
+            <span class="cd_rdv_state cancelled" *ngIf="selectedBooking.status == 'cancelled' ||  selectedBooking.status == 'abandonned'" ngbTooltip="Annulé"></span>
+          </div>
+          <div class="reservation_paiement_state" *ngIf="selectedBooking.idPaymentState != null">Paiement
+            <span class="cd_rdv_paiement_state no_payment" *ngIf="selectedBooking.idPaymentState == 'paiement_none'" ngbTooltip="Pas de paiement">NP</span>
+            <span class="cd_rdv_paiement_state account" *ngIf="selectedBooking.idPaymentState == 'paiement_incomplete'" ngbTooltip="Acompte/Caution">A/C</span>
+            <span class="cd_rdv_paiement_state paid" *ngIf="selectedBooking.idPaymentState == 'paiement_done'" ngbTooltip="Payé">P</span>
+            <span class="cd_rdv_paiement_state refund" *ngIf="selectedBooking.idPaymentState == 'paiement_remboursement'" ngbTooltip="Remboursement nécessaire">R</span>
+            <span class="cd_rdv_paiement_state refund_complete" *ngIf="selectedBooking.idPaymentState == 'paiement_remboursement_done'" ngbTooltip="Remboursement complet">R</span>
+            <span *ngIf="isCaisseOnlineActivated()">(<a (click)="getPaymentsForBooking(selectedBooking)" href="javascript:void(0)">Paiements</a>)</span>
+          </div>
+          <div class="reservation_total" *ngIf="selectedBooking.totalPrice != null">Total :
+            <span *ngIf="selectedBooking.status != 'cancelled' && selectedBooking.status != 'abandonned'">
+              <span *ngIf="selectedBooking.paymentsCaisseOnlineDone || (!isCaisseOnlineActivated() && global.round(selectedBooking.totalPrice - selectedBooking.needToPay) > 0)">
+                {{ global.round(selectedBooking.totalPrice - selectedBooking.needToPay) }}{{ settings.currency }} /
+              </span> {{ selectedBooking.totalPrice }} {{ settings.currency }}
+            </span>
+            <span *ngIf="(selectedBooking.status == 'cancelled' || selectedBooking.status == 'abandonned') && selectedBooking.needToPay < 0 && (selectedBooking.paymentsCaisseOnlineDone || !isCaisseOnlineActivated())">
+              {{ -(selectedBooking.needToPay - selectedBooking.totalPrice) }}{{ settings.currency }}
+            </span>
+          </div>
+        </div>
+        <div id="reservation_content" style="grid-area: reservation_content; margin-top: 15px;">
+          <ul class="nav nav-tabs nav-justified reservation_detail__tabs_menu" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active reservation_detail__tabs_menu__tab_item" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1" aria-expanded="true">Activités({{ selectedBooking.nbAppointments }})</a>
+            </li>
+            <li class="nav-item" *ngIf="selectedBooking.idPaymentState != null">
+              <a class="nav-link reservation_detail__tabs_menu__tab_item" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" aria-expanded="true">Paiements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link reservation_detail__tabs_menu__tab_item" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3" aria-expanded="true">Notes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link reservation_detail__tabs_menu__tab_item" href="#tab4" data-toggle="tab" role="tab" aria-controls="tab4" aria-expanded="true" (click)="loadDataHistoricBookingIfNecessary()">Suivi</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" role="tabpanel" aria-labelledby="tab1-tab" id="tab1">
+              <div class="bookings_this_date" *ngFor="let appointments of selectedBooking.formatAppointments">
+                <p class="date">{{ appointments[0].startDate | parseDate | date:'dd MMMM yyyy':'':'fr'}}</p>
+                <div class="bookings" *ngFor="let appointment of appointments" [ngStyle]="{'border-left': '5px solid ' + appointment.color}">
+                  <p class="date">{{ appointment.startDate | parseDate | date:'HH:mm':'':'fr'}} - {{ appointment.endDate | parseDate | date:'HH:mm':'':'fr'}}</p>
+                  <div class="cd_rdv">
+                    <ng-template #tipContent>
+                      <h4>Participants</h4>
+                      <span *ngFor="let numberPrice of appointment.appointmentNumberPrices">
+                        <table class="table" *ngIf="getParticipantsParameter(numberPrice.participantsParameter)!=null">
+                          <thead>
+                            <tr>
+                              <th *ngFor="let field of getParticipantsParameter(numberPrice.participantsParameter).fields">
+                                {{ global.getTextByLocale(field.name) }}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let participant of numberPrice.participants"><td *ngFor="let field of getParticipantsParameter(numberPrice.participantsParameter).fields">{{ global.getTextByLocale(field.prefix) }}{{ getParticipantFieldName(participant, field) }}{{ global.getTextByLocale(field.suffix) }}</td></tr>
+                          </tbody>
+                          <!--
+                          <tfoot *ngIf="backendCtrl.isDisplaySum(editBookingCtrl.getParticipantsParameter(numberPrice.price.participantsParameter).fields)">
+                            <tr>
+                              <td ng-repeat="field in editBookingCtrl.getParticipantsParameter(numberPrice.price.participantsParameter).fields"><span *ngIf="field.displaySum">Somme : {{ editBookingCtrl.getTextByLocale(field.prefix,'<?php echo get_locale(); ?>') }}{{ backendCtrl.getDisplaySum(field, numberPrice.participants) }}{{ editBookingCtrl.getTextByLocale(field.suffix,'<?php echo get_locale(); ?>') }}</span></td>
+                            </tr>
+                          </tfoot>
+                          //-->
+                        </table>
+                      </span>
+                    </ng-template>
+                    <div class="cd_rdv_head">
+                      <span class="cd_resa_id"><span *ngIf="appointment.idPlace.length > 0 && getPlaceById(appointment.idPlace)" class="cd_rdv_place">[{{ global.getTextByLocale(getPlaceById(appointment.idPlace).name) }}] </span><span class="cd_rdv_service_name">{{ appointment.service | htmlSpecialDecode }}</span><span *ngIf="appointment.askParticipants" class="cd_rdv_participants_icon dashicons dashicons-groups dashicons-sm" [ngbTooltip]="tipContent" tooltipClass="tooltip-participants" container="body"></span></span>
+                      <span class="cd_rdv_state valid" *ngIf="appointment.state == 'ok'" ngbTooltip="Confirmé"></span>
+                      <ng-template #waitingStateName>
+                        <span *ngIf="appointment.askPaymentsStatus == 0">Non confirmé</span>
+                        <span *ngIf="appointment.askPaymentsStatus == 1">Paiement en attente</span>
+                        <span *ngIf="appointment.askPaymentsStatus == 2">Paiement expiré</span>
+                      </ng-template>
+                      <span class="cd_rdv_state not_confirmed" *ngIf="appointment.state == 'waiting'" [ngbTooltip]="waitingStateName"></span>
+                      <span class="cd_rdv_state cancelled" *ngIf="appointment.state == 'cancelled' ||  appointment.state == 'abandonned'" ngbTooltip="Annulé"></span>
+                    </div>
+                    <div class="cd_rdv_prices">
+                      <div class="cd_rdv_price" *ngFor="let appointmentNumberPrice of appointment.appointmentNumberPrices">
+                        <span class="cd_price_nb" *ngIf="appointmentNumberPrice.number != null">{{ appointmentNumberPrice.number }} </span>
+                        <span class="cd_price_name">{{ appointmentNumberPrice.name | htmlSpecialDecode }}</span>
+                      </div>
+                    </div>
+                    <div class="cd_rdv_members" *ngIf="appointment.appointmentMembers.length > 0">
+                      <span *ngFor="let staff of appointment.appointmentMembers; index as i"><span *ngIf="i > 0">, </span>{{ staff.name | htmlSpecialDecode }}</span>
+                    </div>
+                    <div class="cd_rdv_tags">
+                      <div [hidden]="getTagById(idTag) == null" class="cd_rdv_tag {{ getTagById(idTag).color }}" *ngFor="let idTag of appointment.tags">{{ global.getTextByLocale(getTagById(idTag).title) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" role="tabpanel" aria-labelledby="tab2-tab" id="tab2">
+              <h4>Paiements </h4>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Type</th>
+                    <th>Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr [hidden]="payment.state == 'pending'" *ngFor="let payment of selectedBooking.payments">
+                    <td>{{ payment.paymentDate | parseDate | date:'dd MMMM yyyy HH:mm':'':'fr' }}
+                    <del class="text-danger" *ngIf="payment.state=='cancelled'"><br />Annulé</del></td>
+                    <td *ngIf="payment.repayment">{{ payment.value|negative }}{{ settings.currency }}</td>
+                    <td *ngIf="!payment.repayment">{{ payment.value }}{{ settings.currency }}</td>
+                    <td>
+                      <span *ngIf="payment.isReceipt != null && payment.isReceipt && payment.value >= 0">[Acompte]</span>
+                      <span *ngIf="payment.isReceipt != null && payment.isReceipt && payment.value < 0">[Remboursement acompte]</span>
+                      {{ getPaymentName(payment.type, payment.name) | htmlSpecialDecode }}
+                    </td>
+                    <td>{{ payment.note }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-pane" role="tabpanel" aria-labelledby="tab3-tab" id="tab3">
+              <h4>Notes</h4>
+              <p class="text-left">
+                <span *ngIf="selectedBooking.note!=null && selectedBooking.note.length > 0">
+                  <span class="font-weight-bold">Note privée : <br /></span>
+                  <span [innerHtml]="selectedBooking.note | htmlSpecialDecode:true"></span> <br />
+                </span>
+                <span *ngIf="selectedBooking.selectedBooking!=null && selectedBooking.publicNote.length > 0">
+                  <span class="font-weight-bold">Note public note : <br /></span>
+                  <span [innerHtml]="selectedBooking.publicNote | htmlSpecialDecode:true"></span><br />
+                </span>
+                <span *ngIf="selectedBooking.customerNote!=null && selectedBooking.customerNote.length > 0">
+                  <span class="font-weight-bold">Remarque cliente : <br /></span>
+                  <span [innerHtml]="selectedBooking.customerNote | htmlSpecialDecode:true"></span><br />
+                </span>
+                <span *ngIf="selectedBooking.staffNote.length > 0">
+                  <span class="font-weight-bold">Note des membres : <br /></span>
+                  <span [innerHtml]="selectedBooking.staffNote | htmlSpecialDecode:true"></span><br />
+                </span>
+              </p>
+            </div>
+            <div class="tab-pane" role="tabpanel" aria-labelledby="tab4-tab" id="tab4">
+              <button class="btn btn-success" *ngIf="selectedBooking.historic == null && !loadDataBookingLaunched"
+              (click)="loadDataHistoricBookingIfNecessary()">Charger le suivi</button>
+              <table class="table" *ngIf="selectedBooking.historic">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Information</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let line of selectedBooking.historic">
+                    <td>{{ line.creationDate | parseDate | date:'EEEE dd MMMM yyyy':'':'fr' }}</td>
+                    <td>{{ line.creationDate | parseDate | date:'HH\'h\'mm':'':'fr' }}</td>
+                    <td><span [innerHtml]="line.text"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="selection_actions btn-group text-center justify-content-center d-flex" role="group" aria-label="Basic example">
+        <button class="btn btn-danger" type="button" (click)="handler = false">Fermer</button>
+        <button class="btn btn-success" type="button" (click)="goEditBooking(selectedBooking)">Modifier</button>
+      </div>
+    </div>
+    <div class="handler" (click)="switchHandler('services')">
+      <div *ngIf="!handler" class="handler_icon">&#8250;</div>
+      <div *ngIf="handler" class="handler_icon">&#8249;</div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #contentPaymentState let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Changement de l'état de paiement</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    Etat de paiement actuel :
+    <span class="font-weight-bold text-success">
+      <span *ngIf="selectedBooking.paymentState == 'noPayment'">Pas de paiement</span>
+      <span *ngIf="selectedBooking.paymentState == 'advancePayment'">Acompte</span>
+      <span *ngIf="selectedBooking.paymentState == 'deposit'">Caution</span>
+      <span *ngIf="selectedBooking.paymentState == 'complete'">Encaissée</span>
+    </span>
+    <div class="mt-2">
+      <div class="form-group">
+        <label class="font-weight-bold" for="formNewPaymentState"> Nouvel état de paiement </label>
+        <select id="formNewPaymentState" class="form-control" [(ngModel)]="newPaymentState">
+          <option value="noPayment">Pas de paiement</option>
+          <option value="advancePayment">Acompte</option>
+          <option value="deposit">Caution</option>
+          <option value="complete">Encaissée</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" [disabled]="!isOkPaymentStatus()" (click)="c(true)" >Valider le changement</button>
+    <button class="btn btn-danger" (click)="d()">Fermer</button>
+  </div>
+</ng-template>

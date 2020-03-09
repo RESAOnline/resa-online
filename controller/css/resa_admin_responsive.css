@@ -1,0 +1,596 @@
+
+/****** RESPONSIVE STYLE **********/
+@media screen and (max-width: 1440px) {
+	.resa_views{
+		grid-template-rows:auto 1fr;
+	}
+	.resa_views .resa_filters_top{
+		grid-area:resa_filters_top;
+		display:grid;
+		grid-template-columns: repeat(5, auto);
+		grid-template-rows: auto auto;
+		grid-template-areas: 
+		"filters_date filters_date filters_date filters_infos filters_infos"
+		"filters_name filters_name filters_name filters_autres light_mode";
+		grid-column-gap: 10px;
+		grid-row-gap: 0px;
+		padding-top:2px;
+		margin-bottom:10px;
+		width:100%;
+		padding-bottom:5px;
+		border-bottom:1px solid #cccccc;
+	}
+	.resa_filters_top .filter_type.filters_date{
+		grid-area:filters_date;
+	}
+	.resa_filters_top .filter_type.filters_name{
+		grid-area:filters_name;
+	}
+	.resa_filters_top .filter_type.filters_infos{
+		grid-area:filters_infos;
+	}
+	.resa_filters_top .filter_type.light_mode{
+		grid-area:light_mode;
+	}
+	.resa_filters_top .filters_autres{
+		grid-area:filters_autres;
+	}
+	
+	#resa_planning .resa_views .resa_filters_top{
+		grid-area:resa_filters_top;
+		display:grid;
+		grid-template-columns: repeat(5, auto);
+		grid-template-rows: auto auto;
+		grid-template-areas: 
+		"filters_date filters_date filters_date_planning filters_date_planning filters_autres";
+		grid-column-gap: 10px;
+		grid-row-gap: 0px;
+		padding-top:2px;
+		margin-bottom:10px;
+		width:100%;
+		padding-bottom:5px;
+		border-bottom:1px solid #cccccc;
+	}
+	
+	.resa_filters_top .filters_date_planning{
+		grid-area:filters_date_planning;
+	}
+	.reservation_client #client_results .client_results_content{
+		width: 90vw;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.resa_views{
+		grid-template-rows:auto 1fr;
+	}
+}
+
+
+
+@media screen and (max-width: 1168px) {
+	.resa_views{
+		grid-template-rows:auto 1fr;
+	}
+	
+	#resa_planning .resa_views .resa_filters_top{
+		grid-template-columns: repeat(3, auto);
+		grid-template-rows: auto auto;
+		grid-template-areas: 
+		"filters_date filters_date filters_date"
+		"filters_date_planning filters_date_planning filters_autres";
+	}
+}
+
+
+
+
+@media screen and (max-width: 1080px) {
+	.resa_calendar{
+	max-width:100vw;
+	}
+	
+	.resa_calendar .calendar_content{
+	margin-top:10px;
+	}
+	
+	#resa_online_admin .resa_calendar .resa_calendar_navs, #resa_online_admin .resa_calendar .resa_calendar_date_navs{
+		float:none !important;
+	}
+		
+	
+	.resa_actions{
+		display:flex;
+		flex-direction: column;
+		padding:0px 10px;
+		box-sizing:border-box;
+	}	
+	
+	.resa_views{
+		display:flex;
+		flex-direction:column;
+		padding-top:15px;
+	}
+
+	.resa_filters_left{
+		margin-top:5px;
+		width:90%;
+		position:absolute;
+		left:-90%;
+		margin-left:0;
+		z-index:175;
+		background-color:#e5e5e5;
+		-webkit-transition: all 100ms ease-in-out;
+		-moz-transition: all 100ms ease-in-out;
+		-ms-transition: all 100ms ease-in-out;
+		-o-transition: all 100ms ease-in-out;
+		transition: all 100ms ease-in-out;
+	}
+	.resa_filters_left::after{
+		content:'> Filtres <';
+		display:block;
+		position:absolute;
+		text-align:center;
+		line-height:25px;
+		font-weight:bolder;
+		font-size:18px;
+		top:0px;
+		left:100%;
+		right:0px;
+		bottom:0px;
+		width:110%;
+		height:30px;
+		background-color:#27b673;
+		color:white;
+	}
+	.resa_filters_left:hover{
+		left:0px;
+	}
+
+	.resa_views .resa_filters_top{
+		display:flex;
+		flex-direction:column;
+		padding:0px;
+		margin:50px auto 15px auto;	
+	}
+	.resa_filters_top .filter_type.filters_date{
+		text-align:center;
+	}
+	.resa_filters_top .filter_type{
+		width:100%;
+		max-width:100%;
+	}
+	.resa_filters_top .filter_type.light_mode{
+		width:100%;
+		max-width:100%;
+		padding:8px 40%;
+	}
+	.resa_views .resa_filters_top .btn{
+		min-width:45px;
+		padding:8px;
+		text-align:center;
+		box-sizing:border-box;
+		height:auto;
+	}
+	
+	.editing .booking_edit_content{
+		display:grid;
+	}
+	.booking_edit_content{
+		display: none;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: auto;
+		grid-template-areas:
+		"recap_menu_action recap_menu_action recap_menu_action"
+		"col_place_service col_date col_date"
+		"col_prices col_members col_state_tag"
+		"col_clients_infos col_clients_infos col_clients_infos"
+		"col_recap_total col_recap_total col_recap_total";
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		margin:5px;
+		cursor:initial;
+		border-top:2px solid #cccccc;
+		padding:10px;
+	}
+	
+	.edit_clients_infos .client_info{
+		flex-wrap: wrap;
+		margin-bottom:5px;
+	}
+
+	.add_notes{
+		grid-template-columns: 1fr;
+		padding:0px;
+	}
+
+	.resa_view_content{
+		flex:1;
+		width:100%;
+	}
+		
+	.reservation_content .booking{
+		display:grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: auto;
+		grid-template-areas:
+		"booking_date booking_nb_people booking_place"
+		"booking_hour booking_states booking_service"
+		"booking_total booking_total booking_total"
+		"booking_edit booking_edit booking_edit";
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		margin-bottom:2px;
+	}
+	.booking_prices, .booking_members, .booking_tags{
+		display:none;
+	}
+	
+
+}
+@media screen and (max-width: 782px) {
+	/*.resa_header{
+		display:grid;
+		grid-template-columns: 1fr 3fr 1fr;
+		grid-template-areas:
+		"resa_header_logo resa_header_raccourcis resa_header_infos"
+		"notif_center_wrapper notif_center_wrapper notif_center_wrapper";
+	}*/
+	.resa_header{
+		display:grid;
+		grid-template-columns:1fr;
+		grid-template-areas:
+		"resa_header_raccourcis"
+		"notif_center_wrapper notif_center_wrapper notif_center_wrapper";
+	}
+	.resa_header_logo, .resa_header_infos{
+		display:none;
+	}
+	.resa_header_logo{
+		display:none;
+		position:relative;
+	}
+	.resa_header_raccourcis a{
+		flex:1;
+		padding:2px 4px;
+		margin:1px;
+		font-size:10px;
+	}
+	
+	#resa_content {
+		padding-top: 70px;
+		margin-top: 0px;
+	}
+	
+	#resa_online_admin .resa_btn.plus_ico::before{
+		line-height:25px;
+	}
+	#resa_planning .resa_views .resa_filters_top{
+		grid-template-columns: 1fr;
+		grid-template-areas: 
+		"filters_date "
+		"filters_date_planning"
+		"filters_autres";
+	}
+	.resa_popup_header_wrapper {
+		display: block;
+	}
+	.popup_header_title{
+		margin:0px 0px 10px 0px;
+	}
+	.reservation_content{
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 740px) {
+	.resa_view_content{
+		width:100%;
+	}
+	.resa_view_reservations .resa_reservation, #resa_add_resa .resa_reservation{
+		display:flex;
+		flex-direction:column;
+		padding:4px;
+		justify-content: space-between;
+		margin:auto;		
+	}
+	.reservation_client{
+		text-align:center;
+		margin:auto;
+		padding:2px;
+	}
+	.reservation_states{
+		text-align:center;
+		padding:2px;
+	}
+	.reservation_actions{
+		text-align:center;
+		padding:2px;
+		display:flex;
+		width:100%;
+		align-items:stretch;
+		justify-content:space-between;
+	}
+	.resa_view_reservations .reservation_actions .btn{
+		flex-grow:1;
+		padding:8px 2px;
+		margin:0px 2px;
+	}
+	
+	.reservation_bookings{
+		text-align:center;
+		padding:2px;
+	}
+	
+	.wrap .resa_views_menu .nav-tab-wrapper .nav-tab{
+		float:left;
+	}
+	.reservation_bookings .booking{
+		display:grid;
+		grid-template-columns:1fr;
+		grid-template-rows: auto;
+		/*grid-template-areas:
+		"booking_date booking_nb_people booking_place"
+		"booking_hour booking_states booking_service";*/
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		margin-bottom:2px;
+	}
+	
+	.edit_date .creneaux_date_title input{
+		width: 120px;
+		font-size: 11px;
+	}
+	
+	.client_note, .states_paiement_value, .reservation_suivi, .reservation_notes, .reservation_states .states_state, .booking_tags, .booking_prices, .booking_members, .filter_type.light_mode{
+		display:none;
+	}
+	.client_name, .client_company{
+		display:inline;
+		padding-right:7px;
+	}
+	.reservation_actions .btn{
+		display:inline;
+		padding:2px 5px;
+	}
+
+	.resa_views .resa_filters_top .filter_type.light_mode{
+		display:none;
+	}
+
+	.editing .booking_edit_content{
+		display:grid;
+	}
+	.booking_edit_content{
+		display: none;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: auto;
+		grid-template-areas:
+		"recap_menu_action recap_menu_action recap_menu_action"
+		"col_place_service col_date col_date"
+		"col_prices col_members col_state_tag"
+		"col_clients_infos col_clients_infos col_clients_infos"
+		"col_recap_total col_recap_total col_recap_total";
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		margin:5px;
+		cursor:initial;
+		border-top:2px solid #cccccc;
+		padding:10px;
+	}
+	
+	.booking_edit .booking_tags{
+		display:block;
+	}
+	
+	.client_results .client_results_title{
+		display:none;
+	}
+	
+	.client_result{
+		display:grid;
+		grid-template-columns:repeat(3, 1fr);
+		grid-template-rows:18px;
+		grid-template-areas:
+		"lastname firstname company"
+		"email email phone";
+		grid-column-gap: 0px;
+		grid-row-gap: 0px;
+		align-self:center;
+		text-align:left;
+		justify-self: center;
+		vertical-align:middle;
+		line-height:1em;
+		border:1px solid #e5e5e5;
+		padding:4px 2px;
+	}
+	.client_result span{
+		line-height:1.1em;
+		vertical-align:middle;
+	}
+	
+	.popup_header{
+		position:relative;
+		box-sizing:border-box;
+		display:flex;
+		padding:15px;
+		background-color:#27b673;
+	}
+	.popup_content{
+		margin-top:0px;
+	}
+
+}
+
+@media screen and (max-width: 600px) {
+	.reservation_content{
+		padding:0px;
+	}
+	.resa_reservation{
+		padding:0px;
+		border:none;
+	}
+	.resa_popup{
+		position:fixed;
+		left:0px;
+		top:0px;
+		bottom:0px;
+		right:0px;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.resa_popup_wrapper{
+		background-color:white;
+		position:absolute;
+		left:0px;
+		top:0px;
+		bottom:0px;
+		right:0px;
+		overflow:auto;
+		padding:3px;
+	}
+	
+	.popup_header{
+		display:flex;
+		flex-direction:column;
+		padding:10px;
+		background-color:#27b673;
+		margin-bottom:10px;
+		text-align:center;
+	}
+	.popup_header_menu .btn{
+		display:block;
+		text-align:center;
+		margin:3px 0px;
+	}
+	.editing .booking_edit_content{
+		display:grid;
+	}
+	.booking_edit_content{
+		display: none;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+		grid-template-areas:
+		"recap_menu_action"
+		"col_place_service"
+		"col_date"
+		"col_prices" 
+		"col_members"
+		"col_state_tag"
+		"col_clients_infos"
+		"col_recap_total";
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		margin:2px;
+		cursor:initial;
+		border-top:2px solid #cccccc;
+		padding:5px;
+	}
+	
+	.recap_menu_actions_top .recap_menu_actions{
+		flex-direction:column;
+	}
+	
+	.edit_date .creneau_custom .input_nb, .edit_prices .price .price_quantity{
+		padding:2px;
+	}
+	
+	
+	.booking_edit .reduction_description{
+		display:none;
+	}
+	
+	
+	.resa_coupon_line{
+		display:grid;
+		grid-template-columns:1fr;
+		margin:5px;
+	}
+
+	.resa_custom_line{
+		display:grid;
+		grid-template-columns:1fr;
+		margin:5px;
+	}
+
+	.resa_reduction_line{
+		display:grid;
+		grid-template-columns:1fr;
+		margin:5px;
+	}
+	.history_title{
+		grid-template-columns: 1fr;
+		text-align:center;
+	}
+	.history_content{
+		text-align:center;
+		grid-template-columns: 1fr;
+	}
+}
+
+
+@media screen and (max-width: 430px) {
+
+	.client_result{
+		display:grid;
+		grid-template-columns:1fr;
+		grid-template-areas:
+		"lastname""firstname""company""email""phone";
+		text-align:left;
+		justify-self: center;
+		vertical-align:middle;
+		line-height:1em;
+		padding:4px 2px;
+	}
+	.search_client .search_client_input{
+		width:100%;
+	}
+	.reductions .reduction{
+		display:grid;
+		grid-template-columns:1fr;
+		margin:5px;
+	}
+	.edit_clients_infos .client_info{
+		display:flex;
+		flex-wrap: no-wrap;
+		flex-direction:column;
+		flex:1;
+		align-items:center;
+	}
+	.edit_clients_infos .client_info .number{
+		flex-grow:0;
+		padding:0px 5px;
+		margin:0px;
+		padding:0px;
+	}
+	.edit_clients_infos .client_info .firstname{
+		flex-grow:1;
+		height:30px;
+		width:100%;
+	}
+	.edit_clients_infos .client_info .lastname{
+		flex-grow:1;
+		height:30px;
+		width:100%;
+	}
+	.edit_clients_infos .client_info .age{
+		flex-grow:1;
+		height:30px;
+		width:100%;
+	}
+	.edit_clients_infos .client_info .level{
+		flex-grow:0;
+		width:100%;
+	}
+	
+	/*** planning groupe / membres   **/
+	.planning_members .planning_members_timeline{
+		grid-area:timeline;
+		display: grid;
+		width:100%;
+		grid-template-columns: repeat(10, 1fr);
+		grid-template-rows: auto;
+	}
+	.planning_members .tl_min {
+		display:none;
+	}
+}

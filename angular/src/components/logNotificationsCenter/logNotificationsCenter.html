@@ -1,0 +1,52 @@
+<div id="notif_center_wrapper">
+  <div (click)="switchLogNotificationCenter()" id="notif_center_button">
+    <span style="line-height:1.2" class="icon_notif_center dashicons dashicons-megaphone"></span>
+    <span id="alert_number" *ngIf="logNotificationsWaitingNumber > 0">{{ logNotificationsWaitingNumber }}</span>
+  </div>
+  <div *ngIf="logNotificationsCenterDisplayed" id="notif_center_content">
+    <div *ngIf="getLogNotificationsLaunched" class="sLoader_bg"><div class="sLoader"></div></div>
+    <div id="notif_center_content_header">
+      <a class="all_seen" (click)="clickAllLogNotifications()">Tout marquer comme vu</a>
+      <a class="log_link text-danger font-weight-bold" (click)="closeLogNotificationCenter();">Fermer</a>
+    </div>
+    <div id="notif_center_content_tabs">
+      <div id="tabs_menu">
+        <div class="tab_item" [ngClass]="{'active':criticityDisplayed == 0}" (click)="criticityDisplayed = 0">Externes</div>
+        <div class="tab_item" [ngClass]="{'active':criticityDisplayed == 1}" (click)="criticityDisplayed = 1">Internes</div>
+      </div>
+      <div class="tab_content active">
+        <div class="separator">Récent</div>
+        <div (click)="clickOnLogNotifications(log)" [hidden]="criticityDisplayed != log.criticity || !isRecent(log)" *ngFor="let log of logNotifications" class="notif {{ getType(log) }}">
+          <div class="notif_icon">
+            <span *ngIf="log.idBooking == -1" class="icon dashicons dashicons-admin-users"></span>
+            <span *ngIf="log.idBooking > -1" class="icon dashicons dashicons-media-default"></span>
+          </div>
+          <div class="notif_infos">
+            <span [innerHTML]="log.text|htmlSpecialDecode:true"></span>
+          </div>
+          <div class="notif_time">
+            {{ getRemainingTime(log) }}
+            <span *ngIf="log.idPlaces.length > 0"> - {{ getListPlaces(log.idPlaces.split(',')) }}</span>
+            <span *ngIf="log.clicked">- <a id="not_read" (click)="unreadLogNotification($event, log)">Marquer non lu</a></span>
+          </div>
+        </div>
+        <div class="separator">Antérieur</div>
+        <div (click)="clickOnLogNotifications(log)" [hidden]="criticityDisplayed != log.criticity || isRecent(log)" *ngFor="let log of logNotifications" class="notif {{ getType(log) }}">
+          <div class="notif_icon">
+            <span *ngIf="log.idBooking == -1" class="icon dashicons dashicons-admin-users"></span>
+            <span *ngIf="log.idBooking > -1" class="icon dashicons dashicons-media-default"></span>
+          </div>
+          <div class="notif_infos">
+            <span [innerHTML]="log.text|htmlSpecialDecode:true"></span>
+          </div>
+          <div class="notif_time">
+            {{ getRemainingTime(log) }}
+            <span *ngIf="log.idPlaces.length > 0"> - {{ getListPlaces(log.idPlaces.split(',')) }}</span>
+            <span *ngIf="log.clicked">- <a id="not_read" (click)="unreadLogNotification($event, log)">Marquer non lu</a></span>
+          </div>
+        </div>
+        <div id="load_more" (click)="loadLogNotificationsAnteriors(criticityDisplayed)">Plus anciennes</div>
+      </div>
+    </div>
+  </div>
+</div>

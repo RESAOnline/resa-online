@@ -1,0 +1,123 @@
+.resa-calendar-wrapper *,
+.resa-calendar-wrapper *:before,
+.resa-calendar-wrapper *:after {
+    box-sizing: border-box;
+}
+
+.resa-calendar-wrapper .group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.resa-calendar-wrapper img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: baseline;
+}
+
+.resa-calendar-wrapper a {
+    text-decoration: none;
+}
+
+.resa-calendar-wrapper {
+    width: auto;
+    margin: 3em auto;
+    padding: 2em;
+    border: 1px solid #dcdcff;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.resa-calendar-wrapper table {
+    clear: both;
+    width: 100%;
+    border: 1px solid #dcdcff;
+    border-radius: 3px;
+    border-collapse: collapse;
+    color: #444;
+}
+
+.resa-calendar-wrapper td {
+    height: 48px;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px solid #dcdcff;
+    border-top: 1px solid #dcdcff;
+    width: 12.5%;
+}
+
+.resa-calendar-wrapper td a {
+    display: block;
+    padding: 12px 0px;
+    color: black;
+}
+
+.resa-calendar-wrapper td a:hover {
+    color: green;
+    font-weight: bold;
+}
+
+.resa-calendar-wrapper td a.active {
+    background-color: green;
+}
+
+.resa-calendar-wrapper td.not-current {
+    color: #c0c0c0;
+}
+
+.resa-calendar-wrapper td.today {
+    font-weight: 700;
+    color: #28283b;
+    font-size: 1.5em;
+}
+
+.resa-calendar-wrapper thead td {
+    border: none;
+    color: #28283b;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+#divCal table tbody *{ cursor:pointer;}
+
+.resa-calendar-wrapper #btnPrev {
+    float: left;
+    margin-bottom: 20px;
+}
+
+.resa-calendar-wrapper #btnPrev:before {
+    content: '<';
+    font-family: FontAwesome;
+    padding-right: 4px;
+}
+
+.resa-calendar-wrapper #btnNext {
+    float: right;
+    margin-bottom: 20px;
+}
+
+.resa-calendar-wrapper #btnNext:after {
+    content: '>';
+    font-family: FontAwesome;
+    padding-left: 4px;
+}
+
+.resa-calendar-wrapper #btnPrev,
+.resa-calendar-wrapper #btnNext {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #c0c0c0;
+    cursor: pointer;
+    font-family: "Roboto Condensed", sans-serif;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.resa-calendar-wrapper #btnPrev:hover,
+.resa-calendar-wrapper #btnNext:hover {
+    color: #28283b;
+    font-weight: bold;
+}

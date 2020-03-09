@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span *ngIf="!isNewInfoCalendar()">Edition d'une information</span>
+    <span *ngIf="isNewInfoCalendar()">Ajouter une information</span>
+  </h4>
+  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="dismiss()">&times;</button>
+</div>
+<div class="modal-body">
+  <div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+  <p><b><em> Permet d'ajouter une information sur l'affichage du calendrier et sur le planning moniteur.<br /> </em></b></p>
+  <h4>Date</h4>
+  <div class="add_paiement_account">
+    <div class="form-inline">
+      <span *ngIf="formInfoCalendar.manyDays">Du :</span>
+      <div class="form-group ml-2">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="formInfoCalendar.date" ngbDatepicker #date1="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="date1.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-check ml-2">
+        <input type="checkbox" class="form-check-input" id="formManyDays" [(ngModel)]="formInfoCalendar.manyDays" >
+        <label class="form-check-label" for="formManyDays" ngbTooltip="Cocher cette case afin de pouvoir répéter cette information sur plusieurs jours.">Sur plusieurs jours</label>
+      </div><br />
+      <span *ngIf="formInfoCalendar.manyDays" class="ml-2"> Jusqu'au :</span>
+      <span *ngIf="formInfoCalendar.manyDays">
+        <div class="form-group ml-2">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="formInfoCalendar.dateEnd" ngbDatepicker #date2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="date2.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+    <div class="form-inline">
+      <div class="form-group ml-2 mr-2">
+        <div class="input-group">
+          <input type="time" class="form-control" [(ngModel)]="formInfoCalendar.time" (ngModelChange)="startTimeInputUpdate.next($event)" />
+        </div>
+      </div>
+       à
+      <div class="form-group ml-2">
+        <div class="input-group">
+          <input type="time" class="form-control" [(ngModel)]="formInfoCalendar.timeEnd" (ngModelChange)="endTimeInputUpdate.next($event)" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4>Description</h4>
+  <div *ngIf="formInfoCalendar.infoCalendar" class="form-group">
+    <textarea rows="10" class="form-control" [(ngModel)]="formInfoCalendar.infoCalendar.note" placeholder="Note"></textarea>
+  </div>
+  <span *ngIf="formInfoCalendar.infoCalendar && placesList.length > 0">
+    <h4>Lieu</h4>
+    <select class="form-control" [(ngModel)]="formInfoCalendar.infoCalendar.idPlaces">
+      <option *ngFor="let place of placesList" [value]="place.value"> {{ place.title }}</option>
+    </select>
+  </span>
+</div>
+<div class="modal-footer">
+  <div class="mr-auto">
+    <button class="btn btn-danger" *ngIf="!isNewInfoCalendar()" (click)="deleteInfoCalendar()">Supprimer</button>
+  </div>
+  <button [disabled]="!isOkFormInfoCalendar()" class="btn btn-success" (click)="editInfoCalendar()">Valider</button>
+</div>

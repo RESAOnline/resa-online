@@ -1,0 +1,17 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+
+.angular-show-hide-animation {
+	opacity: 1;
+}
+
+.angular-show-hide-animation.ng-enter {
+	-webkit-transition: 1s;
+  transition: 1s;
+  opacity: 0;
+}
+
+.angular-show-hide-animation.ng-enter-active {
+    opacity: 1;
+}

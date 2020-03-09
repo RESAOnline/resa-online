@@ -1,0 +1,138 @@
+
+/** Notification **/
+
+.client_notifications{
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:5px;
+}
+
+.notifications_email, .notifications_sms{
+	border:1px solid #e6e6e6;
+	padding:10px;
+	text-align:center;
+}
+
+.notifications_email_title, .notifications_sms_title{
+	text-align:center;
+}
+
+.notifications_email .notification, .notifications_sms .notification{
+	display:flex;
+	padding:5px;
+	border:1px solid #e6e6e6;
+	justify-content:center;
+	align-items:center;
+}
+
+.notifications_email .notification .notif_title, .notifications_sms .notification .notif_title{
+	flex:2;
+	text-align:center;
+}
+
+.notifications_email .notification .notif_btn, .notifications_sms .notification .notif_btn{
+	flex:1;
+	text-align:center;
+}
+
+.ask_paiement{
+	margin:auto;
+}
+
+.ask_paiement .value{
+	font-size:17px;
+	font-weight: bold;
+	margin:20px 0px;
+	padding:15px;
+	background-color:#262626;
+	color:white;
+	display:inline-block;
+}
+
+.ask_paiement .account_value{
+	font-size:15px;
+	font-weight: bold;
+	margin:10px 0px;
+	padding:10px;
+	background-color:#262626;
+	color:white;
+	display:inline-block;
+}
+
+.ask_paiement h3{
+	font-size:24px;
+	margin:15px 0px;
+	text-align:center;
+}
+
+.ask_paiement h4{
+	font-size:17px;
+	margin:15px 0px;
+}
+
+.ask_paiement_options{
+	display:flex;
+}
+
+.ask_paiement_options .ask_paiement_metods{
+	padding:5px 10px;
+	flex:1;
+}
+.ask_paiement_options .ask_paiement_account{
+	padding:5px 10px;
+	flex:1;
+}
+
+.notification_content_options{
+	padding:10px;
+	margin:5px;
+	border:1px solid #cccccc;
+}
+
+.notification_content_render{
+	padding:10px;
+	margin:5px;
+	border:1px solid #cccccc;
+}
+
+.notification_content_render h3{
+	font-size:24px;
+	margin:15px 0px;
+	text-align:center;
+}
+
+
+.content_render_template{
+	margin:10px 0px;
+	text-align:center;
+}
+.content_render_editor{
+	border:1px solid black;
+	padding:10px;
+	margin:5px;
+}
+.content_render_editor #notificationEditor_ifr{
+	min-height:60vh !important;
+}
+
+
+.resa_lang{
+	margin:10px 0px;
+	background-color:#d6d6d6;
+}
+.resa_lang span{
+	display:inline-block;
+	margin:10px 5px 10px 0px;
+	padding:10px 15px;
+	cursor:pointer;
+	background-color:#979797;
+}
+.resa_lang span.active_lang{
+	background-color:#29b572;
+}
+.resa_lang span img{
+	width:20px;
+}

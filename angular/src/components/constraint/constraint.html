@@ -1,0 +1,101 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <span *ngIf="!isNewConstraint()">
+      Edition d'une contrainte
+    </span>
+    <span *ngIf="isNewConstraint()">
+      Ajouter une contrainte
+    </span>
+  </h4>
+  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="dismiss()">&times;</button>
+</div>
+<div class="modal-body">
+  <div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+  <div *ngIf="formConstraintCalendar.serviceConstraint != null && formConstraintCalendar.serviceConstraint.id == -1 && formConstraintCalendar.memberConstraint.id == -1">
+    <ul class="nav nav-tabs mb-2">
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active':formConstraintCalendar.isServiceConstraint}" href="javascript:void(0)" (click)="formConstraintCalendar.isServiceConstraint = true">Contrainte sur une activité</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active':!formConstraintCalendar.isServiceConstraint}" href="javascript:void(0)" (click)="formConstraintCalendar.isServiceConstraint = false">Contrainte sur un {{ global.getTextByLocale(settings.staff_word_single) }}</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="formConstraintCalendar.isServiceConstraint && formConstraintCalendar.serviceConstraint != null">
+    <p><b><em> Permet de bloquer la réservation d'une activité sur la date et l'heure indiquée seulement sur le formulaire client.<br /> </em></b></p>
+    <h4>Activité</h4>
+    <div class="form-group">
+      <select class="form-control" [(ngModel)]="formConstraintCalendar.serviceConstraint.idService">
+        <option *ngFor="let service of services" value="{{ service.id }}">{{ getServiceName(service) }}</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="!formConstraintCalendar.isServiceConstraint && formConstraintCalendar.memberConstraint != null">
+    <p><b><em> Permet de bloquer le {{ global.getTextByLocale(settings.staff_word_single) }} sur la date et l'heure indiquée.<br /> </em></b></p>
+    <h4>{{ global.getTextByLocale(settings.staff_word_many) }}</h4>
+    <div class="form-group">
+      <select class="form-control" [(ngModel)]="formConstraintCalendar.memberConstraint.idMember">
+        <option *ngFor="let member of members" value="{{ member.id }}">{{ getMemberName(member) }}</option>
+      </select>
+    </div>
+  </div>
+  <h4>Date</h4>
+  <div class="add_paiement_account">
+    <div class="form-inline">
+      <span *ngIf="formConstraintCalendar.manyDays">Du :</span>
+      <div class="form-group ml-2">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="formConstraintCalendar.date" ngbDatepicker #date1="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="date1.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-check ml-2">
+        <input type="checkbox" class="form-check-input" id="formManyDays" [(ngModel)]="formConstraintCalendar.manyDays" >
+        <label class="form-check-label" for="formManyDays" ngbTooltip="Cocher cette case afin de pouvoir répéter cette information sur plusieurs jours.">Sur plusieurs jours</label>
+      </div><br />
+      <span *ngIf="formConstraintCalendar.manyDays" class="ml-2"> Jusqu'au :</span>
+      <span *ngIf="formConstraintCalendar.manyDays">
+        <div class="form-group ml-2">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="formConstraintCalendar.dateEnd" ngbDatepicker #date2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="date2.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+    <div class="form-inline">
+      <div class="form-group ml-2 mr-2">
+        <div class="input-group">
+          <input type="time" class="form-control" [(ngModel)]="formConstraintCalendar.time" (ngModelChange)="startTimeInputUpdate.next($event)" />
+        </div>
+      </div>
+       à
+      <div class="form-group ml-2">
+        <div class="input-group">
+          <input type="time" class="form-control" [(ngModel)]="formConstraintCalendar.timeEnd" (ngModelChange)="endTimeInputUpdate.next($event)" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="text-warning mt-2" *ngIf="isOkFormConstraintCalendar() && formConstraintCalendar.isServiceConstraint">
+    Bloquer la réservation sur l'activité :  <span class="font-weight-bold">{{ getServiceNameById(formConstraintCalendar.serviceConstraint.idService) }}</span>
+    <span *ngIf="!formConstraintCalendar.manyDays"> le <span style="font-weight:bold">{{ generateStartDate(formConstraintCalendar) | date:'dd MMMM yyyy':'':'fr' }}</span> de <span style="font-weight:bold">{{ generateStartDate(formConstraintCalendar)| date:'HH:mm':'':'fr' }} à {{ generateEndDate(formConstraintCalendar)| date:'HH:mm':'':'fr' }}</span></span>
+    <span *ngIf="formConstraintCalendar.manyDays"> du <span style="font-weight:bold">{{ generateStartDate(formConstraintCalendar) | date:'dd MMMM yyyy HH:mm':'':'fr' }} au {{ generateEndDate(formConstraintCalendar) | date:'dd MMMM yyyy HH:mm':'':'fr' }}</span></span> ?
+  </p>
+  <p class="text-warning font-weight-bold mt-2" *ngIf="isOkFormConstraintCalendar() && !formConstraintCalendar.isServiceConstraint">
+    Rendre indisponible le {{ global.getTextByLocale(settings.staff_word_single) }} :
+    <span class="font-weight-bold">{{ getMemberNameById(formConstraintCalendar.memberConstraint.idMember) }}</span>
+    <span *ngIf="!formConstraintCalendar.manyDays"> le <span style="font-weight:bold">{{ generateStartDate(formConstraintCalendar)| date:'dd MMMM yyyy':'':'fr' }}</span> de <span style="font-weight:bold">{{ generateStartDate(formConstraintCalendar)| date:'HH:mm':'':'fr' }} à {{ generateEndDate(formConstraintCalendar)| date:'HH:mm':'':'fr' }}</span></span>
+    <span *ngIf="formConstraintCalendar.manyDays"> du <span style="font-weight:bold">{{ generateStartDate(formConstraintCalendar) | date:'dd MMMM yyyy HH:mm':'':'fr' }} au {{ generateEndDate(formConstraintCalendar) | date:'dd MMMM yyyy HH:mm':'':'fr' }}</span></span> ?
+  </p>
+</div>
+<div class="modal-footer">
+  <div class="mr-auto">
+    <button class="btn btn-danger" *ngIf="!isNewConstraint()" (click)="deleteConstraintCalendar()">Supprimer</button>
+  </div>
+  <button [disabled]="!isOkFormConstraintCalendar()" class="btn btn-success" (click)="editConstraintCalendar()">Valider</button>
+</div>

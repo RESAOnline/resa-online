@@ -1,0 +1,274 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+div#resa_header{
+
+}
+
+div#page_content{
+  min-height: calc(100vh - 160px);
+}
+
+div#resa_footer{
+  height: 50px;
+}
+
+
+.popLoaded {
+  background-color: #27b673;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 300px;
+  height: 250px;
+  margin: -150px 0 0 -150px;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  color:white;
+}
+
+
+.popLoaded .aloader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #27b673;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+
+.sLoader_bg{
+	z-index: 999;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(255, 255, 255, 0.7);
+	display:flex;
+	vertical-align:middle;
+	justify-content:center;
+	align-items:center;
+	align-content:center;
+}
+
+.sLoader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #27b673;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+.color_badge {
+  display: inline-block;
+  border-radius: 15px;
+  border: 1px solid black;
+  height: 15px;
+  width: 15px;
+  background-color: white;
+}
+
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.deactivated {
+  opacity:0.5;
+}
+
+.mlg .modal-dialog{
+  min-width: 82%;
+}
+
+.max .modal-dialog{
+  min-width: 100%;
+}
+
+.param_infos{
+	border-radius: 5px;
+    padding: 3px 5px;
+	margin:1px;
+}
+
+/**
+ * Color input
+ */
+.form-control[type=color] {
+    height: auto;
+}
+
+.form-control[type=color]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]:-moz-color-swatch-wrapper {
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]:-ms-color-swatch-wrapper {
+  padding: 0;
+  margin: 0;
+}
+
+.form-control[type=color][list="colors"]::-webkit-color-swatch-wrapper {
+  padding: .5rem .75rem;
+}
+.form-control[type=color][list="colors"]:-moz-color-swatch-wrapper {
+  padding: .5rem .75rem;
+}
+.form-control[type=color][list="colors"]:-ms-color-swatch-wrapper {
+  padding: .5rem .75rem;
+}
+
+.form-control[type=color]::-webkit-color-swatch {
+  height: 22px; /* font-size + line-height */
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]::-moz-color-swatch {
+  height: 22px; /* font-size + line-height */
+  padding: 0;
+  margin: 0;
+}
+.form-control[type=color]:-ms-color-swatch {
+  height: 22px; /* font-size + line-height */
+  padding: 0;
+  margin: 0;
+}
+
+
+@font-face {
+  font-family: 'resa-icon';
+  src:  url('assets/font/resa-icon.eot?sl2i06');
+  src:  url('assets/font/resa-icon.eot?sl2i06#iefix') format('embedded-opentype'),
+    url('assets/font/resa-icon.ttf?sl2i06') format('truetype'),
+    url('assets/font/resa-icon.woff?sl2i06') format('woff'),
+    url('/font/resa-icon.svg?sl2i06#resa-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ricon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'resa-icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size:28px;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ricon-reload:before {
+  content: "\e918";
+}
+.ricon-reload-full:before {
+  content: "\e919";
+}
+.ricon-cart:before {
+  content: "\e900";
+}
+.ricon-cart-full:before {
+  content: "\e901";
+}
+.ricon-client:before {
+  content: "\e902";
+}
+.ricon-client-full:before {
+  content: "\e903";
+}
+.ricon-date:before {
+  content: "\e904";
+}
+.ricon-date-full:before {
+  content: "\e905";
+}
+.ricon-edit:before {
+  content: "\e906";
+}
+.ricon-edit-full:before {
+  content: "\e907";
+}
+.ricon-group:before {
+  content: "\e908";
+}
+.ricon-group-full:before {
+  content: "\e909";
+}
+.ricon-member:before {
+  content: "\e90a";
+}
+.ricon-member-full:before {
+  content: "\e90b";
+}
+.ricon-message:before {
+  content: "\e90c";
+}
+.ricon-message-full:before {
+  content: "\e90d";
+}
+.ricon-price:before {
+  content: "\e90e";
+}
+.ricon-price-full:before {
+  content: "\e90f";
+}
+.ricon-reciept:before {
+  content: "\e910";
+}
+.ricon-reciept-full:before {
+  content: "\e911";
+}
+.ricon-show:before {
+  content: "\e912";
+}
+.ricon-show-full:before {
+  content: "\e913";
+}
+.ricon-ticket:before {
+  content: "\e914";
+}
+.ricon-ticket-full:before {
+  content: "\e915";
+}
+.ricon-trash:before {
+  content: "\e916";
+}
+.ricon-trash-full:before {
+  content: "\e917";
+}
+
+
+.tag_vert{ color:#28b673; border-color:#28b673;}
+.tag_jaune{ color:#efb20e; border-color:#efb20e;}
+.tag_orange{ color:#e28d14; border-color:#e28d14;}
+.tag_marron{ color:#765337; border-color:#765337;}
+.tag_rouge{ color:#d62d2d; border-color:#d62d2d;}
+.tag_bleu{ color:#1492e2; border-color:#1492e2;}

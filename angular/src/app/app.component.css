@@ -1,0 +1,46 @@
+
+#resa_header .btn-dashicons-outline {
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  padding: 2px;
+  border-radius: 10px;
+  color: white;
+  background-color: #27b673;
+}
+
+#resa_header .btn-dashicons-outline:hover {
+  color: white;
+}
+
+#resa_header .btn-dashicons-outline.dashicons {
+  font-size: 35px;
+}
+
+#resa_header a.btn-dashicons-outline.dashicons {
+  line-height: 1.2;
+}
+
+#resa_header .btn-dashicons {
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  padding: 2px;
+  border-radius: 10px;
+  color: #27b673;
+  background-color: white;
+}
+
+#resa_header .btn-dashicons:hover {
+  color: #27b673;
+}
+
+#resa_header .btn-dashicons.dashicons {
+  font-size: 35px;
+}
+
+@media (max-width: 800px) {
+  #browser-compatibility {
+    font-size: 10px;
+  }
+}

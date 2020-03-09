@@ -1,0 +1,1107 @@
+/** general **/
+
+#resa-form h1, #resa-form h2, #resa-form h3{
+	margin:25px 0px;
+}
+#resa-form h4, #resa-form h5, #resa-form h6{
+	margin:18px 0px;
+}
+
+
+/***** bloc Formulaire *****/
+#resa-form {
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	max-width: 1280px;
+	margin: auto;
+}
+
+#resa-form input,
+#resa-form select {
+	border: 1px solid #000000;
+	background-color: #f5f5f5;
+	padding: 5px 7px;
+	margin-bottom: 2px;
+	margin-top: 2px;
+	align-self: center;
+	color:#000000;
+	border-radius:0px;
+	height:2.2em;
+}
+
+/**** lightbox ****/
+.resa-lightbox {
+	/** a supprimer par benji **/
+	display: flex;
+
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+}
+
+.resa-lightbox .resa-lightbox-content {
+	display: block;
+	max-width: 90%;
+	max-height: 80%;
+	margin-top: 2%;
+	background-color: #ffffff;
+	margin: auto;
+	padding: 25px;
+}
+
+.resa-lightbox:target {
+	outline: none;
+	display: flex;
+}
+
+/***** NAVIGATION *****/
+#resa-form-navigation {
+	align-items: center;
+	justify-content: space-around;
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.navigation-step {
+	text-align: center;
+	padding: 5px 10px;
+	flex-grow: 1;
+	color: #9f9f9f;
+	border: 1px solid transparent;
+	cursor: not-allowed;
+	background-color: #cccccc;
+}
+
+.navigation-step.active {
+	color: #000000;
+	border: 1px solid transparent;
+	cursor: pointer;
+}
+
+.navigation-step.selected {
+	color: #ffffff;
+	background-color: #000000;
+	border: 1px solid #000000;
+	cursor: pointer;
+}
+
+.navigation-step.active:hover {
+	color: #000000;
+	background-color: #ffffff;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+}
+
+.navigation-step.navigation-previous-step,
+.navigation-step.navigation-next-step {
+	border: 1px solid transparent;
+	cursor: pointer;
+	color: #000000;
+}
+
+#resa-form-navigation-mobile .navigation-step.navigation-previous-step,
+#resa-form-navigation-mobile .navigation-step.navigation-next-step {
+	background-color: transparent;
+}
+
+/***** connexion *****/
+#resa-connexion {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/**** activité récente *****/
+#resa-recent-activity {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/**** font ******/
+.resa-fstyle-italic {
+	font-style: italic;
+}
+
+.resa-fweight-bold {
+	font-weight: bold;
+}
+
+.resa-tdecoration-lthrough {
+	text-decoration: line-through;
+}
+
+.resa-text-alert {
+	color:red !important;
+}
+
+/***** alignement texte *****/
+.resa-talign-center {
+	text-align: center;
+}
+
+.resa-talign-right {
+	text-align: right;
+}
+
+.resa-talign-justify {
+	text-align: justify;
+}
+
+/***** bouton *****/
+.resa-btn {
+	text-align: center;
+	padding: 15px;
+	margin: 10px 0px;
+	border: 1px solid #000000;
+	cursor: pointer;
+}
+
+.resa-btn:hover {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+.resa-btn.btn-wide {
+	width: 100%;
+	display: block;
+	box-sizing: border-box;
+}
+
+.resa-btn.btn-small {
+	padding: 8px;
+	margin: 5px 0px;
+}
+
+.resa-btn.resa-btn-disabled {
+	background-color:lightgrey;
+	color:grey;
+	border-color:lightgrey;
+}
+
+.resa-btn.resa-btn-disabled:hover {
+	background-color:lightgrey;
+	color:grey;
+	border-color:lightgrey;
+}
+
+/*
+.resa-btn.btn-dark {
+color: #ffffff;
+background-color: #000000;
+}
+*/
+/***** Bloc etapes *****/
+#resa-steps-content {
+	display: flex;
+}
+
+#steps {
+	flex-grow: 1;
+	flex-basis: 60%;
+	z-index: 2;
+	min-width: 75%;
+}
+
+/*** lieux ***/
+.resa-place {
+	margin: 5px;
+	border-style: solid;
+	box-sizing: border-box;
+}
+
+.resa-place img {
+	width: 100%;
+}
+
+/* lieu en colonne */
+.resa-places-cols {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+/* lieux en ligne */
+.resa-places-lines {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+}
+
+.resa-places-lines .resa-place img {
+	float: left;
+	width: 30%;
+	margin-right: 20px;
+}
+
+.resa-places-lines .resa-place h4 {
+	text-align: left;
+	margin-top: 0px;
+}
+
+/* image lieu arrondie */
+.resa-place img.rounded {
+	object-fit: cover;
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
+	display: block;
+	margin: auto;
+}
+
+.resa-place img.rounded.small {
+	width: 100px;
+	height: 100px;
+}
+
+.resa-place img.rounded.large {
+	width: 200px;
+	height: 200px;
+}
+
+.resa-place img.rounded.xlarge {
+	width: 300px;
+	height: 300px;
+}
+
+
+/**** categories et activités *****/
+.category-image {
+	width: 100%;
+}
+
+.resa-activities-content {
+}
+
+.resa-category,
+.resa-activity {
+	margin: 5px;
+	border-style: solid;
+	box-sizing: border-box;
+}
+
+.activities-col {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+/* activité en ligne */
+.activities-lines {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+}
+
+.activities-lines .resa-activity img {
+	float: left;
+	width: 30%;
+	margin-right: 20px;
+}
+
+.activities-lines .resa-activity .activity-title {
+	text-align: left;
+	margin-top: 0px;
+}
+
+.resa-service-description {
+	padding:10px 15px;
+}
+
+/***** date *****/
+
+/** calendrier date **/
+.resa-datepicker{
+	max-width:500px;
+	width:auto;
+	margin:auto;
+}
+.resa-datepicker table{
+	width:auto;
+	min-width:400px;
+	margin:auto;
+}
+.resa-datepicker thead .btn{
+	background-color:transparent;
+	line-height:2em;
+	padding:4px 8px;
+	color:black;
+	border:1px solid black;
+	content:"<" !important;
+}
+
+.resa-datepicker tbody td{
+	border:1px solid white;
+	width:auto;
+	height:auto;
+}
+.resa-datepicker tbody .btn{
+	background-color:transparent;
+	line-height:inherit;
+	line-height:2em;
+	padding:inherit;
+	color:black;
+	border:1px solid transparent;
+	border-radius:0px;
+}
+.resa-datepicker tbody .btn:hover{
+	color:white;
+	border:1px solid black;
+	background-color:black;
+}
+
+.resa-datepicker tbody .btn.active{
+	color:black;
+	border:1px solid black;
+	background-color:white;
+}
+
+.resa-datepicker tbody .btn.active:hover{
+	color:white;
+}
+
+.resa-datepicker tbody td{
+	padding:0px;
+	margin:0px;
+}
+
+/* BOSTRAAP GLYPHICON */
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url('../fonts/glyphicons-halflings-regular.eot');
+	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.resa-datepicker .glyphicon,
+.resa-datepicker.glyphicon {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.resa-datepicker .glyphicon-chevron-left:before,
+.resa-datepicker .glyphicon-chevron-left:before {
+	content: "\e079";
+}
+.resa-datepicker .glyphicon-chevron-right:before,
+.resa-datepicker .glyphicon-chevron-right:before {
+	content: "\e080";
+}
+
+
+.resa-period {
+	border: 1px solid #000000;
+	padding: 10px;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+
+.resa-period-content {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.resa-period:hover,
+.resa-period.selected {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+/* timeslots */
+.resa-timeslots-2col {
+	display: flex;
+	justify-content: center;
+}
+
+.resa-timeslots-column {
+	flex-grow:0;
+	width: auto;
+	min-width: 250px;
+}
+
+.resa-timeslot {
+	padding: 5px;
+	border: 1px solid #000000;
+	margin: 2px;
+	cursor: pointer;
+	width:auto;
+	position: relative;
+	overflow: hidden;
+}
+
+.resa-timeslot:hover,
+.resa-timeslot.selected {
+	color: #ffffff;
+	background-color: #000000;
+}
+
+#resa-form .resa-timeslot div {
+	color: inherit;
+}
+
+#resa-form .resa-timeslot .promo-label {
+	width: 135px;
+	background: #e43;
+	position: absolute;
+	top: 25px;
+	left: -50px;
+	text-align: center;
+	line-height: 16px;
+	letter-spacing: 1px;
+	color: #ffffff;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	top: 12px;
+	right: -35px;
+	left: auto;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(30deg);
+	font-size: 10px;
+	font-weight:500;
+
+}
+
+/* prices */
+.resa-prices .resa-prices-content {
+	display: flex;
+	justify-content: center;
+}
+
+
+.resa-price {
+	max-width: 300px;
+	margin-left: 10px;
+	margin-right: 11px;
+	border: 1px solid #000000;
+	padding: 5px 5px 15px 5px;
+}
+
+
+.resa-price-quantity {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.resa-price-quantity-equipment {
+	padding-top: 5px;
+}
+
+.resa-price-quantity .quantity-less {
+	width: 40px;
+	height: 30px;
+	text-align: center;
+	display: flex;
+	background-color: #000000;
+	color: #ffffff;
+	margin-right: 5px;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+}
+
+.resa-price-quantity .quantity-more {
+	width: 40px;
+	height: 30px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #000000;
+	color: #ffffff;
+	margin-left: 5px;
+	cursor: pointer;
+	align-self: center;
+}
+
+.resa-price-quantity .quantity-value {
+	width: 80px;
+	border: 1px solid #000000;
+	padding: 5px;
+	text-align: center;
+	font-size: 14px;
+}
+
+.resa-price-value {
+	font-size: 22px;
+}
+
+.resa-price-title {
+	font-size: 22px;
+}
+
+#resa-steps-content div.price_mention{
+	text-align: center;
+	font-style: italic;
+	font-weight:bold;
+	margin:10px 0px;
+	font-size: 14px;
+}
+
+.resa-extras {
+	margin-top: 60px;
+}
+
+/**** Information compte client *****/
+.resa_create_account {
+	width: calc(50% - 40px);
+	margin-left: 20px;
+	margin-right: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.resa-facebook-login-image {
+	width: 50px;
+}
+
+#resa-form-navigation-mobile {
+	display: none;
+}
+
+.resa-facebook-login {
+	text-align: center;
+}
+
+.resa-already_client {
+	display: flex;
+	flex-direction: column;
+	width: calc(50% - 40px);
+	margin-right: 20px;
+	margin-left: 20px;
+	align-items: center;
+}
+
+#resa-step-account {
+
+}
+
+.resa-customer-text{
+}
+
+.resa-step-account-registrations {
+	display: flex;
+}
+
+#resa-step-account input {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#resa-step-account select {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#resa-step-account .input_error {
+	color: #E74C3C;
+	font-size: 12px;
+	font-style: italic;
+	line-height: 12px;
+	display: block;
+	width: 100%;
+	text-align: right;
+	position: relative;
+	top: -23px;
+	right: 10px;
+	height: 0px;
+}
+
+#resa-step-account .input_info {
+	color: #FFC300;
+	font-size: 12px;
+	font-style: italic;
+	line-height: 12px;
+	display: block;
+	width: 100%;
+	text-align: right;
+	position: relative;
+	top: -23px;
+	right: 10px;
+	height: 0px;
+}
+
+#resa-step-account input[type="submit"] {
+	cursor: pointer;
+}
+
+#resa-step-account input[type="submit"]:disabled {
+	background: #dddddd;
+	border:none;
+}
+
+.resa-gdpr {
+	display: flex;
+	cursor:pointer;
+}
+
+.resa-gdpr p{
+	margin:5px 0px;
+}
+
+.resa-gdpr #acceptNewsletters {
+	flex-shrink: 1;
+	flex-basis: 80px;
+}
+
+.resa-gdpr #acceptGDPR {
+	flex-shrink: 1;
+	flex-basis: 80px;
+}
+
+/***** participants *****/
+.participants-content {
+}
+
+#resa-form .participant-icon {
+	width: 28px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.participants-content td {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.participants-content thead td {
+	text-transform: capitalize;
+	font-weight: bold;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.participants-booking-price-infos {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.participants-booking-service {
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-transform: uppercase;
+}
+
+.participants-booking-price {
+	margin-bottom: 20px;
+}
+
+.resa-missing-btn-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* tableau participants */
+.resa-participants-list thead {
+	font-weight: bold;
+}
+
+.resa-participants-list {
+	border-collapse: collapse;
+}
+
+.resa-participants-list td {
+	border-collapse: collapse;
+	padding: 5px;
+	min-width: 80px;
+}
+
+.resa-participants-list tr {
+	border-bottom: 1px solid #000000;
+}
+
+.participant-input {
+	width: 95%;
+}
+
+/* tableau absense */
+.resa-missing-list thead {
+	font-weight: bold;
+}
+
+.resa-missing-list {
+	border-collapse: collapse;
+}
+
+.resa-missing-list td {
+	border-collapse: collapse;
+	padding: 5px;
+	min-width: 80px;
+}
+
+.resa-missing-list tr {
+	border-bottom: 1px solid #000000;
+}
+
+/***** help box *****/
+.helpbox {
+	position: relative;
+}
+
+.helpbox .helpbox_content {
+	display: none;
+	z-index: 100;
+	text-transform: none;
+}
+
+.helpbox::after {
+	content: '?';
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	text-align: center;
+	border-radius: 50px;
+	z-index: 4;
+}
+
+.helpbox:hover .helpbox_content {
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 17px;
+	text-align: justify;
+	display: block;
+	padding: 10px;
+	box-sizing: border-box;
+	position: absolute;
+	left: -200px;
+	bottom: 35px;
+	width: 400px;
+	background-color: #ffffff;
+	border: 1px solid #000000;
+	-webkit-box-shadow: 0 0 20px 0 #000000;
+	box-shadow: 0 0 20px 0 #000000;
+	z-index: 100;
+}
+
+/***** CART *****/
+#cart {
+	flex-grow: 1;
+	flex-basis: 40%;
+	z-index: 1;
+	min-width: 25%;
+}
+
+.resa-cart-activity-title {
+	margin-bottom: 0;
+	border-bottom: 1px dashed #000000;
+	padding-bottom: 5px;
+	font-size: 18px;
+}
+
+.resa-cart-activity-datetime {
+	display: flex;
+	font-weight: bold;
+	justify-content: space-between;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.resa-cart-activity-price {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	margin-bottom: 10px;
+}
+
+.action-delete {
+	color: #ab0000;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 5px;
+	cursor:pointer;
+}
+
+.resa-cart-activity-price-actions {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+.cart-content {
+	border: 2px solid;
+	padding: 10px;
+	top: 20px;
+	position: sticky;
+}
+
+.resa-cart-activites-content {
+	font-size: 15px;
+}
+
+.resa-cart-prices-content {
+	line-height:1.1em;
+	justify-content: space-between;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+.resa-cart-activity-price-number{
+	font-style:italic;
+}
+
+.resa-cart-prices-amount {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	font-weight: bold;
+}
+
+.resa-cart-activity-price-action-delete {
+	padding-left: 10px;
+}
+
+.resa-cart-total {
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	border-top: 2px solid grey;
+}
+
+.resa-cart-btn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.resa-cart-activities {
+	margin-bottom: 15px;
+}
+
+.resa-cart-activity-infos {
+	font-style: italic;
+	color:grey !important;
+}
+
+.resa-cart-activity-error {
+	font-style: italic;
+	color:red !important;
+}
+
+.cart-textarea {
+	width: 100%;
+	min-height: 60px;
+}
+
+.resa-cart-reductions {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	border-top: 2px solid grey;
+}
+
+.resa-cart-reductions input {
+	width: 95%;
+}
+
+.resa-cart-reduction {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	margin-bottom: 10px;
+}
+
+.reduction-title {
+
+}
+
+.reduction-value {
+	font-weight: italic;
+}
+
+/******* VALIDATION ****/
+#resa-step-validation #cart {
+	flex-basis: 100%;
+	flex-grow: 0;
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.cart-rgpd {
+	margin-bottom: 20px;
+}
+
+.cart-note {
+	margin-top: 40px;
+}
+
+.cart-paiement {
+	margin-top: 40px;
+}
+
+.cart-validation {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.cart-paiement-types > div {
+	margin-bottom: 10px;
+}
+.cart-paiement-types label, .cart-validation label{
+	display:inline;
+	height:auto;
+}
+#resa-form .cart-paiement-types input, #resa-form .cart-validation input{
+	height:auto;
+}
+
+#resa-form .cart-validation label p{
+	display: inline-block;
+}
+
+/******* RESPONSIVE *******/
+@media (max-width:767px) {
+	/* navigation */
+	#resa-form-navigation-mobile {
+		align-items: center;
+		justify-content: space-around;
+		display: flex;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	#resa-form-navigation {
+		align-items: center;
+		justify-content: space-around;
+		display: none;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.navigation-step.selected {
+		color: #000000;
+		background-color: #ffffff;
+		border: 1px solid transparent;
+		cursor: pointer;
+	}
+
+	/* bloc etapes */
+	#resa-steps-content {
+		display: block;
+	}
+
+	/* lieu */
+	.resa-places-cols {
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
+
+	.resa-places-cols .resa-place,
+	.resa-places-cols.resa-place-3col .resa-place,
+	.resa-places-cols.resa-place-2col .resa-place,
+	.resa-places-cols.resa-place-4col .resa-place {
+		width: 100%;
+	}
+
+	/* activité */
+	.activities-col {
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
+
+	.activities-col .resa-category,
+	.activities-2col .resa-category,
+	.activities-3col .resa-category,
+	.activities-4col .resa-category,
+	.activities-col .resa-activity,
+	.activities-2col .resa-activity,
+	.activities-3col .resa-activity,
+	.activities-4col .resa-activity {
+		width: calc(100% - 10px);
+	}
+
+	/** calendrier **/
+	.resa-datepicker table{
+		min-width:200px;
+	}
+	/** timeslot **/
+
+	.resa-timeslots-column {
+		min-width: 180px;
+	}
+
+	#resa-form .resa-timeslot .promo-label {
+		width: 100%;
+		background: #e43;
+		position: relative;
+		top: 0px;
+		left: 0px;
+		text-align: center;
+		line-height: 16px;
+		letter-spacing: 1px;
+		color: #ffffff;
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		font-size: 10px;
+		font-weight:500;
+
+	}
+
+
+	/* prices */
+	.resa-prices-content {
+		display: block;
+	}
+
+	.resa-price {
+		max-width: 100%;
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-bottom: 30px;
+	}
+
+	/* account */
+	#resa-step-account {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.resa_create_account {
+		width: calc(100% - 40px);
+	}
+
+	.resa-already_client {
+		width: calc(100% - 40px);
+	}
+}
+
+@media (max-width:420px) {
+	.resa-timeslots-2col{
+		display:block;
+	}
+	.resa-timeslots-column {
+		width:100%;
+	}
+}
+
+@media (max-width:1023px) {
+	/* bloc etapes */
+	#resa-steps-content {
+		display: block;
+	}
+}

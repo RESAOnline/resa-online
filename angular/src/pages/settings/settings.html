@@ -1,0 +1,1671 @@
+<div class="container p-sm-2" *ngIf="settings" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1 border-bottom">
+    <h1>Réglages avancés<span *ngIf="!canDeactivate()">*</span></h1>
+    <div>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+    </div>
+  </div>
+  <div class="align-items-center d-flex mb-3 border border-top-0 border-left-0 border-right-0 pb-3">
+    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+    <select [(ngModel)]="global.currentLanguage" (change)="changeLanguage()" class="custom-select bg-light w-auto">
+      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+    </select>
+    <div class="ml-2">
+      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+    </div>
+  </div>
+  <div *ngFor="let accountCustomer of settings.types_accounts" class="mb-3 border border-top-0 border-left-0 border-right-0 pb-3 text-danger" [hidden]="haveOnePaymentTypeAccount(accountCustomer)">
+    Le compte <b>{{ accountCustomer.name['fr_FR'] }}</b> n'a pas de moyen de paiement défini, il ne pourra pas finir sa réservation depuis vos formulaires de réservations.
+  </div>
+</div>
+<div id="page_content" class="container" *ngIf="settings" style="max-width: 1400px; margin-left: auto; margin-right: auto;">
+  <div class="d-flex">
+    <div class="p-2 border border-left-0 border-top-0 border-bottom-0">
+      <ul class="nav d-flex flex-column nav-pills" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 1}" (click)="initTab = 1" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1" aria-expanded="true">Général</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 2}" (click)="initTab = 2" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" aria-expanded="true">Tags des réservations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 3}" (click)="initTab = 3" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3" aria-expanded="true">Personnel</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 13}" (click)="initTab = 13" href="#tab13" data-toggle="tab" role="tab" aria-controls="tab13" aria-expanded="true">Matériels</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 4}" (click)="initTab = 4" href="#tab4" data-toggle="tab" role="tab" aria-controls="tab4" aria-expanded="true">Groupes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 5}" (click)="initTab = 5" href="#tab5" data-toggle="tab" role="tab" aria-controls="tab5" aria-expanded="true">Participants</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 6}" (click)="initTab = 6" href="#tab6" data-toggle="tab" role="tab" aria-controls="tab6" aria-expanded="true">Affichage client / formulaire</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 8}" (click)="initTab = 8" href="#tab8" data-toggle="tab" role="tab" aria-controls="tab8" aria-expanded="true">Email</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 15}" (click)="initTab = 15" href="#tab015" data-toggle="tab" role="tab" aria-controls="tab015" aria-expanded="true">Reçu/Devis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 10}" (click)="initTab = 10" href="#tab010" data-toggle="tab" role="tab" aria-controls="tab010" aria-expanded="true">Paiements</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 9}" (click)="initTab = 9" href="#tab9" data-toggle="tab" role="tab" aria-controls="tab9" aria-expanded="true">Vue journée</a>
+        </li>
+        <li *ngIf="caisseOnlineInstalled" class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 11}" (click)="initTab = 11" href="#tab011" data-toggle="tab" role="tab" aria-controls="tab011" aria-expanded="true">Caisse (<span class="text-success" *ngIf="caisseStatusOk">Connecté</span><span class="text-danger" *ngIf="!caisseStatusOk">Non connecté</span>)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 14}" (click)="initTab = 14" href="#tab014" data-toggle="tab" role="tab" aria-controls="tab014" aria-expanded="true">Facebook</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active':initTab == 12}" (click)="initTab = 12" href="#tab012" data-toggle="tab" role="tab" aria-controls="tab012" aria-expanded="true">Support/Mise à jour</a>
+        </li>
+      </ul>
+    </div>
+    <div class="flex-grow-1 p-2">
+      <div class="tab-content">
+        <div class="tab-pane" [ngClass]="{'active':initTab == 1}" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#tab12" data-toggle="tab" role="tab" aria-controls="tab12" aria-expanded="true">Entreprise</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#tab13" data-toggle="tab" role="tab" aria-controls="tab13" aria-expanded="true">Compte client</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#tab14" data-toggle="tab" role="tab" aria-controls="tab14" aria-expanded="true">Langues</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#tab15" data-toggle="tab" role="tab" aria-controls="tab15" aria-expanded="true">Calendrier</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" role="tabpanel" aria-labelledby="tab12-tab" id="tab12">
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Informations sur votre entreprise</h3>
+                <p>Ces informations seront utilisées dans le reçu/devis ainsi que dans les notifications par email envoyés aux clients.</p>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCompanyName" data-html="false">Nom de la société</label>
+                  <input class="form-control" id="formCompanyName" type="text" placeholder="Nom de la société" [(ngModel)]="settings.company_name" (ngModelChange)="setToSave(true)" />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCompanyLogo" data-html="false">Logo de la société</label><br />
+                  <img (click)="openImageSelectorDialog(contentImage)" *ngIf="settings.company_logo" [src]="settings.company_logo" />
+                  <button class="btn btn-success" (click)="openImageSelectorDialog(contentImage)" *ngIf="!settings.company_logo">Cliquez ici pour définir l'image</button><br />
+                  <button class="btn btn-danger" *ngIf="settings.company_logo" (click)="deleteImage()">Enlever</button>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCompanyAddress" data-html="false">Adresse</label>
+                  <input class="form-control" id="formCompanyAddress" type="text" placeholder="Adresse"  [(ngModel)]="settings.company_address" (ngModelChange)="setToSave(true)" />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCompanyPhone" data-html="false">Numéro de téléphone</label>
+                  <input class="form-control" id="formCompanyPhone" type="text" placeholder="Téléphone" [(ngModel)]="settings.company_phone" (ngModelChange)="setToSave(true)"  />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCompanyType" data-html="false">Statut</label>
+                  <input class="form-control" id="formCompanyType" type="text" placeholder="SA, SAS, SARL, EURL, EI..." [(ngModel)]="settings.company_type" (ngModelChange)="setToSave(true)" />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCompanySIRET" data-html="false">N° SIRET</label>
+                  <input class="form-control" id="formCompanySIRET" type="text" placeholder="Votre numéro SIRET"  [(ngModel)]="settings.company_siret" (ngModelChange)="setToSave(true)" />
+                </div>
+              </section>
+              <ng-template #contentImage let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Sélection de l'image</h4>
+                  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <image-selector (imageSelected)="setImageLogo($event, c)"></image-selector>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </ng-template>
+            </div>
+            <div class="tab-pane" role="tabpanel" aria-labelledby="tab13-tab" id="tab13">
+              <section class="bg-light p-2 mt-2 mb-2">
+                <h3>Paramètre pour le compte client</h3>
+                <p>Cela permet à vos clients de suivre leurs réservations sur votre site internet depuis un espace client dédié.</p>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCustomerAccountLink" data-html="false">Adresse URL de la page utilisée pour le compte client</label>
+                  <select class="form-control" id="formCustomerAccountLink" [(ngModel)]="settings.customer_account_url" (change)="setToSave(true)">
+                    <option [value]="''">-- Veuillez sélectionner une page --</option>
+                    <option [hidden]="!page.isAccount" *ngFor="let page of allPages;" [value]="page.url">{{ page.title }} ({{ page.url }})</option>
+                  </select>
+                </div>
+                <button *ngIf="settings.customer_account_url.length == 0" type="button" class="btn btn-sm btn-success" [disabled]="checkLaunch" (click)="createPageAccount()"><span *ngIf="!checkLaunch">Créer page compte client</span><span *ngIf="checkLaunch">Créer page compte client...</span></button>
+                <a *ngIf="settings.customer_account_url.length > 0" href="{{ settings.customer_account_url }}" target="_blank">Accéder à la page du compte client.</a>
+              </section>
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Types de comptes clients</h3>
+                <p>Vous pouvez créer des types de comptes clients pour personnaliser leurs expériences de réservation (activités, tarifs, informations différentes...)</p>
+                <table class="table mt-3" id="services_list">
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>Moyens de paiement</th>
+                      <th class="text-right">
+                        <button type="button" class="btn btn-sm btn-outline-success" (click)="addCustomTypeAccount(accountCustomerContent)">+ Ajouter un type de compte</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let accountCustomer of settings.types_accounts; index as i">
+                      <td scope="row">{{ accountCustomer.name['fr_FR'] }}</td>
+                      <td scope="row">
+                        <span class="text-danger" *ngIf="!haveOnePaymentTypeAccount(accountCustomer)">
+                          Attention, ce type de compte n'a pas de moyen de paiement définie et ne pourra donc pas finir sa réservation depuis vos formulaires de réservations.
+                        </span>
+                        <span [hidden]="!isPaymentTypeActivated(payment) || !accountCustomer.paymentsTypeList[payment.id]" *ngFor="let payment of paymentsTypeList">
+                          {{ payment.title }}<br />
+                        </span>
+                      </td>
+                      <td class="text-right">
+                        <button class="btn btn-sm btn-outline-info m-1" (click)="modifyAccountCustomer(accountCustomerContent, accountCustomer)">Modifier</button>
+                        <button *ngIf="i >= 2" class="btn btn-sm btn-outline-danger m-1" (click)="deletCustomTypeAccount(i)">Supprimer</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <ng-template #accountCustomerContent let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Informations clients pour {{ formAccountCustomer.name[global.currentLanguage] }}</h4>
+                  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label class="font-weight-bold" for="formAccountCustomerName" data-html="false" ngbTooltip="Nom du type de compte client">Nom du type de compte client</label>
+                    <input class="form-control" id="formAccountCustomerName" type="text" placeholder="Nom du type de compte" [(ngModel)]="formAccountCustomer.name[global.currentLanguage]" />
+                  </div>
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#tabAccount1" data-toggle="tab" role="tab" aria-controls="tabAccount1" aria-expanded="true">Champs d'informations</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#tabAccount2" data-toggle="tab" role="tab" aria-controls="tabAccount2" aria-expanded="true">Moyens de paiement</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content mt-3">
+                    <div class="tab-pane active" role="tabpanel" aria-labelledby="tabAccount1-tab" id="tabAccount1">
+                      <h4>Champs d'informations</h4>
+                      <p>Vous pouvez choisir les informations qui seront demandées à ce type de client lors de la création de son compte.</p>
+                      <div class="form-group" *ngFor="let field of fields">
+                        <label class="font-weight-bold" for="formAccountCustomer_{{ field.id }}" data-html="false">{{ field.text }}</label>
+                        <select class="form-control" id="formAccountCustomer_{{ field.id }}" [(ngModel)]="formAccountCustomer.fields[field.id]">
+                          <option [hidden]="field.exceptId != null && field.exceptId.indexOf(mode.id) > -1" *ngFor="let mode of fieldStates" [value]="mode.id">{{ mode.text }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" aria-labelledby="tabAccount2-tab" id="tabAccount2">
+                      <h4>Moyens de paiement</h4>
+                      <p>Vous pouvez choisir les différents moyens de paiement qui seront affichés pour ce type de compte. N'oubliez pas de les paramétrer dans l'onglet "Paiement"</p>
+                      <div [hidden]="!isPaymentTypeActivated(payment)" class="form-group" *ngFor="let payment of paymentsTypeList">
+                        <div class="form-check">
+                          <input class="form-check-input" id="formAccountCustomer_{{ payment.id }}" type="checkbox" [(ngModel)]="formAccountCustomer.paymentsTypeList[payment.id]" />
+                          <label class="form-check-label" for="formAccountCustomer_{{ payment.id }}" data-html="false">{{ payment.title }}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-success" type="button" (click)="c('save')">Enregistrer</button>
+                </div>
+              </ng-template>
+            </div>
+            <div class="tab-pane" role="tabpanel" aria-labelledby="tab14-tab" id="tab14">
+              <section class="bg-light p-2 mt-2 mb-2">
+                <h3>Langues pour la réservation</h3>
+                <p>Ajoutez plusieurs langues pour permettrent aux visiteurs de monde entier de réserver en ligne. Vous devrez ensuite traduire le contenu des activités que vous proposez.</p>
+                <table class="table mt-3" id="services_list">
+                  <thead>
+                    <tr>
+                      <th>Langue</th>
+                      <th>Drapeau</th>
+                      <th class="text-right">
+                        <button type="button" class="btn btn-sm btn-outline-success" (click)="addNewLanguage(languageContent)">+ Ajouter une langue</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let language of settings.languages; index as i">
+                      <td scope="row">{{ global.languagesNames[language] }}</td>
+                      <td scope="row">
+                        <div class="col-md-3"><img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + language + '.png'" alt=""></div>
+                      </td>
+                      <td class="text-right">
+                        <button *ngIf="settings.languages.length > 1" class="btn btn-sm btn-outline-danger m-1" (click)="deleteLanguage(i)">Supprimer</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div>
+                  <p class="font-italic">
+                    Toutes les langues ne sont pas présentes dans la liste car les pages clientes n'ont pas été traduite !<br />
+                    Si vous voulez nous aider à les traduire, contactez-nous sur le <a href="{{ global.supportURL }}" target="_blank">support</a> de RESA Online
+                  </p>
+                </div>
+              </section>
+              <ng-template #languageContent let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Ajouter une langue</h4>
+                  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label class="font-weight-bold" data-html="false">Sélectionnez la langue à ajouter</label>
+                    <select class="form-control" [(ngModel)]="formLanguage">
+                      <option [hidden]="settings.languages.indexOf(language[1]) != -1" *ngFor="let language of allLanguages" [value]="language[1]">{{ language[0] + ' - ' + language[1] }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-success" type="button" (click)="c('save')">Ajouter</button>
+                </div>
+              </ng-template>
+            </div>
+            <div class="tab-pane" role="tabpanel" aria-labelledby="tab15-tab" id="tab15">
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Affichage du calendrier RESA</h3>
+                <p>Cela vous permet de gérer l'affichage du calendrier des réservations.</p>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCalendarBegin" data-html="false">Heure de début</label>
+                  <input class="form-control" id="formCalendarBegin" type="number" value="9" [(ngModel)]="settings.calendar_start_time" (ngModelChange)="setToSave(true)" />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCalendarEnd" data-html="false">Heure de fin (pour minuit mettre 24)</label>
+                  <input class="form-control" id="formCalendarEnd" type="number" value="18" [(ngModel)]="settings.calendar_end_time" (ngModelChange)="setToSave(true)" />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCalendarSplit" data-html="false">Afficher toutes les X minutes</label>
+                  <select class="form-control" id="formCalendarSplit"  [(ngModel)]="settings.calendar_split_time" (change)="setToSave(true)">
+                    <option [value]="10">10 min</option>
+  									<option [value]="15">15 min</option>
+  									<option [value]="30">30 min</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" id="formCalendarD&DA" type="checkbox" [(ngModel)]="settings.calendar_drag_and_drop_activated" (ngModelChange)="setToSave(true)" />
+                    <label class="form-check-label font-weight-bold" for="formCalendarD&DA" data-html="false">Autoriser le drag&drop dans le calendrier pour déplacer les réservations (Ancienne interface)</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCalendarColorInfo" data-html="false">Couleur des informations</label>
+                  <input class="form-control" id="formCalendarColorInfo" type="color" [(ngModel)]="settings.calendar_info_calendar_color" (ngModelChange)="setToSave(true)" />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCalendarColorSConst" data-html="false">Couleur des contraintes</label>
+                  <input class="form-control" id="formCalendarColorSConst" type="color"  [(ngModel)]="settings.calendar_service_constraint_color" (ngModelChange)="setToSave(true)" />
+                </div>
+              </section>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 2}" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Tags des réservations</h3>
+            <p>Les tags sont des étiquettes que vous pouvez attacher à une réservation pour les trier plus rapidement (ce sont des pense-bêtes personnalisables)</p>
+            <table class="table mt-3" id="services_list">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Couleur</th>
+                  <th class="text-right">
+                    <button type="button" class="btn btn-sm btn-outline-success" (click)="addCustomTag()">+ Ajouter un tag</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tag of settings.custom_tags; index as i">
+                  <td scope="row">
+                    <input class="form-control" type="text" placeholder="Nom du tag" [(ngModel)]="tag.title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                  </td>
+                  <td scope="row">
+                    <div class="form-inline">
+                      <select class="form-control" [(ngModel)]="tag.color" (change)="setToSave(true)">
+                        <option *ngFor="let color of colors" [value]="color.id">{{ color.name }}</option>
+                      </select>
+                      <span class="color_badge ml-3 {{ tag.color }}"></span>
+                    </div>
+                  </td>
+                  <td class="text-right">
+                    <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteCustomTag(i)">Supprimer</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 3}" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Personnel</h3>
+            <p>Permet de gérer les droits accordés aux personnels</p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formStaffManagementActivated" type="checkbox" [(ngModel)]="settings.staff_management_actived" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formStaffManagementActivated"><b>Activer la gestion du personnel</b></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formStaffWordSingle" data-html="false">Mot utilisé pour le personnel au singulier (membre, guide, moniteur, encadrant...)</label>
+              <input class="form-control" id="formStaffWordSingle" type="text" placeholder="" [(ngModel)]="settings.staff_word_single[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formStaffWordMany" data-html="false">Mot utilisé pour le personnel au pluriel (membres, guides, moniteurs, encadrants...)</label>
+              <input class="form-control" id="formStaffWordMany" type="text" placeholder="" [(ngModel)]="settings.staff_word_many[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold">Droits accordés aux personnels par défaut</label>
+              <div class="form-check">
+                <input class="form-check-input" id="formPermSOAD" type="checkbox" [(ngModel)]="settings.staff_old_appointments_displayed" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formPermSOAD">Afficher les réservations passées</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" id="formPermSDC" type="checkbox" [(ngModel)]="settings.staff_display_customer" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formPermSDC">Afficher les informations du client</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" id="formPermSDT" type="checkbox" [(ngModel)]="settings.staff_display_total" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formPermSDT">Afficher le total du prix</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" id="formPermSDP" type="checkbox" [(ngModel)]="settings.staff_display_payments" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formPermSDP">Afficher l'état de paiement</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" id="formPermSDN" type="checkbox" [(ngModel)]="settings.staff_display_numbers" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formPermSDN">Afficher le nombre de personnes</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" id="formPermSDBT" type="checkbox" [(ngModel)]="settings.staff_display_bookings_tab" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formPermSDBT">Accès à l'onglet réservations</label>
+              </div>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 13}" id="tab13" role="tabpanel" aria-labelledby="tab13-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Matériels</h3>
+            <p>Activer la gestion du matériels</p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formEquipmentsActived" type="checkbox" [(ngModel)]="settings.equipments_management_actived" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formEquipmentsActived"><b>Activer la gestion du matériel (ex: fusils paintball, baudriers, casques VR)</b></label>
+              </div>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 4}" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Groupes</h3>
+            <p>Activer la gestion des groupes</p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formGroupsManagementActived" type="checkbox" [(ngModel)]="settings.groups_management_actived" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formGroupsManagementActived"><b>Activer la gestion des groupes</b></label>
+              </div>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 5}" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Informations sur les participants</h3>
+            <p>Informations demandées sur les participants lors d'une réservation. Vous pouvez créer plusieurs paramètres d'informations différents et ensuite les attribuer sur les tarifs des activités.</p>
+            <table class="table mt-3" id="services_list">
+              <thead>
+                <tr>
+                  <th>Nom du groupe de paramètres</th>
+                  <th>Tarif(s) associé(s)</th>
+                  <th class="text-right">
+                    <button type="button" class="btn btn-sm btn-outline-success" (click)="addParticipantParameters(contentParticipantParameters)">+ Ajouter un groupe de paramètres</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let participantParameters of settings.form_participants_parameters; index as i">
+                  <th scope="row">{{ participantParameters.label[global.currentLanguage] }}</th>
+                  <td scope="row">
+                    <span [hidden]="service.askParticipants == 0" *ngFor="let service of services">
+                      <span [hidden]="servicePrice.participantsParameter != participantParameters.id"  *ngFor="let servicePrice of service.prices">
+                      <span *ngIf="service.places.length > 0">[<span *ngFor="let idPlace of service.places; index as i"><span *ngIf="i > 0">,</span>{{ getPlaceName(idPlace) }}</span>] </span><a (click)="goActivity(service.id)" href="javascript:void(0)">{{ service.name[global.currentLanguage ]}}</a> > {{ servicePrice.name[global.currentLanguage]}} ({{servicePrice.slug}})<br />
+                      </span>
+                    </span>
+                  </td>
+                  <td class="text-right">
+                    <button class="btn btn-sm btn-outline-info m-1" (click)="modifyParticipantParameters(contentParticipantParameters, participantParameters)">Modifier</button>
+                    <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateParticipantParameters(contentParticipantParameters, participantParameters)">Dupliquer</button>
+                    <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteParticipantParameters(i)">Supprimer</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+          <ng-template #contentParticipantParameters let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Groupe de paramètres {{ formParticipantParameters.label[global.currentLanguage] }}</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label class="font-weight-bold" for="formParticipantParametersName" ngbTooltip="Nom de l'activité que verra le visiteur">Nom du groupe de paramètres</label>
+                <input class="form-control" id="formParticipantParametersName" type="text" placeholder="Nom du groupe" [(ngModel)]="formParticipantParameters.label[global.currentLanguage]" />
+              </div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#tab10" data-toggle="tab" role="tab" aria-controls="tab10" aria-expanded="true">Champs</a>
+                </li>
+                <!-- TODO
+                <li class="nav-item">
+                  <a class="nav-link" href="#tab11" data-toggle="tab" role="tab" aria-controls="tab11" aria-expanded="true">Tarifs associés</a>
+                </li>
+                //-->
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active pt-sm-2" id="tab10" role="tabpanel" aria-labelledby="tab10-tab">
+                  <div class="align-items-center d-flex pb-3">
+                    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+                    <select [(ngModel)]="global.currentLanguage" (change)="changeLanguage()" class="custom-select bg-light w-auto">
+                      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+                    </select>
+                    <div class="ml-2">
+                      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+                    </div>
+                  </div>
+                  <p>Ajouter des champs d'informations que les participants devront remplir.</p>
+                  <table class="table mt-3" id="services_list">
+                    <thead>
+                      <tr>
+                        <th class="text-center" ngbTooltip="Le nom de la variable permet de créer une liaison entre tous les groupes d'informations des participants, ex : age, niveau, remarque" container="body">Varname</th>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Préfixe / Suffixe</th>
+                        <th class="text-center" ngbTooltip="Force le client à définir ce champs" container="body">Requis/Obligatoire</th>
+                        <th class="text-center" ngbTooltip="Indication affichée pour client afin de l'aider à remplir cette information." container="body">Indication/Aide</th>
+                        <th class="text-right">
+                          <button class="btn btn-sm btn-outline-success" type="button" (click)="addParticipantField()">+ Ajouter</button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let participantField of formParticipantParameters.fields; index as i">
+                        <td scope="row">
+                          <input class="form-control" type="text" placeholder="Variable du champs" [disabled]="participantField.varname == 'lastname' || participantField.varname == 'firstname'" [(ngModel)]="participantField.varname"/>
+                        </td>
+                        <td scope="row">
+                          <input class="form-control" type="text" placeholder="Nom du champs" [(ngModel)]="participantField.name[global.currentLanguage]"/>
+                        </td>
+                        <td scope="row">
+                          <select *ngIf="participantField.varname != 'lastname' && participantField.varname != 'firstname'" class="form-control" [(ngModel)]="participantField.type">
+                            <option [value]="'text'">Texte</option>
+                            <option [value]="'number'">Nombre</option>
+                            <option [value]="'select'">Options</option>
+                          </select>
+  												<span *ngIf="participantField.varname == 'lastname' || participantField.varname == 'firstname'">Texte</span>
+                          <div *ngIf="participantField.type == 'number'" class="form-group m-1 d-flex">
+                            <input class="form-control form-control-sm w-50 mr-1" type="number" placeholder="Min" [(ngModel)]="participantField.min" />
+                            <input class="form-control w-50 form-control-sm" type="number" placeholder="Max" [(ngModel)]="participantField.max"  />
+                          </div>
+                          <div *ngIf="participantField.type == 'number'" class="form-group m-1 d-flex">
+                            <div class="form-check">
+                              <input class="form-check-input" id="formCheckboxDisplaySum{{ i }}" type="checkbox" [(ngModel)]="participantField.displaySum" />
+                              <label class="form-check-label" for="formCheckboxDisplaySum{{ i }}">Afficher la somme</label>
+                            </div>
+                          </div>
+                          <button *ngIf="participantField.type == 'select'" class="btn btn-sm m-1 btn-block btn-success" (click)="modifyOptions(contentOptions, participantField)">Gérer les options</button>
+                        </td>
+                        <td scope="row">
+                          <input class="form-control" type="text" placeholder="Préfixe" [(ngModel)]="participantField.prefix[global.currentLanguage]" />
+                          <input class="form-control" type="text" placeholder="Suffixe" [(ngModel)]="participantField.suffix[global.currentLanguage]" />
+                        </td>
+                        <td scope="row" class="text-center">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formInput135" type="checkbox" [(ngModel)]="participantField.mandatory" />
+                          </div>
+                        </td>
+                        <td scope="row" class="text-center">
+                          <textarea class="form-control" rows="3" [(ngModel)]="participantField.presentation[global.currentLanguage]"></textarea>
+                        </td>
+                        <td class="text-right">
+                          <button class="btn btn-sm btn-outline-danger align-items-center d-inline-flex justify-content-center align-content-center mr-null mb-null ml-null  dashicons dashicons-trash" (click)="deleteParameterField(formParticipantParameters, i)" >
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane pt-sm-2" id="tab11" role="tabpanel" aria-labelledby="tab11-tab">
+                  <p>Associer cette demande d'information à certains&nbsp; tarifs.</p>
+                  <table class="table mt-3" id="services_list">
+                    <thead>
+                      <tr>
+                        <th>Activités</th>
+                        <th>Tarif</th>
+                        <th class="text-right">
+                          <button class="btn btn-sm btn-outline-success" type="button">+ Associer un tarif</button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">
+                          <select class="form-control">
+                            <option>Rafting</option>
+                            <option>Airboat</option>
+                            <option>Accrobranche</option>
+                          </select>
+                        </td>
+                        <td class="text-right">
+                          <select class="form-control">
+                            <option>Adulte</option>
+                            <option>Enfant</option>
+                            <option>Groupe</option>
+                          </select>
+                        </td>
+                        <td class="text-right">
+                          <a class="btn btn-sm btn-outline-danger m-1" href="#">Supprimer</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <ng-template #contentOptions let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Modifier les options du champs <b>{{ formField.name[global.currentLanguage] }}</b></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="align-items-center d-flex mb-3 pb-3">
+                    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+                    <select [(ngModel)]="global.currentLanguage"  (change)="changeLanguage()" class="custom-select bg-light w-auto">
+                      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+                    </select>
+                    <div class="ml-2">
+                      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+                    </div>
+                  </div>
+                  <table class="table mt-3" id="services_list">
+                    <thead>
+                      <tr>
+                        <th class="text-center">Option</th>
+                        <th class="text-center">Valeur</th>
+                        <th class="text-right"><button class="btn btn-sm btn-outline-success" type="button" (click)="addOption()">+ Ajouter une valeur</button></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let option of formField.options; index as i">
+                        <td scope="row" class="text-center align-middle">{{ i + 1 }}</td>
+                        <td scope="row"><input class="form-control" type="text" placeholder="Valeur {{i+1}}" [(ngModel)]="formField.options[i].name[global.currentLanguage]" /></td>
+                        <td class="text-right">
+                          <button class="btn btn-sm btn-outline-danger m-1" (click)="formField.options.splice(i, 1);">Supprimer</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" (click)="d(0)">Fermer</button>
+                  <button class="btn btn-success" type="button" (click)="c('save')">Enregistrer</button>
+                </div>
+              </ng-template>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success" type="button" (click)="saveParticipantParameters(c)">Enregistrer</button>
+            </div>
+          </ng-template>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 6}" id="tab6" role="tabpanel" aria-labelledby="tab6-tab">
+          <section class="bg-light p-2 mt-2 mb-2">
+            <h3>Lien vers le formulaire de réservation</h3>
+            <p>Cela permet d'afficher le lien à partager pour les coupons.</p>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formCustomerAccountLink" data-html="false">Adresse URL de la page utilisée pour le formulaire de réservation</label>
+              <select class="form-control" id="formCustomerAccountLink" [(ngModel)]="settings.customer_booking_url" (change)="setToSave(true)">
+                <option [value]="''">-- Veuillez sélectionner une page --</option>
+                <option [hidden]="!page.isForm" *ngFor="let page of allPages;" [value]="page.url">{{ page.title }} ({{ page.url }})</option>
+              </select>
+            </div>
+          </section>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h4>Couleurs principale des pages clientes</h4>
+            <p>Vous pouvez définir la couleur globale des pages pour vos clients  (formulaires/compte clients/demande de compte/etc)</p>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formColorsBtn">Couleur des boutons</label>
+              <input class="form-control h-50" id="formColorsBtn" type="color" [(ngModel)]="settings.colors.primaryColor" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formColorsBtnHover" >Couleur des boutons au passage de la souris</label>
+              <input class="form-control h-50" id="formColorsBtnHover" type="color" [(ngModel)]="settings.colors.secondaryColor" (ngModelChange)="setToSave(true)" />
+            </div>
+            <p class="font-italic">
+              Nous proposons sur devis l'intégration de quelques éléments aux pages clientes afin qu'elles collent mieux avec votre thème Wordpress et votre identité visuelle.<br />
+              Contactez nous sur notre <a href="{{ supportURL }}" target="_blank">support</a>
+            </p>
+          </section>
+          <section class="bg-light p-2 mt-2 mb-2">
+            <h3>Couleur du calendrier sur le formulaire</h3>
+            <p>Vous pouvez modifier les couleurs du calendrier pour le choix de la date dans le formulaire client</p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formCalendarEnableEnable" type="checkbox" [(ngModel)]="settings.calendar_enabled_enabled_color" (ngModelChange)="setToSave(true)" />
+                <label class="form-check-label" for="formCalendarEnableEnable" data-html="false">Autoriser les couleurs des jours disponibles du calendrier du formulaire</label>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="settings.calendar_enabled_enabled_color">
+              <label class="font-weight-bold" for="formCalendarColorEnabled" data-html="false">Couleur des jours disponibles du calendrier du formulaire</label>
+              <input class="form-control" id="formCalendarColorInfo" type="color" [(ngModel)]="settings.calendar_enabled_days_front_color" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formCalendarEnableDisabled" type="checkbox" [(ngModel)]="settings.calendar_enabled_disabled_color" (ngModelChange)="setToSave(true)" />
+                <label class="form-check-label" for="formCalendarEnableDisabled" data-html="false">Autorisé les couleurs des jours indisponibles du calendrier du formulaire</label>
+              </div>
+            </div>
+            <div class="form-group"  *ngIf="settings.calendar_enabled_disabled_color">
+              <label class="font-weight-bold" for="formCalendarColorInfo" data-html="false">Couleur des jours indisponibles du calendrier du formulaire</label>
+              <input class="form-control" id="formCalendarColorInfo" type="color" [(ngModel)]="settings.calendar_disabled_days_front_color" (ngModelChange)="setToSave(true)" />
+            </div>
+          </section>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Surcharger le css</h3>
+            <p>Vous pouvez charger un CSS général pour toutes les pages RESA pour vos clients</p>
+            <div class="form-group" *ngFor="let css of allCSS">
+              <div class="form-check" (click)="swapCSSLoaded(css)">
+                <input [checked]="isCSSLoaded(css)" class="form-check-input" id="formCSS_{{ css }}" type="checkbox" />
+                <label class="form-check-label" data-html="false">{{ css }}</label>
+              </div>
+            </div>
+            <i *ngIf="allCSS.length == 0">Cliquez sur ajouter pour ajouter un fichier CSS dans la liste à charger</i>
+            <div class="form-group">
+              <label for="file" class="label-file">+ Ajouter</label>
+              <input class="input-file" type="file" id="file" (change)="handleFileInput($event)" accept=".css" value="Ajouter...">
+            </div>
+            <!--
+            <div class="form-group">
+              <label for="formFCustomCSS" ngbTooltip="Les fichiers doivent être dans le dossier le fichier wp-content/uploads/resa_css, ne pas mettre .css, séparer le nom des fichiers par une virgule." class="font-weight-bold">Fichiers CSS supplémentaires à charger dans le formulaire et le compte client (?)</label>
+              <input type="text" class="form-control" id="formFCustomCSS" [(ngModel)]="settings.custom_css" placeholder="mon_fichier_css" (ngModelChange)="setToSave(true)" />
+            </div>
+            -->
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formOverCapacity" type="checkbox" [(ngModel)]="settings.display_remaining_position_overcapacity" (ngModelChange)="setToSave(true)" />
+                <label class="form-check-label" for="formOverCapacity"><b>Afficher places restantes pour les créneaux avec surcapacité</b></label>
+              </div>
+            </div>
+          </section>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Informations pour les navigateurs non ou peu compatible</h3>
+            <p>Cette phrase est affichée sur les pages clientes afin d'indiquer qu'il est préférable d'utilise Google Chrome ou Mozilla Firefox pour réserver, payer avec RESA-Online</p>
+            <div class="form-group">
+              <div class="form-check">
+                <label class="font-weight-bold" for="formBrowserNotCompatibleSentence" data-html="false">Informations pour les navigateurs non ou peu compatible</label>
+                <input class="form-control" id="formBrowserNotCompatibleSentence" type="text" placeholder="Informations pour les navigateurs non ou peu compatible" [(ngModel)]="settings.browser_not_compatible_sentence[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+              </div>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 8}"  id="tab8" role="tabpanel" aria-labelledby="tab8-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Connexion à votre adresse email</h3>
+            <p>En connectant RESA-Online à votre adresse email, les réponses de vos clients seront consultables directement dans leur fiche client et vous permettent de centraliser le suivi client.<br>Veuillez contacter votre prestataire de service email ou hébergement web pour connaître les valeurs du réglage (IMAP).</p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formMailboxActivated" type="checkbox" [(ngModel)]="settings.mailbox_activated" (ngModelChange)="setToSave(true)" />
+                <label class="form-check-label" for="formMailboxActivated"><b>Activer la lecture de vos emails</b></label>
+              </div>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-outline-success" (click)="addMailbox()">+ Ajouter une boite email</button>
+          <section class="p-2 mt-2 mb-2 bg-light" *ngFor="let mailbox of settings.mailbox; index as i">
+            <p>Statut : <b>
+              <span *ngIf="allConnected[i] != null">
+                <span class="text-success" *ngIf="isConnected(allConnected[i])">Connecté</span>
+                <span class="text-danger" *ngIf="!isConnected(allConnected[i])">{{ allConnected[i] }}</span>
+              </span>
+              <span class="text-warning" *ngIf="allConnected[i] == null">Pas de synchronisation</span></b></p>
+            <div class="form-group" *ngIf="settings.mailbox.length > 1">
+              <div class="form-check">
+                <input class="form-check-input" id="formMailboxActivated{{ i }}" type="checkbox" [(ngModel)]="mailbox.activated" (ngModelChange)="setToSave(true)" />
+                <label class="form-check-label" for="formMailboxActivated{{ i }}" data-html="false">Activé</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formMailboxHost{{ i }}" data-html="false">Hôte</label>
+              <input class="form-control" id="formMailboxHost{{ i }}" type="text" placeholder="Hôte" [(ngModel)]="mailbox.url" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formMailboxPort{{ i }}" data-html="false">Port</label>
+              <input class="form-control" id="formMailboxPort{{ i }}" type="text" placeholder="Port" [(ngModel)]="mailbox.port" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formMailboxLogin{{ i }}" data-html="false">Login</label>
+              <input class="form-control" id="formMailboxLogin{{ i }}" type="text" placeholder="Login" [(ngModel)]="mailbox.login" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formMailboxPassword{{ i }}" data-html="false">Mot de passe</label>
+              <input class="form-control" id="formMailboxPassword{{ i }}" type="password" placeholder="Mot de passe" [(ngModel)]="mailbox.password" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div class="form-group" *ngIf="settings.places.length > 0">
+              <label class="font-weight-bold" for="formMailboxPlace{{ i }}" data-html="false">Lieu associé à cette adresse (1 par lieu)</label>
+              <select class="form-control" id="formMailboxPlace{{ i }}" [(ngModel)]="mailbox.idPlace" (ngModelChange)="setToSave(true)">
+                <option *ngFor="let place of settings.places" [value]="place.id">{{ global.getTextByLocale(place.name) }}</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteMailbox(i)">Supprimer</button>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate()" (click)="save()">Sauvegarder et connecter</button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 9}" id="tab9" role="tabpanel" aria-labelledby="tab9-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <div class="container">
+              <h3>Vue journée</h3>
+              <p>Informations utiles pour générer la page de la vue journée</p>
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" id="formDisplayWeather" type="checkbox" [(ngModel)]="settings.daily_display_weather" (ngModelChange)="setToSave(true)" />
+                  <label class="form-check-label" for="formDisplayWeather"><b>Afficher la météo sur la vue journée</b></label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="font-weight-bold" for="formUrlWeather" data-html="false">Url Météo (voir <a href="https://www.tameteo.com" target="_blank">https://www.tameteo.com</a>)</label>
+                <input class="form-control" id="formUrlWeather" type="text" placeholder="Url Météo" [(ngModel)]="settings.daily_url_weather" (ngModelChange)="setToSave(true)" />
+              </div>
+              <div class="form-group">
+                <label class="font-weight-bold" for="formDailyGroupNumber" data-html="false" ngbTooltip="Dès que le nombre de personnes d’une réservation dépasse cette valeur, cela lève dans l’affichage une alerte de groupe.">Nombre de personnes pour un groupe (?)</label>
+                <input class="form-control" id="formDailyGroupNumber" type="text" placeholder="Nombre de personnes pour un groupe"  [(ngModel)]="settings.daily_group_number" (ngModelChange)="setToSave(true)" />
+              </div>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 15}" id="tab15" role="tabpanel" aria-labelledby="tab15-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Reçu/Devis</h3>
+            <p class="font-italic">
+              Pour afficher le logo sur le reçu/devis, veuillez définir le logo de la société dans l'onglet Général !
+            </p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formDisplayVATOnBill" type="checkbox" [(ngModel)]="settings.display_tva_on_bill" (ngModelChange)="setToSave(true)" />
+                <label class="form-check-label" for="formDisplayVATOnBill"><b>Afficher la TVA sur le reçu/devis</b></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formInformationsOnBill" data-html="false">Informations complémentaires à afficher sur le reçu</label>
+              <app-tinymce id="formInformationsOnBill" [(ngModel)]="settings.informations_on_bill[global.currentLanguage]" (ngModelChange)="setToSave(true)"></app-tinymce>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formInformationsOnQuotation" data-html="false">Informations complémentaires à afficher sur le devis</label>
+              <app-tinymce id="formInformationsOnQuotation" [(ngModel)]="settings.informations_on_quotation[global.currentLanguage]"  (ngModelChange)="setToSave(true)"></app-tinymce>
+            </div>
+            <div class="text-danger text-center">Attention, les raccourcies ne sont pas interprétés !</div>
+            <div class="mt-3">
+              <span class="font-weight-bold">DEVIS :</span> Pour gérer l'envoie de l'email du DEVIS, le nombre de relances et la durée entre deux relances, rendez-vous dans sur la page <a href="javascript:void(0)" (click)="goNotifications()">Notifications</a><br />
+              <span class="small">Nom de la notification : <span class="font-italic">Relance devis en attente</span></span>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 10}" id="tab010" role="tabpanel" aria-labelledby="tab10-tab">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':isTabPaymentGeneral()}" href="#tab16" data-toggle="tab" role="tab" aria-controls="tab16" aria-expanded="true">Général</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':isTabPaymentTVA()}" href="#tab18" data-toggle="tab" role="tab" aria-controls="tab18" aria-expanded="true">TVA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':isTabPaymentMeansOfPayment()}" href="#tab19" data-toggle="tab" role="tab" aria-controls="tab19" aria-expanded="true">Moyens de paiement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{'active':isTabPaymentStateParameters()}" href="#tab20" data-toggle="tab" role="tab" aria-controls="tab20" aria-expanded="true">Scénario de réservation</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane" [ngClass]="{'active':isTabPaymentGeneral()}" role="tabpanel" aria-labelledby="tab16-tab" id="tab16">
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Devises</h3>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formCurrency" data-html="false">Symbole de la devise à afficher</label>
+                  <input class="form-control" id="formCurrency" type="text" placeholder="€" [(ngModel)]="settings.currency" (ngModelChange)="setToSave(true)" />
+                </div>
+              </section>
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Activer/Desactiver paiement dans le formulaire</h3>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" id="formPaymentActivate" type="checkbox" [(ngModel)]="settings.payment_activate" (ngModelChange)="setToSave(true)" />
+                    <label class="form-check-label" for="formPaymentActivate"><b>Activer le paiement sur le formulaire</b></label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formPaymentNotActivateText" data-html="false">Message à afficher si le paiement est désactivé</label>
+                  <input class="form-control" [disabled]="settings.payment_activate" id="formPaymentNotActivateText" type="text" placeholder="Message à afficher si le paiement est désactivé." [(ngModel)]="settings.payment_not_activated_text[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                </div>
+              </section>
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Acomptes</h3>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input"  id="formAskAdvancePayment" type="checkbox" [(ngModel)]="settings.ask_advance_payment" (ngModelChange)="setToSave(true)" />
+                    <label class="form-check-label" for="formAskAdvancePayment"><b>Activer le paiement d'un acompte (si aucun type de compte n'est sélectionné, tous les types peuvent payer un acompte)</b></label>
+                  </div>
+                  <div class="border border-top-0 border-right-0 border-bottom-0 ml-1 pl-3 mt-1">
+                    <div class="form-check" *ngFor="let typeAccount of settings.types_accounts">
+                      <input class="form-check-input" id="formAskAdvancePayment_{{ typeAccount.id }}" type="checkbox" [checked]="settings.ask_advance_payment_type_accounts.indexOf(typeAccount.id)!=-1" (change)="switchAskAdvancePayment(typeAccount.id)"  />
+                      <label class="form-check-label" for="formAskAdvancePayment_{{ typeAccount.id }}">{{ typeAccount.name[global.currentLanguage] }}</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formAskTextAdvancePayment" data-html="false">Intitulé de la case à cocher</label>
+                  <input class="form-control" id="formAskTextAdvancePayment" type="text" placeholder="Payer un acompte maintenant et le reste plus tard." [(ngModel)]="settings.ask_text_advance_payment[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                </div>
+              </section>
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Url de retour</h3>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formReturnUrlSuccess" data-html="false">Url de retour en cas de succès de la transaction ou ajout d'une nouvelle réservation</label>
+                  <select class="form-control" id="formReturnUrlSuccess" [(ngModel)]="settings.return_url_success" (change)="setToSave(true)">
+                    <option [value]="''">-- Veuillez sélectionner une page --</option>
+                    <option *ngFor="let page of allPages;" [value]="page.url">{{ page.title }} ({{ page.url }})</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formReturnUrlError" data-html="false">Url de retour en cas d'échec de la transaction</label>
+                  <select class="form-control" id="formReturnUrlError" [(ngModel)]="settings.return_url_error" (change)="setToSave(true)">
+                    <option [value]="''">-- Veuillez sélectionner une page --</option>
+                    <option *ngFor="let page of allPages;" [value]="page.url">{{ page.title }} ({{ page.url }})</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-bold" for="formQReturnUrlSuccess" data-html="false">Url de retour en cas de succès d'ajout d'un DEVIS</label>
+                  <select class="form-control" id="formQReturnUrlSuccess" [(ngModel)]="settings.quotation_return_url_success" (change)="setToSave(true)">
+                    <option [value]="''">-- Veuillez sélectionner une page --</option>
+                    <option *ngFor="let page of allPages;" [value]="page.url">{{ page.title }} ({{ page.url }})</option>
+                  </select>
+                </div>
+              </section>
+            </div>
+            <div class="tab-pane" [ngClass]="{'active':isTabPaymentTVA()}" role="tabpanel" aria-labelledby="tab18-tab" id="tab18">
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>TVA</h3>
+                <p>Crées vos taux de TVA</p>
+                <table class="table mt-3" id="services_list">
+                  <thead>
+                    <tr>
+                      <th>Libellé</th>
+                      <th>Nom</th>
+                      <th>Taux (%)</th>
+                      <th>Référence</th>
+                      <th class="text-right">
+                        <button type="button" class="btn btn-sm btn-outline-success" (click)="addVatLine()">+ Ajouter une TVA</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let vat of settings.vat_list; index as i;">
+                      <td scope="row">
+                        <input class="form-control" type="text" [(ngModel)]="vat.label[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                      </td>
+                      <td scope="row">
+                        <input class="form-control" type="text" [(ngModel)]="vat.name[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                      </td>
+                      <td scope="row">
+                        <input class="form-control" type="number" [(ngModel)]="vat.value" (ngModelChange)="setToSave(true)" />
+                      </td>
+                      <td scope="row">
+                        <input class="form-control" type="text" [(ngModel)]="vat.reference" (ngModelChange)="setToSave(true)" />
+                      </td>
+                      <td class="text-right">
+                        <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteVatLine(i)">Supprimer</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+            <div class="tab-pane" [ngClass]="{'active':isTabPaymentMeansOfPayment()}" role="tabpanel" aria-labelledby="tab19-tab" id="tab19">
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Moyens de paiement</h3>
+                <p>
+                  Veuillez configurer les moyens de paiements qui vous souhaitez proposer pour prendre une réservation.<br />
+                </p>
+              </section>
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="{'active':isTabPaymentClassic()}" href="#moyenPaiementGeneral" data-toggle="tab" role="tab" aria-controls="moyenPaiementGeneral" aria-expanded="true">Paiements classiques</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="{'active':isTabPaymentStripeConnect()}" href="#stripeConnect" data-toggle="tab" role="tab" aria-controls="stripeConnect" aria-expanded="true">Paiement en ligne</a>
+                </li>
+                <li *ngIf="caisseOnlineInstalled"  class="nav-item">
+                  <a class="nav-link" [ngClass]="{'active':isTabPaymentCaisseOnline()}" [ngClass]="{'disabled':!caisseStatusOk}" href="#caisseOnline" data-toggle="tab" role="tab" aria-controls="caisseOnline" aria-expanded="true">Caisse Online<span *ngIf="!caisseStatusOk"> (Désactivé)</span></a>
+                </li>
+                <li *ngIf="swiklyInstalled" class="nav-item">
+                  <a class="nav-link" href="#swikly" data-toggle="tab" role="tab" aria-controls="swikly" aria-expanded="true">Swikly <span *ngIf="settings.swikly">(Activé)</span><span *ngIf="!settings.swikly">(Désactivé)</span></a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane" [ngClass]="{'active':isTabPaymentClassic()}" role="tabpanel" aria-labelledby="moyenPaiementGeneral-tab" id="moyenPaiementGeneral">
+                  <section class="p-2 mt-2 mb-2 bg-light">
+                    <h3>Moyens de paiement classiques</h3>
+                    <p class="p-2">
+                      Les moyens de paiement classique sans paiement en ligne<br />
+                      <span class="font-italic">
+                        Le "paiement sur place" et le "paiement à plus tard" sont identiques.<br />
+                        Utiliser le "paiement sur place" pour les paiements au comptoir.<br />
+                      </span>
+                    </p>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" id="formOnTheSpot" type="checkbox" [(ngModel)]="settings.on_the_spot" (ngModelChange)="setToSave(true)" />
+                        <label class="form-check-label" for="formOnTheSpot"><b>Autoriser le paiement sur place</b></label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" id="formLater" type="checkbox" [(ngModel)]="settings.later" (ngModelChange)="setToSave(true)" />
+                        <label class="form-check-label" for="formLater"><b>Autoriser le paiement à plus tard</b></label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" id="formTransfer" type="checkbox" [(ngModel)]="settings.transfer" (ngModelChange)="setToSave(true)" />
+                        <label class="form-check-label" for="formTransfer"><b>Autoriser le paiement par virement bancaire</b></label>
+                      </div>
+                      <textarea class="form-control" rows="3" [(ngModel)]="settings.transfer_text[global.currentLanguage]" (ngModelChange)="setToSave(true)"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" id="formCheque" type="checkbox" [(ngModel)]="settings.cheque" (ngModelChange)="setToSave(true)" />
+                        <label class="form-check-label" for="formCheque"><b>Autoriser le paiement par envoie de chèques</b></label>
+                      </div>
+                      <textarea class="form-control" rows="3" [(ngModel)]="settings.cheque_text[global.currentLanguage]" (ngModelChange)="setToSave(true)"></textarea>
+                    </div>
+                  </section>
+                </div>
+                <div class="tab-pane" [ngClass]="{'active':isTabPaymentStripeConnect()}" role="tabpanel" aria-labelledby="stripe-tab" id="stripeConnect">
+                  <section class="p-2 mt-2 mb-2 bg-light">
+                    <h3>Paiement en ligne avec Stripe Connect</h3>
+                    <p class="p-2">
+                      RESA Online vous permet de prendre du paiement en ligne via la plateforme Stripe.<br />
+                      Cela permet à vos clients de régler tout ou partie du montant de leur réservation directement sur votre site par carte bancaire.<br />
+                      Eviter les désistements et prennez une garantie avec les acomptes. Rembourser tout ou partie d'une réservation depuis RESA Online.<br />
+                    </p>
+                    <div class="p-2">
+                      <button class="btn btn-primary" (click)="openStripeConnectConditions(contentStripeConnect)">
+                        <span *ngIf="!settings.stripe_connect_conditions_validated">Activer le paiement en ligne</span>
+                        <span *ngIf="settings.stripe_connect_conditions_validated">Voir les CGU</span>
+                      </button>
+                    </div>
+                    <div class="p-2" *ngIf="settings.stripe_connect_conditions_validated">
+                      <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" id="formStripeConnect" type="checkbox" [(ngModel)]="settings.stripeConnect" (ngModelChange)="setToSave(true)" />
+                          <label class="form-check-label" for="formStripeConnect"><b>Autoriser le paiement par Stripe</b></label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="font-weight-bold" for="formConnectId" data-html="false">
+                          Indiquer votre Stripe ID connect -
+                          <span class="text-danger" *ngIf="!global.stripeConnect.activated">Pas Synchronisé</span>
+                          <span class="text-success" *ngIf="global.stripeConnect.activated">Synchronisé</span>
+                        </label>
+                        <input class="form-control" id="formConnectId" type="text" placeholder="Stripe ID connect" [disabled]="!settings.stripeConnect" [(ngModel)]="settings.stripe_connect_id" (ngModelChange)="setToSave(true)" />
+                        <a *ngIf="!global.stripeConnect.activated" class="font-italic" href="javascript:void(0)" (click)="openStripeConnectConditions(contentStripeConnect)">Je n'ai pas de Stripe ID connect</a>
+                        <a *ngIf="global.stripeConnect.activated" class="text-danger font-italic" href="javascript:void()" (click)="deauthorizeAction()"> Se déconnecter de Stripe Connect</a>
+                      </div>
+                      <h4>Paramètres</h4>
+                      <div class="form-group">
+                        <label class="font-weight-bold" for="formStripeConnectTitle" data-html="false">Texte à afficher pour ce moyen de paiement</label>
+                        <input class="form-control" id="formStripeConnectTitle" type="text" placeholder="Texte à afficher" [disabled]="!settings.stripeConnect" [(ngModel)]="settings.stripe_title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                      </div>
+                      <div class="form-group">
+                        <label class="font-weight-bold" for="formStripeMode" data-html="false" ngbTooltip="Automatique : &quot;Encaissée&quot; si la somme des paiements correspond au total de la réservation, &quot;Acompte&quot; tant que le total n'a pas été réglé">Etat de paiement de la réservation après un paiement en ligne (?)</label>
+                        <select id="formStripeMode" class="form-control" [disabled]="!settings.stripeConnect" [(ngModel)]="settings.stripe_mode_payment_state" (ngModelChange)="setToSave(true)" >
+                          <option [value]="0">Encaissée</option>
+                          <option [value]="2">Acompte</option>
+                          <option [value]="1">Automatique</option>
+                        </select>
+                      </div>
+                    </div>
+                    <ng-template #contentStripeConnect let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Activer le paiement en ligne</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <section class="p-3 mt-2 mb-2 bg-light">
+                          <h4>Informations paiement en ligne sur RESA Online via Stripe Connect</h4>
+                          <div class="mt-2 mb-2">
+                            resa-online.pro est une passerelle automatisée vous permettant de prendre du paiement depuis le plugin gratuit RESA Online via la plateforme de paiement sécurisé Stripe.<br />
+                            Le service resa-online.pro fourni une intégration des services Stripe dans RESA Online moyennant une commission sur chaque paiement en addition des frais de fonctionnement de la plateforme Stripe.
+                          </div>
+                          <div>
+                            <h5>Frais d'utilisations du service :</h5>
+                            <b>resa-online.pro : </b><br />
+                            <ul>
+                              <li>10 requêtes vers l'API Stripe gratuite par mois,</li>
+                              <li>Commission : 1% du montant de chaque transaction,</li>
+                              <li>Commission non remboursable (même en cas d'annulation).</li>
+                            </ul>
+                            <b>Stripe : </b><a href="https://stripe.com/fr/pricing" target="_blank">Voir les tarifs</a>
+                          </div>
+                        </section>
+                        <section class="p-3 mt-2 mb-2 bg-light">
+                          <div [innerHTML]="stripeConnectCGU"></div>
+                        </section>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formAcceptStripeConnect" type="checkbox" [(ngModel)]="acceptStripeConnect"/>
+                            <label class="form-check-label" for="formAcceptStripeConnect"><b>Accepter les conditions générale</b></label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-success" [disabled]="!acceptStripeConnect" (click)="acceptStripeConnectAction(c)">Valider</button>
+                      </div>
+                    </ng-template>
+                  </section>
+                </div>
+                <div class="tab-pane" [ngClass]="{'active':isTabPaymentCaisseOnline()}" role="tabpanel" aria-labelledby="caisseOnline" id="caisseOnline">
+                  <section class="p-2 mt-2 mb-2 bg-light">
+                    <h3>Caisse Online</h3>
+                    <p>Liste des paiements en ligne intégrés avec Caisse Online</p>
+                  </section>
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li *ngIf="caisseOnlineInstalled" class="nav-item">
+                      <a class="nav-link" [ngClass]="{'disabled':!caisseStatusOk}" href="#paypal" data-toggle="tab" role="tab" aria-controls="paypal" aria-expanded="true">Paypal <span *ngIf="settings.paypal">(Activé)</span><span *ngIf="!settings.paypal">(Désactivé)</span></a>
+                    </li>
+                    <li *ngIf="caisseOnlineInstalled" class="nav-item">
+                      <a class="nav-link" [ngClass]="{'disabled':!caisseStatusOk}" href="#systempay" data-toggle="tab" role="tab" aria-controls="systempay" aria-expanded="true">SystemPay <span *ngIf="settings.systempay">(Activé)</span><span *ngIf="!settings.systempay">(Désactivé)</span></a>
+                    </li>
+                    <li *ngIf="caisseOnlineInstalled" class="nav-item">
+                      <a class="nav-link" [ngClass]="{'disabled':!caisseStatusOk}" href="#monetico" data-toggle="tab" role="tab" aria-controls="monetico" aria-expanded="true">Monetico <span *ngIf="settings.monetico">(Activé)</span><span *ngIf="!settings.monetico">(Désactivé)</span></a>
+                    </li>
+                    <li *ngIf="caisseOnlineInstalled" class="nav-item">
+                      <a class="nav-link" [ngClass]="{'disabled':!caisseStatusOk}" href="#stripe" data-toggle="tab" role="tab" aria-controls="stripe" aria-expanded="true">Stripe <span *ngIf="settings.stripe">(Activé)</span><span *ngIf="!settings.stripe">(Désactivé)</span></a>
+                    </li>
+                    <li *ngIf="caisseOnlineInstalled" class="nav-item">
+                      <a class="nav-link" [ngClass]="{'disabled':!caisseStatusOk}" href="#paybox" data-toggle="tab" role="tab" aria-controls="paybox" aria-expanded="true">Paybox <span *ngIf="settings.paybox">(Activé)</span><span *ngIf="!settings.paybox">(Désactivé)</span></a>
+                    </li>
+                  </ul>
+                  <div class="tab-content p-2 mb-2">
+                    <div class="tab-pane" role="tabpanel" aria-labelledby="paypal-tab" id="paypal">
+                      <section class="p-2 mt-2 mb-2 bg-light">
+                        <h3>Paypal</h3>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formPaypal" type="checkbox" [(ngModel)]="settings.paypal" (ngModelChange)="setToSave(true)" />
+                            <label class="form-check-label" for="formPaypal"><b>Autoriser le paiement par PayPal</b></label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPaypalTitle" data-html="false">Texte à afficher pour ce moyen de paiement</label>
+                          <input class="form-control" id="formPaypalTitle" type="text" placeholder="Texte à afficher" [disabled]="!settings.paypal" [(ngModel)]="settings.paypal_title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPaypalIdShop" data-html="false">ID marchand</label>
+                          <input class="form-control" id="formPaypalIdShop" type="text" placeholder="ID marchand" [disabled]="!settings.paypal" [(ngModel)]="settings.paypal_idShop" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPaypalModel" data-html="false">Mode (pour le DEBUG)</label>
+                          <select class="form-control" id="formPaypalModel" [disabled]="!settings.paypal" [(ngModel)]="settings.paypal_mode" (ngModelChange)="setToSave(true)">
+                            <option value="0">Production</option>
+                            <option value="1">Test</option>
+                          </select>
+                        </div>
+                      </section>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" aria-labelledby="systempay-tab" id="systempay">
+                      <section class="p-2 mt-2 mb-2 bg-light">
+                        <h3>SystemPay</h3>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formSystempay" type="checkbox" [(ngModel)]="settings.systempay" (ngModelChange)="setToSave(true)" />
+                            <label class="form-check-label" for="formSystempay"><b>Autoriser le paiement par SystemPay</b></label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formSystempayTitle" data-html="false">Texte à afficher pour ce moyen de paiement</label>
+                          <input class="form-control" id="formSystempayTitle" type="text" placeholder="Texte à afficher" [disabled]="!settings.systempay" [(ngModel)]="settings.systempay_title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formSystempayIdShop" data-html="false">Identifiant boutique</label>
+                          <input class="form-control" id="formSystempayIdShop" type="text" placeholder="Identifiant boutique" [disabled]="!settings.systempay" [(ngModel)]="settings.systempay_id_shop" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formSystempayCertificate" data-html="false">Certificat</label>
+                          <input class="form-control" id="formSystempayCertificate" type="text" placeholder="Certificat" [disabled]="!settings.systempay" [(ngModel)]="settings.systempay_certificate" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formSystempayMode" data-html="false">Mode (pour le DEBUG)</label>
+                          <select class="form-control" id="formSystempayMode" [disabled]="!settings.systempay" [(ngModel)]="settings.systempay_mode" (ngModelChange)="setToSave(true)">
+                            <option value="0">Production</option>
+                            <option value="1">Test</option>
+                          </select>
+                        </div>
+                      </section>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" aria-labelledby="monetico-tab" id="monetico">
+                      <section class="p-2 mt-2 mb-2 bg-light">
+                        <h3>Monetico Paiement</h3>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formMonetico" type="checkbox" [(ngModel)]="settings.monetico" (ngModelChange)="setToSave(true)" />
+                            <label class="form-check-label" for="formMonetico"><b>Autoriser le paiement par Monetico Paiement</b></label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formMoneticoTitle" data-html="false">Texte à afficher pour ce moyen de paiement</label>
+                          <input class="form-control" id="formMoneticoTitle" type="text" placeholder="Texte à afficher" [disabled]="!settings.monetico" [(ngModel)]="settings.monetico_title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formMoneticoTPE" data-html="false">Numéro du TPE</label>
+                          <input class="form-control" id="formMoneticoTPE" type="text" placeholder="Numéro du TPE" [disabled]="!settings.monetico" [(ngModel)]="settings.monetico_tpe" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formMoneticoIdShop" data-html="false"> Identifiant société</label>
+                          <input class="form-control" id="formMoneticoIdShop" type="text" placeholder="Identifiant société" [disabled]="!settings.monetico" [(ngModel)]="settings.monetico_id_shop" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formMoneticoKey" data-html="false">Clé</label>
+                          <input class="form-control" id="formMoneticoKey" type="text" placeholder="Clé" [disabled]="!settings.monetico" [(ngModel)]="settings.monetico_key" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formMoneticoMode" data-html="false">Mode (pour le DEBUG)</label>
+                          <select class="form-control" id="formMoneticoMode" [disabled]="!settings.monetico" [(ngModel)]="settings.monetico_mode" (ngModelChange)="setToSave(true)">
+                            <option value="0">Production</option>
+                            <option value="1">Test</option>
+                          </select>
+                        </div>
+                      </section>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" aria-labelledby="stripe-tab" id="stripe">
+                      <section class="p-2 mt-2 mb-2 bg-light">
+                        <h3>Stripe</h3>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formStripe" type="checkbox" [(ngModel)]="settings.stripe" (ngModelChange)="setToSave(true)" />
+                            <label class="form-check-label" for="formStripe"><b>Autoriser le paiement par Stripe</b></label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formStripeTitle" data-html="false">Texte à afficher pour ce moyen de paiement</label>
+                          <input class="form-control" id="formStripeTitle" type="text" placeholder="Texte à afficher" [disabled]="!settings.stripe" [(ngModel)]="settings.stripe_title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formStripeKey" data-html="false">Clé publique</label>
+                          <input class="form-control" id="formStripeKey" type="text" placeholder="Clé publique" [disabled]="!settings.stripe" [(ngModel)]="settings.stripe_public_key" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formStripePrivateKey" data-html="false">Clé privée</label>
+                          <input class="form-control" id="formStripePrivateKey" type="text" placeholder="Clé privée" [disabled]="!settings.stripe" [(ngModel)]="settings.stripe_private_key" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div *ngIf="global.wpDebugMode" class="form-group">
+                          <label class="font-weight-bold" for="formStripeMode" data-html="false">Mode (pour le DEBUG)</label>
+                          Pour le mode, veuillez vérifier la mode de la caisse actuellement : <b><span *ngIf="settings.caisse_online_mode == 0">Production</span><span *ngIf="settings.caisse_online_mode == 1">Local</span><span *ngIf="settings.caisse_online_mode == 2">Test</span></b>
+                        </div>
+                      </section>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" aria-labelledby="paybox-tab" id="paybox">
+                      <section class="p-2 mt-2 mb-2 bg-light">
+                        <h3>Paybox</h3>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formPaybox" type="checkbox" [(ngModel)]="settings.paybox" (ngModelChange)="setToSave(true)" />
+                            <label class="form-check-label" for="formPaybox"><b>Autoriser le paiement par Paybox</b></label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPayboxTitle" data-html="false">Texte à afficher pour ce moyen de paiement</label>
+                          <input class="form-control" id="formPayboxTitle" type="text" placeholder="Texte à afficher" [disabled]="!settings.paybox" [(ngModel)]="settings.paybox_title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPayboxSite" data-html="false">Numéro de site</label>
+                          <input class="form-control" id="formPayboxSite" type="text" placeholder="Numéro de site" [disabled]="!settings.paybox" [(ngModel)]="settings.paybox_site" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPayboxRank" data-html="false">Numéro de rang</label>
+                          <input class="form-control" id="formPayboxRank" type="text" placeholder="Numéro de rang" [disabled]="!settings.paybox" [(ngModel)]="settings.paybox_rank" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPayboxId" data-html="false">Un Identifiant</label>
+                          <input class="form-control" id="formPayboxId" type="text" placeholder="Identifiant" [disabled]="!settings.paybox" [(ngModel)]="settings.paybox_id" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPayboxSecret" data-html="false">Clé d’authentification</label>
+                          <input class="form-control" id="formPayboxSecret" type="text" placeholder="Clé d’authentification" [disabled]="!settings.paybox" [(ngModel)]="settings.paybox_secret" (ngModelChange)="setToSave(true)" />
+                        </div>
+                        <div class="form-group">
+                          <label class="font-weight-bold" for="formPaypalMode" data-html="false">Mode (pour le DEBUG)</label>
+                          <select class="form-control" id="formPaypalMode" [disabled]="!settings.paybox" [(ngModel)]="settings.paybox_mode" (ngModelChange)="setToSave(true)">
+                            <option value="0">Production</option>
+                            <option value="1">Test</option>
+                          </select>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="swiklyInstalled" class="tab-pane" role="tabpanel" aria-labelledby="stripe-tab" id="swikly">
+                  <section class="p-2 mt-2 mb-2 bg-light">
+                    <h3>Swikly</h3>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" id="formSwikly" type="checkbox" [(ngModel)]="settings.swikly" (ngModelChange)="setToSave(true)" />
+                        <label class="form-check-label" for="formSwikly"><b>Autoriser la prise de caution avec Swikly</b></label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="formSwiklyTitle" data-html="false">Texte à afficher pour ce moyen de paiement</label>
+                      <input class="form-control" id="formSwiklyTitle" type="text" placeholder="Texte à afficher" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_title[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+                    </div>
+                    <h4>Le lien Swikly</h4>
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="formSwiklyUserSecret" data-html="false">Client Secret</label>
+                      <input class="form-control" id="formSwiklyUserSecret" type="text" placeholder="Clé" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_user_secret" (ngModelChange)="setToSave(true)" />
+                    </div>
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="formSwiklyUserId" data-html="false">Client ID</label>
+                      <input class="form-control" id="formSwiklyApiSecret" type="text" placeholder="Secret" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_user_api" (ngModelChange)="setToSave(true)" />
+                    </div>
+                    <h4>API</h4>
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="formSwiklyKey" data-html="false">Clé</label>
+                      <input class="form-control" id="formSwiklyKey" type="text" placeholder="Clé" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_api_key" (ngModelChange)="setToSave(true)" />
+                    </div>
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="formSwiklyApiSecret" data-html="false">Secret</label>
+                      <input class="form-control" id="formSwiklyApiSecret" type="text" placeholder="Secret" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_api_secret" (ngModelChange)="setToSave(true)" />
+                    </div>
+                    <div class="form-group">
+                      <label class="font-weight-bold" for="formSwiklyDepositType" data-html="false">Type de demande</label>
+                      <select class="form-control" id="formSwiklyDepositType" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_deposit_type" (ngModelChange)="setToSave(true)">
+                        <option value="reservation">Swik réservation</option>
+                        <option value="deposit">Swik caution</option>
+                      </select>
+                    </div>
+                    <div class="p-3 mt-2 mb-2">
+                      <h4>Mode de fonctionnement avec Swikly</h4>
+                      <div>
+                        <p>RESA Online peut fonctionner selon deux processus différents avec Swikly :</p>
+                        <ul>
+                          <li><b>Processus n°1 :</b> Prise de la caution du montant entier de la réservation que vous pourrez débiter lorsque le client aura fait son activité.</li>
+                          <li><b>Processus n°2 :</b> Prise d'une caution d'un montant partiel de la réservation que vous pourrez débiter QUE si le client n'est pas présent.</li>
+                        </ul>
+                        <div class="form-check">
+                          <input class="form-check-input" id="formSwiklyProcessus1" type="radio" name="swiklyProcess" value="0" [(ngModel)]="settings.swikly_process" (ngModelChange)="setToSave(true)">
+                          <label class="form-check-label" for="formSwiklyProcessus1">
+                            Prise de la caution du montant entier de la réservation (Processus n°1)
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" id="formSwiklyProcessus2" type="radio" name="swiklyProcess" value="1" [(ngModel)]="settings.swikly_process" (ngModelChange)="setToSave(true)">
+                          <label class="form-check-label" for="formSwiklyProcessus2">
+                            Prise de la caution d'un montant partiel de la réservation (Processus n°2)
+                          </label>
+                        </div>
+                        <div class="mt-2">
+                          <div class="form-group">
+                            <label class="font-weight-bold" for="formSwiklyProcessType" data-html="false">Méthode de calcul du montant de la caution</label>
+                            <select class="form-control" id="formSwiklyProcessType" [disabled]="!settings.swikly || settings.swikly_process == 0" [(ngModel)]="settings.swikly_process_type" (ngModelChange)="setToSave(true)">
+                              <option value="0">Montant total de la réservation</option>
+                              <option value="1">Utilisation le calcul d'acompte des activités</option>
+                              <option value="2">Pourcentage sur le montant total de la réservation</option>
+                              <option value="3">Montant fixe</option>
+                              <option value="4">Montant fixe par personne de la réservation</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label class="font-weight-bold" for="formSwiklyProcessValue">Montant associé à la méthode de calcul</label>
+                            <input class="form-control" id="formSwiklyProcessValue" type="number" [disabled]="!settings.swikly || settings.swikly_process == 0 || settings.swikly_process_type < 2" [(ngModel)]="settings.swikly_process_value" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-3 mt-2 mb-2">
+                      <h4>Autres options</h4>
+                      <div>
+                        <p>RESA Online peut réaliser la création d'un swik par Swikly lors de l'envoie d'une demande de paiement. Dans ce cas là, c'est Swikly qui enverra le lien au client pour réaliser l'enregistrement de la caution. (<i>RESA Online envoie quand même le mail de demande de paiement, veuillez donc l'adapter à vos besoins.</i>)</p>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formSwiklySSWAK" type="checkbox" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_sent_swik_with_ask_payment" (ngModelChange)="setToSave(true)" />
+                            <label class="form-check-label" for="formSwiklySSWAK"><b>Créer un swik lors de l'envoie d'une demande de paiement</b></label>
+                          </div>
+                        </div>
+                        <div>
+                          Cette fonctionnalité utilise l'URL de retour du paiement, veuillez être sur que cette page soit définie !<br />
+                          <span *ngIf="settings.return_url_success != ''">Actuellement définie : {{ settings.return_url_success }}</span>
+                          <span class="text-danger" *ngIf="settings.return_url_success == ''">Veuillez la définir (Onglet Paiement/Général)</span>
+                          <br />
+                        </div>
+                      </div>
+                      <div class="mt-2">
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formSwiklyDisplayLink" type="checkbox" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_display_link" (ngModelChange)="setToSave(true)" />
+                            <label class="form-check-label" for="formSwiklyDisplayLink"><b>Afficher le lien de la page Swikly dans l'onglet réservation</b></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="global.wpDebugMode" class="form-group">
+                      <label class="font-weight-bold" for="formSwiklyMode" data-html="false">Mode (pour le DEBUG)</label>
+                      <select class="form-control" id="formSwiklyMode" [disabled]="!settings.swikly" [(ngModel)]="settings.swikly_mode" (ngModelChange)="setToSave(true)">
+                        <option value="0">Production</option>
+                        <option value="1">Test(Développeur)</option>
+                      </select>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" [ngClass]="{'active':isTabPaymentStateParameters()}" role="tabpanel" aria-labelledby="tab20-tab" id="tab20">
+              <section class="p-2 mt-2 mb-2 bg-light">
+                <h3>Processus de réservation</h3>
+                <p>Informations demandées sur les participants lors d'une réservation. Vous pouvez créer plusieurs paramètres d'informations différents et ensuite les attribuer sur les tarifs des activités.</p>
+                <table class="table mt-3" id="services_list">
+                  <thead>
+                    <tr>
+                      <th>Nom du processus</th>
+                      <th>Texte affiché dans le formulaire</th>
+                      <th class="text-right">
+                        <button type="button" class="btn btn-sm btn-outline-success" (click)="addStateParameters(stateParametersContent)">+ Ajouter un processus</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let parameters of settings.states_parameters; index as i">
+                      <td scope="row"><span ngbTooltip="{{ parameters.description }}" container="body">{{ parameters.name }}</span></td>
+                      <td scope="row">{{ parameters.form[global.currentLanguage] }}</td>
+                      <td class="text-right">
+                        <button class="btn btn-sm btn-outline-info m-1" (click)="modifyStateParameters(stateParametersContent, parameters)">Modifier</button>
+                        <button *ngIf="!idParameterIsUsed(parameters.id)" class="btn btn-sm btn-outline-danger m-1" (click)="deleteStateParameters(i)">Supprimer</button>
+    										<span *ngIf="idParameterIsUsed(parameters.id)">Utilisé dans les activités</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <ng-template #stateParametersContent let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Modifier le processus {{ formStateParameters.name }}</h4>
+                  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">×</button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label class="font-weight-bold" for="formStateParameterName" ngbTooltip="Nom du processus de réservation">Nom du processus de réservation</label>
+                    <input class="form-control" id="formStateParameterName" type="text" placeholder="Nom du processus (ex : Pré-réservayion, Validation manuelle...)" [(ngModel)]="formStateParameters.name" />
+                  </div>
+                  <div class="form-group">
+                    <label class="font-weight-bold" for="formStateParameterDesc" ngbTooltip="Description du processus de réservation">Description du processus de réservation (utile que pour vous)</label>
+                    <textarea class="form-control" id="formStateParameterDesc" rows="3" [(ngModel)]="formStateParameters.description"></textarea>
+                  </div>
+                  <p>Vous pouvez créer des paramètres différents et les attibuer dans les créneaux par la suite.</p>
+                  <table class="table mt-3" id="services_list">
+                    <thead><tr><th colspan="5"> Réservation côté formulaire client </th></tr></thead>
+                    <thead>
+                      <tr>
+                        <th class="text-center" ngbTooltip="L'étape de paiement sera affiché lors de la réservation." container="body">Paiement à la réservation</th>
+                        <th class="text-center" ngbTooltip="Etat de la réservation une fois celle ci faite par le client" container="body">Etat à la réservation</th>
+                        <th class="text-center" ngbTooltip="Cette réservation sera compté au planning" container="body">Compter dans la capacité</th>
+                        <th class="text-center" ngbTooltip="Etat de la réservation lorsqu'un paiement est reçu" container="body">Etat après paiement</th>
+                        <th class="text-center" ngbTooltip="La réservation expire pour une réservation faite par le client et lorsque le paiement n'a pas été fait (abandon) !" container="body">Expiration de la réservation (client)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row" class="text-center">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="formStateParameters.paiement" />
+                          </div>
+                        </td>
+                        <td scope="row">
+                          <select class="form-control" [(ngModel)]="formStateParameters.state">
+                            <option *ngFor="let state of statesList" [value]="state.id">{{ state.filterName }}</option>
+                          </select>
+                        </td>
+                        <td scope="row" class="text-center">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="formStateParameters.capacity" />
+                          </div>
+                        </td>
+                        <td scope="row">
+                          <select class="form-control" [(ngModel)]="formStateParameters.paiementState">
+                            <option *ngFor="let state of statesList" [value]="state.id">{{ state.filterName }}</option>
+                          </select>
+                        </td>
+                        <td scope="row" class="text-center">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="formStateParameters.expired" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5">
+                          <div class="form-group">
+                            <label class="font-weight-bold" for="formStateParametersForm" data-html="false">Texte à afficher sur le formulaire</label>
+                            <textarea class="form-control" id="formStateParametersForm" rows="3" [(ngModel)]="formStateParameters.form[global.currentLanguage]"></textarea>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table mt-3" id="services_list">
+                    <thead><tr><th colspan="5"> Réservation côté administrateur </th></tr></thead>
+                    <thead>
+                      <tr>
+                        <th class="text-center" ngbTooltip="Le client devra payer au moins un acompte lors de la réservation." container="body">Paiement à la réservation</th>
+                        <th class="text-center" ngbTooltip="Etat de la réservation une fois celle ci faite par le client" container="body">Etat à la réservation</th>
+                        <th class="text-center" ngbTooltip="Cette réservation sera compté au planning" container="body">Compter dans la capacité</th>
+                        <th class="text-center" ngbTooltip="Etat de la réservation lorsqu'un paiement est reçu" container="body">Etat après paiement</th>
+                        <th class="text-center" ngbTooltip="La réservation expire pour une réservation faite par le client et lorsque le paiement n'a pas été fait (abandon) !" container="body">Expiration de la réservation (client)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row" class="text-center">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="formStateParameters.paiementBackend" />
+                          </div>
+                        </td>
+                        <td scope="row">
+                          <select class="form-control" [(ngModel)]="formStateParameters.stateBackend">
+                            <option *ngFor="let state of statesList" [value]="state.id">{{ state.filterName }}</option>
+                          </select>
+                        </td>
+                        <td scope="row" class="text-center">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="formStateParameters.capacityBackend" />
+                          </div>
+                        </td>
+                        <td scope="row">
+                          <select class="form-control" [(ngModel)]="formStateParameters.paiementStateBackend">
+                            <option *ngFor="let state of statesList" [value]="state.id">{{ state.filterName }}</option>
+                          </select>
+                        </td>
+                        <td scope="row" class="text-center">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="formStateParameters.expiredBackend" />
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-success" type="button" [disabled]="!isOkStateParameters()" (click)="saveStateParameters(c)">Enregistrer</button>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 11}" id="tab011" role="tabpanel" aria-labelledby="tab11-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Synchronisation CAISSE-Online</h3>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formCaisseOnlineActivated" type="checkbox" [(ngModel)]="settings.caisse_online_activated" (ngModelChange)="setToSave(true)" />
+                <label class="form-check-label" for="formCaisseOnlineActivated">
+                  <b ngbTooltip="Si vous ne savez pas ce que cela veut dire, vous ne devriez pas toucher quoi que se soit ici ! Veuillez contacter le support de RESA Online pour plus d'informations.">Activer la synchronisation avec CAISSE-Online</b>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              Etat de connexion avec Caisse Online : <span class="text-success" *ngIf="caisseStatusOk">Connecté</span><span class="text-danger" *ngIf="!caisseStatusOk">Non connecté</span>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formCaisseOnlineSiteURL" data-html="false">URL du site (à copier dans la licence Caisse Online)</label> : {{ settings.caisse_online_site_url }}
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formCaisseOnlineLicenseId" data-html="false">Licence CAISSE-Online</label>
+              <input class="form-control" id="formCaisseOnlineLicenseId" type="text" placeholder="Licence CAISSE-Online" [(ngModel)]="settings.caisse_online_license_id" (ngModelChange)="setToSave(true)" />
+            </div>
+            <div *ngIf="global.wpDebugMode" class="form-group">
+              <label class="font-weight-bold" for="formCaisseOnlineMode" data-html="false">Mode (pour le mode DEBUG)</label>
+              <select id="formCaisseOnlineMode" class="form-control" [(ngModel)]="settings.caisse_online_mode" (ngModelChange)="setToSave(true)">
+                <option [value]="'0'">Production</option>
+                <option [value]="'1'">Local</option>
+                <option [value]="'2'">Test</option>
+              </select>
+            </div>
+            <button [disabled]="!caisseStatusOk" (click)="forceCaisseOnline()" class="btn btn-sm btn-warning d-block" ngbTooltip="Attention vous devez savoir ce que vous faites !" type="button">
+              Forcer la synchronisation avec la caisse<span *ngIf="checkLaunch">...</span>
+            </button>
+            <button [disabled]="!caisseStatusOk" (click)="clearSynchronizationCustomers()"  type="button" class="btn btn-sm btn-warning d-block mt-1" ngbTooltip="Attention vous devez savoir ce que vous faites !">
+              Supprimer la synchronisation de tous les clients<span *ngIf="checkLaunch">...</span>
+            </button>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 12}" id="tab012" role="tabpanel" aria-labelledby="tab12-tab">
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Mise à jour</h3>
+            <p *ngIf="needUpdate">
+              Une mise à jour de votre base de données est nécessaire ! Attention, cela peut prendre quelques minutes...<br />
+              <button class="btn btn-sm btn-success" [disabled]="launchUpdate" (click)="update()">Lancer la mise à jour</button>
+            </p>
+            <p *ngIf="!needUpdate">
+              Aucun mise à jour en attente.
+            </p>
+          </section>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Support</h3>
+            <p>
+              Vous pouvez faire une demande de support en suivant le lien suivant<br />
+              <a class="btn btn-sm btn-success" href="{{ global.supportURL }}" target="_blank">Aller sur le support</a>
+            </p>
+            <p>
+              Le bouton suivant permet de générer le fichier de configuration de votre site pour eventuellement comprendre les conflits.<br />
+              Le support peut en avoir besoin pour résoudre vos problèmes.<br />
+              <button *ngIf="!configurationFileURL" class="btn btn-sm btn-success" [disabled]="checkLaunch" (click)="configurationFile()">Générer configuration<span *ngIf="checkLaunch">...</span></button>
+              <a *ngIf="configurationFileURL" href="{{ configurationFileURL }}" download>Voir le fichier de configuration</a>
+            </p>
+          </section>
+          <!--
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Exporter/Importer les données</h3>
+            <div>
+              <p>Exportez les données de votre RESA Online et Wordpress<br /></p>
+              <button *ngIf="!exportFileURL" class="btn btn-sm btn-success" [disabled]="checkLaunch" (click)="exportFile()">Générer le fichier d'export<span *ngIf="checkLaunch">...</span></button>
+              <a *ngIf="exportFileURL" href="{{ exportFileURL }}" download>Téléchager le fichier d'export</a>
+            </div>
+            <div>
+              <br />
+              <p>Importez le fichier précédemment exporté d'un autre wordpress (attention votre resa-online ne doit pas contenir de données)<br /></p>
+              <div class="form-group">
+                <label for="importFile" class="label-file">Importer fichier</label>
+                <input class="input-file" type="file" id="importFile" (change)="importFileInput($event)" accept=".sql" value="Ajouter...">
+              </div>
+              <p>
+                Après l'importation n'oubliez pas de migrer les dossiers : <i>wp-content/uploads/resa_css</i> et <i>wp-content/upload/resa_attachments</i>
+              </p>
+            </div>
+          </section>
+          //-->
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h3>Nouvelle interface manageur</h3>
+            <p>
+              Vous pouvez activer la nouvelle interface manager, elle présente des améliorations visuelles et des perfomances diverses.<br />
+              L'ancinne interface est toujours disponible mais elle ne sera plus mise à jour.<br />
+            </p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" id="formActivateBackendV2" type="checkbox" [(ngModel)]="settings.backend_v2_activated" (change)="setToSave(true)" />
+                <label class="form-check-label" for="formActivateBackendV2"><b>Activer la nouvelle interface</b></label>
+              </div>
+            </div>
+          </section>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+        </div>
+        <div class="tab-pane" [ngClass]="{'active':initTab == 14}" id="tab014" role="tabpanel" aria-labelledby="tab014-tab">
+          <div *ngIf="!resaOnlineFacebookInstalled">
+            <section class="p-2 mt-2 mb-2 bg-light">
+              <h3>Connexion avec Facebook</h3>
+              <p>
+                RESA Online permet à vos utilisateurs de créer un compte client avec leur compte Facebook lors de leur première réservation.<br />
+                Pour se faire vous aurez besoin du plugin RESA Facebook, veuillez nous contacter sur le <a href="{{ global.supportURL }}" target="_blank">support</a>
+              </p>
+            </section>
+          </div>
+          <div *ngIf="resaOnlineFacebookInstalled">
+            <section class="p-2 mt-2 mb-2 bg-light">
+              <h3>Connexion avec Facebook</h3>
+              <p>Vos clients pourront utiliser leur compte facebook pour faire une réservation</p>
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" id="formFacebookActivated" type="checkbox" [(ngModel)]="settings.facebook_activated" (change)="setToSave(true)" />
+                  <label class="form-check-label" for="formFacebookActivated"><b>Activer la connexion avec Facebook</b></label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="font-weight-bold" for="formFacebookApiId" data-html="false">Facebook API ID</label>
+                <input class="form-control" [disabled]="!settings.facebook_activated" id="formFacebookApiId" type="text" placeholder="Facebook API Id" [(ngModel)]="settings.facebook_api_id" (ngModelChange)="setToSave(true)" />
+              </div>
+              <div *ngIf="global.wpDebugMode" class="form-group">
+                <label class="font-weight-bold" for="formAPIFacebook" data-html="false">Facebook API version (Afficher en mode DEBUG)</label>
+                <input class="form-control" [disabled]="!settings.facebook_activated" id="formAPIFacebook" type="text" placeholder="Facebook API version" [(ngModel)]="settings.facebook_api_version" (ngModelChange)="setToSave(true)" />
+              </div>
+            </section>
+            <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+            <section class="p-2 mt-2 mb-2">
+              <h4>Créer votre application Facebook (<a href="https://resaonline.freshdesk.com/a/solutions/articles/35000124887-cr%C3%A9er-une-application-facebook-pour-le-plugin-resa-facebook" target="_blank">aide</a>)</h4>
+              <ol>
+                <li>Rendez-vous sur <a href="https://developers.facebook.com/apps" target="_blank">developers.facebook.com/apps</a>, connectez-vous et cliquez sur "Ajouter une app".</li>
+                <li>Lorsque la fenêtre "Créer un nouvel ID d’app" apparaît, saisissez un nom (c'est-à-dire le nom de votre site) et une adresse électronique de contact, puis cliquez sur "Créer un ID d'app"</li>
+                <li>Dans le menu de gauche, allez dans Paramètres : Général, cliquez sur "Ajouter une plate-forme" (tout en bas), "Site Web", puis remplissez votre "URL Site". Remarque: Votre site doit être paramétré en https pour fonctionner avec Facebook Login.</li>
+                <li>Également sur la page "Paramètres", veuillez renseigner une "URL de la Politique de confidentialité", vous pouvez toujours remplir les différents champs du formulaire puis enregistrez les modifications.</li>
+                <li>N'oubliez pas de passer votre APP en mode publique en cliquant sur le commutateur "désactivé" en haut.</li>
+              </ol>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="page_content" class="container p-sm-2" *ngIf="settings == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>
+<div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>
+<div *ngIf="checkLaunch" class="sLoader_bg"><div class="sLoader"></div></div>
+<div *ngIf="launchUpdate" class="popLoaded">
+  <div class="aloader"></div>
+  Mise à jour en cours, cela peut prendre quelques minutes !<br />
+  Ne pas recharger ou fermer la page...
+</div>

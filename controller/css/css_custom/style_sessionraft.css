@@ -1,0 +1,691 @@
+/*** couleurs
+
+vert : #f37829;
+bleu : #0ecee0;
+blanc : white;
+noir : #0ecee0;
+gris : #cccccc;
+
+***/
+
+/** navigation step **/
+
+#steps_navigation{
+z-index:1;
+background-color:white;
+padding:20px 0px;
+}
+
+/** navigation step **/
+
+@media screen and (min-width: 500px){
+	#steps_navigation{
+	z-index:1;
+	background-color:white;
+	padding:20px 0px;
+	}
+
+	#steps_navigation .step_item{
+		text-decoration:none !important;
+		color:#f37829;
+		background-color:transparent;
+	}
+	.step_item.not_active_yet{
+		color:white;
+	}
+	.step_item.active, .step_item:hover{
+		color:white;
+	}
+
+	.step_item::before{
+		content: '';
+		height: 0px;
+		border: 1px solid #f37829;
+		z-index: 0;
+		display: block;
+		position: relative;
+		top: 32px;
+		right: 50%;
+		width: 100%;
+	}
+	#steps_navigation .step_item.not_active_yet::before{
+		border: 1px solid #0ecee0;
+	}
+	#steps_navigation .step_item.active::before{
+		border: 1px solid #f37829;
+	}
+
+	#steps_navigation .step_item .step_number {
+		z-index:3;
+		color:#f37829;
+		background-color:white;
+		border:1px solid #f37829;
+		text-decoration:none;
+		font-size:18px;
+		margin: 0px auto;
+	}
+	#steps_navigation .step_item.not_active_yet .step_number {
+		color:white;
+		background-color:#0ecee0;
+		border:1px solid #0ecee0;
+		font-size:18px;
+		margin: 0px auto;
+	}
+	#steps_navigation .step_item.active .step_number, #steps_navigation .step_item:hover .step_number {
+		color:white;
+		background-color:#f37829;
+		border:1px solid #f37829;
+		font-size:18px;
+		margin: 0px auto;
+	}
+
+	#steps_navigation .step_item .step_text  {
+		font-weight:normal;
+		color:#f37829;
+		padding: 15px 0px 0px 0px ;
+	}
+	#steps_navigation .step_item.not_active_yet .step_text  {
+		color:#0ecee0;
+		font-weight:normal;
+		padding: 15px 0px 0px 0px ;
+	}
+	#steps_navigation .step_item.active .step_text, #steps_navigation .step_item:hover .step_text  {
+		color:#f37829;
+		font-weight:normal;
+		padding: 15px 0px 0px 0px ;
+	}
+}
+
+/** navigation step MOBILE **/
+
+@media screen and (max-width: 500px){
+	#steps_navigation{
+	z-index:1;
+	background-color:white;
+	padding:20px 0px;
+	margin:auto;
+	display:flex;
+	}
+
+	.step_item {
+		display: block;
+		float:none;
+		width:auto;
+		flex-grow:1;
+		color: white;
+		background-color: #f37829;
+	}
+
+	.step_item.active, .step_item:hover {
+		color: white;
+		background-color: #f5a151;
+	}
+
+	.step_item.not_active_yet {
+		color: #0ecee0;
+	}
+}
+
+
+
+
+
+/*** étape 1 lieu **/
+
+#step1_content{
+	display:flex;
+}
+#step1_content .place{
+	background-color:white;
+	color:#f37829;
+	/*border:1px solid #f37829;*/
+	border:none;
+	box-sizing:border-box;
+	padding:60px 25px 80px 25px;
+	width:50%;
+	text-decoration:none !important;
+}
+
+#step1_content .place:hover, #step1_content .place.active{
+	background-color:#f37829;
+	color:white;
+	/*border:1px solid #f37829;*/
+	border:none;
+}
+
+#step1_content .place .place_title {
+	color:#f37829;
+	font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+}
+#step1_content .place .place_description {
+	color:#0ecee0;
+	font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+}
+#step1_content .place:hover .place_title, #step1_content .place.active .place_title, #step1_content .place:hover .place_description, #step1_content .place.active .place_description{
+	color:white;
+}
+
+/* place design */
+#step1_content .place h2,#step1_content .place p {
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius:20px;
+	padding:10px 6px;
+	box-sizing:border-box;
+}
+#step1_content .place:hover h2,#step1_content .place:hover p, #step1_content .place.active h2,#step1_content .place.active p {
+	background-color: rgba(0, 200, 98, 0.9);
+}
+
+#step1_content .place.cours{
+	background-image:url('https://resa-online.fr/wp-content/uploads/2018/03/cours2.jpg');
+	background-cover:cover;
+	background-position:center center;
+}
+
+#step1_content .place.outdoor{
+	background-image:url('https://resa-online.fr/wp-content/uploads/2018/03/activite.jpg');
+	background-cover:cover;
+	background-position:center center;
+}
+
+
+
+/*** étape 2 service **/
+
+#step2_content{
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: auto;
+}
+
+#step2_content .category {
+	padding:10px;
+}
+
+
+#step2_content .category .category_title {
+	color:#f37829;
+	font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+}
+
+#step2_content .service{
+	background-color:white;
+	color:#f37829;
+	border:0px solid #f37829;
+	box-sizing:border-box;
+	padding:0px;
+	width:100%;
+	text-decoration:none !important;
+	margin-bottom:20px;
+	min-height:300px;
+	box-sizing:border-box;
+}
+
+#step2_content .service, #step2_content .service *{
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
+}
+
+#step2_content .service:hover{
+	background-color:#f37829;
+	color:white;
+	border:0px solid #f37829;
+}
+
+#step2_content .service_content , #step2_content .service:hover .service_content{
+	background-color:transparent;
+	color:inherit;
+	border:none;
+}
+
+
+#step2_content .service .service_title {
+	color:white;
+	font-size: 1.8em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+	background-color: rgba(243, 120, 41, 0.8);
+}
+#step2_content .service .service_description {
+	color:white;
+	font-size: 1.3em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: justify;
+	background-color: rgba(243, 120, 41, 0.8);
+	padding:10px;
+	box-sizing:border-box;
+	opacity:0;
+}
+
+#step2_content .service:hover .service_title, #step2_content .service.active .service_title, #step2_content .service:hover .service_description, #step2_content .service.active .service_description{
+	color:white;
+}
+
+
+/***** services sessionraft ****/
+
+
+ #step2_content .service:hover .service_description, #step2_content .service.active .service_description{
+	opacity:1;
+}
+
+
+
+#step2_content .service.rafting_decouverte_img {
+	background-image:url('https://prod7.damienfonvieille.fr/wp-content/uploads/2018/04/rafting-decouverte.jpg') !important;
+}
+
+#step2_content .service.rafting_action_img {
+	background-image:url('https://prod7.damienfonvieille.fr/wp-content/uploads/2018/04/Raft-Arve-action.jpg');
+}
+
+#step2_content .service.rafting_sensation_img {
+	background-image:url('https://prod7.damienfonvieille.fr/wp-content/uploads/2018/04/Raft-sensation-journee-Dora-Baltea.jpg');
+}
+
+#step2_content .service.rafting_sensation_demi_img {
+	background-image:url('https://prod7.damienfonvieille.fr/wp-content/uploads/2018/04/Raft-sensationdemi-journee-Dora-Baltea.jpg');
+}
+
+#step2_content .service.hydro_decouverte_img {
+	background-image:url('https://prod7.damienfonvieille.fr/wp-content/uploads/2018/04/Hydrospeed-decouverte.jpg');
+}
+
+#step2_content .service.cano_decouverte_img {
+	background-image:url('https://prod7.damienfonvieille.fr/wp-content/uploads/2018/04/index-terrain-aventure-eau.jpg');
+}
+
+#step2_content .service.hydro_action_img {
+	background-image:url('https://prod7.damienfonvieille.fr/wp-content/uploads/2018/04/hydrospeed-action-01.jpg');
+}
+
+#step2_content .category:first-child .category_title{
+	color:#99ff99;
+}
+
+#step2_content .category:nth-child(2) .category_title{
+	color:#99ccff;
+}
+
+#step2_content .category:nth-child(3) .category_title{
+	color:#ffa893;
+}
+
+
+
+
+
+/** en-tête lieu et services **/
+
+#selected_place{
+	padding: 30px;
+    background-color: white;
+    margin: 20px 0px;
+    text-align: center;
+}
+
+#selected_place .place_title{
+	color:#f37829;
+    font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+}
+
+#selected_place .place_description {
+	color:#0ecee0;
+    font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+}
+
+#selected_service {
+	padding: 30px;
+    background-color: white;
+    margin: 20px 0px;
+    text-align: left;
+}
+#selected_service .service_title{
+	color:#f37829;
+    font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: left;
+	margin:0px;
+	padding:0px;
+}
+#selected_service .service_description {
+	color:#0ecee0;
+    font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: left;
+	margin:0px;
+	padding:0px;
+}
+
+#steps_content {
+    background-color: white;
+    padding: 20px 10px;
+	box-sizing:border-box;
+}
+
+#step3_content .step3_1_title, #step3_content .step3_2_title, #step3_content .step3_3_title, #step3_content .step3_4_title {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+
+/** calendrier**/
+
+#step3_1 .calendrier {
+    margin: 10px 0px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#ro_front_formulaire .calendrier thead .btn{
+	border:1px solid #f37829;
+	box-sizing:border-box;
+}
+
+#ro_front_formulaire .calendrier tbody .btn{
+	font-weight:normal;
+	color:white;
+}
+
+#step3_1 .calendrier tr, #step3_1 .calendrier thead th, #step3_1 .calendrier td{
+    border:none;
+	color:#0ecee0;
+}
+
+#ro_front_formulaire .calendrier tbody .btn.active {
+    color: white;
+    background-color: #f37829;
+}
+
+/** creneau **/
+
+#step3_2 .creneau{
+	max-width:100%;
+	border: 1px solid #f37829;
+	color:#f37829;
+}
+#step3_2 .creneau:hover {
+    background-color: #f37829;
+    color: white;
+}
+#step3_2 .creneau.active{
+    background-color: #f37829;
+    color: white;
+}
+
+/** date et creneau recap **/
+
+#step3_date_recap, #step3_creneau_recap{
+	background-color: #000000;
+    color: white;
+}
+#step3_date_recap .gras, #step3_creneau_recap .gras{
+    color: #f37829;
+}
+
+/** tarifs et extra **/
+
+#step3_3 .price {
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+}
+
+#step3_3 .price , #step3_4 .extra{
+	background-color:transparent;
+	color:#0ecee0;
+	border:1px solid #f37829;
+}
+#step3_3 .price .price_title, #step3_4 .extra .extra_title {
+	color:#f37829;
+}
+
+#step3_3 .price_value, #step3_4 .extra_value{
+	font-size:26px;
+	line-height:1.2em;
+	color:#f37829;
+}
+#step3_3 .price_unit , #step3_4 .extra_unit{
+	font-size:18px;
+	line-height:1.2em;
+	color:#0ecee0;
+}
+#step3_3 .price_quantity_title  , #step3_4 .extra_quantity_title{
+	display:none;
+}
+
+#ro_front_formulaire .add_date_step_link, #ro_front_formulaire .add_service_step_link , #ro_front_formulaire .previous_step_link , #ro_front_formulaire .next_step_link, #ro_front_formulaire .btn_add_coupon {
+	color:white !important;
+	background-color:#f37829;
+	border:1px solid #f37829;
+	text-decoration:none !important;
+
+}
+#ro_front_formulaire .add_date_step_link:hover, #ro_front_formulaire .add_service_step_link:hover , #ro_front_formulaire .previous_step_link:hover , #ro_front_formulaire .next_step_link:hover {
+	color:#f37829 !important;
+	background-color:white;
+}
+
+
+#step6_1 .order_recap{
+	color:#white;
+}
+
+
+#step6_2{
+	background-color:white;
+}
+
+#step6_2 .paiement_methods form label{
+	padding:20px 0px 0px 0px
+}
+
+#step6_2 .paiement_methods form label .description{
+	display: block;
+    margin-top: -20px;
+    line-height: 14px !important;
+    font-size: 14px;
+    float: left;
+}
+
+#step6_2 .account label{
+	line-height:1.3em;
+	padding-top:20px;
+}
+
+#step6_2 .paiement_validation{
+	border-top:1px solid #0ecee0;
+	margin-top:25px;
+}
+
+#step6_2 .paiement_validation_title{4
+font-weight:bold;
+text-align:center;
+margin-top:30px;
+}
+
+#step7{
+	text-align:center;
+	font-size:18px;
+	margin-top:-20px;
+}
+
+#step7 h3{
+	font-size:24px;
+}
+
+#step7 p{
+	text-align:center;
+	font-size:18px;
+	line-height:1.2em;
+}
+
+/*** cart ***/
+#cart{
+	background-color:#efefef;
+}
+
+#cart .cart_title {
+    text-align: center;
+    margin: 5px 0px;
+    color: #0ecee0;
+    font-weight: bolder;
+    font-size: 24px !important;
+}
+
+#cart .service_title {
+	color:#0ecee0;
+    font-weight: normal;
+    font-size: 24px;
+    padding-bottom: 10px;
+    margin-top: 25px;
+}
+
+#cart .cart_row {
+    color: white;
+    background-color: #f37829;
+    border: 1px solid #f37829;
+	grid-row-gap: 0px;
+}
+
+#cart .cart_row_infos {
+    background-color: transparent;
+}
+
+#cart .reduction_row {
+    background-color: #0ecee0;
+    color: white;
+    padding: 0px 10px;
+}
+
+#cart .cart_row .date, #cart .cart_row .creneau{
+	font-size:18px;
+	font-weight:normal;
+	line-height:1.2em;
+	background-color:#0ecee0;
+	padding:3px 3px;
+}
+
+/** MOBILE **/
+
+@media screen and (max-width: 500px){
+	#cart .cart_row .price_title{
+		text-align:center;
+	}
+
+	#cart .cart_row .date, #cart .cart_row .creneau{
+		padding:3px 3px;
+	}
+	#ro_front_formulaire .cart_add_coupon_title{
+		display:none;
+	}
+}
+
+
+.order_recap_left .order_recap_price_quantity{
+	padding: 1px 5px;
+    background-color: #0ecee0;
+	color:white;
+}
+.order_recap_left .order_recap_price_quantity_separator{
+	padding: 1px 5px;
+    background-color: #0ecee0;
+	color:white;
+}
+.order_recap_center .order_recap_price_title{
+	padding: 1px 5px;
+    background-color: #0ecee0;
+	color:white;
+}
+.order_recap_right .order_recap_price_total{
+	padding: 1px 5px;
+    background-color: #0ecee0;
+	color:white;
+}
+
+
+.cart_coupon{
+	display:flex;
+	justify-content:center;
+}
+.cart_coupon h4{
+	align-self:center;
+	padding:10px;
+	margin:0px;
+}
+.cart_coupon input{
+	width:auto !important;
+	min-width:100px;
+	margin: 0px 15px;
+	align-self:center;
+}
+
+#ro_front_formulaire .cart_add_coupon_title{
+	font-size:18px;
+}
+
+#ro_front_formulaire .btn_add_coupon {
+	border:1px solid white !important;
+	border-radius:0px;
+	color:white !important;
+	background-color:#f37829;
+	font-size:16px;
+	font-weight:bold;
+	padding: 6px;
+	line-height:1em;
+}
+
+#ro_front_formulaire .btn_add_coupon:hover {
+	border:1px solid #f37829 !important;
+	color:#f37829 !important;
+	background-color:white;
+	line-height:1em;
+}
+
+
+
+/**** comtpe client ***/
+
+
+#resa_account label.active{
+	color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid #0ecee0;
+    border-bottom: 1px solid #fff;
+}
+#ro_front_formulaire .filters_menu:hover .dropbtn {
+    background-color: #1de7f1;
+}
+#ro_front_formulaire .dropbtn {
+    background-color: #0ecee0;
+    color: white;
+    padding: 14px;
+    font-size: 14px;
+    border: none;
+    min-width: 180px;
+}

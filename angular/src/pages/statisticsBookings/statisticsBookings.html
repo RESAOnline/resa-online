@@ -1,0 +1,46 @@
+<div id="page_content" class="container p-sm-2" style="max-width: 95vw; margin-left: auto; margin-right: auto;">
+  <h3>Statistiques des réservations</h3>
+  <p>Sélectionner les dates</p>
+  <p class="small">Pour les détails, rendez-vous sur la page "Statistiques Activités"</p>
+  <div class="form-inline">
+    <div ngbDropdown *ngIf="settings != null && settings.places.length > 0" class="d-inline-block">
+      <button class="btn btn-success" id="dropdownPlaces" ngbDropdownToggle>Lieux</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownPlaces" class="p-3 text-center">
+        <div class="text-left">
+          <div>Choix des lieux</div>
+          <div class="form-check mt-1" *ngFor="let place of settings.places; index as i">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="statisticsForm.places[place.id]" id="defaultCheck{{ i }}">
+            <label class="form-check-label" for="defaultCheck{{ i }}">
+              {{ global.getTextByLocale(place.name) }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group ml-2">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="statisticsForm.startDate" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="changeStartDate()">
+        <div class="input-group-append">
+          <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group ml-2">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="statisticsForm.endDate" ngbDatepicker #d2="ngbDatepicker" (ngModelChange)="changeEndDate()">
+        <div class="input-group-append">
+          <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="d2.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success ml-2" (click)="getStatisticsBookings()">Charger</button>
+  </div>
+  <div *ngIf="loadSettings || loadStatistics" class="sLoader_bg"><div class="sLoader"></div></div>
+  <div *ngIf="statistics != null" class="p-2">
+    <ul>
+      <li>Nombre de réservation : <b>{{ statistics.nbBookings }}</b></li>
+      <li>Prix total : <b>{{ statistics.totalPrice | number:'1.2':'fr' }}{{ settings.currency }}</b></li>
+      <li>Pourcentage des <b>réservations prise directement en ligne  : {{ statistics.purcentOnline }}%</b></li>
+    </ul>
+  </div>
+</div>

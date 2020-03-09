@@ -1,0 +1,58 @@
+<style ng-if="enabledColor != ''">
+.resa_enabled{
+	background-color: {{ enabledColor }};
+}
+</style>
+<style ng-if="disabledColor != ''">
+.resa_disabled{
+	background-color: {{ disabledColor }};
+}
+</style>
+
+<div class="row">
+	<div class="col-xs-12 col-md-4">
+		<h4 class="resa_h4">1 - {{ translate('Date_word') }}</h4>
+		<p class="resa_title_description">{{ translate('choose_a_date') }}</p>
+		<div class="resa_bg4 resa_calendar_box resa_calendar" uib-datepicker ng-model="model.date" datepicker-options="model.options">
+		</div>
+	</div>
+	<div class="col-xs-12 col-md-8">
+		<h4 class="resa_h4">2 - {{ translate('timeslot_on_date_words') }} <span class="resa1">{{ getDate() | formatDate:dateFormat }}</span></h4>
+		<p class="resa_title_description">{{ translate('choose_a_timeslot') }}
+			<a ng-if="displayMembers && timeslots.length == 0 && !loading" ng-click="getTimeslotsAjax()">{{ translate('reload_link_title') }}</a>
+		</p>
+		<div class="resa_timeslot_bloc">
+			<div ng-if="loading" class="ro-loader-timeslot">
+				<span class="ro-span"> </span>
+				<div class='ro-loader-img' style='transform:scale(0.35);'><div></div><div></div></div>
+			</div>
+			<div class="resa_timeslot angular-show-hide-animation" ng-class="{'resa_timeslot_complet': !displayMembers && getCapacity(timeslot) <= 0, 'resa_timeslot_active':  isSelectedTimeslot(timeslot) }" ng-click="setTimeslot(timeslot)" ng-repeat="timeslot in timeslots">
+				<p class="resa_timeslot_time" ng-if="!timeslot.noEnd">
+					{{ timeslot.startTime | formatTime:timeFormat }}<br>{{ translate('to_word') }} {{ timeslot.endTime | formatTime:timeFormat }}
+				</p>
+				<p class="resa_timeslot_time" ng-if="timeslot.noEnd">
+					{{ translate('begin_word') }} {{ timeslot.startTime | formatTime:timeFormat }}
+				</p>
+				<p class="resa_timeslot_capacity" ng-if="!displayMembers && getCapacity(timeslot) > 0 && (!timeslot.overCapacity || (timeslot.overCapacity && timeslot.display_remaining_position_overcapacity))">
+					{{ getCapacity(timeslot) }} {{ translate('positions_word') }}
+				</p>
+				<p class="resa_timeslot_capacity" ng-if="!displayMembers && getCapacity(timeslot) > 0 && timeslot.overCapacity && !timeslot.display_remaining_position_overcapacity">
+					{{ translate('remaining_positions_word') }}
+				</p>
+				<p class="resa_timeslot_capacity" ng-if="!displayMembers && getCapacity(timeslot) <= 0">
+					{{ translate('Full_word') }}
+				</p>
+				<p class="resa_timeslot_capacity" ng-if="displayMembers">
+					{{ translate('Capacity_word') }} {{ getCapacity(timeslot) }}<br />
+					<span ng-if="timeslot.members.length > 0 && !timeslot.noStaff">
+					<!--   {{ translate('Members_word') }} : -->
+					  <span ng-repeat="member in timeslot.members"><span ng-show="$index > 0">,</span> {{ member.nickname }}</span>
+					</span>
+					<span ng-if="timeslot.active && timeslot.noStaff">
+					  {{ translate('no_staff_gestions_words') }}
+					</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

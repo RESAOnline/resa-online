@@ -1,0 +1,401 @@
+
+.resa_reservation{
+	background-color:white;
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"reservation_client reservation_states reservation_notes reservation_suivi reservation_actions"
+	"reservation_bookings reservation_bookings reservation_bookings reservation_bookings reservation_bookings";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	padding:8px 2px 0px 2px;
+	color:#292929;
+	margin-bottom:20px;
+	margin-top:15px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.add_reservation .resa_reservation{
+	grid-template-columns: 4fr 1fr 1fr 1fr 2fr;
+}
+
+.resa_reservation .reservation_client{
+	align-self:start;
+	justify-self:start;
+	grid-area:reservation_client;
+	padding-left:8px;
+}
+.resa_reservation .reservation_states{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:reservation_states;
+}
+.resa_reservation .reservation_notes{
+	align-self:center;
+	justify-self: center;
+	grid-area:reservation_notes;
+}
+.resa_reservation .reservation_suivi{
+	align-self:center;
+	justify-self: center;
+	grid-area:reservation_suivi;
+}
+.resa_reservation .reservation_actions{
+	align-self:center;
+	justify-self: end;
+	padding-right:4px;
+	grid-area:reservation_actions;
+}
+.resa_reservation .reservation_bookings{
+	grid-area:reservation_bookings;
+}
+
+.reservation_actions .btn{
+	padding:10px 10px;
+}
+
+.reservation_actions .btn:hover{
+	padding:10px 10px;
+}
+
+
+.reservation_client .client_name{
+	font-weight:600;
+}
+
+.states_paiement{
+	padding:0px;
+	margin:2px;
+	display:block;
+	width:100%;
+}
+.state_paiement{
+	padding:0px 4px;
+	text-align:center;
+	color:white;
+	background-color:black;
+	font-size:12px;
+	line-height:12px;
+	display:none;
+}
+
+
+.state_paiement.paiement_none{
+	background-color:#ff0000;
+}
+.state_paiement.paiement_incomplete{
+	background-color:#dfb70c;
+}
+.state_paiement.paiement_done{
+	background-color:#27b673;
+}
+.state_paiement.paiement_overpaiement{
+	background-color:#e88758;
+}
+.state_paiement.paiement_remboursement{
+	background: repeating-linear-gradient(  45deg,  rgba(100,100,100, 0.6),  rgba(100,100,100, 0.6) 10px,  rgba(100,100,100, 0.9) 10px,   rgba(100,100,100, 0.9) 20px);
+}
+.state_paiement.paiement_remboursement_done{
+	background: repeating-linear-gradient(  45deg,  rgba(155,193,27, 0.6),  rgba(155,193,27, 0.6) 10px,  rgba(155,193,27, 0.9) 10px,   rgba(155,193,27, 0.9) 20px);
+}
+
+
+.paiement_none .state_paiement.paiement_none{
+	display:inline;
+}
+.paiement_incomplete .state_paiement.paiement_incomplete{
+	display:inline;
+}
+.paiement_done .state_paiement.paiement_done{
+	display:inline;
+}
+.paiement_overpaiement .state_paiement.paiement_overpaiement{
+	display:inline;
+}
+.paiement_remboursement .state_paiement.paiement_remboursement{
+	display:inline;
+}
+.paiement_remboursement_done .state_paiement.paiement_remboursement_done{
+	display:inline;
+}
+
+
+
+
+.states_paiement_value{
+	text-align:center;
+	font-weight:bolder;
+}
+
+.reservation_suivi{
+	display:flex;
+}
+
+.suivi_title{
+	text-align:right;
+	padding-right:5px;
+	white-space:nowrap;
+}
+.suivi_content{
+	text-align:left;
+	white-space:nowrap;
+	color:#28b673;
+}
+
+
+.resa_reservation .booking{
+	display:grid;
+	/*grid-template-columns: repeat(9, 1fr);*/
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"booking_date booking_hour booking_nb_people booking_states booking_place booking_service booking_prices booking_members booking_tags";
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	margin-bottom:2px;
+	min-height:40px;
+}
+
+/* afficher les participants */
+.resa_reservation .booking.show_participants{
+	display:grid;
+	/*grid-template-columns: repeat(9, 1fr);*/
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+	"booking_date booking_hour booking_nb_people booking_states booking_place booking_service booking_prices booking_members booking_tags"
+	"table_participant table_participant table_participant table_participant table_participant table_participant table_participant table_participant table_participant" ;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	margin-bottom:2px;
+	min-height:40px;
+}
+.booking .table_participant{
+	display:none;
+}
+.booking.show_participants .table_participant{
+	display:block;
+	grid-area:table_participant;
+	min-width:300px;
+	width:100%;
+	margin:auto;
+	background-color: rgba(0, 0, 0, 0.1);
+	padding:0px;
+}
+
+.booking .table_participant table{
+	width:100%;
+	margin:2px;
+}
+
+.booking .table_participant tr{
+	border-bottom:1px solid white;
+}
+
+.booking .table_participant td{
+	line-height:9px;
+	padding:1px 8px;
+	font-size:11px;
+}
+
+
+
+.booking .booking_date{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_date;
+}
+.booking .booking_hour{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_hour;
+}
+.booking .booking_nb_people{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_nb_people;
+}
+.booking .booking_states{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_states;
+}
+.booking .booking_place{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_place;
+}
+.booking .booking_service{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_service;
+}
+.booking .booking_prices{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_prices;
+	min-height:50px;
+}
+.booking .booking_members{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_members;
+}
+.booking .booking_tags{
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	grid-area:booking_tags;
+}
+
+.booking_nb_people{
+	font-weight:bold;
+}
+
+.booking.confirmed{
+	background-color:#d4ffeb;
+}
+.booking.not_confirmed{
+	background-color:#fff7e0;
+}
+.booking.cancelled .booking_date, .booking.cancelled .booking_hour, .booking.cancelled .booking_place, .booking.cancelled .booking_service, .booking.cancelled .booking_members{
+	text-decoration:line-through;
+}
+.booking.cancelled{
+	background-color:#b0b0b0;
+	background: repeating-linear-gradient(  45deg,  rgba(0,0,0, 0.1),  rgba(0,0,0, 0.1) 10px,  rgba(176, 176 ,176, 0.1) 10px,   rgba(176, 176 ,176, 0.1) 20px);
+}
+.booking.abandonned{
+	background-color:#b0978a;
+}
+.booking.quote{
+	background-color:#d4eeff;
+}
+.booking.inerror{
+	background-color:#ff9c9c;
+}
+.booking.incomplete{
+	background-color:#b0b0b0;
+}
+
+
+.booking .states_state{display:none;}
+
+.booking.confirmed .states_state.state_confirmed{display:block;}
+
+.booking.not_confirmed .states_state.state_not_confirmed{display:block;}
+
+.booking.cancelled .states_state.state_cancelled{display:block;}
+
+.booking.inerror .states_state.state_inerror{display:block;}
+
+.booking.incomplete .states_state.state_incomplete{display:block;}
+
+
+.reservation_states .states_state{display:none;}
+
+.resa_reservation.valid .reservation_states .state_valid{display:block;}
+
+.resa_reservation.pending .reservation_states .state_pending{display:block;}
+
+.resa_reservation.cancelled .reservation_states .state_cancelled{display:block;}
+
+.resa_reservation.abandonned .reservation_states .state_abandonned{display:block;}
+
+.resa_reservation.quote .reservation_states .state_quote{display:block;}
+
+.resa_reservation.inerror .reservation_states .state_inerror{display:block;}
+
+.resa_reservation.incomplete .reservation_states .state_incomplete{display:block;}
+
+
+.prices_price{
+	background-color:#292929;
+	color:white;
+	padding:2px 5px;
+	margin:2px 0px;
+	white-space:nowrap;
+}
+.booking_prices .price_nb{
+	font-weight:bolder;
+	padding:0px 4px;
+}
+.booking_prices .price_name{
+	font-style:italic;
+}
+.booking_prices .price_value{
+	font-style:italic;
+}
+
+.booking_tags{
+	background-color: rgba(255, 255, 255, 0.8);
+}
+.booking_tags .tag{
+	border-left:3px solid grey;
+	margin:3px;
+	white-space:nowrap;
+	font-size:14px;
+	font-weight:bold;
+	line-height:11px;
+	font-style:italic;
+	color:grey;
+	padding-left:5px;
+	text-align:left;
+}
+
+.states_state{
+	padding:2px 10px;
+	text-align:center;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	color:white;
+	background-color:black;
+	font-size:12px;
+	line-height:12px;
+	margin:2px;
+	box-sizing:border-box;
+}
+
+.state_valid,.state_confirmed{	background-color:#28b673;}
+.state_pending,.state_not_confirmed{	background-color:#efb20e;}
+.state_cancelled{
+	background: repeating-linear-gradient(  45deg,  rgba(50,50,50, 0.5),  rgba(50,50,50, 0.5) 10px,  rgba(94, 94 ,94, 0.5) 10px,   rgba(94, 94 ,94, 0.5) 20px);
+	}
+.state_abandonned{	background-color:#765337;}
+.state_quote{	background-color:#1492e2;}
+.state_inerror{	background-color:#d62d2d;}
+.state_incomplete{	background-color:#787878;}
+
+
+.on {
+	color:#27b673;
+}
+.off {
+	color:#a1a1a1;
+	text-decoration:line-through;
+}
+
+
+
+::ng-deep .tooltip-participants {
+  opacity:1 !important;
+  width: 750px;
+	border: 1px solid black;
+	background-color: white;
+}
+
+::ng-deep .tooltip-participants .tooltip-inner {
+   background-color: white;
+   color:black;
+   opacity:1 !important;
+   max-width: 750px;
+}

@@ -1,0 +1,15 @@
+<div id="resa_img_library">
+	<div class="thumbnail" *ngFor="let image of images" (click)="selectImage(image)">
+	 	<img *ngIf="isImage(image) && image.media_details != null && image.media_details.sizes != null && image.media_details.sizes.thumbnail != null"  [src]="image.media_details.sizes.thumbnail.source_url" />
+		<img *ngIf="isImage(image) && (image.media_details == null || image.media_details.sizes == null || image.media_details.sizes.thumbnail == null)"  [src]="image.source_url" />
+	  <span class="doc_image_container" *ngIf="!isImage(image)">
+		<img class="doc_image" src="assets/image/document.png" />
+		<div class="doc_name">{{ image.title.rendered }} </div>
+	  </span>
+	</div>
+</div>
+<div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+<div>
+  <button class="btn btn-success" (click)="goMediaLink()">Importer une nouvelle image avec Wordpress</button>
+	<button class="btn btn-primary ml-2" [disabled]="launchAction" (click)="refresh()">Rafraîchir</button>
+</div>

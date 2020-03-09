@@ -1,0 +1,89 @@
+<div id="page_content" class="container p-sm-2" style="max-width: 95vw; margin-left: auto; margin-right: auto;">
+  <h3>Nombre de réservations par activités</h3>
+  <p>Sélectionner les dates</p>
+  <p class="font-italic">Attention, il se peut que la requête n'aboutisse pas sur des périodes trop larges !</p>
+  <div class="form-inline">
+    <div ngbDropdown *ngIf="settings != null && settings.places.length > 0" class="d-inline-block">
+      <button class="btn btn-success" id="dropdownPlaces" ngbDropdownToggle>Lieux</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownPlaces" class="p-3 text-center">
+        <div class="text-left">
+          <div>Choix des lieux</div>
+          <div class="form-check mt-1" *ngFor="let place of settings.places; index as i">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="statisticsForm.places[place.id]" id="defaultCheck{{ i }}">
+            <label class="form-check-label" for="defaultCheck{{ i }}">
+              {{ global.getTextByLocale(place.name) }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group ml-2">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="statisticsForm.startDate" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="changeStartDate()">
+        <div class="input-group-append">
+          <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group ml-2">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="statisticsForm.endDate" ngbDatepicker #d2="ngbDatepicker" (ngModelChange)="changeEndDate()">
+        <div class="input-group-append">
+          <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="d2.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success ml-2" (click)="getStatisticsActivities()">Charger</button>
+  </div>
+  <div *ngIf="loadSettings || loadStatistics" class="sLoader_bg"><div class="sLoader"></div></div>
+  <div style="overflow-x: auto;">
+    <table id="statistics-table" *ngIf="services.length > 0" class="mt-3 table table-striped text-center">
+      <thead>
+        <tr>
+          <td>Activité</td>
+          <td style="min-width:100px">Total</td>
+          <td style="min-width:100px" [hidden]="dates.length <= 1" *ngFor="let date of dates">
+            {{ date.date | parseDate | date:'EEEE d MMMM yyyy':'':'fr' }}<br />
+            <a href="javascript:void(0)" (click)="goPlanningBookings(date.date)">Planning</a>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of services">
+          <td><span *ngIf="settings != null && settings.places.length > 0 && service.places.length > 0">
+          [<span *ngFor="let place of service.places; index as i"><span *ngIf="i > 0">,</span>{{ getPlaceName(place) }}</span>]<br />
+          </span>{{ service.name | htmlSpecialDecode }}</td>
+          <td>
+            <span class="font-weight-bold">{{ service.total }}</span><br />
+            <span class="font-weight-bold">{{ service.numbers }}</span> pers.<br />
+            <span class="font-weight-bold">{{ service.price | number:'1.2':'fr' }}{{ settings.currency }}</span><br />
+          </td>
+          <td [hidden]="dates.length <= 1" *ngFor="let date of dates">
+            <span *ngIf="service.dates[date.label].total > 0">
+              <span class="font-weight-bold">{{ service.dates[date.label].total }}</span><br />
+              <span class="font-weight-bold">{{ service.dates[date.label].numbers }}</span> pers.<br />
+              <span class="font-weight-bold">{{ service.dates[date.label].price | number:'1.2':'fr'  }}{{ settings.currency }}</span><br />
+            </span>
+            <span *ngIf="service.dates[date.label].total <= 0 || service.dates[date.label].total == null"> - </span>
+          </td>
+        </tr>
+        <tr>
+          <td>Cumul</td>
+          <td>
+            <span class="font-weight-bold">{{ totals.total }}</span><br />
+            <span class="font-weight-bold">{{ totals.numbers }}</span> pers.<br />
+            <span class="font-weight-bold">{{ totals.price | number:'1.2':'fr' }}{{ settings.currency }}</span><br />
+          </td>
+          <td [hidden]="dates.length <= 1" *ngFor="let date of dates">
+            <span *ngIf="totals.dates[date.label].total > 0">
+              <span class="font-weight-bold">{{ totals.dates[date.label].total }}</span><br />
+              <span class="font-weight-bold">{{ totals.dates[date.label].numbers }}</span> pers.<br />
+              <span class="font-weight-bold">{{ totals.dates[date.label].price | number:'1.2':'fr'  }}{{ settings.currency }}</span><br />
+            </span>
+            <span *ngIf="totals.dates[date.label].total <= 0 || totals.dates[date.label].total == null"> - </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

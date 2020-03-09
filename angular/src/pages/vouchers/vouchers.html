@@ -1,0 +1,77 @@
+<div id="page_content" class="container p-sm-2" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div>
+    <h3>Coupons</h3>
+    <p>Sélectionner le coupon dans la liste ci-dessous afin de charger les réservations possédant ce coupon.</p>
+    <div class="form-inline">
+      <select style="width:150px" class="form-control" [(ngModel)]="promoCode" (ngModelChange)="vouchersForm.page = 1">
+        <option value="all">Tous</option>
+        <option *ngFor="let promoCode of promoCodes" [value]="promoCode">{{ promoCode }}</option>
+      </select>
+      <div class="form-group ml-2">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="vouchersForm.startDate" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="changeStartDate()">
+          <div class="input-group-append">
+            <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group ml-2">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="vouchersForm.endDate" ngbDatepicker #d2="ngbDatepicker" (ngModelChange)="changeEndDate()">
+          <div class="input-group-append">
+            <button class="btn bg-secondary btn-dashicons dashicons dashicons-calendar-alt" (click)="d2.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-success ml-2" (click)="launchLoadBookings()">Charger</button>
+    </div>
+  </div>
+  <div *ngIf="loadVouchers || loadBookingVouchers || loadBookingLaunch" class="sLoader_bg"><div class="sLoader"></div></div>
+  <div *ngIf="!promoCodeLoaded"><h5 class="voucher_title">Aucune réservation chargée</h5></div>
+  <div *ngIf="promoCodeLoaded">
+    <h5 class="voucher_title">Liste des réservations : <b><span *ngIf="promoCodeLoaded == 'all'">Tous</span><span *ngIf="promoCodeLoaded != 'all'">{{ promoCodeLoaded }}</span></b> ({{ vouchersForm.nbTotal }})</h5>
+    <div class="mt-2">
+      <ngb-pagination class="float-left" [(page)]="vouchersForm.page" [pageSize]="vouchersForm.limit" [collectionSize]="vouchersForm.nbTotal" (pageChange)="launchLoadBookings()" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
+      <div class="float-right form-inline">
+        <select [disabled]="vouchersForm.nbTotal < 10" class="form-control mr-2" [(ngModel)]="vouchersForm.limit" (ngModelChange)="launchLoadBookings()" style="width:70px">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+        </select> par page
+      </div>
+    </div>
+    <table class="table table-striped text-center" *ngIf="bookings.length > 0">
+      <thead>
+        <tr><th>Id Réservation</th><th>Client</th><th>Total (avec réduction)</th><th>Etat</th><th>Paiement</th><th>Date de début</th><th>Codes promos</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings" class="voucher_line">
+          <td>
+            <a href="javascript:void(0)" (click)="loadBooking(booking.id)">
+              <span *ngIf="booking.idCreation == -1">#{{ booking.id }}</span>
+              <span *ngIf="booking.idCreation > -1">#{{ booking.idCreation }}</span>
+            </a>
+          </td>
+          <td>
+            <span *ngIf="booking.customer.company.length > 0">{{ booking.customer.company }} </span>
+            <span *ngIf="booking.customer.lastName.length > 0">{{ booking.customer.lastName }} </span>
+            <span *ngIf="booking.customer.firstName.length > 0">{{ booking.customer.firstName }} </span>
+            <br />
+            <a *ngIf="!global.backendV2Activated" href="{{ getLinkCustomerPage(booking.idCustomer) }}" target="_blank">Fiche client</a>
+            <a *ngIf="global.backendV2Activated" href="javascript:void(0)" (click)="goCustomer(booking.idCustomer)">Fiche client</a>
+          </td>
+          <td>{{ booking.totalPrice|number:'1.2':'fr' }}{{ settings.currency }}</td>
+          <td>{{ getStatusName(booking.status, booking.quotation) }}</td>
+          <td>{{ getPaymentStateName(booking.status, booking.paymentState) }}</td>
+          <td>{{ booking.startDate | parseDate | date:'EEEE d MMMM yyyy':'':'fr' }}</td>
+          <td><span *ngFor="let promoCode of booking.promoCodes; index as i"><span *ngIf="i > 0">, </span>{{ promoCode }}</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="bookings.length == 0" class="text-warning text-center">
+      <div *ngIf="promoCodeLoaded == 'all'">Aucune réservation ne possède de coupon</div>
+      <div *ngIf="promoCodeLoaded != 'all'">Aucune réservation ne possède ce coupon</div>
+    </div>
+</div>

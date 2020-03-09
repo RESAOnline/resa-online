@@ -1,0 +1,1251 @@
+<div id="page_content" class="container" *ngIf="activity" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1>
+      <span (click)="goActivities()" ngbTooltip="Retour aux activités" class="dashicons dashicons-arrow-left-alt green pointer align-middle" style="font-size:35px"></span>
+      <span *ngIf="havePlaces() && activity.places.length > 0">[<span *ngFor="let place of activity.places; index as i"><span *ngIf="i > 0">,</span>{{ getPlaceName(place) }}</span>] </span>
+      {{ activity.name[global.currentLanguage] }}<span *ngIf="getToSave()">*</span>
+    </h1>
+    <div *ngIf="!serviceHasChanged">
+      <span class="align-middle mr-2" *ngIf="isOkActivity()">
+        <span class="switch switch-sm">
+          <input class="form-control" class="switch" id="formActivated2" [(ngModel)]="activity.activated" (ngModelChange)="setToSave(true)" [disabled]="!isOkActivity()" type="checkbox">
+          <label for="formActivated2" ngbTooltip="">Activer / Désactiver activité</label>
+        </span>
+      </span>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+      <div class="bg-danger text-white param_infos" *ngIf="!isOkActivity()" style="float:left; margin:1px 5px;">
+        <span *ngIf="!isOkActivityName()">- Veuillez définir le nom de l'activité !<br /></span>
+        <span *ngIf="!isOkActivityCalendar()">- Veuillez définir des dates et des créneaux pour toutes les règles de l'agenda !<br /></span>
+        <span *ngIf="isSlugAlreadyUsed(this.activity.slug)">- Le slug défini pour cette activité est déjà utilisée par une autre activité !<br /></span>
+        <span *ngIf="isSlugNull(this.activity.slug)">- Le slug de cette activité ne doit pas être null !<br /></span>
+        <span *ngIf="!haveOneServicePriceActivated()">- Cette activité doit avoir au moins un tarif.<br /></span>
+        <span *ngIf="!haveOneServiceAvailability()">- Cette activité doit avoir au moins un agenda et des créneaux.<br /></span>
+      </div>
+    </div>
+    <div class="bg-danger text-white param_infos" *ngIf="serviceHasChanged">
+      L'activité a été modifiée, veuillez recharger la page afin de prendre en compte les modifications...
+    </div>
+  </div>
+  <div class="mb-3 border-bottom">
+    <p><a href="javascript:void(0)" (click)="goActivities()">Activités </a>&gt;
+      <span *ngIf="havePlaces() && activity.places.length > 0">[<span *ngFor="let place of activity.places; index as i"><span *ngIf="i > 0">,</span>{{ getPlaceName(place) }}</span>] </span>
+      {{ activity.name[global.currentLanguage] }}
+    </p>
+  </div>
+  <div class="align-items-center d-flex mb-3">
+    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+    <select class="custom-select bg-light w-auto" [(ngModel)]="global.currentLanguage">
+      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+    </select>
+    <div class="ml-2">
+      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+    </div>
+  </div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 1}" (click)="initTab = 1" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1" aria-expanded="true">Aperçu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 2}" (click)="initTab = 2" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" aria-expanded="true">Général</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 3}" (click)="initTab = 3" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3" aria-expanded="true">Tarifs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 4}" (click)="initTab = 4" href="#tab4" data-toggle="tab" role="tab" aria-controls="tab4" aria-expanded="true">Extras</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 5}" (click)="initTab = 5" href="#tab5" data-toggle="tab" role="tab" aria-controls="tab5" aria-expanded="true">Agenda</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 8}" (click)="initTab = 8" href="#tab8" data-toggle="tab" role="tab" aria-controls="tab8" aria-expanded="true">Personnalisation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 6}" (click)="initTab = 6" href="#tab6" data-toggle="tab" role="tab" aria-controls="tab6" aria-expanded="true">Notifications</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active':initTab == 7}" (click)="initTab = 7" href="#tab7" data-toggle="tab" role="tab" aria-controls="tab7" aria-expanded="true">Options</a>
+    </li>
+  </ul>
+  <div class="tab-content mb-4">
+    <div class="tab-pane border border-top-0 p-3" [ngClass]="{'active':initTab == 1}" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+      <div class="mb-3 container-fluid">
+        <div class="row bg-light pl-2 pr-2 pr-3 pt-4 pt-3 pb-4">
+          <div class="col-md-4">
+            <img class="w-100 img-thumbnail" *ngIf="activity.image[global.currentLanguage]" [src]="activity.image[global.currentLanguage]">
+            <span *ngIf="!activity.image[global.currentLanguage]" class="param_infos">Image non sélectionnée</span>
+          </div>
+          <div class="col-md-6">
+            <h4>
+              <span *ngIf="havePlaces() && activity.places.length > 0">[<span *ngFor="let place of activity.places; index as i"><span *ngIf="i > 0">,</span>{{ getPlaceName(place) }}</span>] </span>
+              {{ activity.name[global.currentLanguage] }}
+            </h4>
+            <p [innerHTML]="activity.presentation[global.currentLanguage] | formatNewLineHtml"></p>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 container-fluid" *ngIf="members.length > 0">
+        <div class="row bg-light pl-2 pr-2 pr-3 pt-4 pt-3 pb-4">
+          <div class="col-md-6">
+            <h4>{{ settings.staff_word_many[global.currentLanguage] }}</h4>
+            <p>La liste des {{ settings.staff_word_many[global.currentLanguage]|lowercase }} associés à cette activité (toutes dates confondues)</p>
+            <p>
+              <span *ngFor="let member of members">{{ member.nickname }}<br /></span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="p-3 bg-light container-fluid flex-fill">
+        <div class="d-xl-flex d-lg-block">
+          <div class="border border-top-0 border-left-0 border-bottom-0 pr-4">
+            <h4>Calendrier</h4>
+            <calendar *ngIf="activity.typeAvailabilities == 0" [view]="true" [disabled]="true" [colors]="getColorsPreview()" [datesModels]="getDatesPreview()"  (clickDate)="setCurrentDatePreview($event)"></calendar>
+            <calendar-week *ngIf="activity.typeAvailabilities == 1" [view]="true" [disabled]="true" [colors]="getColorsPreview()"  [datesModelsArray]="getDatesPreview()"  (clickDate)="setCurrentDatePreview($event)"></calendar-week>
+            <calendar *ngIf="activity.typeAvailabilities == 2" [view]="true" [disabled]="true" [colors]="getColorsPreview()" [datesModels]="getDatesPreview()"  (clickDate)="setCurrentDatePreview($event)"></calendar>
+          </div>
+          <div class="flex-grow-1 ml-2 pl-2 flex-wrap">
+            <h4>Créneaux du {{ currentDatePreview |date:'dd MMMM yyyy':'':'fr'}}</h4>
+            <table class="table text-center">
+              <thead>
+                <tr>
+                  <th class="d-lg-table-cell d-md-none d-sm-none d-none">Début</th>
+                  <th class="d-lg-table-cell d-md-none d-sm-none d-none">Fin</th>
+                  <th class="d-lg-table-cell d-md-none d-sm-none d-none">Durée</th>
+                  <th class="d-lg-table-cell d-md-none d-sm-none d-none">Vu par</th>
+                  <th class="d-lg-table-cell d-md-none d-sm-none d-none">Tarifs</th>
+                  <th class="d-lg-table-cell d-md-none d-sm-none d-none">Places</th>
+                  <th class="d-lg-table-cell d-md-none d-sm-none d-none">Scénario Mention</th>
+                  <th class="text-right"> Action </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="d-lg-table-row d-sm-flex d-flex d-md-flex flex-md-row flex-column justify-content-sm-center justify-content-center align-items-sm-center align-items-center justify-content-md-center align-items-md-start flex-sm-row flex-sm-wrap bg-white border-top-0 border-right-0 border-left-0 border" *ngFor="let timeslot of timeslotsPreview">
+                  <td scope="row" class="font-weight-bold text-center border-0" style="vertical-align: middle;">
+                    <div class="d-flex align-items-center">
+                      <div class="resa-slot-time">{{ timeslot.startHours | number:'2.0':'fr' }}</div>h<div class="resa-slot-time">{{ timeslot.startMinutes | number:'2.0':'fr'}}</div>
+                    </div>
+                  </td>
+                  <td scope="row" class="font-weight-bold text-center border-0" style="vertical-align: middle;">
+                    <div class="d-flex align-items-center">
+                      <div class="resa-slot-time">{{ timeslot.endHours | number:'2.0':'fr' }}</div>h<div class="resa-slot-time">{{ timeslot.endMinutes | number:'2.0':'fr' }}</div>
+                    </div>
+                  </td>
+                  <td class="font-weight-bold text-center border-0" style="vertical-align: middle;">{{ timeOfTimeslot(timeslot)|date:'HH\'h\'mm':'':'fr' }}</td>
+                  <td class="text-center border-0" style="vertical-align: middle;">
+                    <span *ngIf="timeslot.typesAccounts.length == 0" class="badge badge-success">Tout le monde</span>
+                    <span *ngIf="timeslot.typesAccounts.length == 1 && timeslot.typesAccounts[0] == 'private'" class="badge badge-warning">Privé</span>
+                    <span *ngIf="timeslot.typesAccounts.length >= 1 && timeslot.typesAccounts[0] != 'private'">
+                      <span *ngFor="let typeAccount of timeslot.typesAccounts" class="badge badge-info">{{ getTypeAccountName(typeAccount) }}<br /></span>
+                    </span>
+                  </td>
+                  <td class="text-center border-0" style="vertical-align: middle;">
+                    <p class="m-0">
+                      <span *ngIf="timeslot.idsServicePrices.length == 0">Tous</span>
+                      <span *ngFor="let idActivityPrice of timeslot.idsServicePrices">
+                        <span *ngIf="getActivityPrice(idActivityPrice) != null">
+                          {{ getActivityPrice(idActivityPrice).name[global.currentLanguage] }} {{ getPriceOfActivityPrice(getActivityPrice(idActivityPrice)) }}{{ settings.currency }} ({{ getActivityPrice(idActivityPrice).slug }})<span class="dashicons dashicons-sm dashicons-edit" (click)="modifyActivityPrice(content, getIndexOfActivityPrice(getActivityPrice(idActivityPrice).slug))" ngbTooltip="Modifier le prix/extra"></span><br />
+                        </span>
+                        <span class="text-danger" *ngIf="getActivityPrice(idActivityPrice) == null">Erreur de tarif</span>
+                      </span>
+                    </p>
+                  </td>
+                  <td class="text-center border-0" style="vertical-align: middle;">
+                    <p class="m-0">
+                      <span *ngIf="timeslot.typeCapacity == 1">Fixe : {{ timeslot.capacity }}</span>
+                      <span *ngIf="timeslot.typeCapacity == 0">Capacité des {{ settings.staff_word_many[global.currentLanguage]|lowercase }} ({{ getCapacityForMembers(currentDatePreview, timeslot) }})</span>
+                      <span *ngIf="timeslot.equipmentsActivated && settings.equipmentsManagementActivated"><br />Matériel activé</span>
+                      <span *ngIf="timeslot.exclusive" ngbTooltip="Ce créneau est exclusif, maximum {{ timeslot.maxAppointments }} rendez-vous en même temps"><br />Exclusif({{ timeslot.maxAppointments}})</span>
+                      <span *ngIf="timeslot.membersExclusive" ngbTooltip="Le {{ settings.staff_word_single[global.currentLanguage]|lowercase }} ne peut être associé qu'à une seule réservation"><br />{{ settings.staff_word_many[global.currentLanguage] }} exclusif</span>
+                    </p>
+                  </td>
+                  <td class="text-center border-0" style="vertical-align: middle;">
+                    <p class="m-0" *ngIf="timeslot.idParameter == ''">Réglage par défaut</p>
+                    <p class="m-0" *ngIf="timeslot.idParameter != ''">{{ getScenarioName(timeslot.idParameter) }}</p>
+                    <div *ngIf="timeslot.idMention != '' && getMentionById(timeslot.idMention)" class="promo-label" [ngStyle]="{'backgroundColor':getMentionById(timeslot.idMention).backgroundColor}">{{ getMentionById(timeslot.idMention).name[global.currentLanguage] }}</div>
+                  </td>
+                  <td class="text-right border-0">
+                    <button class="btn btn-sm align-items-center d-inline-flex justify-content-center align-content-center btn-outline-success dashicons dashicons-edit" ngbTooltip="Modifier" (click)="viewActivityAvailabilities(timeslot)"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane border border-top-0 p-3" [ngClass]="{'active':initTab == 2}" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+      <tutoButton [url]="'https://youtu.be/AYYC4aqUlbI'"></tutoButton>
+      <div class="form-group">
+        <span class="switch switch-sm">
+          <input class="form-control" class="switch" id="formActivated" [(ngModel)]="activity.activated" (ngModelChange)="setToSave(true)" [disabled]="!isOkActivity()" type="checkbox">
+          <label for="formActivated" ngbTooltip="">Activer / Désactiver activité</label>
+        </span>
+      </div>
+      <div class="mb-3 text-warning" *ngIf="!isOkActivity()">
+        Vous ne pouvez pas activer cette activité car elle est incomplète.
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" for="formActivityName" ngbTooltip="Nom de l'activité que verra le visiteur">Nom de l'activité (ex: Accrobranche, Paintball, Rafting, etc...)</label>
+        <input class="form-control" id="formActivityName" type="text" placeholder="Nom public de l'activité (ex: Accrobranche, Paintball, Rafting, etc...)" [(ngModel)]="activity.name[global.currentLanguage]" (ngModelChange)="setToSave(true)" />
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" for="formImage" ngbTooltip="Image de l'activité que verra le visiteur">Image</label><br />
+        <img (click)="openImageSelectorDialog(contentImage)" width="70" height="70" *ngIf="activity.image[global.currentLanguage]" [src]="activity.image[global.currentLanguage]" /><br />
+        <button class="btn btn-success" (click)="openImageSelectorDialog(contentImage)" *ngIf="!activity.image[global.currentLanguage]">Cliquez ici pour définir l'image</button>
+        <button class="btn btn-danger" *ngIf="activity.image[global.currentLanguage]" (click)="deleteImage()">Enlever</button>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" for="formActivityPresentation" ngbTooltip="Présenter l'activité pour vos visiteurs.">Présentation de l'activité</label>
+        <app-tinymce id="formActivityPresentation" [(ngModel)]="activity.presentation[global.currentLanguage]" (ngModelChange)="setToSave(true)"></app-tinymce>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" for="formInput_color_a" ngbTooltip="Couleur sur le planning">Couleur</label>
+        <input class="form-control h-50" id="formInput_color_a" type="color" [(ngModel)]="activity.color" (ngModelChange)="activity.colorChange = true; setToSave(true)" />
+      </div>
+      <div class="form-group" *ngIf="settings.categories_services.length > 0">
+        <label class="font-weight-bold" for="formActivityCategory">Catégorie</label>
+        <select class="form-control" id="formActivityCategory" [(ngModel)]="activity.category" (ngModelChange)="setToSave(true)">
+          <option value="">Aucune</option>
+          <option *ngFor="let category of settings.categories_services" [value]="category.id">{{ category.label[global.currentLanguage] }}</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="havePlaces()">
+        <label class="font-weight-bold">Lieux</label>
+        <div class="form-check" *ngFor="let place of settings.places">
+          <input class="form-check-input" id="formInput_{{ place.id }}" type="checkbox" value="{{ place.id }}" [checked]="activity.places.indexOf(place.id) != -1" (change)="switchPlace(place.id)" />
+          <label class="form-check-label" for="formInput_{{ place.id }}">{{ place.name[global.currentLanguage]}}</label>
+        </div>
+      </div>
+      <div *ngIf="settings.staffManagementActivated">
+        <h4>{{ settings.staff_word_many[global.currentLanguage] }}</h4>
+        <p>
+          Pour associer du personnel (<span class="font-weight-bold">{{ settings.staff_word_many[global.currentLanguage]|lowercase }}</span>) à cette activité
+          <a href="javascript:void(0)" (click)="goMembers()">cliquez-ici</a>
+        </p>
+      </div>
+      <ng-template #contentImage let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Sélection de l'image</h4>
+          <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+        </div>
+        <div class="modal-body">
+          <image-selector (imageSelected)="setImageActivity($event, c)"></image-selector>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </ng-template>
+    </div>
+    <div class="tab-pane border border-top-0 p-3" [ngClass]="{'active':initTab == 3}" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+      <div class="text-white text-center bg-dark param_infos">Définissez les tarifs de cette activité.</div>
+      <div class="text-white text-center bg-danger param_infos" *ngIf="!haveOneServicePriceActivated()">Cette activité doit avoir au moins un tarif d'activé.</div>
+      <input class="form-control mt-md-3" id="price_search" type="text" placeholder="Recherche..." [(ngModel)]="formFilters.activityPrice" />
+      <table class="table mt-3" id="prices_list">
+        <thead>
+          <tr>
+            <th class="text-left">Activé</th>
+            <th>Nom</th>
+            <th>Prix TTC</th>
+            <th>Vu par</th>
+            <th class="text-right">
+              <button class="btn btn-sm btn-outline-success" type="button" (click)="addActivityPrice(content, false)">+ Nouveau tarif</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [hidden]="activityPrice.extra || isActivityPriceFiltered(activityPrice)" *ngFor="let activityPrice of activity.servicePrices; index as i">
+            <th class="text-left" scope="row">
+              <span class="switch switch-sm">
+                <input class="switch" id="id_service_{{ activityPrice.id }}" type="checkbox" [(ngModel)]="activityPrice.activated" (ngModelChange)="setToSave(true)"  />
+                <label for="id_service_{{ activityPrice.id }}" ngbTooltip="Activer / Désactiver"></label>
+              </span>
+            </th>
+            <td scope="row">
+              <span class="font-weight-bold">{{ activityPrice.name[global.currentLanguage] }} ({{ activityPrice.slug}})<span *ngIf="activityPrice.mandatory"> - requis*</span></span>
+              <span *ngIf="settings.equipmentsManagementActivated && activityPrice.equipments.length > 0"><br />
+                Matériel : {{ getEquipmentNameOfActivityPrice(activityPrice) }}
+              </span>
+              <span *ngIf="activity.askParticipants && activityPrice.participantsParameter != null && activityPrice.participantsParameter.length > 0"><br />Paramètre participants : {{ getParticipantParametersName(activityPrice.participantsParameter) }}</span>
+            </td>
+            <td><span ngbTooltip="Prix pour une personne et une heure">{{ getPriceOfActivityPrice(activityPrice) }}{{ settings.currency }}<span *ngIf="activityPrice.thresholdPrices.length > 0">(Variable)</span></span></td>
+            <td>
+              <span *ngIf="activityPrice.typesAccounts.length == 0" class="badge badge-success">Tout le monde</span>
+              <span *ngIf="activityPrice.typesAccounts.length == 1 && activityPrice.typesAccounts[0] == 'private'" class="badge badge-warning">Privé</span>
+              <span *ngIf="activityPrice.typesAccounts.length >= 1 && activityPrice.typesAccounts[0] != 'private'">
+                <span *ngFor="let typeAccount of activityPrice.typesAccounts" class="badge badge-info">{{ getTypeAccountName(typeAccount) }}<br /></span>
+              </span>
+            </td>
+            <td class="text-right">
+              <button class="btn btn-sm btn-outline-info m-1" (click)="modifyActivityPrice(content, i)">Modifier</button>
+              <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateActivityPrice(content, activityPrice)">Dupliquer</button>
+              <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteActivityPrice(activityPrice, i)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane border border-top-0 p-3" [ngClass]="{'active':initTab == 4}" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+      <div class="bg-dark text-center text-white param_infos">Les extras sont des options d'achats supplémentaires qui ne comptent pas dans la capacité calculée des créneaux.</div>
+      <input class="form-control mt-md-3" id="extra_search" type="text" placeholder="Recherche..." [(ngModel)]="formFilters.activityPriceExtra" />
+      <table class="table mt-3" id="extras_list">
+        <thead>
+          <tr>
+            <th class="text-left">Activé</th>
+            <th>Nom</th>
+            <th>Prix TTC</th>
+            <th>Vu par</th>
+            <th class="text-right">
+              <button class="btn btn-sm btn-outline-success" type="button" (click)="addActivityPrice(content, true)">+ Ajouter un extra</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [hidden]="!activityPrice.extra || isActivityPriceFiltered(activityPrice)" *ngFor="let activityPrice of activity.servicePrices; index as i">
+            <td class="text-left" scope="row">
+              <span class="switch switch-sm">
+                <input class="switch" id="id_service_{{ activityPrice.id }}" type="checkbox" [(ngModel)]="activityPrice.activated" (ngModelChange)="setToSave(true)"  />
+                <label for="id_service_{{ activityPrice.id }}" ngbTooltip="Activer / Désactiver"></label>
+              </span>
+            </td>
+            <td scope="row">
+              <span class="font-weight-bold">{{ activityPrice.name[global.currentLanguage] }} ({{ activityPrice.slug}})<span *ngIf="activityPrice.mandatory"> - requis*</span></span>
+              <span *ngIf="activity.askParticipants && activityPrice.participantsParameter != null && activityPrice.participantsParameter.length > 0"><br />Paramètre participants : {{ getParticipantParametersName(activityPrice.participantsParameter) }}</span>
+            </td>
+            <td><span ngbTooltip="Prix pour une personne et une heure">{{ getPriceOfActivityPrice(activityPrice) }}{{ settings.currency }}<span *ngIf="activityPrice.thresholdPrices.length > 0">(Variable)</span></span></td>
+            <td>
+              <span *ngIf="activityPrice.typesAccounts.length == 0" class="badge badge-success">Tout le monde</span>
+              <span *ngIf="activityPrice.typesAccounts.length == 1 && activityPrice.typesAccounts[0] == 'private'" class="badge badge-warning">Privé</span>
+              <span *ngIf="activityPrice.typesAccounts.length >= 1 && activityPrice.typesAccounts[0] != 'private'">
+                <span *ngFor="let typeAccount of activityPrice.typesAccounts" class="badge badge-info">{{ getTypeAccountName(typeAccount) }}<br /></span>
+              </span>
+            </td>
+            <td class="text-right">
+              <button class="btn btn-sm btn-outline-info m-1" (click)="modifyActivityPrice(content, i)">Modifier</button>
+              <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateActivityPrice(content, activityPrice)">Dupliquer</button>
+              <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteActivityPrice(activityPrice, i)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane border border-top-0 p-1 p-sm-3" [ngClass]="{'active':initTab == 5}" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
+      <div class="text-white bg-warning text-center param_infos" *ngIf="haveOneNewServicePrice()">Des nouveaux tarifs ou extras ont été créés, veuillez sauvegarder l'activitée afin de pouvoir les sélectionner dans les créneaux !</div>
+      <div class="text-white bg-dark text-center param_infos">Définissez les périodes de réservations de cette activité et créez les différents créneaux réservable.</div>
+      <div class="text-white text-center bg-danger param_infos" *ngIf="!haveOneServiceAvailability()">Vous devez avoir au moins une règle</div>
+      <div class="mt-4 mb-4 container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <h6 class="text-left">Temps min avant une réservation</h6>
+            <p class="font-italic">Doit être réservé <span class="font-weight-bold">{{ getDisplayTime(activity.minBookingHours,activity.minBookingDays,activity.minBookingMonths) }}</span> à l'avance au minimum</p>
+            <div class="input-group m-1">
+              <input type="number" class="form-control text-right" placeholder="0" [(ngModel)]="activity.minBookingHours" (ngModelChange)="setToSave(true)" (blur)="activity.minBookingHours = setToZeroIfNullOrNegative(activity.minBookingHours)">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Heure</div>
+              </div>
+            </div>
+            <div class="input-group m-1">
+              <input type="number" class="form-control text-right" placeholder="0" [(ngModel)]="activity.minBookingDays" (ngModelChange)="setToSave(true)" (blur)="activity.minBookingDays = setToZeroIfNullOrNegative(activity.minBookingDays)">
+              <div class="input-group-prepend">
+                <div class="input-group-text w-100">Jour</div>
+              </div>
+            </div>
+            <div class="input-group m-1">
+              <input type="number" class="form-control text-right" placeholder="0" [(ngModel)]="activity.minBookingMonths" (ngModelChange)="setToSave(true)" (blur)="activity.minBookingMonths = setToZeroIfNullOrNegative(activity.minBookingMonths)">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Mois</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h6 class="text-left">Temps max avant une réservation</h6>
+            <p class="font-italic">Peut être réservée jusqu'à <span class="font-weight-bold">{{ getDisplayTime(activity.maxBookingHours,activity.maxBookingDays,activity.maxBookingMonths) }}</span> à l'avance maximum</p>
+            <div class="input-group m-1">
+              <input type="number" class="form-control text-right" placeholder="0" [(ngModel)]="activity.maxBookingHours" (ngModelChange)="setToSave(true)" (blur)="activity.maxBookingHours = setToZeroIfNullOrNegative(activity.maxBookingHours)">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Heure</div>
+              </div>
+            </div>
+            <div class="input-group m-1">
+              <input type="number" class="form-control text-right" placeholder="0" [(ngModel)]="activity.maxBookingDays" (ngModelChange)="setToSave(true)" (blur)="activity.maxBookingDays = setToZeroIfNullOrNegative(activity.maxBookingDays)">
+              <div class="input-group-prepend">
+                <div class="input-group-text w-100">Jour</div>
+              </div>
+            </div>
+            <div class="input-group m-1">
+              <input type="number" class="form-control text-right" placeholder="0" [(ngModel)]="activity.maxBookingMonths" (ngModelChange)="setToSave(true)" (blur)="activity.maxBookingMonths = setToZeroIfNullOrNegative(activity.maxBookingMonths)">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Mois</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h6>Type de réservation</h6>
+            <div class="form-group">
+              <div class="form-check" ngbTooltip="Permet de réserver un créneau horaire sur une date." placement="left">
+                <input class="form-check-input" type="radio" name="typeAvailabilities" id="formInput_activity_simple"  [value]="0" [(ngModel)]="activity.typeAvailabilities">
+                <label class="form-check-label" for="formInput_activity_simple">Simple</label>
+              </div>
+              <div class="form-check" ngbTooltip="Permet de réserver un créneau horaire sur plusieurs dates consécutives" placement="left">
+                <input class="form-check-input" type="radio" name="typeAvailabilities" id="formInput_activity_jours_consecutifs" [value]="1" [(ngModel)]="activity.typeAvailabilities">
+                <label class="form-check-label" for="formInput_activity_jours_consecutifs">Jours consécutifs</label>
+              </div>
+              <div class="form-check" ngbTooltip="Permet de réserver un créneau horaire sur plusieurs dates non consécutive" placement="left">
+                <input class="form-check-input" type="radio" name="typeAvailabilities" id="formInputManyDates" [value]="2" [(ngModel)]="activity.typeAvailabilities">
+                <label class="form-check-label" for="formInputManyDates">Sur plusieurs dates</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ngb-tabset #tabsRules="ngbTabset" (tabChange)="addServiceAvailabilityIfClickOnAdd($event, tabsRules)">
+        <ngb-tab id="tab-rule-{{ i }}" title="{{ getTabName(activityAvailability, i) }}" *ngFor="let activityAvailability of activity.serviceAvailabilities; index as i">
+          <ng-template ngbTabContent>
+            <div class="bg-light container-fluid flex-fill p-sm-3 p-1">
+              <input type="text" class="form-control mb-3" placeholder="Règle n°{{ (i + 1) }}" [(ngModel)]="activityAvailability.name" (ngModelChange)="setToSave(true)" />
+              <div class="d-xl-flex d-lg-block">
+                <div class="border border-top-0 border-left-0 border-bottom-0 pr-4" style="min-width: 390px; max-width: 30%;">
+                <h4>Calendrier</h4>
+                <hr class="mt-3 mb-3"/>
+                <div *ngIf="!activityAvailability.synchronized" class="form-group mt-2">
+                  <label for="formRule{{i}}Color" ngbTooltip="Couleur sur le planning" class="font-weight-bold">
+                    Couleur du calendrier pour cette règle
+                  </label>
+                  <input id="formRule{{i}}Color" class="form-control h-50" type="color" [(ngModel)]="activityAvailability.color" (ngModelChange)="setToSave(true)">
+                </div>
+                <section *ngIf="activity.typeAvailabilities == 1">
+                  <hr class="mt-3 mb-3"/>
+                  <h6>Jours consécutifs</h6>
+                  <p>Veuillez choisir la durée de la réservation à la semaine en nombre de jours consécutifs</p>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Nombre de jours consécutifs</div>
+                    </div>
+                    <input type="number" class="form-control" placeholder="4" [(ngModel)]="numberDaysByWeek">
+                  </div>
+                  <p>Cliquer sur le premier jour consécutif pour sélectionner / déselectionner les jours consécutifs suivants. Cliquez sur une entête de colonne pour créer plusieurs groupes de jours consécutifs d'un coup.</p>
+                </section>
+                <section *ngIf="activity.typeAvailabilities == 2">
+                  <hr class="mt-3 mb-3"/>
+                  <h6>Sur plusieurs dates</h6>
+                  <p>Créez chaque groupe de date et sélectionnez les dates à y inclure sur le calendrier et cliquez sur "terminer".</p>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="d-lg-table-cell d-md-none d-sm-none d-none">Dates</th>
+                        <th class="text-right">
+                          <button *ngIf="!activityAvailability.synchronized" type="button" class="btn btn-sm btn-outline-success" (click)="openManyDatesDialog(manyDates, activityAvailability, -1)">+ Groupe de dates</button>
+                          <span *ngIf="activityAvailability.synchronized">Synchronisé</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="d-lg-table-row d-sm-flex d-flex d-md-flex flex-md-row flex-column justify-content-sm-center justify-content-center align-items-sm-center align-items-center justify-content-md-center align-items-md-start flex-sm-row flex-sm-wrap bg-white border-top-0 border-right-0 border-left-0 border" *ngFor="let dates of activityAvailability.manyDates; index as i">
+                          <td class="border-0 dates_group" style="vertical-align: middle;">
+                            <span [innerHTML]="dates | formatManyDatesView"></span>
+                            <p>Soit {{ dates.split(',').length }} jours</p>
+                          </td>
+                          <td class="text-right border-0">
+                            <button *ngIf="!activityAvailability.synchronized" class="btn btn-sm align-items-center d-inline-flex justify-content-center align-content-center btn-outline-success" (click)="openManyDatesDialog(manyDates, activityAvailability, i)">Modifier</button>
+                            <button *ngIf="!activityAvailability.synchronized" class="btn btn-sm btn-outline-danger align-items-center d-inline-flex justify-content-center align-content-center mr-null mb-null ml-null dashicons dashicons-trash" (click)="deleteManyDates(activityAvailability, i)"></button>
+                            <span *ngIf="activityAvailability.synchronized">Synchronisé</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </section>
+                  <section  *ngIf="activity.typeAvailabilities == 0">
+                    <calendar [disabled]="activityAvailability.synchronized" [color]="activityAvailability.color" [datesModel]="activityAvailability.dates" (ngDatesModel)="setServiceAvailabilityDates(activityAvailability,$event)"></calendar>
+                  </section>
+                  <section  *ngIf="activity.typeAvailabilities == 1">
+                    <calendar-week [disabled]="activityAvailability.synchronized" [color]="activityAvailability.color" [datesModels]="activityAvailability.groupDates"  [days]="numberDaysByWeek" (ngDatesModel)="setServiceAvailabilityGroupDates(activityAvailability,$event)"></calendar-week>
+                  </section>
+                  <a href="javascript:void(0)" (click)="activityAvailability.advancedCalendarOptions = !activityAvailability.advancedCalendarOptions">
+                    Afficher/Masquer les options avancées des calendriers
+                  </a>
+                  <hr class="mt-3 mb-3"/>
+                  <div *ngIf="activityAvailability.advancedCalendarOptions">
+                    <div class="form-group">
+                      <select class="form-control m-1" [(ngModel)]="activityAvailability.idCalendar">
+                        <option *ngFor="let calendar of settings.calendars" [value]="calendar.id">
+                          {{ calendar.name }}<span *ngIf="activityAvailability.synchronized && activityAvailability.idCalendar == calendar.id">(synchroniser)</span>
+                        </option>
+                      </select>
+            					<div class="form-group d-flex">
+            						<button type="button" class="btn m-1 btn-outline-success" (click)="synchronizeCalendar(activityAvailability, i)">Synchroniser</button>
+            						<button [disabled]="activityAvailability.idCalendar.length == 0" type="button" class="btn m-1 btn-outline-warning" (click)="disynchronizeCalendar(activityAvailability, i)">Désynchroniser</button>
+            					</div>
+                    </div>
+                    <h5>Synchroniser un calendrier</h5>
+                    <p class="mb-0">Veuillez sélectionner le calendrier à synchroniser</p>
+                    <p class="text-danger font-italic mb-0">Attention cela remplacera le calendrier actuel ! Vous ne pourrez pas éditer le calendrier ici. Veuillez vous rendre dans <a href="javascript:void(0)" (click)="goCalendars()">la section calendrier</a></p>
+                    <hr class="mt-3 mb-3"/>
+                    <h5>Copier un calendrier existant pour le modifer</h5>
+                    <p class="mb-0">Veuillez sélectionner le calendrier à copier.</p>
+                    <p class="text-danger font-italic mb-0">Attention cela remplacera le calendrier et synchronisera le calendrier de cette règle !</p>
+                    <div class="form-group d-flex">
+                      <select class="form-control m-1" [(ngModel)]="activityAvailability.idCalendarTemporary">
+                        <option *ngFor="let calendar of settings.calendars" [value]="calendar.id">
+                          {{ calendar.name }}
+                        </option>
+                      </select>
+                      <button type="button" class="btn m-1 btn-outline-success" (click)="copyCalendar(activityAvailability, i)">Copier</button>
+                    </div>
+                    <hr class="mt-3 mb-3"/>
+                    <span *ngIf="!activityAvailability.synchronized">
+                      <h5>Sauvegarder ce calendrier pour le réutiliser</h5>
+                      <p class="mb-0">Veuillez choisir un nom pour sauvegarder le calendrier.</p>
+                      <p class="text-danger font-italic mb-0">Si ce nom existe déjà, vous allez modifier le calendrier existant.</p>
+                      <div class="form-group d-flex">
+                        <input class="form-control m-1" placeholder="Nom du calendrier" [(ngModel)]="activityAvailability.nameCalendar">
+                        <button class="btn m-1 btn-outline-success" type="button" (click)="saveCalendar(activityAvailability, i)">Sauvegarder</button>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              <div class="flex-grow-1 flex-wrap pl-sm-2 ml-sm-2 ml-0 pl-0">
+                <h4>Créneaux</h4>
+                <p>Créer des créneaux réservables</p>
+                <table class="table text-center">
+                  <thead>
+                    <tr>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none text-center" ngbTooltip="Sélectionner tous / Aucun" container="body"  style="vertical-align: middle;">
+                        <input class="form-check-input ml-0 mt-2" type="checkbox" (change)="selectAllTimeslots(activityAvailability)" [(ngModel)]="activityAvailability.allTimeslotsSelected">
+                      </th>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Début</th>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Fin</th>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Durée</th>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Vu par</th>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Tarifs</th>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Places</th>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Scénario Mention</th>
+                      <th class="text-right">
+                        <button type="button" class="btn btn-sm btn-outline-success" (click)="addTimeslot(activityAvailability)">+ Nouveau créneau</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let timeslot of activityAvailability.timeslots; index as i" class="d-lg-table-row d-sm-flex d-flex d-md-flex flex-md-row flex-column justify-content-sm-center justify-content-center align-items-sm-center align-items-center justify-content-md-center align-items-md-start flex-sm-row flex-sm-wrap bg-white border-top-0 border-right-0 border-left-0 border">
+                      <td scope="row" class="font-weight-bold border-0 text-center" (click)="modifyTimeslotIfNecessary(activityAvailability, i)">
+                        <input class="form-check-input ml-0 mt-2" type="checkbox" [(ngModel)]="timeslot.settingsWillChange">
+                      </td>
+                      <td scope="row" class="font-weight-bold text-center border-0">
+                        <div class="d-flex align-items-center">
+                          <div class="resa-slot-time">
+                            <span class="btn-plus" (click)="addValue(timeslot, 'hours', 1, 1, 'start')">+</span>
+                            <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" step="1" max="23" min="0"  [(ngModel)]="timeslot.startHours" (ngModelChange)="generateStartTime(timeslot)">
+                            <span class="btn-moins" (click)="addValue(timeslot, 'hours', 1, -1, 'start')">-</span>
+                          </div>
+                          <span class="pr-2">h</span>
+                          <div class="resa-slot-time">
+                            <span class="btn-plus" (click)="addValue(timeslot, 'minutes', 15, 1, 'start')">+</span>
+                            <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" value="0" step="15" max="59" min="0" [(ngModel)]="timeslot.startMinutes" (ngModelChange)="generateStartTime(timeslot)">
+                            <span class="btn-moins" (click)="addValue(timeslot, 'minutes', 15, -1, 'start')">-</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td scope="row" class="font-weight-bold text-center border-0">
+                        <div class="d-flex align-items-center">
+                          <div class="resa-slot-time">
+                            <span class="btn-plus" (click)="addValue(timeslot, 'hours', 1, 1, 'end')">+</span>
+                            <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" step="1" max="23" min="0"  [(ngModel)]="timeslot.endHours" (ngModelChange)="generateEndTime(timeslot)">
+                            <span class="btn-moins" (click)="addValue(timeslot, 'hours', 1, -1, 'end')">-</span>
+                          </div>
+                          <span class="pr-2">h</span>
+                          <div class="resa-slot-time">
+                            <span class="btn-plus" (click)="addValue(timeslot, 'minutes', 15, 1, 'end')">+</span>
+                            <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" value="0" step="15" max="59" min="0" [(ngModel)]="timeslot.endMinutes" (ngModelChange)="generateEndTime(timeslot)">
+                            <span class="btn-moins" (click)="addValue(timeslot, 'minutes', 15, -1, 'end')">-</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="font-weight-bold text-center border-0" style="vertical-align: middle;">{{ timeOfTimeslot(timeslot)|date:'HH\'h\'mm':'':'fr' }}</td>
+                      <td class="text-center border-0" style="vertical-align: middle;">
+                        <span *ngIf="timeslot.typesAccounts.length == 0" class="badge badge-success">Tout le monde</span>
+                        <span *ngIf="timeslot.typesAccounts.length == 1 && timeslot.typesAccounts[0] == 'private'" class="badge badge-warning">Privé</span>
+                        <span *ngIf="timeslot.typesAccounts.length >= 1 && timeslot.typesAccounts[0] != 'private'">
+                          <span *ngFor="let typeAccount of timeslot.typesAccounts" class="badge badge-info">{{ getTypeAccountName(typeAccount) }}<br /></span>
+                        </span>
+                      </td>
+                      <td class="text-center border-0" style="vertical-align: middle;">
+                        <p class="m-0">
+                          <span *ngIf="timeslot.idsServicePrices.length == 0">Tous</span>
+                          <span *ngFor="let idActivityPrice of timeslot.idsServicePrices; index as i">
+                            <span *ngIf="getActivityPrice(idActivityPrice) != null">
+                              {{ getActivityPrice(idActivityPrice).name[global.currentLanguage] }} {{ getPriceOfActivityPrice(getActivityPrice(idActivityPrice)) }}{{ settings.currency }} ({{ getActivityPrice(idActivityPrice).slug }}) <span class="dashicons dashicons-sm dashicons-edit" (click)="modifyActivityPrice(content, getIndexOfActivityPrice(getActivityPrice(idActivityPrice).slug))" ngbTooltip="Modifier le prix/extra"></span>
+                              <br />
+                            </span>
+                            <span class="text-danger" *ngIf="getActivityPrice(idActivityPrice) == null">
+                              Erreur de tarif <span class="text-danger dashicons dashicons-sm dashicons-no-alt" (click)="removeIdsServicePrices(timeslot.idsServicePrices, i)" ngbTooltip="Retirer le prix/extra"></span>
+                              <br />
+                            </span>
+                          </span>
+                        </p>
+                      </td>
+                      <td class="text-center border-0" style="vertical-align: middle;">
+                        <p class="m-0">
+                          <span *ngIf="timeslot.typeCapacity == 1">Fixe : {{ timeslot.capacity }}</span>
+                          <span *ngIf="timeslot.typeCapacity == 0">Capacité des {{ settings.staff_word_many[global.currentLanguage]|lowercase }} ({{ getCapacityForMembers(getFirstDate(activityAvailability), timeslot) }})</span>
+                          <span *ngIf="timeslot.equipmentsActivated && settings.equipmentsManagementActivated"><br />Matériel activé</span>
+                          <span *ngIf="timeslot.exclusive" ngbTooltip="Ce créneau est exclusif, maximum {{ timeslot.maxAppointments }} rendez-vous en même temps"><br />Exclusif({{ timeslot.maxAppointments}})</span>
+                          <span *ngIf="timeslot.membersExclusive" ngbTooltip="Le {{ settings.staff_word_single[global.currentLanguage]|lowercase }} ne peut être associé qu'à une seule réservation"><br />{{ settings.staff_word_many[global.currentLanguage] }} exclusif</span>
+                        </p>
+                      </td>
+                      <td class="text-center border-0" style="vertical-align: middle; position:relative;">
+                        <p class="m-0" *ngIf="timeslot.idParameter == ''">Réglages par défaut</p>
+                        <p class="m-0" *ngIf="timeslot.idParameter != ''">{{ getScenarioName(timeslot.idParameter) }}</p>
+                        <div *ngIf="timeslot.idMention != '' && getMentionById(timeslot.idMention)" class="promo-label" [ngStyle]="{'backgroundColor':getMentionById(timeslot.idMention).backgroundColor}">{{ getMentionById(timeslot.idMention).name[global.currentLanguage] }}</div>
+                      </td>
+                      <td class="text-right border-0" nowrap>
+                        <button class="btn btn-sm align-items-center d-inline-flex justify-content-center align-content-center btn-outline-success dashicons dashicons-edit" (click)="modifyTimeslot(activityAvailability, i)" ngbTooltip="Modifier"></button>
+                        <button class="btn btn-sm align-items-center d-inline-flex justify-content-center align-content-center btn-outline-warning mr-null mb-null ml-null dashicons dashicons-admin-page" (click)="duplicateTimeslot(activityAvailability, i)" ngbTooltip="Dupliquer"></button>
+                        <button class="btn btn-sm btn-outline-danger align-items-center d-inline-flex justify-content-center align-content-center mr-null mb-null ml-null dashicons dashicons-trash" (click)="deleteTimeslot(activityAvailability, i)"  ngbTooltip="Supprimer"></button>
+                      </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr class="mt-3 mb-3">
+                <h4 id="slot_settings">Réglages des créneaux</h4>
+                <p *ngIf="formTimeslot != null">Choisir des paramètres et les appliquer sur les créneaux sélectionnés.</p>
+                <p *ngIf="formTimeslot == null" class="font-italic">Veuillez sélectionner un créneau ou cliquez sur le crayon pour le modifier.</p>
+                <div *ngIf="formTimeslot" class="container">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" id="formVisibilyTimeslotNotActivated" type="checkbox" [checked]="!formTimeslot.formVisibilyTimeslotNotActivated" (change)="formTimeslot.formVisibilyTimeslotNotActivated = !formTimeslot.formVisibilyTimeslotNotActivated" />
+                          <label class="font-weight-bold"  for="formVisibilyTimeslotNotActivated" ngbTooltip="Qui peut voir ce créneau ?">Visibilité</label>
+                        </div>
+                        <span *ngIf="!formTimeslot.formVisibilyTimeslotNotActivated">
+                          <div class="form-check">
+                            <input class="form-check-input" id="formInputTimeslotVAll" type="radio" name="timeslotTypeAccount" [checked]="formTimeslot.typesAccounts.length == 0" (change)="formTimeslot.typesAccounts = []" />
+                            <label class="form-check-label" for="formInputTimeslotVAll" ngbTooltip="Tous les visiteurs ainsi que vous">Tout le monde</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="timeslotTypeAccount" id="formInputTimeslotPrivate" [checked]="formTimeslot.typesAccounts.indexOf('private') != -1" (change)="formTimeslot.typesAccounts = ['private']">
+                            <label class="form-check-label" for="formInputTimeslotPrivate" ngbTooltip="Seulement vous dans la gestion des réservations">Privé</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="timeslotTypeAccount" id="formInputTimeslotCustom" [checked]="formTimeslot.typesAccounts.length >= 1 && formTimeslot.typesAccounts[0] != 'private'" (change)="addAllTypeAccountsTimeslots()">
+                            <label class="form-check-label" for="formInputTimeslotCustom" ngbTooltip="Seulement les types de comptes clients suivants">Personnalisé</label>
+                          </div>
+                          <div class="border border-top-0 border-right-0 border-bottom-0 ml-1 pl-3 mt-1">
+                            <div class="form-check" *ngFor="let typeAccount of settings.typesAccounts">
+                              <input class="form-check-input" id="formInputTimeslot_{{ typeAccount.id }}" type="checkbox" [checked]="formTimeslot.typesAccounts.indexOf(typeAccount.id)!=-1" (change)="switchTypeAccountTimeslots(typeAccount.id)"  />
+                              <label class="form-check-label" for="formInputTimeslot_{{ typeAccount.id }}">{{ typeAccount.name[global.currentLanguage] }}</label>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" id="pricesExtrasTimeslotNotActivated" type="checkbox" [checked]="!formTimeslot.pricesExtrasTimeslotNotActivated" (change)="formTimeslot.pricesExtrasTimeslotNotActivated = !formTimeslot.pricesExtrasTimeslotNotActivated" />
+                          <label ngbTooltip="Quels tarif(s) / extra(s) sont disponibles?" for="pricesExtrasTimeslotNotActivated" class="font-weight-bold">Tarif(s) / extra(s)</label>
+                        </div>
+                        <span *ngIf="!formTimeslot.pricesExtrasTimeslotNotActivated">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="timeslot_activityPrices" id="formInput_tapa" [checked]="formTimeslot.idsServicePrices.length == 0" (change)="formTimeslot.idsServicePrices = []">
+                            <label class="form-check-label" for="formInput_tapa" ngbTooltip="Tous les visiteurs ainsi que vous">Tous (par défaut)</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="timeslot_activityPrices" id="formInput_tapp" [checked]="formTimeslot.idsServicePrices.length > 0">
+                            <label class="form-check-label" for="formInput_tapp" ngbTooltip="Seulement les types de comptes clients suivants">Personnalisé</label>
+                          </div>
+                          <div class="border border-top-0 border-right-0 border-bottom-0 ml-1 pl-3 mt-1">
+                            <div [hidden]="activityPrice == null || activityPrice.id == -1" class="form-check" *ngFor="let activityPrice of activity.servicePrices; index as i">
+                              <input class="form-check-input" type="checkbox" id="formInput_tapc{{ i }}" [checked]="formTimeslot.idsServicePrices.indexOf(activityPrice.id) > -1" (change)="switchActivityPrice(activityPrice.id)">
+                              <label class="form-check-label" for="formInput_tapc{{ i }}">{{ activityPrice.name[global.currentLanguage] }} {{ getPriceOfActivityPrice(activityPrice) }}{{ settings.currency }} ({{ activityPrice.slug }})</label>
+                            </div>
+                          </div>
+                          <span class="bg-warning" *ngIf="haveOneNewServicePrice()">Veuillez sauvegarder afin d'avoir tous les tarifs affichés ici !</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" id="formCapacitiesTimeslotNotActivated" type="checkbox" [checked]="!formTimeslot.formCapacitiesTimeslotNotActivated" (change)="formTimeslot.formCapacitiesTimeslotNotActivated = !formTimeslot.formCapacitiesTimeslotNotActivated" />
+                          <label class="font-weight-bold" for="formCapacitiesTimeslotNotActivated" ngbTooltip="Comment est calculée la capacité">Capacité avancée</label>
+                        </div>
+                        <span *ngIf="!formTimeslot.formCapacitiesTimeslotNotActivated">
+                          <p>Par défaut, le nombre de places dépend du matériel et des {{ settings.staff_word_many[global.currentLanguage]|lowercase }} disponiblent qui sont attribués à cette activité.</p>
+                          <div class="text-warning" *ngIf="isStaffManagementSelected() && !settings.staffManagementActivated">
+                            Vous n'avez pas activé le personnel, cependant la règle prend en compte le calcul du personnel, veuillez désélectionner la capacité du personnel.
+                          </div>
+                          <div *ngIf="settings.staffManagementActivated" class="font-italic" placement="left" ngbTooltip="Comment est calculée la capacité">Type de calcul utilisé</div>
+                          <div *ngIf="isStaffManagementSelected()" class="form-check" placement="left" ngbTooltip="Calcul en prenant compte la capacité du personnel associé à cette activité.">
+                            <label class="form-check-label">
+                              <input [disabled]="!settings.staffManagementActivated" type="radio" class="form-check-input" [(ngModel)]="formTimeslot.typeCapacity" [value]="0"> Capacité du personnel
+                            </label>
+                          </div>
+                          <div class="form-check d-flex align-items-center mb-2" placement="left" ngbTooltip="Permet de fixer un nombre de places maximum sur le créneau">
+                            <label *ngIf="isStaffManagementSelected()"  class="form-check-label">
+                              <input type="radio" class="form-check-input" [(ngModel)]="formTimeslot.typeCapacity" [value]="1"> Capacité fixe<br />
+                            </label>
+                            <label for="formTimeslotCapacity" *ngIf="!isStaffManagementSelected()">Capacité fixe</label>
+                            <input id="formTimeslotCapacity" type="number" class="form-control ml-2" placeholder="10" style="max-width: 80px;" [(ngModel)]="formTimeslot.capacity">
+                          </div>
+                          <div *ngIf="settings.equipmentsManagementActivated" class="form-check mb-2" ngbTooltip="Calcul de la capacité prend compte du matériel attaché aux tarifs." placement="left">
+                            <input class="form-check-input" type="checkbox" id="formInput_dlm" [(ngModel)]="formTimeslot.equipmentsActivated">
+                            <label class="form-check-label" for="formInput_dlm">Décompter le Matériel</label>
+                          </div>
+                          <div *ngIf="isStaffManagementSelected()" class="form-check mb-2" ngbTooltip="A cocher si vous ne souhaitez pas attribuer de {{ settings.staff_word_single[global.currentLanguage]|lowercase }} lorsque ce créneau est réservé." placement="left">
+                            <input class="form-check-input" type="checkbox" id="formInput_tnm" [(ngModel)]="formTimeslot.noStaff">
+                            <label class="form-check-label" for="formInput_tnm">Ne pas attribuer de {{ settings.staff_word_many[global.currentLanguage]|lowercase }}</label>
+                          </div>
+                          <div class="form-check mb-2" ngbTooltip="A cocher s'il s'agit d'une heure d'arrivée sans limite de temps d'activité, n'empêche pas de définir une date de fin de créneau correcte !" placement="left">
+                            <input class="form-check-input" type="checkbox" id="formInput_tdet" [(ngModel)]="formTimeslot.noEnd">
+                            <label class="form-check-label" for="formInput_tdet">Ne pas afficher d'heure de fin</label>
+                          </div>
+                          <a (click)="formTimeslot.displayAdvancedSettings = !formTimeslot.displayAdvancedSettings" href="javascript:void">Afficher les paramètres avancés</a>
+                          <div *ngIf="formTimeslot.displayAdvancedSettings" class="form-check d-flex align-items-center mb-2" placement="left" ngbTooltip="Le nombre de fois que ce créneau peut être réservé.">
+                            <input class="form-check-input" type="checkbox" id="formInput_tet" [(ngModel)]="formTimeslot.exclusive" />
+                            <label class="form-check-label" for="formInput_tet">Créneau exclusif :&nbsp;</label>
+                            <input type="number" class="form-control ml-2" placeholder="10" style="max-width: 80px;" [disabled]="!formTimeslot.exclusive" [(ngModel)]="formTimeslot.maxAppointments">
+                          </div>
+                          <div *ngIf="formTimeslot.displayAdvancedSettings" class="form-check d-flex align-items-center mb-2" placement="left" ngbTooltip="La capacité de chaque créneau éclusif est celle définie en fixe">
+                            <input class="form-check-input" type="checkbox" id="formInput_taefc" [(ngModel)]="formTimeslot.activateExclusiveFixedCapacity" />
+                            <label class="form-check-label" for="formInput_taefc">Capacité fixe par créneau exclusif</label>
+                          </div>
+                          <div *ngIf="formTimeslot.displayAdvancedSettings"  class="form-check mb-2" ngbTooltip="Autoriser la dernière réservation a être en surcapacité avant de bloquer le créneau." placement="left">
+                            <input class="form-check-input" type="checkbox" id="formOverCapacity" [disabled]="formTimeslot.activateExclusiveFixedCapacity" [(ngModel)]="formTimeslot.overCapacity">
+                            <label class="form-check-label" for="formOverCapacity">Autoriser la sur-capacité</label>
+                          </div>
+                          <div *ngIf="formTimeslot.displayAdvancedSettings" class="form-check d-flex align-items-center mb-2" placement="left" ngbTooltip="Le nombre de créneaux est égal au nombre de {{ settings.staff_word_many[global.currentLanguage]|lowercase }} disponibles.">
+                            <input class="form-check-input" type="checkbox" id="formInput_tme" [disabled]="formTimeslot.exclusive" [(ngModel)]="formTimeslot.membersExclusive" />
+                            <label class="form-check-label" for="formInput_tme">Créneaux égaux au nombre de {{ settings.staff_word_many[global.currentLanguage]|lowercase }} disponibles</label>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" id="formParametersTimeslotNotActivated" type="checkbox" [checked]="!formTimeslot.formParametersTimeslotNotActivated" (change)="formTimeslot.formParametersTimeslotNotActivated = !formTimeslot.formParametersTimeslotNotActivated" />
+                          <label class="font-weight-bold" for="formParametersTimeslotNotActivated" ngbTooltip="Comment se déroule la réservation ?">Scénario de réservation</label>
+                        </div>
+                        <span *ngIf="!formTimeslot.formParametersTimeslotNotActivated">
+                          <div ngbTooltip="{{ parameter.description }}" class="form-check" *ngFor="let parameter of settings.states_parameters; index as i">
+                            <input class="form-check-input" type="radio" name="parameters_timeslot" id="formInput_tpc{{ i }}" [(ngModel)]="formTimeslot.idParameter" [value]="parameter.id">
+                            <label class="form-check-label" for="formInput_tpc{{ i }}">{{ parameter.name }}</label>
+                          </div>
+                        </span>
+                        <div class="form-check mt-2">
+                          <input class="form-check-input" id="formMentionsTimeslotNotActivated" type="checkbox" [checked]="!formTimeslot.formMentionsTimeslotNotActivated" (change)="formTimeslot.formMentionsTimeslotNotActivated = !formTimeslot.formMentionsTimeslotNotActivated" />
+                          <label class="font-weight-bold" for="formMentionsTimeslotNotActivated" ngbTooltip="Ajout une mention spéciale au créneau ?">Ajout d'une mention</label>
+                        </div>
+                        <span *ngIf="!formTimeslot.formMentionsTimeslotNotActivated">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mention_timeslot" id="formInput_tm" [(ngModel)]="formTimeslot.idMention" [value]="''">
+                            <label class="form-check-label" for="formInput_tm">Aucun</label>
+                          </div>
+                          <div class="form-check" *ngFor="let mention of settings.timeslots_mentions; index as i">
+                            <input class="form-check-input" type="radio" name="mention_timeslot" id="formInput_tm{{ i }}" [(ngModel)]="formTimeslot.idMention" [value]="mention.id">
+                            <label class="form-check-label promo-label" for="formInput_tm{{ i }}" [ngStyle]="{'backgroundColor':mention.backgroundColor}">{{ mention.name[global.currentLanguage] }}</label>
+                          </div>
+                          <a href="javascript:void(0)" (click)="openMentionDialog(contentMentions)">Ajouter/Editer une mention</a>
+                          <br />
+                        </span>
+                        <button type="button" class="btn btn-success m-1 mt-md-4" (click)="launchSaveTimeslots(activityAvailability)">
+                          <span [ngPlural]="getTimeslotsNumberSelected(activityAvailability)">
+                            <ng-template ngPluralCase="=0">Appliquer sur le créneau sélectionné</ng-template>
+                            <ng-template ngPluralCase="=1">Appliquer sur le créneau sélectionné</ng-template>
+                            <ng-template ngPluralCase="other">Appliquer sur les créneaux sélectionnés</ng-template>
+                          </span>
+                        </button><br />
+                        <button type="button" class="btn m-1 mt-md-2 btn-outline-warning" (click)="resetFormTimeslot()">Réinitialiser</button>
+                        <button type="button" class="btn m-1 mt-md-2 btn-outline-danger" (click)="cancelFormTimeslot(activityAvailability)">Annuler</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button *ngIf="this.activity.serviceAvailabilities.length > 1" type="button" class="btn btn-sm ml-md-2 btn-outline-danger" (click)="removeServiceAvailability(i)"> Supprimer la règle</button>
+            <button type="button" class="btn btn-sm ml-md-2 btn-outline-warning" (click)="duplicateServiceAvailability(i, tabsRules)"> Dupliquer la règle</button>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="tab-add-rule">
+          <ng-template ngbTabTitle title="Ajouter une règle">+ Ajouter une règle</ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+    <div class="tab-pane border border-top-0 p-3" [ngClass]="{'active':initTab == 8}" id="tab8" role="tabpanel" aria-labelledby="tab8-tab">
+      <div class="text-center text-white bg-dark param_infos">Personnalisation du texte des créneaux</div>
+      <div>
+        Variables : <br />
+        <ul>
+          <li>[heure_debut] : Heure de début du créneau</li>
+          <li>[heure_fin] : Heure de fin du créneau</li>
+          <li>[duree] : La durée du créneau (attention pas d'accent à durée)</li>
+          <li>[nb_creneau_disponible] : Nombre de créneaux disponible</li>
+          <li>[nb_creneau_disponible_restant] : Nombre de créneaux disponible restant*</li>
+          <li>[capacite_par_creneau] : Capacité du créneau la plus haute</li>
+          <li>[capacite_par_creneau_restante] : Capacité restante du créneau*</li>
+        </ul>
+        (* tiens compte de la sélection en cours)
+        <br /><br />
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" id="formInput_customTimeslotsTextActivated" type="checkbox" [(ngModel)]="activity.customTimeslotsTextActivated" />
+        <label class="form-check-label" for="formInput_customTimeslotsTextActivated" ngbTooltip="Activer la personnalisation des textes du créneaux">Activation la personnalisation</label>
+      </div>
+      <div class="form-group" *ngIf="activity.customTimeslotsTextActivated">
+        <label class="font-weight-bold" for="formCTTB" data-html="false" title="Contenu">Personnalisation du créneau affichage simple non sélectionné</label>
+        <app-tinymce id="formCTTB" [disabled]="!activity.customTimeslotsTextActivated" [(ngModel)]="activity.customTimeslotsTextBase[global.currentLanguage]" (ngModelChange)="setToSave(true)"></app-tinymce>
+      </div>
+      <div class="form-group" *ngIf="activity.customTimeslotsTextActivated">
+        <label class="font-weight-bold" for="formCTTS" data-html="false" title="Contenu">Personnalisation du créneau lorsqu'il est sélectionné</label>
+        <app-tinymce id="formCTTS" [disabled]="!activity.customTimeslotsTextActivated" [(ngModel)]="activity.customTimeslotsTextSelected[global.currentLanguage]" (ngModelChange)="setToSave(true)"></app-tinymce>
+      </div>
+      <div class="form-group" *ngIf="activity.customTimeslotsTextActivated">
+        <label class="font-weight-bold" for="formCTTC" data-html="false" title="Contenu">Personnalisation du créneau lorsqu'il est complet</label>
+        <app-tinymce id="formCTTC" [disabled]="!activity.customTimeslotsTextActivated" [(ngModel)]="activity.customTimeslotsTextCompleted[global.currentLanguage]" (ngModelChange)="setToSave(true)"></app-tinymce>
+      </div>
+    </div>
+    <div class="tab-pane border border-top-0 p-3" [ngClass]="{'active':initTab == 6}" id="tab6" role="tabpanel" aria-labelledby="tab6-tab">
+      <div class="text-center text-white bg-dark param_infos">Vous pouvez définir une notification pour cette activité qui pourra être ajoutée à n'importe quelle notification via le raccourcie [RESA_notifications_services]</div>
+      <div class="text-center text-white bg-warning param_infos">Informations : <em>Attention n'oubliez pas le raccourcie [RESA_notifications_services] dans vos notifications !</em></div>
+      <div class="form-check">
+        <input class="form-check-input" id="formInput_notification" type="checkbox" [(ngModel)]="activity.notificationActivated" (ngModelChange)="setToSave(true)" />
+        <label class="form-check-label" for="formInput_notification" ngbTooltip="Cette notification apparaîtra dans le raccourcie :  [RESA_notifications_services]">Activation de la notification</label>
+      </div>
+      <textarea class="form-control" rows="3" [disabled]="!activity.notificationActivated" [(ngModel)]="activity.notificationMessage[global.currentLanguage]" (ngModelChange)="setToSave(true)" ></textarea>
+    </div>
+    <div class="tab-pane border border-top-0 p-3" [ngClass]="{'active':initTab == 7}" id="tab7" role="tabpanel" aria-labelledby="tab7-tab">
+      <div class="form-group">
+        <label class="font-weight-bold" ngbTooltip="Permet de choisir un extra qui s'appliquera à la place des autres tarifs tant que le montant de cet extra n'est pas atteint.">Montant minimum (?)</label>
+        <select class="form-control mt-md-2" [(ngModel)]="activity.defaultSlugServicePrice" (ngModelChange)="setToSave(true)">
+          <option [value]="''">Pas de montant minimum</option>
+          <option [hidden]="!servicePrice.extra" [disabled]="servicePrice.mandatory" *ngFor="let servicePrice of activity.servicePrices" [value]="servicePrice.slug">{{ servicePrice.name[global.currentLanguage] }} ({{ servicePrice.slug }}) <span *ngIf="servicePrice.mandatory">(non sélectionnable : tarif requis)</span></option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" ngbTooltip="Permet d'activer la demande des informations des participants à la réservation, ce réglage se fait sur le tarif">Demande de participant (?)</label>
+        <div class="form-check">
+          <input class="form-check-input" id="formAskParticipants" type="checkbox" [(ngModel)]="activity.askParticipants" (ngModelChange)="setToSave(true)" />
+          <label class="form-check-label" for="formAskParticipants">Activer</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="form-group">
+          <label class="font-weight-bold" for="formActivityAcompte" ngbTooltip="Pourcentage du total du prix de l'activité pour le calcul de l'acompte">Acompte général (en %)</label>
+          <input class="form-control" id="formActivityAcompte" type="number" [(ngModel)]="activity.advancePayment" (ngModelChange)="setToSave(true)" />
+          <span class="text-warning">Astuce : Si vous ne voulez pas d'acompte pour cette activité mettez comme valeur 100%</span>
+        </div>
+        <button *ngIf="activity.advancePaymentByAccountTypes.length == 0" class="btn btn-sm btn-outline-success" type="button" (click)="addAdvancePaymentAccountType()">+ Ajouter une exception pour un type de compte</button>
+        <p *ngIf="activity.advancePaymentByAccountTypes.length > 0">Le tableau suivant sert à ajouter une exception pour l'acompte en fonction des types de compte, si un type de compte n'est pas présent, il prendra la valeur de l'acompte général.</p>
+        <table *ngIf="activity.advancePaymentByAccountTypes.length > 0" class="table mt-3" id="services_list">
+          <thead>
+            <tr>
+              <th>Type de compte</th>
+              <th>Acompte (en %)</th>
+              <th class="text-right">
+                <button class="btn btn-sm btn-outline-success" type="button" (click)="addAdvancePaymentAccountType()">+ Ajouter une exception</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let advancePayment of activity.advancePaymentByAccountTypes; index as i">
+              <td scope="row">
+                <select class="form-control" [(ngModel)]="advancePayment.typeAccount" (ngModelChange)="setToSave(true)">
+                  <option *ngFor="let typeAccount of settings.typesAccounts" [value]="typeAccount.id">{{ global.getTextByLocale(typeAccount.name) }}</option>
+                </select>
+              </td>
+              <td scope="row">
+                <input class="form-control" type="number" [(ngModel)]="advancePayment.advancePayment" (ngModelChange)="setToSave(true)">
+              </td>
+              <td class="text-right">
+                <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteAdvancePaymentAccountType(i)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold">Activité exclusive</label>
+        <div class="form-check">
+          <input class="form-check-input" id="formServiceExclusif" type="checkbox" [(ngModel)]="activity.exclusive" (ngModelChange)="setToSave(true)" />
+          <label class="form-check-label" for="formServiceExclusif">Activer</label>
+        </div>
+        <p class="mb-xl-0 font-italic">Si activé, un {{ settings.staff_word_single[global.currentLanguage]|lowercase }} affecté à cette activité ne sera plus disponible. Cet activité n'apparaitra pas dans les activités partagées du personnel.</p>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" ngbTooltip="Vous permet de définir quel {{ settings.staff_word_many[global.currentLanguage]|lowercase }} doit être mis sur la réservation en priorité.">Priorité</label>
+        <table *ngIf="settings.staffManagementActivated && members.length > 0" class="table" id="services_list">
+          <thead>
+            <tr>
+              <th>{{ settings.staff_word_many[global.currentLanguage] }}</th>
+              <th>Priorité</th>
+              <th class="text-right">
+                <button type="button" class="btn btn-sm btn-outline-success" (click)="addServiceMemberPriority()">+ Ajouter une prioritaire</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let activityMemberPriority of activity.serviceMemberPriorities; index as i">
+              <th scope="row">
+                <select class="form-control mt-md-2" [(ngModel)]="activityMemberPriority.idMember" (ngModelChange)="setToSave(true)">
+                  <option *ngFor="let member of members" [value]="member.id">{{ member.nickname }}</option>
+                </select>
+              </th>
+              <td>
+                <select class="form-control mt-md-2" [(ngModel)]="activityMemberPriority.priority" (ngModelChange)="setToSave(true)">
+                  <option *ngFor="let member of members; index as i" [value]="(i+1)">{{ i + 1 }}</option>
+                </select>
+              </td>
+              <td class="text-right">
+                <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteServiceMemberPriority(i)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!settings.staffManagementActivated">Vous n'avez pas la gestion du personnel activé</div>
+        <div *ngIf="settings.staffManagementActivated && members.length == 0">Pas de {{ settings.staff_word_single[global.currentLanguage]|lowercase }} associé à cette activité</div>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold" for="formActivitySlug" ngbTooltip="Nom de l'activité court, utiliser pour le css et la caisse. (Pas d'espace ni de caractère spéciaux)">Slug (?)</label>
+        <input class="form-control" id="formActivitySlug" type="text" placeholder="Slug" [(ngModel)]="activity.slug" (ngModelChange)="setToSave(true)" />
+        <span class="bg-warning" *ngIf="isSlugAlreadyUsed(activity.slug)">Ce slug est déjà utilisé par une autre activité</span>
+        <span class="bg-warning" *ngIf="isSlugNull(activity.slug)">Ce slug est null, veuillez le renseigner</span>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Modifier <span *ngIf="!formActivityPrice.extra">le tarif</span><span *ngIf="formActivityPrice.extra">l'extra</span> : {{ formActivityPrice.name[global.currentLanguage] }}</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="align-items-center d-flex pb-3 ">
+      <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+      <select [(ngModel)]="global.currentLanguage" (change)="changeLanguage()" class="custom-select bg-light w-auto">
+        <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+      </select>
+      <div class="ml-2">
+        <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+      </div>
+    </div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" href="#tab10" data-toggle="tab" role="tab" aria-controls="tab10" aria-expanded="true">Général</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab11" data-toggle="tab" role="tab" aria-controls="tab11" aria-expanded="true">Tarifs variables</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab12" data-toggle="tab" role="tab" aria-controls="tab12" aria-expanded="true">TVA</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab13" data-toggle="tab" role="tab" aria-controls="tab13" aria-expanded="true">Options</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab14" data-toggle="tab" role="tab" aria-controls="tab14" aria-expanded="true">Importer</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active pt-sm-2" id="tab10" role="tabpanel" aria-labelledby="tab10-tab">
+        <div class="form-group">
+          <label class="font-weight-bold" for="formInputActivityPriceName" ngbTooltip="Nom du tarif">Nom du tarif</label>
+          <input class="form-control" id="formInputActivityPriceName" type="text" placeholder="Nom du tarif" [(ngModel)]="formActivityPrice.name[global.currentLanguage]" />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formInputActivityPriceMP" ngbTooltip="Mention afficher pour mettre en avant ce tarif">Mention spéciale</label>
+          <input class="form-control" id="formInputActivityPriceMP" type="text" placeholder="Meilleur prix / Nouveau ..." [(ngModel)]="formActivityPrice.mention[global.currentLanguage]" />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formInputActivityPricePresentation" ngbTooltip="Présenter brievement les condition d'application de ce tarif">Présentation du tarif</label>
+          <textarea class="form-control" id="formInputActivityPriceMP" rows="3" [(ngModel)]="formActivityPrice.presentation[global.currentLanguage]"></textarea>
+        </div>
+        <div class="small text-warning" *ngIf="formActivityPrice.thresholdPrices.length == 0 && (activity.typeAvailabilities == 1 || activity.typeAvailabilities == 2)">
+          La réservation de cette activité est réglée à plusieurs jours, veuillez diviser votre tarif par le nombre de jours (en laissant plusieurs chiffres après la virgule si nécessaire).
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formInputActivityPriceTTC" ngbTooltip="Prix de vente de base.">Prix de base (TTC)</label>
+          <p *ngIf="formActivityPrice.thresholdPrices.length > 0" class="text-danger mb-1">Les tarifs variables sont activés. Le prix de base n'est pas pris en compte</p>
+          <input class="form-control" id="formInputActivityPriceTTC" type="number" placeholder="100" [disabled]="formActivityPrice.thresholdPrices.length > 0" [(ngModel)]="formActivityPrice.price" />
+        </div>
+        <div class="form-group" *ngIf="settings.equipmentsManagementActivated">
+          <label class="font-weight-bold" for="formInputActivityPriceTTC" ngbTooltip="Si vous associez un matériel à ce tarif, vous pourrez décompter le matériel associé">Associer un matériel</label>
+          <select class="form-control" [(ngModel)]="formActivityPrice.equipments[0]">
+            <option value="">Aucun</option>
+            <option [hidden]="!isSamePlace(equipment)" *ngFor="let equipment of equipments" [value]="equipment.id">
+              <span *ngIf="havePlaces() && equipment.places.length > 0">[<span *ngFor="let idPlace of equipment.places; index as i"><span *ngIf="i > 0">, </span>{{ getPlaceName(idPlace) }}</span>] </span>
+              {{ equipment.name[global.currentLanguage] }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="tab-pane pt-sm-2" id="tab11" role="tabpanel" aria-labelledby="tab11-tab">
+        <div class="form-group">
+          <label class="font-weight-bold" for="formInput195">Variations de prix</label>
+          <div class="font-italic">Cela vous permet de faire des prix plus complexe en fonction du nombre de personnes et du temps passé.</div>
+          <div class="small text-warning" *ngIf="activity.typeAvailabilities == 1 || activity.typeAvailabilities == 2">
+            La réservation de cette activité est réglée à plusieurs jours, veuillez diviser votre tarif par le nombre de jours (en laissant plusieurs chiffres après la virgule si nécessaire).
+          </div>
+          <button class="btn btn-sm btn-outline-success m-md-2" type="button" (click)="addActivityPriceVariation()">+ Ajouter une variation</button>
+          <table class="table mb-xl-3 mt-xl-3 table-sm">
+            <thead>
+              <tr>
+                <th class="text-center text-warning" colspan="4">Critères</th>
+                <th class="text-center text-success" scope="row" style="border-left: 1px solid #cbcbcb;" colspan="5">Prix (TTC)</th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th class="text-center" colspan="4">Nombre de personnes</th>
+                <th class="text-center" style="border-left: 1px solid #cbcbcb;" ngbTooltip="Prix par personne" container="body">Par pers.</th>
+                <th class="text-center" ngbTooltip="Prix pour 1h (utile en fonction du créneau ou de l'heure d'encaissement)" container="body">Par heure</th>
+                <th class="text-center" ngbTooltip="Prix fixe pour cette tranche de personne" container="body">Forfait</th>
+                <th class="text-center" ngbTooltip="Prix par personne supplémentaire (ne fonctionne que sur la dernière variation)" container="body">Pers. supp.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-light" *ngFor="let thresholdPrice of formActivityPrice.thresholdPrices; index as i">
+                <td scope="row" style="vertical-align: middle;"><span class="btn-moins" (click)="formActivityPrice.thresholdPrices.splice(i, 1);">-</span></td>
+                <td scope="row">
+                  <input class="form-control form-control-sm" type="text" placeholder="0" [(ngModel)]="thresholdPrice.min" />
+                </td>
+                <td class="p-xl-0 text-center" scope="row" style="vertical-align: middle;">à</td>
+                <td scope="row">
+                  <input class="form-control form-control-sm" type="text" placeholder="0"  [(ngModel)]="thresholdPrice.max" />
+                </td>
+                <td scope="row" style="border-left: 1px solid #cbcbcb;">
+                  <input class="form-control form-control-sm" type="number" placeholder="0" [(ngModel)]="thresholdPrice.byPerson" />
+                </td>
+                <td scope="row" style="vertical-align: middle;">
+                  <input class="form-control form-control-sm" type="checkbox" [(ngModel)]="thresholdPrice.byHours" />
+                </td>
+                <td scope="row">
+                  <input class="form-control form-control-sm" type="number" placeholder="0"  [(ngModel)]="thresholdPrice.price" />
+                </td>
+                <td scope="row">
+                  <input class="form-control form-control-sm" type="number" placeholder="0" [disabled]="i < (formActivityPrice.thresholdPrices.length - 1)" [(ngModel)]="thresholdPrice.supPerson" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane pt-sm-2" id="tab12" role="tabpanel" aria-labelledby="tab12-tab">
+        <div class="form-group">
+          <h2 class="font-weight-bold">TVA</h2>
+          <div class="font-italic">TTC et HT calculés pour 1 personne et 1 heure : {{ getPriceOfActivityPrice(formActivityPrice) }}{{ settings.currency }}</div>
+          <div class="">
+            <span *ngFor="let vatLine of formActivityPrice.vatList; index as i">
+              <div class="row pl-md-0 pr-md-0 border pt-md-1 pb-md-1 bg-light pt-sm-2 pb-sm-2">
+                <div class="pl-md-1 pr-md-1 text-center col-md-1 col-lg-1 d-flex align-items-center justify-content-center">
+                  <span *ngIf="vatLine.product == null" class="btn-moins" (click)="removeVat(i)">-</span>
+                  <span *ngIf="vatLine.product != null">Synchroniser avec Caisse Online</span>
+                </div>
+                <div class="pl-md-1 pr-md-1 col-md-2">
+                  <select class="form-control" [(ngModel)]="vatLine.idVat">
+                    <option *ngFor="let vat of settings.vatList" [value]="vat.id">{{ vat.label[global.currentLanguage] }}</option>
+                  </select>
+                </div>
+  			        <div class="pl-md-1 pr-md-1 col-lg-2 col-md-2 text-center">
+                  <span class="switch switch-sm">
+                    <label for="formUseFixed_vat{{i}}" ngbTooltip="">% </label>
+                    <input class="form-control" class="switch" id="formUseFixed_vat{{i}}" [(ngModel)]="vatLine.useFixed" type="checkbox" [disabled]="vatLine.complete" >
+                    <label for="formUseFixed_vat{{i}}" ngbTooltip=""> {{ settings.currency }}</label>
+                  </span>
+                </div>
+                <div class="pl-md-1 pr-md-1 col-lg-2 col-md-2 d-flex align-items-center justify-content-center" *ngIf="!vatLine.useFixed">
+                  <input class="form-control w-75" type="number" step="1" placeholder="%" min="0" max="100" [(ngModel)]="vatLine.purcent" [disabled]="vatLine.complete || vatLine.useFixed" /><label>%</label>
+                </div>
+                <div class="pl-md-1 pr-md-1 col-lg-2 col-md-2 d-flex align-items-center justify-content-center" *ngIf="vatLine.useFixed">
+                  <input class="form-control w-75" type="number" step="0.01" placeholder="TTC" [(ngModel)]="vatLine.fixed" [disabled]="vatLine.complete || !vatLine.useFixed"  />
+  				        <label>{{ settings.currency }}</label>
+                </div>
+                <div class="pl-md-1 pr-md-1 col-lg-2 col-md-1 pb-2 pt-2 text-center" *ngIf="i == formActivityPrice.vatList.length - 1">
+                  <input class="form-check-input" id="formCompleted" type="checkbox" [(ngModel)]="vatLine.complete" />
+                  <label class="form-check-label text-align:center;" for="formCompleted">Compléter le reste</label>
+                </div>
+                <div class="pr-0 text-center pl-md-1 pr-md-1 font-weight-bold d-flex align-items-center justify-content-center col-md">
+                  TTC {{ displayTTCPrice(vatLine, formActivityPrice)|number:'1.2-2':'fr' }}{{ settings.currency }} /  HT {{ displayHTPrice(vatLine, formActivityPrice)|number:'1.2-2':'fr' }}{{ settings.currency }} /
+                  TVA {{ (displayTTCPrice(vatLine, formActivityPrice) - displayHTPrice(vatLine, formActivityPrice))|number:'1.2-2':'fr' }}{{ settings.currency }}&nbsp;
+                </div>
+              </div>
+              <div class="row pl-md-0 pr-md-0 border pt-md-1 pb-md-1 pt-sm-2 pb-sm-2">
+                <div class="pl-md-1 pr-md-1 text-center col-md-1 col-lg-1 d-flex align-items-center justify-content-center">
+                  <span ngbTooltip="Informations produit envoyé sur la caisse lors de la synchronisation">Produit :</span>
+                </div>
+                <div class="pl-md-1 pr-md-1 col-lg-2 col-md-1 pb-2 pt-2 text-center">
+                  <input class="form-control" type="text" placeholder="Nom produit" [(ngModel)]="vatLine.name" />
+                </div>
+                <div class="pl-md-1 pr-md-1 col-lg-2 col-md-1 pb-2 pt-2 text-center">
+                  <input class="form-control" type="text" placeholder="Référence produit" [(ngModel)]="vatLine.reference" />
+                </div>
+                <div class="pl-md-1 pr-md-1 col-lg-2 col-md-1 pb-2 pt-2 text-center">
+                  <input class="form-control" type="text" placeholder="Nom produit public" [(ngModel)]="vatLine.publicName" />
+                </div>
+              </div>
+            </span>
+            <p *ngIf="formActivityPrice.vatList.length > 0 && (sumOfTTC(formActivityPrice) != getPriceOfActivityPrice(formActivityPrice) || (formActivityPrice.thresholdPrices.length > 0 && !isLastComplete(formActivityPrice)))" class="text-danger font-italic mb-md-1">
+              La somme des TTC doit être égale au prix unitaire !
+              <strong *ngIf="(formActivityPrice.thresholdPrices.length > 0 && !isLastComplete(formActivityPrice))"><br />!! Si vos tarifs sont variables, vous devez cocher la case "Compléter le reste" sur le dernier taux de TVA.</strong>
+            </p>
+            <button class="btn btn-sm btn-outline-success m-md-2" type="button" (click)="addVat()">+ Ajouter une TVA</button>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane pt-sm-2" id="tab13" role="tabpanel" aria-labelledby="tab13-tab">
+        <div class="form-group">
+          <label class="font-weight-bold" ngbTooltip="Sélectionner le type d'informations à demander aux participants">Demander des informations sur les participants</label>
+          <select [disabled]="!activity.askParticipants" class="form-control" [(ngModel)]="formActivityPrice.participantsParameter">
+            <option value="">Aucun</option>
+            <option *ngFor="let participantsParameter of settings.form_participants_parameters" [value]="participantsParameter.id">{{ participantsParameter.label[global.currentLanguage] }}</option>
+          </select>
+          <span class="text-warning" *ngIf="!activity.askParticipants">Cette activité ne demande pas des informations aux participants de la réservation, voulez vous l'activer ?</span>
+          <div class="form-check">
+            <input class="form-check-input" id="formAskParticipants2" type="checkbox" [(ngModel)]="activity.askParticipants" (ngModelChange)="setToSave(true)" />
+            <label class="form-check-label" for="formAskParticipants2">Activer la demande</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" ngbTooltip="Cette activité ne pourra pas être réservée sans ce tarif">Tarif requis(?)</label>
+          <div class="form-check d-flex align-items-center mb-2" placement="left">
+            <input class="form-check-input" id="formMandatoryActivityPrice" type="checkbox" [(ngModel)]="formActivityPrice.mandatory" />
+            <label class="form-check-label" for="formMandatoryActivityPrice">Activer</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formInput195">Options supplémentaire</label>
+          <div class="form-check d-flex align-items-center mb-2" placement="left">
+            <input class="form-check-input" id="formActivateMinQuantity" type="checkbox" [(ngModel)]="formActivityPrice.activateMinQuantity" />
+            <label class="form-check-label" for="formActivateMinQuantity" ngbTooltip="Permet de fixer un nombre minimum sur ce tarif (lors du choix fait par le client)">Quantité minimum</label>
+            <input class="form-control ml-2" type="number" placeholder="1" style="max-width: 80px;" [disabled]="!formActivityPrice.activateMinQuantity" [(ngModel)]="formActivityPrice.minQuantity" />
+          </div>
+          <div class="form-check d-flex align-items-center mb-2" placement="left">
+            <input class="form-check-input" id="formActivateMaxQuantity" type="checkbox"  [(ngModel)]="formActivityPrice.activateMaxQuantity" />
+            <label class="form-check-label" for="formActivateMaxQuantity" ngbTooltip="Permet de fixer un nombre maximum sur ce tarif (lors du choix fait par le client)">Quantité maximum</label>
+            <input class="form-control ml-2" type="number" placeholder="10" style="max-width: 80px;" [disabled]="!formActivityPrice.activateMaxQuantity" [(ngModel)]="formActivityPrice.maxQuantity" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" ngbTooltip="Qui peut voir et choisir ce tarif ?" placement="right">Visibilité(?)</label>
+          <div class="form-check">
+            <input class="form-check-input" id="formInputActivityPriceAll" type="radio" name="activityPriceTypeAccount" [checked]="formActivityPrice.typesAccounts.length == 0" (change)="formActivityPrice.typesAccounts = []" />
+            <label class="form-check-label" for="formInputActivityPriceAll" ngbTooltip="Tous les visiteurs ainsi que vous">Tout le monde</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="activityPriceTypeAccount" id="formInputActivityPricePrivate" [checked]="formActivityPrice.typesAccounts.indexOf('private') != -1" (change)="formActivityPrice.typesAccounts = ['private']">
+            <label class="form-check-label" for="formInputActivityPricePrivate" ngbTooltip="Seulement vous dans la gestion des réservations">Privé</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="formInputActivityPriceCustom" type="radio" name="activityPriceTypeAccount" [checked]="formActivityPrice.typesAccounts.length >= 1 && formActivityPrice.typesAccounts[0] != 'private'" (change)="addAllTypeAccountsTimeslots()" />
+            <label class="form-check-label" for="formInputActivityPriceCustom" ngbTooltip="Seulement les types de comptes clients suivants">Personnalisé</label>
+          </div>
+          <div class="border border-top-0 border-right-0 border-bottom-0 ml-1 pl-3 mt-1">
+            <div class="form-check"  *ngFor="let typeAccount of settings.typesAccounts">
+              <input class="form-check-input" id="formInput_activityPrice_{{ typeAccount.id }}" type="checkbox" [checked]="formActivityPrice.typesAccounts.indexOf(typeAccount.id)!=-1" (change)="switchTypeAccount(typeAccount.id)"  />
+              <label class="form-check-label" for="formInput_activityPrice_{{ typeAccount.id }}">{{ typeAccount.name[global.currentLanguage] }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" for="formActivityPriceSlug" ngbTooltip="Le slug est généré par défaut, vous pouvez le modifier pour l'utiliser dans le css">Slug du tarif(?)</label>
+          <input class="form-control" id="formActivityPriceSlug" type="text" placeholder="Slug du tarif" [(ngModel)]="formActivityPrice.slug"/>
+          <span *ngIf="haveSameServicePriceSlug(formActivityPrice.slug)">
+            Slug déjà utilisé par : <span *ngFor="let indexServicePrices of getIndexServicePricesHaveSameServicePriceSlug(formActivityPrice.slug); index as i"><span *ngIf="i > 0">, </span>{{ activity.servicePrices[indexServicePrices].name[global.currentLanguage] }}</span>
+          </span>
+          <span class="bg-warning" *ngIf="isSlugNull(formActivityPrice.slug)">Ce slug est null, veuillez le renseigner</span>
+        </div>
+      </div>
+      <div class="tab-pane pt-sm-2" id="tab14" role="tabpanel" aria-labelledby="tab14-tab">
+        <div class="form-group">
+          <label class="font-weight-bold" ngbTooltip="Permet d'importer et de copier un tarif d'une autre activité. Si vous voulez copier un tarif de cette activité, veuillez utiliser le bouton &quot;Dupliquer&quot;">Importer et copier un tarif d'une autre activité</label>
+          <select class="form-control" [(ngModel)]="formImport.activity">
+            <option [hidden]="localActivity.slug == activity.slug" *ngFor="let localActivity of activities" [ngValue]="localActivity">
+              <span *ngIf="havePlaces() && localActivity.places.length > 0">[
+                <span *ngFor="let idPlace of localActivity.places; index as i"><span *ngIf="i>0">, </span>{{ getPlaceName(idPlace) }}<br /></span>] </span>
+              {{ global.getTextByLocale(localActivity.name) }}
+            </option>
+          </select>
+          <select *ngIf="formImport.activity" class="form-control mt-md-2"  [(ngModel)]="formImport.activityPrice">
+            <option [hidden]="price.id == -1" *ngFor="let price of formImport.activity.prices" [ngValue]="price">{{ global.getTextByLocale(price.name) }} ({{ price.slug }})</option>
+          </select>
+          <button *ngIf="formImport.activityPrice" class="btn btn-sm btn-outline-info mr-md-0 mb-md-0 ml-md-0 mt-md-2" (click)="importActivityPrice()">Importer et copier</button>
+          <div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="bg-danger text-white pull-left param_infos" *ngIf="!isOkActivityPrice(formActivityPrice)">
+      <span *ngIf="!isOkNameActivityPrice(formActivityPrice)">- Veuillez définir le nom du tarif<br /></span>
+      <span *ngIf="getPriceOfActivityPrice(formActivityPrice) == 0">- Le tarif ne doit pas être null<br /></span>
+      <span *ngIf="formActivityPrice.vatList.length == 0">- Veuillez définir une TVA<br /></span>
+      <span *ngIf="haveSameServicePriceSlug(formActivityPrice.slug)">- Slug déjà utilisé<br /></span>
+      <span *ngIf="isSlugNull(formActivityPrice.slug)">- Slug null<br /></span>
+    </div>
+    <button class="btn btn-default btn-outline-warning" type="button" (click)="formActivityPrice.extra = !formActivityPrice.extra">
+      Transformer en <span *ngIf="!formActivityPrice.extra">extra</span><span *ngIf="formActivityPrice.extra">tarif</span>
+    </button>
+    <button class="btn btn-success" type="button" [disabled]="!isOkActivityPrice(formActivityPrice)" (click)="closeActivityPriceModal(c)">Enregistrer</button>
+  </div>
+</ng-template>
+<ng-template #contentMentions let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Edition des mentions</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="c(true)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="align-items-center d-flex pb-3 ">
+      <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+      <select [(ngModel)]="global.currentLanguage" (change)="changeLanguage()" class="custom-select bg-light w-auto">
+        <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+      </select>
+      <div class="ml-2">
+        <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+      </div>
+    </div>
+    <div class="p-2 mt-2 mb-2 bg-light">
+      <h4>Mention</h4>
+      <p>Vous pouvez ajouter, éditer ou supprimer un type de mention pour vos créneaux. Ces mentions seront affichées uniquement côté formulaire.</p>
+      <div>
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th class="align-middle">#</th>
+              <th class="align-middle">Nom de la mention</th>
+              <th class="align-middle">Couleur de fond</th>
+              <th class="align-middle">
+                Actions
+                <button (click)="addMention()" class="btn btn-success">+ Ajouter</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mention of settings.timeslots_mentions; index as i">
+              <th>{{ i + 1}}</th>
+              <th><input class="form-control" type="text" [(ngModel)]="mention.name[global.currentLanguage]" placeholder="Nom de la mention" /></th>
+              <th><input class="form-control h-50" type="color" [(ngModel)]="mention.backgroundColor" /></th>
+              <th><button (click)="settings.timeslots_mentions.splice(i, 1)" class="btn btn-danger">Suppression</button></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" [disabled]="!isOkMentions()" (click)="c(true)">Sauvegarder</button>
+  </div>
+</ng-template>
+
+<ng-template #manyDates let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Choisissez vos dates</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="c(true)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <calendar [color]="formManyDates.activityAvailability.color" [datesModel]="formManyDates.dates" (ngDatesModel)="setServiceFormManyDates($event)"></calendar>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" (click)="c(true)">Sauvegarder</button>
+  </div>
+</ng-template>
+<div id="page_content" class="container" *ngIf="activity == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>
+<div *ngIf="launchAction || launchActionSave" class="sLoader_bg"><div class="sLoader"></div></div>

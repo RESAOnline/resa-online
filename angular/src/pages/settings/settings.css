@@ -1,0 +1,19 @@
+.label-file {
+    cursor: pointer;
+    color: #27b673;
+    font-weight: bold;
+}
+.label-file:hover {
+    color: #219e63;
+}
+
+.input-file {
+    display: none;
+}
+
+.tag_vert{ background-color:#28b673; }
+.tag_jaune{ background-color:#efb20e; }
+.tag_orange{ background-color:#e28d14; }
+.tag_marron{ background-color:#765337; }
+.tag_rouge{ background-color:#d62d2d; }
+.tag_bleu{ background-color:#1492e2; }

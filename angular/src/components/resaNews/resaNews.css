@@ -1,0 +1,89 @@
+.btn-dashicons-outline {
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  padding: 2px;
+  border-radius: 10px;
+  color: white;
+  background-color: #27b673;
+}
+.btn-dashicons-outline:hover {
+  color: white;
+}
+.btn-dashicons-outline.dashicons {
+  font-size: 35px;
+}
+
+
+#resa_news_center_wrapper{
+	width: 100vw;
+	max-width: 500px;
+	min-width: 250px;
+	grid-area: resa_news_center_wrapper;
+	position: absolute;
+	right: 150px;
+	align-items: center;
+	z-index: 100;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background-color: white;
+}
+
+#resa_news_title{
+	text-align: center;
+	color:#27b673;
+	font-weight: bold;
+	height: 30px;
+	border-bottom: 2px solid #dddfe2;
+	line-height: 2.2em;
+	padding: 5px;
+}
+
+#resa_news_center_wrapper .notif{
+	text-align: left;
+	border-top: 1px solid #dddfe2;
+	border-bottom: 1px solid #dddfe2;
+	padding: 7px;
+	line-height: 1.3em;
+}
+
+#resa_news_center_content{
+	display:block;
+	width:100%;
+	padding:0px;
+	margin:0px;
+	box-sizing:border-box;
+	overflow:auto;
+  max-height: calc(80vh - 100px);
+}
+
+.btn {
+	color:white;
+	border: 1px solid white;
+}
+
+.alert_number{
+	padding: 2px;
+	font-size: 9px;
+	color: white;
+	background-color: red;
+	position: absolute;
+	border: 1px solid white;
+	line-height: 1em;
+}
+
+
+
+.resa_news_infos .link-more {
+	display:none;
+}
+
+.resa_news_time .time {
+	font-style: italic;
+	color: #898989;
+}
+
+.resa_news_time .see {
+	display: inline;
+	color:#27b673;
+  background-color: white;
+}

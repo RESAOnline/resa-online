@@ -1,0 +1,86 @@
+<subMenu [date]="global.currentDate" (changeDate)="updateDate($event)"></subMenu>
+<div id="page_content" class="ml-5 mr-5">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2 ngbTooltip="Compte uniquement les rendez-vous confirmés !">Arrivées<span class="dashicons dashicons-editor-help"></span></h2>
+    <!--
+    <div>
+      <div class="input-group mb-4 ml-auto mr-auto">
+        <button class="form-control bg-success text-white w-auto" (click)="loadToday()">Aujourd'hui</button>
+        <button class="form-control bg-success text-white w-auto" (click)="loadTomorow()">Demain</button>
+      </div>
+    </div>
+    <div>
+      <div class="input-group mb-4 ml-auto mr-auto">
+        <input type="date" class="form-control w-auto" [ngModel]="nextDate | date:'yyyy-MM-dd'" (ngModelChange)="nextDate = $event" />
+        <button class="form-control bg-success text-white w-auto" (click)="launchLoadDate()">Charger</button>
+      </div>
+    </div>
+    //-->
+  </div>
+  <h3 class="text-center">Aperçu du {{ date  | parseDate | date:'EEEE dd MMMM yyyy':'':'fr'}}</h3>
+  <div *ngIf="globalStatistics == null" class="sLoader_bg"><div class="sLoader"></div></div>
+  <div class="text-center" *ngIf="globalStatistics != null &&globalStatistics.bookings == 0">
+    <span class="bg-warning">Aucune réservation en état confirmée</span>
+  </div>
+  <div class="mb-5" *ngIf="globalStatistics != null && globalStatistics.bookings > 0">
+    <div class="row mr-4 ml-4 mt-5 mb-5">
+      <div class="col-md text-center">
+        <img src="assets/image/start_time.png"/>
+        <h4 class="text-center mb-0 display-4">{{ globalStatistics.minStartDate  | parseDate | date:'HH\'h\'mm':'':'fr'}}</h4>
+        <p class="mb-0 text-center font-weight-bold">première réservation</p>
+      </div>
+      <div class="col-md text-center">
+        <img src="assets/image/end_time.png"/>
+        <h4 class="mb-0 text-center display-4">{{ globalStatistics.maxStartDate | parseDate | date:'HH\'h\'mm':'':'fr'}}</h4>
+        <p class="text-center mb-0 font-weight-bold">dernière réservation</p>
+      </div>
+      <div class="col-md text-center">
+        <img src="assets/image/booking.png"/>
+        <h4 class="mb-0 text-center display-4">{{ globalStatistics.bookings }}</h4>
+        <p class="text-center mb-0 font-weight-bold">réservations</p>
+      </div>
+      <div class="col-md text-center">
+        <img src="assets/image/ico_people.png"/>
+        <h4 class="mb-0 text-center display-4">{{ globalStatistics.numbers }}</h4>
+        <p class="text-center mb-0 font-weight-bold">personnes</p>
+      </div>
+    </div>
+    <div class="mt-3 p-3">
+      <h3 class="mb-3 text-center">Arrivées des réservations (nb de personnes)</h3>
+      <div class="d-flex justify-content-center">
+        <div class="bg-light p-2 pr-3 pl-3 flex-shrink-0">
+          <h6 class="mb-3 mt-1">Filtres par activités</h6>
+          <div *ngFor="let service of services">
+            <span class="switch switch-sm">
+              <input class="switch" id="id_service_{{ service.id }}" type="checkbox" [(ngModel)]="service.display" (change)="regenerateDataView()">
+              <label for="id_service_{{ service.id }}" data-toggle="tooltip" ngbTooltip="Activer / Désactiver">
+                <span *ngIf="service.places.length > 0">[<span *ngFor="let place of service.places; index as i"><span *ngIf="i > 0">, </span>{{ getPlaceName(place) }}</span>] </span>
+                {{ global.getTextByLocale(service.name) }}
+              </label>
+            </span>
+          </div>
+        </div>
+        <div class="bg-light p-2 pr-3 pl-3">
+          <canvas style="width:1000px" id="demoCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-3 p-3" *ngIf="dataSelected">
+      <h4>Détail des arrivées à {{ dataSelected.startDate | parseDate | date:'HH\'h\'mm':'':'fr' }}, {{ dataSelected.numbers }} personne<span *ngIf="dataSelected.numbers>1">s</span> au total</h4>
+      <span [hidden]="!isSameHours(dataSelected.startDate, statistic.startDate) || !getServicesById(statistic.idService).display" *ngFor="let statistic of statistics">
+        <span class="color_badge mr-2" [ngStyle]="{'background-color': getServicesById(statistic.idService).color }"></span>
+        <span *ngIf="getServicesById(statistic.idService).places.length > 0">[<span *ngFor="let place of getServicesById(statistic.idService).places; index as i"><span *ngIf="i > 0">, </span>{{ getPlaceName(place) }}</span>] </span>
+        {{ global.getTextByLocale(getServicesById(statistic.idService).name) }} : <b>{{ statistic.bookings }}</b> réservation<span *ngIf="statistic.bookings>1">s</span> pour <b>{{ statistic.numbers }}</b> personne<span *ngIf="statistic.numbers>1">s</span> au total <br />
+      </span>
+    </div>
+  </div>
+  <div class="d-flex pt-5 pb-5" *ngIf="settings.displayWeather">
+    <div class="flex-grow-1 text-center">
+      <h4>Prévision météo à 7 jours</h4>
+      <div *ngIf="settings.urlWeather != null && settings.urlWeather.length > 0" id="{{ idWeather }}" class="border-0"></div>
+      <div *ngIf="settings.urlWeather != null && settings.urlWeather.length == 0" class="border-0 bg-warning">
+        Veuillez définir le lien vers la météo dans <a (click)="goSettingsDaily()">les réglages avancées...</a>
+      </div>
+    </div>
+  </div>
+</div>

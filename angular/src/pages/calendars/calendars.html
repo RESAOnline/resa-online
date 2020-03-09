@@ -1,0 +1,146 @@
+<div id="page_content" class="container p-sm-2" *ngIf="settings" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Calendriers ({{ settings.calendars.length }})</h1>
+    <div>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+    </div>
+  </div>
+  <div class="align-items-center d-flex pb-3 mb-3 border-bottom">
+    Définissez les différentes périodes d'activité de votre entreprise. Les calendriers sont utilisables pour paramétrer vos activités.
+  </div>
+  <div class="align-items-center d-flex mb-3" *ngIf="false && settings != null && settings.languages">
+    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+    <select [(ngModel)]="global.currentLanguage" class="custom-select bg-light w-auto">
+      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+    </select>
+    <div class="ml-2">
+      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+    </div>
+  </div>
+  <input class="form-control mt-md-3" id="service_search" type="text" placeholder="Recherche..." [(ngModel)]="formCalendars.search" (ngModelChange)="calculateDisplayCalendars()">
+  <table class="table mt-3" id="services_list">
+    <thead>
+      <tr>
+        <th><a href="javascript:void(0)" (click)="displayCalendarsOrderBy('name')">Nom</a></th>
+        <th class="text-right">
+          <button type="button" class="btn btn-sm btn-outline-success" (click)="addNewCalendar(content)">+ Nouveau calendrier</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let calendar of displayCalendars">
+        <td scope="row">{{ calendar.name }}</td>
+        <td class="text-right">
+          <button class="btn btn-sm btn-outline-info m-1" (click)="openCalendar(content, calendar)">Modifier</button>
+          <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateCalendar(content, calendar)">Dupliquer</button>
+          <button class="btn btn-sm btn-outline-danger m-1"  (click)="deleteCalendar(calendar)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modifier le calendrier {{ formCalendar.name }}</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="font-weight-bold" for="formCalendarName">Nom du calendrier</label>
+        <input type="text" class="form-control" id="formCalendarName" placeholder="Nom du calendrier (ex : Basse saison)" [(ngModel)]="formCalendar.name" />
+      </div>
+      <div class="form-group mt-2">
+        <label for="formCalendarColor" ngbTooltip="Couleur sur le planning" class="font-weight-bold">
+          Couleur du calendrier pour cette règle (que pour les réglages)
+        </label>
+        <input id="formCalendarColor" class="form-control h-50" type="color" [(ngModel)]="formCalendar.color">
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 col-12">
+            <h6>Type de calendrier</h6>
+            <div class="form-group">
+              <div class="form-check" data-toggle="tooltip" title="Permet de réserver un créneau horaire sur une date." data-placement="left">
+                <input class="form-check-input" type="radio" name="type" id="formType0" [value]="0" [(ngModel)]="formCalendar.type">
+                <label class="form-check-label" for="formType0">Simple</label>
+              </div>
+              <div class="form-check" title="Permet de réserver un créneau horaire sur plusieurs dates consécutives" data-toggle="tooltip" data-placement="left">
+                <input class="form-check-input" type="radio" name="type" id="formType1" [value]="1" [(ngModel)]="formCalendar.type">
+                <label class="form-check-label" for="formType1">Jours consécutifs</label>
+              </div>
+              <div class="form-check" data-toggle="tooltip" title="Permet de réserver un créneau horaire sur plusieurs dates différentes" data-placement="left">
+                <input class="form-check-input" type="radio" name="type" id="formType2" [value]="2" [(ngModel)]="formCalendar.type">
+                <label class="form-check-label" for="formType2">Groupe de dates</label>
+              </div>
+            </div>
+            <button class="button" class="btn btn-sm btn-outline-success" (click)="clearCalendar()">Supprimer toutes les dates</button>
+          </div>
+          <div class="col-md col-12">
+            <section *ngIf="formCalendar.type == 1">
+              <h6>Jours consécutifs</h6>
+              <p>Veuillez choisir la durée de la réservation à la semaine en nombre de jours consécutifs</p>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Nombre de jours consécutifs</div>
+                </div>
+                <input type="number" class="form-control" [(ngModel)]="anotherFormCalendar.days">
+              </div>
+              <p>Cliquer sur le premier des jours consécutifs pour sélectionner / déselectionner les jours consécutifs suivants. Cliquez sur une entête de colonne pour créer plusieurs groupes de jours consécutifs d'un coup.</p>
+            </section>
+            <section *ngIf="formCalendar.type == 2">
+              <h6>Sur plusieurs dates</h6>
+              <p>Créez chaque groupe de date et sélectionnez les dates à y inclure sur le calendrier et cliquez sur "terminer".</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="d-lg-table-cell d-md-none d-sm-none d-none">Dates</th>
+                    <th class="text-right">
+                      <button type="button" class="btn btn-sm btn-outline-success" (click)="addManyDates()">+ Groupe de dates</button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="d-lg-table-row d-sm-flex d-flex d-md-flex flex-md-row flex-column justify-content-sm-center justify-content-center align-items-sm-center align-items-center justify-content-md-center align-items-md-start flex-sm-row flex-sm-wrap border-top-0 border-right-0 border-left-0 border" *ngFor="let dates of formCalendar.manyDates; index as i">
+                    <td class="border-0 dates_group" style="vertical-align: middle;">
+                      <div *ngIf="dates.length > 0">
+                        <span [innerHTML]="dates | formatManyDatesView"></span>
+                        <p>Soit {{ dates.split(',').length }} jours</p>
+                      </div>
+                      <div *ngIf="dates.length == 0">Sélectionner des dates</div>
+                    </td>
+                    <td class="text-right border-0">
+                      <button class="btn btn-sm align-items-center d-inline-flex justify-content-center align-content-center btn-outline-success" (click)="modifyManyDates(i)">Modifier</button>
+                      <button class="btn btn-sm align-items-center d-inline-flex justify-content-center align-content-center btn-success" (click)="stopManyDates()">Terminer</button>
+                      <button class="btn btn-sm btn-outline-danger align-items-center d-inline-flex justify-content-center align-content-center mr-null mb-null ml-null  dashicons dashicons-trash" (click)="deleteManyDates(i)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="formCalendar.type != 2 || formCalendar.currentIndexManyDates > -1">
+        <label class="font-weight-bold" for="formYear">Année</label>
+        <select class="form-control" id="formYear" [(ngModel)]="anotherFormCalendar.year">
+          <option *ngFor="let year of anotherFormCalendar.years" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+      <div class="calendar_grid d-flex flex-wrap text-center justify-content-center align-items-center">
+        <section class="mb-4" *ngFor="let item of getRepeat(12); index as i">
+          <calendar *ngIf="formCalendar.type == 0" [fixYear]="anotherFormCalendar.year" [fixMonth]="i" [datesModel]="formCalendar.dates" [color]="formCalendar.color" (ngDatesModel)="setDates($event)"></calendar>
+          <calendar-week *ngIf="formCalendar.type == 1" [fixYear]="anotherFormCalendar.year" [fixMonth]="i" [datesModels]="formCalendar.groupDates"  [color]="formCalendar.color" [days]="anotherFormCalendar.days" (ngDatesModel)="setGroupDates($event)"></calendar-week>
+          <calendar *ngIf="formCalendar.type == 2 && formCalendar.currentIndexManyDates > -1" [fixYear]="anotherFormCalendar.year" [fixMonth]="i" [datesModel]="formCalendar.manyDates[formCalendar.currentIndexManyDates]" [color]="formCalendar.color" (ngDatesModel)="setManyDates($event)"></calendar>
+        </section>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="bg-danger text-white pull-left param_infos" *ngIf="!isOkCalendar()">
+        <span *ngIf="!isOkName(formCalendar)">- Veuillez définir un nom au calendrier<br /></span>
+      </div>
+      <button type="button" [disabled]="!isOkCalendar()" class="btn btn-success" (click)="c('save')">Modifier</button>
+    </div>
+  </ng-template>
+</div>
+<div id="page_content" class="container p-sm-2" *ngIf="settings == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>
+<div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>

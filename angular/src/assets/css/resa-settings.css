@@ -1,0 +1,273 @@
+/******* class generales *********/
+
+body{
+	font-family:'Verdana', 'Arial', 'Helvetica', 'sans-serif';
+}
+
+input{
+	font-family:"-apple-system", "BlinkMacSystemFont", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/** Alignement grid **/
+.center {
+    place-self: center;
+}
+
+.center-left {
+    place-self: center left;
+}
+
+.center-right {
+    place-self: center right;
+}
+
+/**** couleurs ****/
+/** link **/
+a:not([href]):not([tabindex]) {
+    color: darkgrey;
+}
+
+/* rouge tomate */
+a.tomato {
+    color: tomato;
+}
+
+a.tomato[href]:hover {
+    color: #e55940;
+}
+
+a {
+	color:#27b673;
+}
+
+/* vert resa */
+a.vert {
+    color: #27b673;
+}
+
+a.vert[href]:hover {
+    color: #219e63;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #27b673;
+}
+
+/*
+/** badge bouton plus et moins **/
+.btn-moins ,
+.btn-plus {
+    display: block;
+    font-size: 22px;
+    line-height: 14px;
+    padding: 0px 0px 0px 0px;
+    width: 30px;
+    height: 22px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.btn-moins {
+    border: 1px solid red;
+    background-color: red;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.btn-plus {
+    border: 1px solid green;
+    background-color: green;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.cursor-pointer{ cursor: pointer !important; }
+.font-size-18 { font-size: 18px; }
+.font-size-20 { font-size: 20px; }
+
+/* input position dans tableau */
+.position {
+    width: 60px;
+}
+
+.resa-img-thumbnail {
+	height: 50px;
+}
+
+/* icone */
+.dashicons{
+    width: 36px;
+    height: 36px;
+    margin: 2px;
+    font-size: 1.4rem;
+}
+
+
+.dashicons-sm{
+    width: 10px;
+    height: 10px;
+		margin: 0px;
+		font-size: 1.1rem;
+}
+
+.btn-dashicons{
+  width: 40px;
+  height: 40px;
+	border: 1px solid transparent;
+	padding: 2px;
+	border-radius: 10px;
+	color:white;
+}
+
+/* Surcharge for bootstrap */
+.input-group-append .btn-dashicons {
+	margin: 0px;
+	height: 38px;
+	border-radius: 0.25rem;
+	border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.bg-dark {
+	background-color: #27b673 !important;
+}
+
+.green {
+	color: #27b673 !important;
+}
+
+.opacity-05 {
+	opacity: 0.5;
+}
+
+/******** fin class générale ***********/
+.resa-service-bloc {
+    display: grid;
+    grid-template-areas: "title switch"
+    	"slug slug"
+        "menu menu";
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    padding-top: 15px;
+    margin: 5px;
+    width: auto;
+    min-width: 150px;
+}
+
+.resa-service-title {
+    grid-area: title;
+    padding-left: 15px;
+}
+
+.resa-service-slug {
+    grid-area: slug;
+    padding-left: 15px;
+}
+
+.resa-service-switch {
+    grid-area: switch;
+    padding-right: 15px;
+    align-items: flex-end;
+    display: flex;
+    padding-left: 10px;
+}
+
+.resa-service-menu {
+    grid-area: menu;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-column-gap: 5px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.resa-menu-btn {
+    text-decoration: none;
+}
+
+.resa-menu-btn:hover {
+    text-decoration: none;
+}
+
+.resa-menu-btn.resa-menu-del ,
+.resa-menu-btn.resa-menu-see,
+.resa-menu-btn.resa-menu-edit,
+.resa-menu-btn.resa-menu-clone {
+    text-align: center;
+}
+
+.resa-category {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+input::placeholder {
+    color: lightgrey !important;
+}
+
+.resa-category-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.resa-category-menu {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.resa-category-actions {
+    justify-self: end;
+    display: flex;
+}
+
+.resa-category-actions-item {
+    padding: 5px;
+    margin-right: 15px;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.resa-category-actions-item:hover {
+    text-decoration: none;
+}
+
+.resa-tarif-bloc {
+    margin-bottom: 10px;
+}
+
+.resa-slot-hour {
+    width: 40px;
+	height: 55px;
+    margin-top: -7px;
+    margin-bottom: -7px;
+}
+
+.resa-slot-time {
+    position: relative;
+}
+
+.resa-slot-time:hover  .btn-plus,
+.resa-slot-time:hover  .btn-moins {
+    display: block;
+}
+
+.resa-slot-time .btn-plus {
+    display: none;
+    position: absolute;
+    top: -13px ;
+    left: 2px;
+}
+
+.resa-slot-time .btn-moins {
+    display: none;
+    position: absolute;
+    bottom: -13px ;
+    left: 2px;
+}
+
+.dates_group {
+    line-height: 1.2em;
+    font-size: 12px;
+}

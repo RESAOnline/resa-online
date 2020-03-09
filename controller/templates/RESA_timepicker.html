@@ -1,0 +1,20 @@
+<!--
+Need in RESA_Reductions
+<span uib-timepicker class="inline" ng-model="element.date" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></span>
+//-->
+<div class="resa_col_spacing resa_timeslot_hour_col {{ hoursClass }}">
+	<p>Heures</p>
+	<input type="text" ng-blur="reload()" class="form-control" min="0" max="23" ng-change="changed()" maxlength="2" ng-model="element.hours" placeholder="0">
+	<div class="resa_timeslot_number_link">
+		<a ng-click="changeHours(-hstep)"><span class="glyphicon glyphicon-minus"></span></a>
+		<a ng-click="changeHours(hstep)"><span class="glyphicon glyphicon-plus"></span></a>
+	</div>
+</div>
+<div class="resa_col_spacing {{ minutesClass }}">
+	<p>Min</p>
+	<input type="text" ng-blur="reload()" class="form-control" min="0" max="55" ng-change="changed()" maxlength="2" ng-model="element.minutes" placeholder="0">
+	<div class="resa_timeslot_number_link">
+		<a ng-click="changeMinutes(-mstep)"><span class="glyphicon glyphicon-minus"></span></a>
+		<a ng-click="changeMinutes(mstep)"><span class="glyphicon glyphicon-plus"></span></a>
+	</div>
+</div>

@@ -1,0 +1,154 @@
+<div id="page_content" class="container p-sm-2" *ngIf="settings" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Coupons ({{ reductions.length }})<span *ngIf="getToSave()">*</span></h1>
+    <div>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+    </div>
+  </div>
+  <div class="align-items-center d-flex pb-3 mb-3 border-bottom">
+    Définissez les différents coupons de réductions qui pourront être appliquer sur les réservations.
+  </div>
+  <div class="align-items-center d-flex mb-3">
+    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+    <select [(ngModel)]="global.currentLanguage" class="custom-select bg-light w-auto">
+      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+    </select>
+    <div class="ml-2">
+      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+    </div>
+  </div>
+  <div class="align-items-center d-flex mb-3" *ngIf="anotherReductions">
+    <p class="text-warning">
+      Nous détectons que vous avez d'autres réductions que les COUPONS, rendez-vous à cette page pour les éditer :
+      <a href="{{ goReductions() }}">Autres réductions</a>
+    </p>
+  </div>
+  <input class="form-control mt-md-3" id="reduction_search" type="text" placeholder="Recherche..." [(ngModel)]="formReductions.search" (ngModelChange)="calculateDisplayReductions()">
+  <table class="table mt-3" id="reductions_list">
+    <thead>
+      <tr>
+        <th class="text-left"><a href="javascript:void(0)" (click)="displayReductionsOrderBy('activated')">Activé</a></th>
+        <th><a href="javascript:void(0)" (click)="displayReductionsOrderBy('position')">Position</a></th>
+        <th><a href="javascript:void(0)" (click)="displayReductionsOrderBy('visibility')">Visibilité</a></th>
+        <th><a href="javascript:void(0)" (click)="displayReductionsOrderBy('name')">Nom</a></th>
+        <th class="text-right">
+          <button type="button" class="btn btn-sm btn-outline-success" (click)="addReduction(content)">+ Nouveau coupon</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [ngClass]="{'deactivated': !reduction.activated }"  *ngFor="let reduction of displayReductions">
+        <th scope="row" class="text-left"><span class="switch switch-sm"> <input class="switch" id="activated_reduction{{ reduction.id }}" type="checkbox" [(ngModel)]="reduction.activated" (ngModelChange)="updateReduction(reduction)"> <label for="activated_reduction{{ reduction.id }}" ngbTooltip="Activer / Désactiver"></label></span></th>
+        <th><input class="form-control position" type="number" [(ngModel)]="reduction.editPosition" (blur)="updatePosition(reduction)" /></th>
+        <th scope="row">
+          <span *ngIf="reduction.visibility == 0">Tous</span>
+          <span *ngIf="reduction.visibility == 1">Administration</span>
+          <span *ngIf="reduction.visibility == 2">Formulaire client</span>
+        </th>
+        <td scope="row">
+          <b>{{ reduction.name[global.currentLanguage] }}</b><br />
+          {{ getVoucherLink(reduction) }}
+          <input *ngIf="settings.customer_booking_url != null && settings.customer_booking_url.length > 0" class="btn btn-sm btn-outline-secondary" type="button" value="Copier" (click)="copyInClipboard(getVoucherLink(reduction))" />
+        </td>
+        <td class="text-right" nowrap>
+          <button *ngIf="isValidVoucher(reduction)" class="btn btn-sm btn-outline-info m-1" (click)="modifyReduction(content, reduction)">Modifier</button>
+          <button *ngIf="isValidVoucher(reduction)" class="btn btn-sm btn-outline-warning m-1" (click)="duplicateReduction(content, reduction)">Dupliquer</button>
+          <span class="text-danger" *ngIf="!isValidVoucher(reduction)">
+            Vous devez passer par l'ancienne interface pour éditer ce coupon !
+          </span>
+          <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteReduction(reduction)">Supprimer</button>
+          <button class="btn btn-sm btn-outline-secondary m-1" (click)="goVoucher(getVoucher(reduction))">Statistique</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Modifier le coupon de {{ formReduction.name[global.currentLanguage] }}</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <span class="switch switch-sm">
+          <input class="form-control" class="switch" id="formActivated" [(ngModel)]="formReduction.activated" (ngModelChange)="setToSave(true)" type="checkbox">
+          <label for="formActivated" ngbTooltip="">Activer / Désactiver coupon</label>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="formRName" class="font-weight-bold">Nom du coupon*</label>
+        <input type="text" class="form-control" id="formRName" placeholder="Nom du coupon" [(ngModel)]="formReduction.name[global.currentLanguage]" />
+      </div>
+      <div class="form-group">
+        <label for="formRPresentation" ngbTooltip="Présentation du membre" class="font-weight-bold" >Présentation</label>
+        <textarea class="form-control" rows="3" id="formRPresentation" [(ngModel)]="formReduction.presentation[global.currentLanguage]"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="font-weight-bold">Visibilité</label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="visibility" [value]="0" [(ngModel)]="formReduction.visibility">Tous
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="visibility" [value]="1" [(ngModel)]="formReduction.visibility">Administration
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="visibility" [value]="2" [(ngModel)]="formReduction.visibility">Formulaire client
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="formRVoucher" class="font-weight-bold" ngbTooltip="Le nom du coupon que vous devrez entrer dans le champs coupon.">Coupon*</label>
+        <input type="text" class="form-control" id="formRVoucher" placeholder="Nom du coupon" [(ngModel)]="formReduction.reductionConditionsList[0].reductionConditions[0].param2" />
+      </div>
+      <div class="form-group">
+        <label for="formRAT" class="font-weight-bold">Type de réduction</label>
+        <select class="form-control" id="formRAT" [(ngModel)]="formReduction.reductionApplications[0].type">
+          <option [value]="1">Un pourcentage du total</option>
+          <option [value]="0">Un montant fixe sur le total</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="formRAVA" class="font-weight-bold">Taux de TVA (montant fixe uniquement)</label>
+        <select class="form-control" id="formRAVA" [(ngModel)]="formReduction.reductionApplications[0].vatAmount">
+          <option *ngFor="let vat of settings.vat_list; index as i;" [value]="vat.value">{{ vat.name[global.currentLanguage] }}({{ vat.value }}%)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="formRAV" class="font-weight-bold">Montant de la réduction* <span *ngIf="formReduction.reductionApplications[0].type == 0">(en €)</span><span *ngIf="formReduction.reductionApplications[0].type == 1">(en %)</span></label>
+        <input type="text" class="form-control" id="formRAV" placeholder="0" [(ngModel)]="formReduction.reductionApplications[0].value" />
+      </div>
+      <div class="mt-2 p-2">
+        <h3>Validité du Coupon</h3>
+        <p>Prend en compte la <b>date de prise de la réservation</b></p>
+        <div class="form-group">
+          <label class="font-weight-bold" (click)="d.toggle()">Valabe du </label>
+          <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" placeholder="XX/XX/XXXX" (dateSelect)="onConditionDateSelected(formReduction, $event, 1)" [(ngModel)]="formReduction.reductionConditionsList[0].reductionConditions[1].pickerDateValue" />
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold" (click)="de.toggle()">Au (incluse): </label>
+          <input type="text" class="form-control" ngbDatepicker #de="ngbDatepicker" (click)="de.toggle()" placeholder="XX/XX/XXXX" (dateSelect)="onConditionDateSelected(formReduction, $event, 2)" [(ngModel)]="formReduction.reductionConditionsList[0].reductionConditions[2].pickerDateValue" />
+        </div>
+        <div class="form-group">
+          <label for="formRVoucherMax" class="font-weight-bold">Nombre d'utilisations maximum (commun à toutes les réservations)</label>
+          <input type="text" class="form-control" id="formRVoucherMax" placeholder="Laissez vide pour un nombre infini" [(ngModel)]="formReduction.reductionConditionsList[0].reductionConditions[0].param4" (ngModelChange)="fixUsage(formReduction.reductionConditionsList[0].reductionConditions[0])" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm btn-outline-info pull-left" type="button" (click)="closeAndGoBVoucher(modal.dismiss)">Statistique du coupon</button>
+      <div class="bg-danger text-white param_infos" *ngIf="!isOkReduction(formReduction)" style="float:left; margin:1px 5px;">
+        <span *ngIf="!isOkNameReduction(formReduction)">- Veuillez définir le nom de la réduction !<br /></span>
+        <span *ngIf="getVoucher(formReduction).length <= 0">- Veuillez définir le nom du coupon !<br /></span>
+        <span *ngIf="formReduction.reductionApplications[0].value <= 0">- Le montant doit être plus grand que 0 !<br /></span>
+      </div>
+      <button class="btn btn-success" type="button" [disabled]="!isOkReduction(formReduction)" (click)="closeReductionModal(modal.close)">Modifier</button>
+    </div>
+  </ng-template>
+</div>
+<div id="page_content" class="container p-sm-2" *ngIf="settings == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>
+<div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>

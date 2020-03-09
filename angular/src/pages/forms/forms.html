@@ -1,0 +1,479 @@
+<div id="page_content" class="container p-sm-2" *ngIf="settings" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+    <h1>Formulaires / Pages<span *ngIf="getToSave()">*</span></h1>
+    <div>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+    </div>
+  </div>
+  <div class="align-items-center d-flex pb-3 mb-3 border-bottom">
+    Définissez ici les formulaires qui seront utilisés par vos visiteurs pour réserver en ligne. Chaque formulaire est personnalisable (activités, devis, étapes, descriptions, css). Chaque formulaire pourra être intégré sur les pages de votre choix.<br />
+    Vous pouvez aussi gérer les pages de demande de compte, ainsi que des shortcodes wordpress pour afficher dynamiquement la valeur d'un tarif.<br />
+  </div>
+  <div class="pb-3 mb-3">
+    Pour la modification des couleurs par défaut et autres réglages rendez-vous à la page <a href="javascript:void(0)" (click)="goSettings()">réglages avancés</a>
+  </div>
+  <div class="align-items-center d-flex mb-3">
+    <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+    <select [(ngModel)]="global.currentLanguage" (change)="changeLanguage()" class="custom-select bg-light w-auto">
+      <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+    </select>
+    <div class="ml-2">
+      <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+    </div>
+  </div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1" aria-expanded="true">Formulaires ({{ forms.length }})</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" aria-expanded="true">Autres pages du site</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3" aria-expanded="true">Affichage des tarifs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#tab4" data-toggle="tab" role="tab" aria-controls="tab4" aria-expanded="true">Lien direct formulaire</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" role="tabpanel" aria-labelledby="tab1-tab" id="tab1">
+      <input class="form-control mt-md-3" id="form_search" type="text" placeholder="Recherche..." [(ngModel)]="formForms.search" (ngModelChange)="calculateDisplayForms()">
+      <table class="table mt-3" id="forms_list">
+        <thead>
+          <tr>
+            <th class="text-left"><a href="javascript:void(0)">Activé</a></th>
+            <th><a href="javascript:void(0)" (click)="displayFormsOrderBy('name')">Nom du formulaire</a></th>
+            <th class="text-right">
+              <button type="button" class="btn btn-sm btn-outline-success" (click)="addForm(content)">+ Nouveau formulaire</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [ngClass]="{'deactivated': !form.activated }" *ngFor="let form of displayForms">
+            <th scope="row" class="text-left"><span class="switch switch-sm"> <input class="switch" id="activated_form{{ form.id }}" type="checkbox" [(ngModel)]="form.activated" (ngModelChange)="updateForm(form)"> <label for="activated_form{{ form.id }}" ngbTooltip="Activer / Désactiver"></label></span>
+            <span *ngIf="!form.activated && notHaveDeactivatedText(form)" ngbTooltip="Veuillez renseigner le champs de texte du formulaire désactivé pour toutes les langues"><br />Attention !</span></th>
+            <td scope="row">
+              <span class="font-weight-bold">{{ form.name }}</span><br />
+              <span ngbTooltip="Réservation ou Demande de devis ?">Type : <i *ngIf="!form.quotation">Formulaire de réservation</i><i *ngIf="form.quotation">Demande de Devis</i></span>
+              <span *ngIf="getFormPage(form)">
+                <br />Page(s) :
+                <span [hidden]="!isPageIncludeForm(page, form)" *ngFor="let page of allFormPages">
+                  <br /> - <a href="{{ page.url }}" target="_blank">{{ page.title }}</a>
+                </span>
+              </span>
+              <span class="text-warning" *ngIf="!getFormPage(form)"><br />Aucune page wordpress détectée</span>
+              <span class="font-italic">
+                <br />Raccourcie à copier coller sur la page : {{ getRESAFormShortcode(form) }}
+                <input class="btn btn-sm btn-outline-secondary" type="button" value="Copier" (click)="copyInClipboard(getRESAFormShortcode(form))" />
+              </span>
+            </td>
+            <td class="text-right" nowrap>
+              <button class="btn btn-sm btn-outline-info m-1" (click)="modifyForm(content, form)">Modifier</button>
+              <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateForm(content, form)">Dupliquer</button>
+              <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteForm(form)">Supprimer</button>
+              <button *ngIf="getFormPage(form) === false" class="btn btn-sm btn-outline-secondary m-1" (click)="createWordpressPage(form)">Créer page wordpress</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="tab-pane" role="tabpanel" aria-labelledby="tab2-tab" id="tab2">
+        <section class="p-2 mt-2 mb-2 bg-light">
+          <h3>Page de demande de compte</h3>
+          <p>
+            Permet à vos clients de faire une demande de compte. Cela peut vous être utile pour des comptes spéciaux comme le compte entreprise.<br /><span class="font-italic">Choisissez le type de compte et cliquez sur "Nouvelle page"</span>
+          </p>
+          <table class="table mt-3" id="forms_list">
+            <thead>
+              <tr>
+                <th class="text-left">Nom de la page</th>
+                <th>URL</th>
+                <th>Type de compte</th>
+                <th class="text-right input-group">
+                  <select class="form-control" [(ngModel)]="formAskAccount.idTypeAccount">
+                    <option disabled [value]="null">-- Type de compte --</option>
+                    <option *ngFor="let typeAccount of settings.typesAccounts" [value]="typeAccount.id">{{ typeAccount.name[global.currentLanguage] }}</option>
+                  </select>
+                  <button type="button" [disabled]="formAskAccount.idTypeAccount == null" class="btn btn-sm btn-outline-success" (click)="createWordpressAskAccountPage()">+ Nouvelle page</button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let askAccountPage of allAskAccountsPage">
+                <td>{{ askAccountPage.title }}</td>
+                <td><a href="{{ askAccountPage.url }}" target="_blank">{{ askAccountPage.url }}</a></td>
+                <td>{{ getTypeAccountInPage(askAccountPage.content) }}</td>
+                <td></td>
+              </tr>
+              <tr *ngIf="allAskAccountsPage.length == 0">
+                <td class="font-italic" colspan="4">Aucune page de demande de compte.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="p-2 mt-2 mb-2 bg-light">
+          <h3>Page de compte client</h3>
+          <p>Cela permet à vos clients de suivre leurs réservations sur votre site internet depuis un espace client dédié.</p>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formCustomerAccountLink" data-html="false">Adresse URL de la page utilisée pour le compte client</label>
+            <select class="form-control" id="formCustomerAccountLink" [(ngModel)]="settings.customer_account_url" (change)="setToSave(true)">
+              <option [value]="''">-- Veuillez sélectionner une page --</option>
+              <option *ngFor="let page of allAccountsPage;" [value]="page.url">{{ page.title }} ({{ page.url }})</option>
+            </select>
+          </div>
+          <button *ngIf="settings.customer_account_url.length == 0" type="button" class="btn btn-sm btn-success" [disabled]="launchAction" (click)="createPageAccount()"><span *ngIf="!launchAction">Créer page compte client</span><span *ngIf="launchAction">Créer page compte client...</span></button>
+          <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+          <a class="ml-2" *ngIf="settings.customer_account_url.length > 0" href="{{ settings.customer_account_url }}" target="_blank">Accéder à la page du compte client.</a>
+        </section>
+      </div>
+      <div class="tab-pane" role="tabpanel" aria-labelledby="tab3-tab" id="tab3">
+        <section class="p-2 mt-2 mb-2 bg-light">
+          <h3>Shortcode tarifs</h3>
+          <p>Permet de générer un shortcode à copier sur vos pages afin d'afficher la valeur du tarif de manière dynamique</p>
+          <div class="form-check" [hidden]="service.slug.length == 0 || !service.activated" *ngFor="let service of services">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="service" [(ngModel)]="formShortcodePrice.service" [value]="service" />
+              <span class="text-warning" *ngIf="service.activated == 0">[Désactivée] </span>
+              <span *ngIf="service.places.length > 0">
+                [<span *ngFor="let place of service.places; index as i"><span *ngIf="i > 0">, </span>{{ getPlaceName(place) }}</span>]
+              </span>{{ global.getTextByLocale(service.name) }}
+            </label>
+            <div *ngIf="formShortcodePrice.service!=null && formShortcodePrice.service.id == service.id">
+              <div class="form-check" [hidden]="servicePrice.slug.length == 0 || !servicePrice.activated" *ngFor="let servicePrice of service.prices" style="padding-left:20px;">
+                <label class="form-check-label">
+                  <input type="radio"  class="form-check-input" name="price" [(ngModel)]="formShortcodePrice.servicePrice" [value]="servicePrice" /> {{ global.getTextByLocale(servicePrice.name) }}({{ servicePrice.slug }})
+                </label>
+                <br />
+              </div>
+            </div>
+          </div>
+          <div class="m-2 p-2 border border-info" *ngIf="formShortcodePrice.service != null && formShortcodePrice.servicePrice != null">
+            {{ getRESAPriceShortcode() }}
+            <input type="button" value="Copier" (click)="copyInClipboard(getRESAPriceShortcode())" />
+          </div>
+        </section>
+      </div>
+      <div class="tab-pane" role="tabpanel" aria-labelledby="tab4-tab" id="tab4">
+        <section class="p-2 mt-2 mb-2 bg-light">
+          <h3>Lien formulaire</h3>
+          <p>Permet de générer un lien formulaire permettant d'accéder directement à l'activité (ou le lieu)</p>
+          <div class="mb-3">
+            <label class="font-weight-bold">Choix de la page du formulaire</label>
+            <div class="form-check" *ngFor="let page of allFormPages">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="form" [(ngModel)]="formShortcode.url" [value]="page.url" />
+                {{ page.title }} ({{ page.url }})
+              </label>
+            </div>
+          </div>
+          <div class="mb-3" *ngIf="settings.places.length > 0">
+            <label class="font-weight-bold">Choix du lieu</label>
+            <div class="form-check" *ngFor="let place of settings.places">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="place" [(ngModel)]="formShortcode.place" [value]="place" />
+                {{ place.name[this.global.currentLanguage] }}
+              </label>
+            </div>
+            <div class="m-2 p-2 border border-info" *ngIf="formShortcode.url !=null && formShortcode.place != null">
+              {{ getRESAFormShortcodePlace() }}
+              <input type="button" value="Copier" (click)="copyInClipboard(getRESAFormShortcodePlace())" />
+            </div>
+          </div>
+          <div class="mb-3" *ngIf="services.length > 0">
+            <label class="font-weight-bold">Choix de l'activité</label>
+            <div class="form-check" [hidden]="service.slug.length == 0 || !service.activated" *ngFor="let service of services">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="serviceF" [(ngModel)]="formShortcode.service" [value]="service" />
+                <span *ngIf="service.places.length > 0">
+                  [<span *ngFor="let place of service.places; index as i"><span *ngIf="i > 0">, </span>{{ getPlaceName(place) }}</span>]
+                </span>{{ global.getTextByLocale(service.name) }}
+              </label>
+            </div>
+          </div>
+          <div class="m-2 p-2 border border-info" *ngIf="formShortcode.url !=null && formShortcode.service != null">
+            {{ getRESAFormShortcodeService() }}
+            <input type="button" value="Copier" (click)="copyInClipboard(getRESAFormShortcodeService())" />
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>
+  <div *ngIf="launchAction || launchActionSave" class="sLoader_bg"><div class="sLoader"></div></div>
+
+  <!-- here to have ViewChild in content -->
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modifier le formulaire : {{ formForm.name }}</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="d()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="align-items-center d-flex pb-3 ">
+        <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+        <select [(ngModel)]="global.currentLanguage" (change)="changeLanguage()" class="custom-select bg-light w-auto">
+          <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+        </select>
+        <div class="ml-2">
+          <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+        </div>
+      </div>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" href="#tab10" data-toggle="tab" role="tab" aria-controls="tab10" aria-expanded="true">Général</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab12" data-toggle="tab" role="tab" aria-controls="tab12" aria-expanded="true">Activités présentes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab13" data-toggle="tab" role="tab" aria-controls="tab13" aria-expanded="true">Type de compte</a>
+        </li>
+        <li [hidden]="i < 1" class="nav-item" *ngFor="let item of getRepeat(7); index as i">
+          <a class="nav-link" href="#tab_step{{ i+1 }}" data-toggle="tab" role="tab"  aria-expanded="true">Etape {{ i+1 }} - {{ formForm.stepsTitle[global.currentLanguage][i] }}</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active pt-sm-2" role="tabpanel" aria-labelledby="tab10-tab" id="tab10">
+          <div class="form-group">
+            <span class="switch switch-sm">
+              <input class="form-control" class="switch" id="formFActivated" [(ngModel)]="formForm.activated" type="checkbox">
+              <label for="formFActivated" ngbTooltip="">Activer / Désactiver formulaire</label>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="formFName" ngbTooltip="Nom du formulaire" class="font-weight-bold">Nom</label>
+            <input type="text" class="form-control" id="formFName" placeholder="Nom du formulaire" [(ngModel)]="formForm.name" />
+          </div>
+          <div class="form-group">
+            <label for="formFDescription" ngbTooltip="Description du formulaire" class="font-weight-bold" >Description (utile que pour vous)</label>
+            <textarea class="form-control" rows="3" id="formFDescription" [(ngModel)]="formForm.description" placeholder="Description du formulaire"></textarea>
+          </div>
+          <div class="form-group">
+            <span class="switch switch-sm">
+              <input class="form-control" class="switch" id="formFQuotation" [(ngModel)]="formForm.quotation" type="checkbox">
+              <label for="formFQuotation" ngbTooltip="">Formulaire de demande de Devis</label>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formDesactivatedText" data-html="false">Affichage lorsque le formulaire est désactivé</label>
+            <app-tinymce id="formDesactivatedText" [(ngModel)]="formForm.deactivatedText[global.currentLanguage]"></app-tinymce>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formTypeForm">Type de formulaire</label>
+            <select id="formTypeForm" class="form-control" [(ngModel)]="formForm.typeForm">
+              <option value="RESA_form">Ancien formulaire</option>
+              <option value="RESA_newform">Nouveau formulaire</option>
+            </select>
+          </div>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h4>Couleurs du formulaire</h4>
+            <p>Vous pouvez définir la couleur globale du formulaire</p>
+            <div class="form-group">
+              <span class="switch switch-sm">
+                <input class="form-control" class="switch" id="formColorsOverride" [(ngModel)]="formForm.colors.override" type="checkbox">
+                <label for="formColorsOverride" ngbTooltip="permet de surchager les couleurs définies dans les réglages, si vous voulez que ce formulaire soit un peu différent des autres pages">Surcharger les couleurs définie dans les réglages ?</label>
+              </span>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formColorsBtn">Couleur des boutons</label>
+              <input [disabled]="!formForm.colors.override" class="form-control h-50" id="formColorsBtn" type="color" [(ngModel)]="formForm.colors.primaryColor" />
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="formColorsBtnHover" >Couleur des boutons au passage de la souris</label>
+              <input [disabled]="!formForm.colors.override" class="form-control h-50" id="formColorsBtnHover" type="color" [(ngModel)]="formForm.colors.secondaryColor" />
+            </div>
+            <p class="font-italic">Nous proposons sur devis, l'intégration de quelques éléments du formulaire afin qu'il colle mieux avec votre thème, contactez nous sur le support</p>
+          </section>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h4>Surcharger le css</h4>
+            <p>Vous pouvez charger un CSS spécial pour ce formulaire (en plus de ceux définis dans les réglages avancés)</p>
+            <div class="form-group" *ngFor="let css of allCSS">
+              <div class="form-check" (click)="swapCSSLoaded(css)">
+                <input [disabled]="isCSSLoadedSettings(css)" [checked]="isCSSLoaded(css) || isCSSLoadedSettings(css)" class="form-check-input" id="formCSS_{{ css }}" type="checkbox" />
+                <label class="form-check-label" data-html="false">{{ css }}<span *ngIf="isCSSLoadedSettings(css)"> (Charger depuis les réglages avancés)</span></label>
+              </div>
+            </div>
+            <i *ngIf="allCSS.length == 0">Cliquez sur ajouter pour ajouter un fichier CSS dans la liste à charger</i>
+            <div class="form-group">
+              <label for="file" class="label-file">+ Ajouter</label>
+              <input class="input-file" type="file" id="file" (change)="handleFileInput($event)" accept=".css" value="Ajouter...">
+            </div>
+          </section>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h4>Titres des étapes du formulaire</h4>
+            <p>Vous pouvez choisir le nom des différentes étapes du formulaire (en fonction de vos réglages, toutes les étapes ne sont pas présentes.)</p>
+            <div class="form-group">
+              <div class="input-group mb-1" *ngFor="let item of getRepeat(7); index as i">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Etape {{ i+1 }}</div>
+                </div>
+                <input type="text" class="form-control" placeholder="Etape {{ i+1 }}" [(ngModel)]="formForm.stepsTitle[global.currentLanguage][i]" />
+              </div>
+            </div>
+          </section>
+          <section class="p-2 mt-2 mb-2 bg-light">
+            <h4>Affichage des images</h4>
+            <p>Vous pouvez choisir d'afficher ou de masquer les images des différents éléments du formulaire</p>
+            <div class="form-group">
+              <span class="switch switch-sm">
+                <input class="form-control" class="switch" id="formFDIS" [(ngModel)]="formForm.displayImageService" type="checkbox">
+                <label for="formFDIS" ngbTooltip="Permet d'afficher ou de masquer les images des activités sur ce formulaire client">Afficher les images définis pour les activités</label>
+              </span>
+            </div>
+            <div class="form-group">
+              <span class="switch switch-sm">
+                <input class="form-control" class="switch" id="formFDIC" [(ngModel)]="formForm.displayImageCategory" type="checkbox">
+                <label for="formFDIC" ngbTooltip="Permet d'afficher ou de masquer les images des catégories sur ce formulaire client">Afficher les images définis pour les catégories</label>
+              </span>
+            </div>
+            <div class="form-group">
+              <span class="switch switch-sm">
+                <input class="form-control" class="switch" id="formFDIP" [(ngModel)]="formForm.displayImagePlace" type="checkbox">
+                <label for="formFDIP" ngbTooltip="Permet d'afficher ou de masquer les images des lieux sur ce formulaire client">Afficher les images définis pour les lieux</label>
+              </span>
+            </div>
+          </section>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab_step1" id="tab_step1">
+
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab_step2" id="tab_step2">
+          <div class="form-group">
+            <label for="formSelectedPlaceSentence" class="font-weight-bold">Affichage de la phrase de sélection du lieu (raccourcie : [place])</label>
+            <input type="text" class="form-control" id="formSelectedPlaceSentence" [(ngModel)]="formForm.selectedPlaceSentence[global.currentLanguage]" placeholder="Ex: Vous avez sélectionnez le lieu [place]" />
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab_step3" id="tab_step3">
+          <div class="form-group">
+            <label for="formSelectedServiceSentence" class="font-weight-bold">Affichage de la phrase de sélection de l'activité (raccourcie : [activity])</label>
+            <input type="text" class="form-control" id="formSelectedServiceSentence" [(ngModel)]="formForm.selectedServiceSentence[global.currentLanguage]" placeholder="Ex: Vous avez sélectionnez de l'activité [activity]" />
+          </div>
+          <div class="form-group">
+            <label for="formChooseADate" class="font-weight-bold">Affichage indiquant de choisir une date</label>
+            <input type="text" class="form-control" id="formChooseADate" [(ngModel)]="formForm.chooseADateTitle[global.currentLanguage]" placeholder="Ex : 1 - Choisir une date" />
+          </div>
+          <div class="form-group">
+            <label for="formChooseATimeslot" class="font-weight-bold">Affichage indiquant de choisir un créneau</label>
+            <input type="text" class="form-control" id="formChooseATimeslot" [(ngModel)]="formForm.chooseATimeslotTitle[global.currentLanguage]" placeholder="Ex : 1 - Choisir un créneau" />
+          </div>
+          <div class="form-group">
+            <label for="formSelectedDateSentence" class="font-weight-bold">Affichage de la phrase de sélection de la date (raccourcie : [date])</label>
+            <input type="text" class="form-control" id="formSelectedDateSentence" [(ngModel)]="formForm.selectedDateSentence[global.currentLanguage]" placeholder="Ex: Vous avez sélectionnez le [date]" />
+          </div>
+          <div class="form-group">
+            <label for="formatSelectedTimeslotSentence" class="font-weight-bold">Affichage de la phrase de sélection du créneau (raccourcie : [timeslot])</label>
+            <input type="text" class="form-control" id="formatSelectedTimeslotSentence" [(ngModel)]="formForm.selectedTimeslotSentence[global.currentLanguage]" placeholder="Ex: Créneau [timeslot]" />
+          </div>
+          <div class="form-group">
+            <label for="formChoosePrices" class="font-weight-bold">Affichage indiquant de choisir les tarifs</label>
+            <input type="text" class="form-control" id="formChoosePrices" [(ngModel)]="formForm.choosePricesTitle[global.currentLanguage]" placeholder="Ex : 3 - Choisir les tarifs" />
+          </div>
+          <div class="form-group">
+            <label for="formChooseQuantity" class="font-weight-bold">Affichage indiquant de choisir une quantité (défaut : Nombre de personnes)</label>
+            <input type="text" class="form-control" id="formChooseQuantity" [(ngModel)]="formForm.chooseQuantityTitle[global.currentLanguage]" placeholder="Nombre de personnes" />
+          </div>
+          <div class="form-group">
+            <label for="formRemainingEquipments" class="font-weight-bold">Affichage indiquant le nombre de tarif restant (raccourcie [number])</label>
+            <input type="text" class="form-control" id="formRemainingEquipments" [(ngModel)]="formForm.remainingEquipments[global.currentLanguage]" placeholder="Places restantes : [number]" />
+          </div>
+          <div class="form-group">
+            <label for="formPricesSuffixByPersons" class="font-weight-bold">Affichage du suffixe des tarifs par peronnes</label>
+            <input type="text" class="form-control" id="formPricesSuffixByPersons" [(ngModel)]="formForm.pricesSuffixByPersons[global.currentLanguage]" placeholder="par personne" />
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formANDTButton" data-html="false">Texte du bouton afin d'ajouter d'autres rendez-vous sur la même activité dans la réservation</label>
+            <input class="form-control" id="formANDTButton" type="text" placeholder="Ajouter une autre date" [(ngModel)]="formForm.addNewDateTextButton[global.currentLanguage]" (ngModelChange)="setToSave(true)"/>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formANATButton" data-html="false">Texte du bouton afin d'ajouter d'autres rendez-vous sur une autre activité dans la réservation</label>
+            <input class="form-control" id="formANATButton" type="text" placeholder="Ajouter une autre activité" [(ngModel)]="formForm.addNewActivityTextButton[global.currentLanguage]" (ngModelChange)="setToSave(true)"/>
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab_step4" id="tab_step4">
+          <div class="form-group">
+            <label class="font-weight-bold" for="formInformationsCustomerText" data-html="false">Affichage informations de clients dans l'étape des clients</label>
+            <app-tinymce id="formInformationsCustomerText" [(ngModel)]="formForm.informationsCustomerText[global.currentLanguage]"></app-tinymce>
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab_step5" id="tab_step5">
+          <div class="form-group">
+            <label class="font-weight-bold" for="formInformationsParticipantsText" data-html="false">Affichage informations de participants dans l'étape des participants</label>
+            <app-tinymce id="formInformationsParticipantsText" [(ngModel)]="formForm.informationsParticipantsText[global.currentLanguage]"></app-tinymce>
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab_step6" id="tab_step6">
+          <div class="form-group">
+            <label for="formRecapBookingTitle" class="font-weight-bold">Affichage de la phrase de récapitulatif de la réservation/devis</label>
+            <input type="text" class="form-control" id="formRecapBookingTitle" [(ngModel)]="formForm.recapBookingTitle[global.currentLanguage]" placeholder="Ex : Récapitulatif de votre réservation" />
+          </div>
+          <div class="form-group">
+            <label for="formCustomerNotePlaceholder" class="font-weight-bold">Affichage dans le champs de la remarque cliente</label>
+            <input type="text" class="form-control" id="formCustomerNotePlaceholder" [(ngModel)]="formForm.customerNotePlaceholder[global.currentLanguage]" placeholder="Affichage dans le champs de la remarque cliente" />
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formInformationsPaymentText" data-html="false">Affichage informations de paiements dans l'étape de paiement</label>
+            <app-tinymce id="formInformationsPaymentText" [(ngModel)]="formForm.informationsPaymentText[global.currentLanguage]"></app-tinymce>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" id="formCheckboxPayment" type="checkbox" [(ngModel)]="formForm.checkboxPayment" />
+              <label class="form-check-label" for="formCheckboxPayment">
+                <b>Afficher une case à cocher obligatoire avant l'étape de paiement.</b>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formCheckboxTitlePayment" data-html="false">Texte à afficher à coté de la case à cocher obligatoire</label>
+            <app-tinymce id="formCheckboxTitlePayment" [(ngModel)]="formForm.checkboxTitlePayment[global.currentLanguage]"></app-tinymce>
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab_step7" id="tab_step7">
+          <div class="form-group">
+            <label class="font-weight-bold" for="formInformationsConfirmationText" data-html="false">Affichage après l'ajout d'une réservation</label>
+            <app-tinymce id="formInformationsConfirmationText" [(ngModel)]="formForm.informationsConfirmationText[global.currentLanguage]"></app-tinymce>
+            <p class="text-warning">Vous pouvez aussi définir les pages de retour dans l'onglet Paiement des réglages</p>
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab12-tab" id="tab12">
+          <div class="form-group">
+            <p class="bg-dark text-center text-white param_infos">
+              Liste des activités qui seront présentes dans ce formulaire. Si aucune n'est sélectionnée, elles seront toutes présentes.
+            </p>
+            <p class="font-italic">
+              Les activités "désactivées" ne seront pas affichées sur le formulaire client. Si vous voulez les activer, rendez-vous sur les fiches activitées.
+            </p>
+            <div class="form-check">
+              <input class="form-check-input" id="formInputAllServices" type="checkbox" [(ngModel)]="formForm.allServicesSelected" (ngModelChange)="selectAllServices()" />
+              <label class="form-check-label" for="formInputAllServices">Cocher / Décocher toutes les activités</label>
+            </div>
+            <br />
+            <div class="form-check" *ngFor="let service of services">
+              <input class="form-check-input" id="formInput_service{{ service.id }}" type="checkbox" value="{{ service.slug }}" [checked]="formForm.services.indexOf(service.slug) != -1" (change)="switchService(service.slug)" />
+              <label class="form-check-label" for="formInput_service{{ service.id }}">
+                <span class="text-warning" *ngIf="service.activated == 0">[Désactivée]</span> {{ getServiceName(service) }}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab12-tab" id="tab13">
+          <div class="form-group">
+            <p class="bg-dark text-center text-white param_infos">
+              Liste des types de compte qui pourront accéder à ce formulaire.
+            </p>
+            <div class="form-check">
+              <input class="form-check-input" id="formInputAllTypeAccount" type="checkbox" [checked]="formForm.typesAccounts.length == 0" (change)="formForm.typesAccounts = []" />
+              <label class="form-check-label" for="formInputAllTypeAccount">Tous les comptes</label>
+            </div>
+            <br />
+            <div class="form-check" *ngFor="let typeAccount of settings.typesAccounts">
+              <input class="form-check-input" id="formInputTypeAccount{{ typeAccount.id }}" type="checkbox" [checked]="formForm.typesAccounts.indexOf(typeAccount.id)!=-1" (change)="switchTypeAccount(typeAccount.id)"  />
+              <label class="form-check-label" for="formInputTypeAccount{{ typeAccount.id }}">{{ typeAccount.name[global.currentLanguage] | htmlSpecialDecode }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" type="button" (click)="closeFormModal(c)">Modifier</button>
+      </div>
+    </ng-template>
+<div id="page_content" class="container p-sm-2" *ngIf="settings == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>

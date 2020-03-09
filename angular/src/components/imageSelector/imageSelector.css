@@ -1,0 +1,31 @@
+#resa_img_library{
+	display:flex;
+	flex-wrap: wrap; 
+}
+
+#resa_img_library .thumbnail{
+	align-self: auto;
+	width:150px;
+	height:150px;
+	margin:5px;
+	padding:2px;
+	box-sizing:content-box;
+	border:1px solid grey;
+}
+
+.doc_image_container {
+	display:flex;
+	flex-direction:column;
+}
+
+.doc_image {
+	height:130px;
+}
+
+.doc_name{
+	text-align:center;
+	height:20px;
+	padding-top:5px;
+	box-sizing:content-box;
+	font-size:11px;
+}

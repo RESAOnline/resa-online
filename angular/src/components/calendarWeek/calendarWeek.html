@@ -1,0 +1,21 @@
+<div class="resa-calendar-wrapper flex-grow-0 flex-shrink-0" style="margin-top: 10px; margin-bottom: 10px; max-width: 500px; min-width: 380px;">
+  <button id="btnPrev" type="button" (click)="previousMonth()">Précédent</button>
+  <button id="btnNext" type="button" (click)="nextMonth()">Suivant</button>
+  <div id="divCal" *ngIf="calendar">
+    <table>
+      <thead><tr><td colspan="8">{{ Months[getCurrentMonth()] }} {{ getCurrentYear() }}</td></tr></thead>
+      <tbody>
+        <tr class="days">
+          <td class="week"></td>
+          <td *ngFor="let day of DaysOfWeek; index as i"><a (click)="selectColomn(i)" data-toggle="tooltip" title="Sélectionner la colonne">{{ day }}</a></td>
+        </tr>
+        <tr *ngFor="let line of calendar">
+          <td class="week"> <a (click)="selectWeek(line)" data-toggle="tooltip" data-placement="left" title="Sélectionner la semaine"> > </a>
+          <td (click)="clickOnDate(date)" [ngStyle]="{'background-color': isSelected(date) }" [ngClass]="{'normal':ifSameMonth(date), 'today':ifToday(date), 'not-current':!ifSameMonth(date)}" *ngFor="let date of line">
+            {{ date.getDate() }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

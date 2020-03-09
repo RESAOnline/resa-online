@@ -1,0 +1,15 @@
+.voucher_title{
+	margin:20px 0px;
+	text-align:center;
+}
+
+.voucher_line{
+	margin:0px;
+	padding:20px 5px;
+	border-bottom:1px solid #26b673;
+	line-height:1.4em;
+}
+
+.voucher_line:hover{
+	background-color:#f6f6f6;
+}

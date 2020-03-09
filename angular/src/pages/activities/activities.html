@@ -1,0 +1,219 @@
+<div id="page_content" class="container p-sm-2" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="shadow-lg p-5 bg-white rounded" *ngIf="settings && noActivitiesLoaded">
+    <h1 class="display-4">Activités</h1>
+    <p class="lead">
+      C'est ici qu'il vous faut définir vos différentes activités, c'est à dire les services et prestations que vous proposez à vos clients.
+    </p>
+    <hr class="my-4">
+    <p>
+      Pour bien commencer, il vous faut créer une activité.<br />
+      Vous devez définir un nom, une couleur, des tarifs, un agenda et des créneaux nécessaires pour la réservation.<br />
+      Mais pas de panique ! Vous pouvez à tout moment sauvegarder pour y revenir plus tard.<br />
+    </p>
+    <button class="btn btn-success btn-lg" (click)="modifyService()">Créer ma première activité</button>
+  </div>
+  <div *ngIf="!noActivitiesLoaded">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+      <h1>Activités ({{ activities.length }})</h1>
+      <div>
+        <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+      </div>
+    </div>
+    <div class="align-items-center d-flex pb-3 mb-3 border-bottom">
+      C'est ici qu'il vous faut définir vos différentes activités, c'est à dire les services et prestations que vous proposez à vos clients.
+    </div>
+    <div class="align-items-center d-flex mb-3" *ngIf="settings != null && settings.languages">
+      <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+      <select [(ngModel)]="global.currentLanguage" class="custom-select bg-light w-auto">
+        <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+      </select>
+      <div class="ml-2">
+        <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+      </div>
+    </div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" href="#tab1" data-toggle="tab" role="tab" aria-controls="tab1" aria-expanded="true">Activités<span *ngIf="getToSave('activities')">*</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab2" data-toggle="tab" role="tab" aria-controls="tab2" aria-expanded="true">Catégories<span *ngIf="getToSave('categories')">*</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tab3" data-toggle="tab" role="tab" aria-controls="tab3" aria-expanded="true">Lieux<span *ngIf="getToSave('places')">*</span></a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" role="tabpanel" aria-labelledby="tab1-tab" id="tab1">
+        <input class="form-control mt-md-3" id="service_search" type="text" placeholder="Recherche..." [(ngModel)]="formActivities.search" (ngModelChange)="calculateDisplayActivities()">
+        <table class="table mt-3" id="services_list">
+          <thead>
+            <tr>
+              <th class="text-left"><a href="javascript:void(0)" (click)="displayActivitiesOrderBy('activated')">Activé</a></th>
+              <th><a href="javascript:void(0)" (click)="displayActivitiesOrderBy('position')">Position</a></th>
+              <th><a href="javascript:void(0)" (click)="displayActivitiesOrderBy('name')">Nom</a></th>
+              <th *ngIf="settings!=null && settings.categories_services.length > 0"><a href="javascript:void(0)" (click)="displayActivitiesOrderBy('category')">Catégorie</a></th>
+              <th *ngIf="settings!=null && settings.places.length > 0">
+                Lieux
+                <div class="form-check" *ngFor="let place of settings.places">
+                  <input class="form-check-input" id="formInput_{{ place.id }}" type="checkbox" value="{{ place.id }}" [checked]="formActivities.places.indexOf(place.id) != -1" (change)="switchFormActivitiesPlace(place.id)" />
+                  <label class="form-check-label font-weight-normal" for="formInput_{{ place.id }}">{{ place.name[global.currentLanguage]}}</label>
+                </div>
+              </th>
+              <th ngbTooltip="Vous indique dans quels formulaires votre service est réservable." container="body">Formulaires(?)</th>
+              <th class="text-right">
+                <button type="button" class="btn btn-sm btn-outline-success" (click)="modifyService()">+ Nouvelle activité</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr [ngClass]="{'deactivated': !activity.activated }" *ngFor="let activity of displayActivities">
+              <th scope="row">
+                <span *ngIf="activity.activated" class="green">Activé</span>
+                <span *ngIf="!activity.activated" class="text-warning">Désactivé</span>
+                <!--
+                <span class="switch switch-sm">
+                   <input class="switch" id="id_service{{ activity.id }}" [(ngModel)]="activity.activated" (ngModelChange)="setToSaveActivity(activity)" type="checkbox"> <label for="id_service{{ activity.id }}" ngbTooltip="Activer / Désactiver"></label>
+                 </span>
+                 //-->
+              </th>
+              <th><input class="form-control position" type="number" [(ngModel)]="activity.editPosition" (ngModelChange)="setToSaveActivity(activity)" (blur)="updatePosition(activity)" /></th>
+              <th scope="row">
+                <img class="resa-img-thumbnail mr-2" *ngIf="activity.image[global.currentLanguage] != null && activity.image[global.currentLanguage].length > 0" [src]="activity.image[global.currentLanguage]" />
+                <span ngbTooltip="La couleur associée à cette activité" class="color_badge" [ngStyle]="{'background-color': activity.color }"></span>
+                <span [ngClass]="{'deactivated': !activity.activated }"> {{ activity.name[global.currentLanguage] | htmlSpecialDecode }} </span>
+              </th>
+              <td *ngIf="settings!=null && settings.categories_services.length > 0">{{ global.truncateString(getCategoryName(activity), 15) }}</td>
+              <td *ngIf="settings!=null && settings.places.length > 0"><span *ngFor="let idPlace of activity.places">{{ getPlaceName(idPlace) }}<br /></span></td>
+              <td>
+                <span *ngFor="let form of getForms(activity)"><a (click)="goFormPage(form)" href="javascript:void(0)">{{ form.name }}</a><br /></span>
+                <span class="text-warning" *ngIf="getForms(activity).length == 0">
+                  Cette activité n'apparaît pas dans un formulaire activé ! <u><a class="text-warning" href="javascript:void(0)" (click)="goFormsPage()">Cliquez ici pour l'ajouter à un formulaire</a></u>
+                </span>
+              </td>
+              <td class="text-right" nowrap>
+                <button class="btn btn-sm m-1 btn-outline-secondary" (click)="previewService(activity.id)">Aperçu</button>
+                <button class="btn btn-sm btn-outline-info m-1" (click)="modifyService(activity.id)">Modifier</button>
+                <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateService(activity.id)">Dupliquer</button>
+                <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteService(activity)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane" role="tabpanel" aria-labelledby="tab2-tab" id="tab2">
+        <div class="pt-3 mb-3">
+          Les catégories vous permettent de regrouper vos activités plus facilement lorsque vous en avez beaucoup.
+        </div>
+        <input class="form-control mt-md-3" id="category_search" type="search" placeholder="Recherche..." [(ngModel)]="formCategory.search" (ngModelChange)="calculateDisplayCategories()">
+        <table class="table mt-3" id="categories_list">
+          <thead>
+            <tr>
+              <th><a href="javascript:void(0)" (click)="displayCategoriesOrderBy('position')">Position</a></th>
+              <th><a href="javascript:void(0)" (click)="displayCategoriesOrderBy('name')">Nom de la catégorie</a></th>
+              <th>Image</th>
+              <th><a href="javascript:void(0)" (click)="displayCategoriesOrderBy('slug')">Slug</a></th>
+              <th>Nb d'activités</th>
+              <th class="text-right">
+                <button type="button" class="btn btn-sm btn-outline-success" (click)="focusInputCategoryName(); cancelCategory();">+ Nouvelle catégorie</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="settings">
+            <tr *ngFor="let category of displayCategories; index as i">
+              <th scope="row"><input class="form-control position" type="number" [(ngModel)]="category.editPosition"  (blur)="updatePositionCategory(category)" /></th>
+              <th scope="row">{{ category.label[this.global.currentLanguage] }}</th>
+              <th scope="row"><img class="resa-img-thumbnail mr-2" *ngIf="category.image[global.currentLanguage] != null && category.image[global.currentLanguage].length > 0" [src]="category.image[global.currentLanguage]" /></th>
+              <td scope="row">{{ category.slug }}</td>
+              <td scope="row">{{ getNumberActivitiesWithCategory(category) }}</td>
+              <td class="text-right">
+                <button type="button" class="btn btn-sm btn-outline-info m-1" (click)="editCategory(category)">Modifier</button>
+                <button type="button" class="btn btn-sm btn-outline-danger m-1" (click)="deleteCategory(category)">Supprimer</button>
+              </td>
+            </tr>
+            <tr class="table-success">
+              <th scope="row" colspan="2">
+                <input #categoryName type="text" [(ngModel)]="formCategory.name" class="form-control" placeholder="Nom de la catégorie" />
+              </th>
+              <td scope="row">
+                <img (click)="openImageSelectorCategoryDialog(contentImage)" class="resa-img-thumbnail" *ngIf="formCategory.image" [src]="formCategory.image" /><button class="btn btn-outline-success" (click)="openImageSelectorCategoryDialog(contentImage)" *ngIf="!formCategory.image">Cliquez ici pour définir l'image</button><br /><button class="btn btn-danger" *ngIf="formCategory.image" (click)="formCategory.image = null">Enlever</button>
+              </td>
+              <th scope="row">
+                <input type="text" [(ngModel)]="formCategory.slug" class="form-control" placeholder="Slug de la catégorie" />
+              </th>
+              <td scope="row"></td>
+              <td class="text-right">
+                <button type="button" [disabled]="formCategory.name.length == 0" (click)="validateCategory()" class="btn btn-sm mr-1 ml-1 btn-success">Valider</button>
+                <button type="button"  *ngIf="formCategory.name.length > 0" (click)="cancelCategory()" class="btn btn-sm mr-1 ml-1 btn-danger">Annuler</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane" role="tabpanel" aria-labelledby="tab3-tab" id="tab3">
+         <div class="pt-3 mb-3">
+           Créer des lieux pour y rattacher des activités vous permet de gérez plusieurs parcs d'activités avec une seule installation de RESA-Online.<br />
+           <span class="font-italic">Si vous n'avez qu'un seul lieu de réservation, il n'est pas nécessaire de le créer.</span>
+         </div>
+        <input class="form-control mt-md-3" id="place_search" type="text" placeholder="Recherche..." [(ngModel)]="formPlace.search" (ngModelChange)="calculateDisplayPlaces()">
+        <table class="table mt-3" id="places_list">
+          <thead>
+            <tr>
+              <th><a href="javascript:void(0)" (click)="displayPlacesOrderBy('name')">Nom du lieu</a></th>
+              <th>Image</th>
+              <th><a href="javascript:void(0)" (click)="displayPlacesOrderBy('slug')">Slug</a></th>
+              <th>Description</th>
+              <th class="text-right">
+                <button type="button" class="btn btn-sm btn-outline-success" (click)="focusInputPlaceName(); cancelPlace();">+ Nouveau lieu</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="settings">
+            <tr *ngFor="let place of displayPlaces; index as i">
+              <th scope="row">{{ place.name[global.currentLanguage] }}</th>
+              <th scope="row"><img class="resa-img-thumbnail mr-2" *ngIf="place.image[global.currentLanguage] != null && place.image[global.currentLanguage].length > 0" [src]="place.image[global.currentLanguage]" /></th>
+              <td scope="row">{{ place.slug }}</td>
+              <td scope="row">
+                {{ place.presentation[global.currentLanguage] }}
+              </td>
+              <td class="text-right">
+                <button type="button" class="btn btn-sm btn-outline-info m-1" (click)="editPlace(place)">Modifier</button>
+                <button type="button" class="btn btn-sm btn-outline-danger m-1" (click)="deletePlace(place)">Supprimer</button>
+              </td>
+            </tr>
+            <tr class="table-success">
+              <td scope="row">
+                <input #placeName type="text" class="form-control" placeholder="Nom du lieu*" value="" [(ngModel)]="formPlace.name" >
+              </td>
+              <td scope="row">
+                <img (click)="openImageSelectorPlaceDialog(contentImage)" class="resa-img-thumbnail" *ngIf="formPlace.image" [src]="formPlace.image" />
+                <button class="btn btn-outline-success" (click)="openImageSelectorPlaceDialog(contentImage)" *ngIf="!formPlace.image">Cliquez ici pour définir l'image</button><br /><button class="btn btn-danger" *ngIf="formPlace.image" (click)="formPlace.image = null">Enlever</button>
+              </td>
+              <td scope="row">
+                <input type="text" class="form-control" placeholder="Slug*" [(ngModel)]="formPlace.slug">
+              </td>
+              <td scope="row">
+                <textarea class="form-control" placeholder="Présentation du lieu" rows="3" [(ngModel)]="formPlace.presentation" ></textarea>
+              </td>
+              <td class="text-right">
+                <button type="button" [disabled]="!isValidPlace(formPlace)" (click)="validatePlace()" class="btn btn-sm mr-1 ml-1 btn-success">Valider</button>
+                <button type="button" *ngIf="formPlace.name.length > 0" (click)="cancelPlace()" class="btn btn-sm mr-1 ml-1 btn-danger">Annuler</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #contentImage let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Sélection de l'image</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <image-selector (imageSelected)="c($event)"></image-selector>
+  </div>
+  <div class="modal-footer">
+  </div>
+</ng-template>
+<div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>

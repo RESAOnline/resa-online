@@ -1,0 +1,57 @@
+<div class="submenu pt-2 pr-2 pl-2 d-flex justify-content-between align-items-center">
+  <div class="d-flex justify-content-center align-items-center">
+	  <button class="btn-full-screen btn btn-dashicons dashicons" [ngClass]="{'dashicons-editor-expand':!global.fullScreen, 'dashicons-editor-contract':global.fullScreen}" (click)="global.fullScreen = !global.fullScreen"></button>
+    <div ngbDropdown *ngIf="global.places.length > 0" class="d-inline-block ml-2 mr-2">
+      <button class="btn btn-success" id="dropdownPlaces" ngbDropdownToggle>Lieux</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownPlaces" class="p-3 text-center">
+        <div *ngIf="actionLaunch" class="sLoader_bg"><div class="sLoader"></div></div>
+        <div class="text-left">
+          <div>Choix des lieux</div>
+          <div class="form-check mt-1" *ngFor="let place of global.places; index as i">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="global.filterSettings.places[place.id]" id="defaultCheck{{ i }}">
+            <label class="form-check-label" for="defaultCheck{{ i }}">
+              {{ global.getTextByLocale(place.name) }}
+            </label>
+          </div>
+          <button type="submit" class="btn btn-success mt-3" (click)="updateUserSettings()">Recharger</button>
+        </div>
+      </div>
+    </div>
+    <span class="mr-2">
+      <!--<input [hidden]="true" placeholder="yyyy-mm-dd" [(ngModel)]="ngbDate" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="updateDate()">//-->
+      <button ngbTooltip="Cliquez pour choisir une autre date" class="btn btn-dashicons dashicons dashicons-calendar-alt" (click)="toggleDate()" type="button"></button>
+    </span>
+    <button ngbTooltip="Jour précédant" class="btn btn-dashicons dashicons dashicons-arrow-left-alt2" (click)="previousDate()"></button>
+    <button ngbTooltip="Jour suivant" class="btn btn-dashicons dashicons dashicons-arrow-right-alt2" (click)="nextDate()"></button>
+    <span class="current-date ml-2" (click)="toggleDate()">
+      {{ global.currentDate | date:'EEEE d MMMM yyyy':'':'fr' }}
+    </span>
+    <ngb-datepicker [hidden]="!displayDatePicker" #d [(ngModel)]="ngbDate" (ngModelChange)="updateDate()"></ngb-datepicker>
+  </div>
+  <div id="menuButtons" *ngIf="displayLinks && !isDisplayOnlyPlanningGroups()">
+    <button class="btn btn-outline-success ml-2" [ngClass]="{'active':isBookingsDetails()}" (click)="goBookingsDetails()">Vue du jour</button>
+    <button *ngIf="isRESAManager()" class="btn btn-outline-success ml-2" [ngClass]="{'active':isPlanning()}" (click)="goPlanning()">Réservations</button>
+    <button *ngIf="global.staffManagement && !global.groupsManagement" class="btn btn-outline-success ml-2" [ngClass]="{'active':isPlanningMembers()}" (click)="goPlanningMembers()">Personnel</button>
+    <button *ngIf="global.groupsManagement" class="btn btn-outline-success ml-2" [ngClass]="{'active':isPlanningGroups()}" (click)="goPlanningGroups()">Groupes</button>
+    <button class="btn btn-outline-success ml-2" [ngClass]="{'active':isBookingsCalendars()}" (click)="goBookingsCalendars()">Agenda</button>
+    <button class="btn btn-outline-success ml-2" [ngClass]="{'active':isBookingsList()}" (click)="goBookingsList()">Liste des réservations</button>
+    <button *ngIf="isRESAManager()" class="btn btn-outline-success ml-2" [ngClass]="{'active':isQuotations()}" (click)="goQuotations()">Devis</button>
+    <button class="btn btn-outline-success ml-2" [ngClass]="{'active':isDaily()}" (click)="goDaily()">Arrivées</button>
+    <span *ngIf="!isFavPage()" (click)="setFavPage()" class="dashicons dashicons-star-empty green" ngbTooltip="Cliquez pour faire de cette page, votre page d'acceuil"></span>
+    <span *ngIf="isFavPage()" class="dashicons dashicons-star-filled green" ngbTooltip="Cette page est votre page d'acceuil"></span>
+  </div>
+  <div id="menuDropDown" *ngIf="displayLinks && !isDisplayOnlyPlanningGroups()" class="dropdown">
+    <button class="btn dropdown-toggle btn-outline-success" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <button class="dropdown-item" (click)="goBookingsDetails()"><span *ngIf="isBookingsDetails()">> </span>Vue du jour</button>
+      <button *ngIf="isRESAManager()" class="dropdown-item" (click)="goPlanning()">Réservations</button>
+      <button *ngIf="global.staffManagement && !global.groupsManagement" class="dropdown-item" (click)="goPlanningMembers()"><span *ngIf="isPlanningMembers()">> </span>Personnel</button>
+      <button *ngIf="global.groupsManagement" class="dropdown-item" (click)="goPlanningGroups()"><span *ngIf="isPlanningGroups()">> </span>Groupes</button>
+      <button class="dropdown-item" (click)="goBookingsCalendars()"><span *ngIf="isBookingsCalendars()">> </span>Agenda</button>
+      <button class="dropdown-item" (click)="goBookingsList()"><span *ngIf="isBookingsList()">> </span>Liste des réservations</button>
+      <button *ngIf="isRESAManager()" class="dropdown-item" (click)="goQuotations()"><span *ngIf="isQuotations()">> </span>Devis</button>
+      <button class="dropdown-item" (click)="goDaily()"><span *ngIf="isDaily()">> </span>Arrivées</button>
+    </div>
+  </div>
+</div>
+<hr *ngIf="displayLinks" />

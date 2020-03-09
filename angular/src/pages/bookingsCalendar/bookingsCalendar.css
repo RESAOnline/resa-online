@@ -1,0 +1,186 @@
+.resa_calendar{
+	max-height:75vh;
+	overflow: auto;
+}
+
+::ng-deep .resa_calendar .creneau{
+	width:100%;
+	height:100%;
+	box-sizing:border-box;
+	color:white;
+	position:relative;
+	font-family:arial,'sans-serif';
+	font-size:12px;
+	float:left;
+}
+
+::ng-deep .resa_calendar .creneau:hover{
+}
+::ng-deep .resa_calendar .creneau_content{
+	border-top:2px solid transparent;
+}
+::ng-deep .resa_calendar .creneau:hover .creneau_content{
+	border-top:2px dashed white;
+}
+::ng-deep .resa_calendar .creneau.active .creneau_content{
+	border-top:2px dashed white;
+}
+::ng-deep .resa_calendar .creneau_state{
+	border-radius:30px;
+	width:10px;
+	height:10px;
+	border:1px solid black;
+	position:absolute;
+	right:8px;
+	top:7px;
+}
+::ng-deep .resa_calendar .creneau_state.valid{
+	background-color:#27b673;
+}
+::ng-deep .resa_calendar .creneau_state.pending{
+	background-color:#efb20e;
+}
+::ng-deep .resa_calendar .creneau_state.cancelled{
+	background-color:grey;
+}
+::ng-deep .resa_calendar .creneau_time{
+
+}
+::ng-deep .resa_calendar .creneau_service{
+	font-size:14px;
+	line-height:15px;
+	padding-bottom:5px;
+}
+::ng-deep .resa_calendar .creneau_client{
+	background-color:rgba(0,0,0,0.2);
+	padding:3px 4px;
+	box-sizing:border-box;
+}
+::ng-deep .resa_calendar .creneau_client .client_name{
+	font-weight:bold;
+	font-style:italic;
+	font-size:14px;
+	line-height:15px;
+}
+::ng-deep .resa_calendar .creneau_client .client_number{
+	line-height:15px;
+}
+::ng-deep .resa_calendar .creneau_resa_price{
+	padding:5px 0px;
+	font-style:italic;
+	line-height:18px;
+	font-size:14px;
+}
+::ng-deep .resa_calendar .creneau_members{
+
+}
+::ng-deep .resa_calendar .creneau_members .creneau_members_title{
+	text-decoration:underline;
+	line-height:12px;
+	padding-bottom:3px;
+}
+::ng-deep .resa_calendar .creneau_members .creneau_member{
+	line-height:12px;
+	padding-left:3px;
+	font-weight:bold;
+}
+::ng-deep .resa_calendar .creneau_note{
+	line-height:14px;
+	font-size:13px;
+	padding:5px 5px;
+	margin:5px 0px 0px 0px;
+	background-color:rgba(0,0,0,0.2);
+}
+::ng-deep .resa_calendar .creneau_alert{
+	line-height:14px;
+	font-size:12px;
+	padding:3px 2px;
+	margin:5px 0px 0px 0px;
+	background-color:rgba(220,0,0,1);
+	font-weight:bold;
+}
+
+::ng-deep .resa_calendar .day-event{
+	border:1px solid white !important;
+}
+
+::ng-deep .resa_calendar .cell-totals .number {
+	width: 22px;
+	height: 22px;
+	border-radius: 0px;
+	-webkit-box-shadow: none;
+  box-shadow: none;
+	font-size:1.3em;
+	letter-spacing:-0.4px;
+	padding-left: 5px;
+	padding-right: 5px;
+	color:white;
+}
+
+::ng-deep .cal-event {
+	border-radius: 0px !important;
+	color:white !important;
+	word-wrap: break-word;
+}
+
+
+::ng-deep .cal-day-box .event-item{
+	display:block;
+	color:white !important;
+	background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+::ng-deep .cal-event-list .event-item, .tooltip .tooltip-inner{
+	display:block;
+}
+
+::ng-deep .cal-event-list .event-item p, .tooltip-inner p, .cal-day-box .event-item p{
+	padding:0px;
+	margin:0px;
+	line-height:14px !important;
+}
+
+::ng-deep .cal-event-title {
+	white-space: normal;
+}
+
+::ng-deep .resa_cal_nom_service{
+	font-size:15px;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+::ng-deep .resa_cal_client{
+	font-style:italic;
+}
+::ng-deep .resa_cal_nom_client{
+
+
+}
+::ng-deep .resa_cal_prenom_client{
+
+
+}
+
+::ng-deep .resa_cal_creneau{
+	background-color: rgba(145, 145, 145, 0.3) !important;
+	display:inline;
+}
+::ng-deep .resa_cal_creneau_debut{
+
+}
+::ng-deep .resa_cal_creneau_fin{
+
+}
+
+::ng-deep .resa_cal_nb{
+	font-weight:700;
+}
+
+::ng-deep .resa_cal_total{
+
+}
+
+::ng-deep .resa_cal_alert{
+	background-color:red;
+}

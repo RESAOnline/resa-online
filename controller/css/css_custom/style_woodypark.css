@@ -1,0 +1,932 @@
+/*** couleurs 
+
+rgba(232, 8, 8, 0.9);
+
+1 noir : #6e3016
+2 fond desactiver : #426871
+3 fond foncéé alternatif : #0d7c95
+4 fond foncé : #0d677d / black
+5 fond clair: #60acbe
+6 btn hover : #0e7c95
+rose alerte : #ff6c6c
+
+vert : #9bab3b;
+
+---- 
+
+marron : #6e3016
+noir : black
+gris : #777777
+
+btn bleu :#5bc0de
+btn bleu hover :#269abc
+
+btn marron hover : #e65038  (orange)
+
+***/
+
+body{
+	padding:0px !important;
+	font-family:Rokkitt, sans-serif;
+}
+
+#ro_front_formulaire{
+	padding-top:20px;
+}
+
+/** navigation step **/
+
+#steps_navigation{
+z-index:1;
+background-color:tranparent;
+padding:20px 0px;	
+}
+
+#steps_navigation .step_item{
+	text-decoration:none !important;
+	color:white;
+	background-color:transparent;
+}
+.step_item.not_active_yet{
+	color:white;
+	cursor:not-allowed;
+}
+.step_item.not_active_yet *{
+	color:white;
+	cursor:not-allowed;
+}
+.step_item.not_active_yet *:hover{
+	color:white;
+	cursor:not-allowed;
+}
+.step_item.active, .step_item:hover{
+	color:white;
+}
+
+.step_item::before{
+	content: '';
+    height: 0px;
+    border: 1px solid black;
+    z-index: 0;
+    display: block;
+    position: relative;
+    top: 32px;
+    right: 50%;
+    width: 100%;
+}
+#steps_navigation .step_item.not_active_yet::before{
+    border: 1px solid #6e3016;
+}
+#steps_navigation .step_item.active::before{
+    border: 1px solid black;
+}
+
+#steps_navigation .step_item .step_number {
+	z-index:3;
+	color:white;
+	background-color:#6e3016;
+	border:1px solid #6e3016;
+	text-decoration:none;
+	font-size:18px;
+	margin: 0px auto;
+}
+#steps_navigation .step_item.active .step_text, #steps_navigation .step_item.active:hover .step_text  {
+	color:#6e3016;
+}
+#steps_navigation .step_item.not_active_yet .step_number {
+	color:#f2f2f2;
+	background-color:#777777;
+	border:1px solid #777777;
+	font-size:18px;
+	margin: 0px auto;
+}
+#steps_navigation .step_item.active .step_number, #steps_navigation .step_item:hover .step_number {
+	color:white;
+	background-color:#e65038;
+	border:1px solid #e65038;
+	font-size:18px;
+	margin: 0px auto;
+}
+
+#steps_navigation .step_item .step_text  {
+	font-weight:normal;
+	color:black;
+	padding: 15px 0px 0px 0px ;
+}
+#steps_navigation .step_item.not_active_yet .step_text  {
+	color:#426871;
+	font-weight:normal;
+	padding: 15px 0px 0px 0px ;
+}
+#steps_navigation .step_item:hover .step_text  {
+	color:#e65038;
+	font-weight:normal;
+	padding: 15px 0px 0px 0px ;
+}
+
+
+/*** bouton nav */
+
+#next_step_nav .next_step .next_step_link, #next_step_nav .previous_step .previous_step_link, #ro_front_formulaire .add_date_step_link, #ro_front_formulaire .add_service_step_link, #ro_front_formulaire .previous_step_link, #ro_front_formulaire .next_step_link, #ro_front_formulaire .btn_add_coupon{
+	color: white !important;
+    background-color: #6e3016;
+    border: 1px solid #6e3016;
+    text-decoration: none !important;
+}
+
+#next_step_nav .next_step .next_step_link:hover, #next_step_nav .previous_step .previous_step_link:hover, #ro_front_formulaire .add_date_step_link:hover, #ro_front_formulaire .add_service_step_link:hover, #ro_front_formulaire .previous_step_link:hover, #ro_front_formulaire .next_step_link:hover{
+	color: white !important;
+    background-color: #e65038;
+	border: 1px solid #e65038;
+}
+
+
+/*** étape 1 lieu **/
+
+#step1_content{
+	display:flex;
+}
+#step1_content .place{
+	background-color:#60acbe;
+	color:black;
+	/*border:1px solid black;*/
+	border:none;
+	box-sizing:border-box;
+	padding:60px 25px 80px 25px;
+	width:50%;
+	text-decoration:none !important;
+}
+
+#step1_content .place:hover, #step1_content .place.active{
+	background-color:black;
+	color:white;
+	/*border:1px solid black;*/
+	border:none;
+}
+
+#step1_content .place .place_title {
+	color:black;
+	font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+}
+#step1_content .place .place_description {
+	color:#6e3016;
+	font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+}
+#step1_content .place:hover .place_title, #step1_content .place.active .place_title, #step1_content .place:hover .place_description, #step1_content .place.active .place_description{
+	color:white;
+}
+
+/* place design */
+#step1_content .place h2,#step1_content .place p {
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius:20px;
+	padding:10px 6px;
+	box-sizing:border-box;
+}
+#step1_content .place:hover h2,#step1_content .place:hover p, #step1_content .place.active h2,#step1_content .place.active p {
+	background-color: rgba(232, 8, 8, 0.9);
+}
+
+#step1_content .place.cours{
+	background-image:url('https://resa-online.fr/wp-content/uploads/2018/03/cours2.jpg');
+	background-cover:cover;
+	background-position:center center;
+}
+
+#step1_content .place.outdoor{
+	background-image:url('https://resa-online.fr/wp-content/uploads/2018/03/activite.jpg');
+	background-cover:cover;
+	background-position:center center;
+}
+
+
+
+/*** étape 2 service **/
+
+#step2_content{
+	display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+	grid-column-gap: 10px;
+}
+
+#step2_content .category {
+	display:block;
+}
+
+
+#step2_content .category .category_title {
+	color:#e65038;
+	font-size: 1.8em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+	margin-top:20px;
+}
+
+#step2_content .service{
+	background-color:#60acbe;
+	color:black;
+	border:1px solid black;
+	box-sizing:border-box;
+	padding:15px;
+	width:32%;
+	text-decoration:none !important;
+	margin-bottom:10px;
+	float:left;
+}
+
+#step2_content .service:hover{
+	background-color:black;
+	color:white;
+	border:1px solid black;
+}
+
+#step2_content .service_content , #step2_content .service:hover .service_content{
+	background-color:transparent;
+	color:inherit;
+	border:none;
+}
+
+#step2_content .service_content{
+	padding:0px;
+}
+
+
+#step2_content .service .service_title {
+	color:white;
+	font-size: 1.2em;
+    line-height: 1.4em;
+	font-weight:500;
+	text-align: center;
+	margin:10px 0px;
+}
+#step2_content .service .service_description {
+	color:#6e3016;
+	font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+	display:none;
+}
+#step2_content .service:hover .service_title, #step2_content .service.active .service_title, #step2_content .service:hover .service_description, #step2_content .service.active .service_description{
+	color:white;
+}
+
+
+
+
+/** en-tête lieu et services **/
+
+#selected_place{
+	padding: 30px;
+    background-color: white;
+    margin: 20px 0px;
+    text-align: center;
+}
+
+#selected_place .place_title{
+	color:black;
+    font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+}
+
+#selected_place .place_description {
+	color:#6e3016;
+    font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+}
+
+#selected_service {
+	padding: 30px;
+    background-color: tranparent;
+    margin: 20px 0px;
+    text-align: left;
+}
+#selected_service .service_title{
+	color:#e65038;
+    font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: left;
+	margin:0px;
+	padding:0px;
+}
+#selected_service .service_description {
+	color:#6e3016;
+    font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: left;
+	margin:0px;
+	padding:0px;
+}
+
+#steps_content {
+    background-color: tranparent;
+    padding: 20px 10px;
+	box-sizing:border-box;
+}
+
+#step3_content .step3_1_title, #step3_content .step3_2_title, #step3_content .step3_3_title, #step3_content .step3_4_title {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+
+/** calendrier**/
+
+#step3_1 .calendrier {
+    margin: 38px 0px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+#step3_1 .calendrier table{
+	width:100%;
+}
+
+#ro_front_formulaire .calendrier thead .btn{
+	border:none;
+	box-sizing:border-box;
+	color:white;
+	background-color:#6e3016;
+}
+#ro_front_formulaire .calendrier thead .btn:hover{
+	background-color:#e65038;
+}
+
+#ro_front_formulaire .calendrier tbody .btn{
+	font-size: 14px;
+    font-weight: normal;
+	color: black;
+}
+
+#ro_front_formulaire .calendrier tbody td{
+	width: 10%;
+	border: 1px solid white;
+}
+
+#ro_front_formulaire .calendrier tbody .resa_disabled button{
+	cursor:not-allowed;
+}
+#ro_front_formulaire .calendrier tbody .resa_disabled{
+	background: repeating-linear-gradient( 45deg, lightgray, lightgray 10px, darkgray 10px, darkgray 20px );
+}
+#ro_front_formulaire .calendrier tbody .resa_disabled button:hover, #ro_front_formulaire .calendrier tbody .resa_disabled:hover button{
+	cursor:not-allowed;
+	background-color: #cdcdcd;
+}
+
+#step3_1 .calendrier tr, #step3_1 .calendrier thead th, #step3_1 .calendrier td{
+    border:none;
+	color:#777777;
+}
+
+#ro_front_formulaire .calendrier tbody .btn.active {
+    color: white;
+    background-color: #777777;
+}
+
+/** creneau **/
+
+#step3_2 .creneau{
+	max-width:100%;
+	color:white;
+	line-height:1.1em;
+	background-color:#9bab3b;
+	border:1px solid #9bab3b;
+}
+#step3_2 .creneau p{
+	margin-bottom:5px;
+}
+#step3_2 .creneau .creneau_capacity{
+	color:black;
+	font-weight:bold;
+}
+#step3_2 .creneau .creneau_aside{
+	font-size:13px;
+}
+#step3_2 .creneau .avalability{
+
+}
+#step3_2 .creneau:hover {
+    background-color:white;
+    color:#9bab3b;
+	border-color:#9bab3b;
+}
+#step3_2 .creneau.active{
+    background-color: #6e3016;
+    color: white;
+}
+
+/** date et creneau recap **/
+
+#step3_3 .price, #step3_4 .extra{
+	background-color: #9bab3b !important;
+    color: white !important;
+    border: 1px solid #9bab3b !important;
+}
+
+#step3_date_recap, #step3_creneau_recap{
+	background-color: #6e3016;
+    color: white;
+}
+#step3_date_recap .gras, #step3_creneau_recap .gras{
+    color: white;
+}
+
+#step3_2 .morning_title, #step3_2 .afternoon_title{
+	background-color:transparent;
+	color:black;
+}
+
+/** tarifs et extra **/
+
+#step3_3 .price {
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+}
+
+#step3_3 .price , #step3_4 .extra{
+	background-color:#777777;
+	color:white;
+	border:1px solid black;
+}
+#step3_3 .price_quantity_input{
+	color:#6e3016;
+	background-color:white;
+}
+
+#step3_3 .price .price_title, #step3_4 .extra .extra_title {
+	color:white;
+}
+
+#step3_3 .price_unit, #step3_4 .extra_unit{
+	color:white;
+}
+
+#step3_3 .price_value, #step3_4 .extra_value{
+	font-size:26px;
+	line-height:1.2em;
+	color:white;
+}
+#step3_3 .price_unit , #step3_4 .extra_unit{
+	font-size:18px;
+	line-height:1.2em;
+	color:white;
+}
+#step3_3 .price_quantity_title  , #step3_4 .extra_quantity_title{
+	display:none;
+}
+
+#ro_front_formulaire .add_date_step_link, #ro_front_formulaire .add_service_step_link , #ro_front_formulaire .previous_step_link , #ro_front_formulaire .next_step_link, #ro_front_formulaire .btn_add_coupon {
+	color:white !important;
+	background-color:#6e3016;
+	border:1px solid #6e3016;
+	text-decoration:none !important;
+}
+#ro_front_formulaire .add_date_step_link:hover, #ro_front_formulaire .add_service_step_link:hover , #ro_front_formulaire .previous_step_link:hover , #ro_front_formulaire .next_step_link:hover {
+	color:white !important;
+	background-color:#e65038;
+}
+
+#ro_front_formulaire .add_date_step_link{
+	color:white !important;
+	background-color:#6e3016;
+	border:1px solid #6e3016;
+	text-decoration:none !important;
+}
+#ro_front_formulaire .add_date_step_linka{
+	display:none !important;
+}
+#ro_front_formulaire .add_date_step_link:hover{
+	color:white !important;
+	background-color:#e65038;
+	border:1px solid #e65038;
+}
+
+#ro_front_formulaire .add_service_step_link{
+	display:none;
+}
+
+#step4_content input, #step4_content select{
+	background-color: white !important;
+	color:black;
+	border-radius:0px;
+	border:1px solid #777777;
+	margin-top:2px;
+}
+#step4_content label input{
+	margin:0px 10px 0px 5px;
+	padding:0px;
+	height:1.2em;
+}
+#step4_content label{
+	margin:20px 0px 10px 0px;
+	line-height:1.3em;
+	display:block;
+}
+#step4_content input[type=submit]{
+	color:white;
+	border-radius:0px;
+	border:none;
+	font-weight:bolder;
+	font-size:18px;
+	background-color: black !important;
+	cursor:pointer;
+}
+#step4_content .input_error{
+	color: #ff6c6c;
+}
+
+
+#step5 .clients_informations{
+	background-color:transparent;
+}
+
+#step5 .client_information .client_information_title a{
+	color:white;
+	padding:4px;
+	background-color:black;
+}
+
+#step5 .client_information .client_information_title a{
+	padding: 4px 8px;
+    color: white;
+    background-color: black;
+}
+#step5 .client_information .client_information_title a:hover{
+	padding: 4px 8px;
+    color: white;
+    background-color: #e65038;
+}
+
+#step5 .paiement_text {
+	text-align:center;
+	font-size:18px;
+	line-height: 1.2em;
+	color: #6e3016;
+	padding: 15px;
+    background-color: white;
+}
+
+.helpbox::after{
+    color: black;
+}
+
+.helpbox .helpbox_content h4, .helpbox .helpbox_content p{
+	text-transform:none;
+}
+
+
+
+.particpants_popup_bloc {
+    background-color: white;
+    border: 1px solid #6e3016;
+    width: 60vw;
+    height: 60vh;
+    margin-top: 20vh;
+    margin-left: 20vw;
+    padding: 8px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+#step6_1 .order_recap{
+	color:white;
+}
+
+.order_recap_left .order_recap_price_quantity, .order_recap_left .order_recap_price_quantity_separator, .order_recap_center .order_recap_price_title, .order_recap_right .order_recap_price_total{
+	background-color:transparent;
+}
+
+#step6_1B{
+	background-color:transparent;
+	border-top:2px solid black;
+}
+#step6_1B #client_notes textarea{
+	background-color:white;
+	color:black;
+}
+
+#step6_2{
+	background-color:white;
+}
+
+#step6_2 .paiement_text, #step6_2 .paiement_methods form .method, #step6_2 .paiement_validation_form{
+	background-color:transparent;
+	color:black;
+}		
+
+#step6_2 .paiement_methods form label{
+	padding:20px 0px 0px 0px
+}
+
+#step6_2 .paiement_methods form label .description{
+	display: block;
+    margin-top: -20px;
+    line-height: 14px !important;
+    font-size: 14px;
+    float: left;
+}
+
+#step6_2 .account label{
+	line-height:1.3em;
+	padding-top:20px;
+}
+
+#step6_2 .paiement_validation{
+	border-top:1px solid #6e3016;
+	margin-top:25px;
+}
+#step6_2 .paiement_validation_btn{
+	background-color:black;
+	border:none;
+	border-radius:0px;
+	font-size:18px;
+}
+#step6_2 .paiement_validation_btn:hover{
+	background-color:#0e7c95;
+	border:none;
+}
+
+#step6_2 .paiement_validation_title{4
+font-weight:bold;
+text-align:center;
+margin-top:30px;
+}
+
+/*** cart ***/
+#cart{
+	background-color:#9bab3b;
+}
+
+#cart .creneau_sous_total{
+	color:white;
+}
+
+#cart h3, #cart h4, #cart h5{
+	color:white;
+}
+
+#cart .cart_title {
+    text-align: center;
+    margin: 5px 0px;
+    color: white;
+    font-weight: bolder;
+    font-size: 24px !important;
+}
+
+#cart .cart_title::after {
+    display:block;
+	content:"";
+}
+
+#cart .service_title {
+	color:white;
+    font-weight: normal;
+    font-size: 24px;
+    padding-bottom: 10px;
+    margin-top: 25px;
+}
+
+#cart .cart_row {
+    color: white;
+    background-color: #6e3016;
+    border: 1px solid #6e3016;
+	grid-row-gap: 0px;
+}
+
+#cart .cart_row .date, #cart .cart_row .creneau{
+	font-size:18px;
+	font-weight:normal;
+	line-height:1.2em;
+	background-color:transparent;
+	color:white;
+}
+
+#cart .cart_total{
+	background-color:transparent;
+}
+
+.cart_coupon{
+	display:flex;
+	justify-content:center;
+}
+.cart_coupon h4{
+	align-self:center;
+	padding:10px;
+	margin:0px;
+}
+.cart_coupon input{
+	width:auto !important;
+	min-width:100px;
+	margin: 0px 15px;
+	align-self:center;
+}
+
+#cart .cart_row_infos{
+	color:white;
+	background-color:transparent;
+	padding:1px 5px;
+}
+
+#ro_front_formulaire .cart_add_coupon_title{
+	font-size:18px;
+}
+
+#ro_front_formulaire .btn_add_coupon {
+	border:1px solid white !important;
+	border-radius:0px;
+	color:white !important;
+	background-color:black;
+	font-size:16px;
+	font-weight:bold;
+	padding: 6px;
+	margin-top:7px;
+}
+
+#ro_front_formulaire .btn_add_coupon:hover {
+	border:1px solid white !important;
+	color:white !important;
+	background-color:#e65038;
+}
+
+
+#ro_front_formulaire .dropbtn{
+	background-color:black;
+}
+
+
+#ro_front_formulaire .filters_menu:hover .dropbtn {
+    background-color: #6e3016;
+}
+
+
+#ro_front_formulaire .btn{
+	background-color:#6e3016;
+	border:none;
+	color:white;
+}
+
+#ro_front_formulaire .btn:hover{
+	background-color:#e65038;
+	border:none;
+	color:white;
+}
+
+/*** compte client **/
+
+#resa_account {
+	background-color: tranparent;
+	color:white;
+}
+#resa_account #cart .cart_total{
+	background-color: black;
+	color:white;
+}
+
+
+#personal_informations h3{
+	text-align:center;
+}
+	
+#resa_account .infos_clients  input, #resa_account .infos_clients select, #ro_front_formulaire .infos_clients  input, #ro_front_formulaire .infos_clients select{
+	background-color: black !important;
+	color:white;
+	border-radius:0px;
+	border:none;
+	margin-top:2px;
+}
+#resa_account .infos_clients label input, #ro_front_formulaire .infos_clients label input{
+	margin:0px 10px 0px 5px;
+	padding:0px;
+	height:1.2em;
+}
+#resa_account .infos_clients label, #ro_front_formulaire .infos_clients label{
+	margin:20px 0px 10px 0px;
+	line-height:1.3em;
+	display:block;
+}
+#resa_account .infos_clients input[type=submit], #ro_front_formulaire .infos_clients input[type=submit]{
+	color:white;
+	border-radius:0px;
+	border:none;
+	font-weight:bolder;
+	font-size:18px;
+	background-color: black !important;
+	cursor:pointer;
+}
+.infos_clients .input_error{
+	color: #ff6c6c;
+}
+
+ .paiement_cgv_label a{
+	color:#6e3016 !important;
+}
+
+.paiement_cgv_label a:hover{
+	color:#e65038 !important;
+}
+
+#resa_account label {
+	background-color:#9bab3b;
+	border: none !important;
+	color:white !important;
+}
+
+#resa_account label:hover, #ro_front_formulaire label:hover{
+	color:white !important;
+	background-color:#e65038 !important;
+	border: none  !important;
+}
+#resa_account label.active, #ro_front_formulaire label.active{
+	background-color:#e65038 !important;
+	color:white !important;
+	border: none !important;
+}
+
+#resa_account label.active, #ro_front_formulaire label.active{
+	border-top:2px solid white;
+	border-left:1px solid #6e3016;
+	border-right:1px solid #6e3016;
+}
+
+
+#resa_account .client_resa_title, #ro_front_formulaire .client_resa_title {
+	padding-top:15px;
+	border-top:1px solid black;
+}
+
+#resa_account .infos_clients input, #resa_account .infos_clients select, #ro_front_formulaire .infos_clients input, #ro_front_formulaire .infos_clients select {
+    background-color: #9bab3b !important;
+    color: white;
+    border-radius: 0px;
+    border: none;
+    margin-top: 2px;
+}
+
+
+
+#ro_front_formulaire .resa_clients #cart{
+	color: white;
+	background-color:#777777;
+}
+
+.fusion-header-wrapper{
+	position:static;
+}
+.resa_popupa4{
+	z-index:10011; 	
+}
+.resa_popup_wrapper .resa_popup_content{
+	color:black !important;
+}
+	
+#cart .cart_row .date_selected.cancelled .rdv_state{
+	color:white;
+}
+
+
+.infos_tarifs{
+	font-size:14px;
+	padding:10px 0px 0px 0px;
+	font-style:italic;
+	font-weight:bolder;
+}
+
+
+@media screen and (max-width: 500px) {
+	#steps_navigation {
+		display: flex;
+		justify-content: center;
+	}
+	
+	.step_item{
+		float:none;
+	}
+	
+	
+	.step_item::before, .step_item.not_active_yet::before{
+		display:none;
+		
+	}
+	
+	#steps_navigation .step_item.not_active_yet .step_number, #steps_navigation .step_item.active .step_number, #steps_navigation .step_item:hover .step_number, #steps_navigation .step_item .step_number{
+		padding:10px;
+	}
+ }

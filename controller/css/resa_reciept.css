@@ -1,0 +1,405 @@
+.reciept_content p{
+	line-height:1.2em;
+	margin:0px 0px 5px 0px;
+	padding:0px;
+}
+
+.reciept_footer_infos{
+	font-weight:bold;
+	margin:15px 0px 10px 0px;
+}
+
+/******
+FORMAT A4
+************/
+
+.resa_popupa4 .reciept_content{
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	grid-template-rows:auto auto auto;
+	grid-template-areas:
+	"reciept_company_logo reciept_company_logo"
+	"reciept_client_infos reciept_company_infos"
+	"reciept_resa_state reciept_resa_state"
+	"reciept_reservation_infos reciept_reservation_infos"
+	"reciept_resa_paiements reciept_resa_paiements"
+	"reciept_resa_balance reciept_resa_balance";
+	grid-column-gap: 0px;
+	grid-row-gap: 20px;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	padding:5px 0px;
+}
+
+.resa_popupa4 .reciept_company_logo {
+	grid-area:reciept_company_logo;
+	text-align:center;
+	padding:5px;
+}
+
+.resa_popupa4 .reciept_client_infos {
+	grid-area:reciept_client_infos;
+	text-align:left;
+	padding:20px;
+}
+
+.resa_popupa4 .reciept_company_infos {
+	grid-area:reciept_company_infos;
+	text-align:right;
+	padding:20px;
+}
+
+.resa_popupa4 .reciept_resa_state {
+	grid-area:reciept_resa_state;
+	text-align:center;
+}
+
+.resa_popupa4 .reciept_reservation_infos {
+	grid-area:reciept_reservation_infos;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking.resa_booking_header{
+	font-weight:bolder;
+	width:100%;
+}
+.resa_popupa4 .reciept_reservation_infos .resa_booking{
+	display:grid;
+	grid-template-columns:3fr 3fr 2fr 4fr;
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+}
+.resa_popupa4 .reciept_reservation_infos .resa_booking.no_tax{
+	display:grid;
+	grid-template-columns:1fr 1fr 1fr;
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+}
+.resa_popupa4 .reciept_reservation_infos .resa_booking > div{
+	border-top:1px solid #e6e6e6;
+	padding:2px;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking .date_hour{
+	text-align:left;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking .state{
+	display:none;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking .activity {
+	text-align:center;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking .tax {
+	text-align:center;
+	font-style:italic;
+}
+.resa_popupa4 .reciept_reservation_infos .resa_booking.no_tax .tax {
+	display:none;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking .price {
+	text-align:right;
+}
+
+
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking_reduction{
+	display:grid;
+	grid-template-columns:repeat(3, auto);
+	grid-template-areas:"reduction_title reduction_description reduction_price";
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking_reduction > div{
+	border-top:1px solid #e6e6e6;
+	padding:2px 7px;
+}
+
+.resa_popupa4 .reduction_title {
+	grid-area:reduction_title;
+}
+
+.resa_popupa4 .reduction_description {
+	grid-area:reduction_description;
+}
+
+.resa_popupa4 .reduction_price {
+	grid-area:reduction_price;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking_subtotal{
+	display:grid;
+	grid-template-columns:3fr 1fr;
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	font-size:14px;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking_subtotal > div{
+	border-top:1px solid #e6e6e6;
+	padding:4px;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking_total{
+	display:grid;
+	grid-template-columns:3fr 1fr;
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	font-size:18px;
+	font-weight:bold;
+}
+
+.resa_popupa4 .reciept_reservation_infos .resa_booking_total > div{
+	background-color:#e6e6e6;
+	padding:6px;
+}
+
+.resa_popupa4 .reciept_resa_paiements {
+	grid-area:reciept_resa_paiements;
+}
+
+.resa_popupa4 .reciept_resa_paiements .paiement_table{
+	margin:20px 0px;
+}
+
+.resa_popupa4 .reciept_resa_paiements .paiement_table_head{
+	display:flex;
+	font-weight:bold;
+	background-color:#e6e6e6;
+}
+.resa_popupa4 .reciept_resa_paiements .paiement_table_head > div{
+	flex-grow:1;
+}
+
+.resa_popupa4 .reciept_resa_paiements .paiement_table_line{
+	display:flex;
+	border-top:1px solid #e6e6e6;
+}
+.resa_popupa4 .reciept_resa_paiements .paiement_table_line > div{
+	flex-grow:1;
+}
+
+
+
+.resa_popupa4 .reciept_resa_balance {
+	grid-area:reciept_resa_balance;
+	margin:15px 0px;
+	font-weight:bold;
+	font-size:18px;
+	background-color:#e6e6e6;
+	padding:8px;
+}
+
+
+
+
+
+/******
+FORMAT TICKET
+************/
+
+.resa_popupticket .reciept_content{
+	display:grid;
+	grid-template-columns:1fr;
+	grid-template-rows:auto auto auto;
+	grid-template-areas:
+	"reciept_company_logo"
+	"reciept_company_infos"
+	"reciept_client_infos"
+	"reciept_resa_state"
+	"reciept_resa_state"
+	"reciept_reservation_infos"
+	"reciept_resa_paiements"
+	"reciept_resa_balance";
+	grid-column-gap: 0px;
+	grid-row-gap: 5px;
+	align-self:center;
+	text-align:center;
+	justify-self: center;
+	padding:5px 0px;
+	word-break: break-all;
+}
+
+.resa_popupticket .reciept_company_logo {
+	grid-area:reciept_company_logo;
+	text-align:center;
+	padding-right:5px;
+}
+
+.resa_popupticket .reciept_client_infos {
+	grid-area:reciept_client_infos;
+	text-align:center;
+	padding-right:5px;
+}
+
+.resa_popupticket .reciept_company_infos {
+	grid-area:reciept_company_infos;
+	text-align:center;
+	padding:20px 0px 0px 5px;
+}
+
+.resa_popupticket .reciept_resa_state {
+	grid-area:reciept_resa_state;
+	text-align:center;
+}
+
+.resa_popupticket .reciept_reservation_infos {
+	grid-area:reciept_reservation_infos;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking.resa_booking_header{
+	display:none;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking{
+	display:grid;
+	grid-template-columns:auto;
+	grid-template-areas:
+	"date_hour"
+	"activity"
+	"tax"
+	"price";
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	border-top:1px solid #e6e6e6;
+	text-align:center;
+}
+.resa_popupticket .date_hour {
+	grid-area:date_hour;
+	text-align:left;
+	font-weight:bold;
+}
+.resa_popupticket .state {
+	display:none;
+	grid-area:state;
+	text-align:left;
+}
+.resa_popupticket .activity {
+	grid-area:activity;
+	text-align:left;
+}
+.resa_popupticket .tax {
+	grid-area:tax;
+	text-align:left;
+	font-style:italic;
+}
+
+.resa_popupticket .price {
+	grid-area:price;
+	text-align:right;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking > div{
+	padding:2px;
+}
+
+
+
+.resa_popupticket .reciept_reservation_infos .resa_booking_reduction{
+	display:grid;
+	grid-template-columns:auto auto;
+	grid-template-areas:
+	"reduction_title reduction_price";
+	grid-template-rows:auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+}
+
+.resa_popupticket .reduction_title{
+	grid-area:reduction_title;
+}
+.resa_popupticket .reduction_description{
+	display:none;
+}
+.resa_popupticket .reduction_price{
+	grid-area:reduction_price;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking_reduction > div{
+	border-top:1px solid #e6e6e6;
+	padding:2px 7px;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking_subtotal{
+	display:grid;
+	grid-template-columns:3fr 1fr;
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	font-size:14px;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking_subtotal > div{
+	border-top:1px solid #e6e6e6;
+	padding:4px;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking_total{
+	display:grid;
+	grid-template-columns:3fr 1fr;
+	grid-template-rows:auto auto auto;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	font-size:18px;
+	font-weight:bold;
+}
+
+.resa_popupticket .reciept_reservation_infos .resa_booking_total > div{
+	background-color:#e6e6e6;
+	padding:6px;
+}
+
+.resa_popupticket .reciept_resa_paiements {
+	grid-area:reciept_resa_paiements;
+}
+
+
+.resa_popupticket .reciept_resa_paiements .paiement_table{
+	margin:20px 0px;
+}
+
+.resa_popupticket .reciept_resa_paiements .paiement_table_head{
+	display:none;
+}
+
+.resa_popupticket .reciept_resa_paiements .paiement_table_line{
+	display:flex;
+	flex-direction:column;
+	border-top:1px solid #e6e6e6;
+}
+.resa_popupticket .reciept_resa_paiements .paiement_table_line > div{
+	flex-grow:1;
+}
+
+.resa_popupticket .reciept_resa_balance {
+	grid-area:reciept_resa_balance;
+}
+
+
+.resa_brand{
+	text-align:center;
+	font-style:italic;
+	padding:8px;
+}
+
+
+
+@media print {
+	html body{
+		font-size:12px !important;
+		font-family:arial, 'sans-serif';
+	}
+	body .no-print{
+		display:none !important;
+	}
+}

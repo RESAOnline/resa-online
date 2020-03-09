@@ -1,0 +1,9 @@
+.form-group {
+  line-height: 1;
+  width: 350px;
+  margin: 0px 0px 5px 0px;
+}
+
+.hover-bold:hover{
+  font-weight: bold;
+}

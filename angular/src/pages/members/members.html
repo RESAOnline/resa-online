@@ -1,0 +1,363 @@
+<div id="page_content" class="container p-sm-2" *ngIf="settings" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="shadow-lg p-5 bg-white rounded" *ngIf="noMembersLoaded">
+    <h1 class="display-4">Personnel - {{ settings.staff_word_many[global.currentLanguage] }}</h1>
+    <p class="lead">
+      Dans vos paramètres d'installations, vous avez indiqué que vous vouliez attribuer du personnel aux réservations.
+    </p>
+    <hr class="my-4">
+    <p>
+      Définissez les {{ settings.staff_word_many[global.currentLanguage]|lowercase }} de votre équipe qui pourront être attribués à l'encadrement des réservations.
+    </p>
+    <button class="btn btn-success btn-lg" (click)="addMember(content)">Créer mon premier {{ settings.staff_word_single[global.currentLanguage]|lowercase }}</button>
+  </div>
+  <div *ngIf="!noMembersLoaded">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1">
+      <h1>Personnel - {{ settings.staff_word_many[global.currentLanguage] }} ({{ members.length }})<span *ngIf="getToSave()">*</span></h1>
+      <div>
+        <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+      </div>
+    </div>
+    <div class="align-items-center d-flex pb-3 mb-3 border-bottom">
+      Définissez les {{ settings.staff_word_many[global.currentLanguage]|lowercase }} de votre équipe qui pourront être attribués à l'encadrement des réservations.
+    </div>
+    <div class="align-items-center d-flex mb-3">
+      <label class="pr-2 pb-0 mb-0">Editer pour la langue : </label>
+      <select [(ngModel)]="global.currentLanguage" class="custom-select bg-light w-auto">
+        <option *ngFor="let language of settings.languages" [value]="language">{{ global.languagesNames[language] }}</option>
+      </select>
+      <div class="ml-2">
+        <img class="w-100 img-thumbnail" [src]="'assets/image/flags/' + global.currentLanguage + '.png'" alt="">
+      </div>
+    </div>
+    <input class="form-control mt-md-3" id="member_search" type="text" placeholder="Recherche..." [(ngModel)]="formMembers.search" (ngModelChange)="calculateDisplayMembers()">
+    <table class="table mt-3" id="members_list">
+      <thead>
+        <tr>
+          <th class="text-left"><a href="javascript:void(0)" (click)="displayMembersOrderBy('activated')">Activé</a></th>
+          <th><a href="javascript:void(0)" (click)="displayMembersOrderBy('position')">Position</a></th>
+          <th><a href="javascript:void(0)" (click)="displayMembersOrderBy('lastname')">NOM Prénom</a></th>
+          <th><a href="javascript:void(0)" (click)="displayMembersOrderBy('nickname')">Surnom</a></th>
+          <th><a href="javascript:void(0)" (click)="displayMembersOrderBy('email')">Email</a></th>
+          <th *ngIf="settings != null && settings.places.length > 0">
+            Lieu(x)
+            <div class="form-check" *ngFor="let place of settings.places">
+              <input class="form-check-input" id="formInput_{{ place.id }}" type="checkbox" value="{{ place.id }}" [checked]="formMembers.places.indexOf(place.id) != -1" (change)="switchFormMembersPlace(place.id)" />
+              <label class="form-check-label font-weight-normal" for="formInput_{{ place.id }}">{{ place.name[global.currentLanguage]}}</label>
+            </div>
+          </th>
+          <th class="text-right">
+            <button type="button" class="btn btn-sm btn-outline-success" (click)="addMember(content)">+ Nouveau {{ settings.staff_word_single[global.currentLanguage]|lowercase }}</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [ngClass]="{'deactivated': !member.activated }"  *ngFor="let member of displayMembers">
+          <th scope="row" class="text-left"><span class="switch switch-sm"> <input class="switch" id="activated_member{{ member.id }}" type="checkbox" [(ngModel)]="member.activated" (ngModelChange)="updateMember(member)"> <label for="activated_member{{ member.id }}" ngbTooltip="Activer / Désactiver"></label></span></th>
+          <th><input class="form-control position" type="number" [(ngModel)]="member.editPosition" (blur)="updatePosition(member)" /></th>
+          <th scope="row">{{ member.lastname | uppercase }} {{ member.firstname }}</th>
+          <td>{{ member.nickname | htmlSpecialDecode }}</td>
+          <td>
+            {{ member.email }}
+            <span class="text-success" *ngIf="memberAssociated(member)"><span *ngIf="member.email.length > 0"><br /></span>Possède un compte wordpress</span>
+            <span class="text-warning" *ngIf="!memberAssociated(member)"><span *ngIf="member.email.length > 0"><br /></span>Ne possède pas un compte wordpress</span>
+          </td>
+          <td *ngIf="settings != null && settings.places.length > 0"><span *ngFor="let idPlace of member.places">{{ getPlaceName(idPlace) }}<br /></span></td>
+          <td class="text-right">
+            <button class="btn btn-sm btn-outline-info m-1" (click)="modifyMember(content, member)">Modifier</button>
+            <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateMember(content, member)">Dupliquer</button>
+            <button *ngIf="member.isDeletable" class="btn btn-sm btn-outline-danger m-1" (click)="deleteMember(member)">Supprimer</button>
+            <span *ngIf="!member.isDeletable" ngbTooltip="Ce {{ settings.staff_word_single[global.currentLanguage]|lowercase }} est utilisé dans une réservation, il ne peut pas être supprimé !">Non supprimable</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modifier la fiche de {{ formMember.lastname }} {{ formMember.firstname }}</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="d()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" href="#tab10" data-toggle="tab" role="tab" aria-controls="tab10" aria-expanded="true">Général</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab11" data-toggle="tab" role="tab" aria-controls="tab11" aria-expanded="true">Agenda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab12" data-toggle="tab" role="tab" aria-controls="tab12" aria-expanded="true">Activités partagées</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active pt-sm-2" role="tabpanel" aria-labelledby="tab10-tab" id="tab10">
+          <div class="form-group">
+            <span class="switch switch-sm">
+              <input class="form-control" class="switch" id="formActivated" [(ngModel)]="formMember.activated" type="checkbox">
+              <label for="formActivated" ngbTooltip="">Activer / Désactiver {{ settings.staff_word_single[global.currentLanguage]|lowercase }}</label>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="formMLastname" ngbTooltip="Nom du {{ settings.staff_word_single[global.currentLanguage]|lowercase }}" class="font-weight-bold">Nom</label>
+            <input type="text" class="form-control" id="formMLastname" placeholder="Nom du member" [(ngModel)]="formMember.lastname" />
+          </div>
+          <div class="form-group">
+            <label for="formMFirstname" class="font-weight-bold" ngbTooltip="Prénom">Prénom</label>
+            <input type="text" class="form-control" id="formMFirstname" placeholder="Prénom" [(ngModel)]="formMember.firstname" />
+          </div>
+          <div class="form-group">
+            <label for="formMNickname" class="font-weight-bold" ngbTooltip="Surnom afficher dans le planning">Surnom</label>
+            <input type="text" class="form-control" id="formMNickname" placeholder="Surnom" [(ngModel)]="formMember.nickname" />
+          </div>
+          <div class="form-group">
+            <label for="formMEmail" ngbTooltip="Email unique et indispensable pour l'association avec un compte RESA_Membre" class="font-weight-bold" >Email</label>
+            <input class="form-control" rows="3" id="formMEmail" placeholder="Email" [(ngModel)]="formMember.email" />
+          </div>
+          <div class="form-group">
+            <label for="formMPresentation" ngbTooltip="Présentation du {{ settings.staff_word_single[global.currentLanguage]|lowercase }}" class="font-weight-bold" >Présentation</label>
+            <textarea class="form-control" rows="3" id="formMPresentation" [(ngModel)]="formMember.presentation[global.currentLanguage]"></textarea>
+          </div>
+          <div class="form-group" *ngIf="settings.places.length > 0">
+            <label class="font-weight-bold">Lieux</label>
+            <div class="form-check" *ngFor="let place of settings.places">
+              <input class="form-check-input" id="formInput_{{ place.id }}" type="checkbox" value="{{ place.id }}" [checked]="formMember.places.indexOf(place.id) != -1" (change)="switchPlace(place.id)" />
+              <label class="form-check-label" for="formInput_{{ place.id }}">{{ place.name[global.currentLanguage]}}</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div *ngIf="launchActionCreateRESAMember" class="sLoader_bg"><div class="sLoader"></div></div>
+            <label class="font-weight-bold" ngbTooltip="Permet au {{ settings.staff_word_single[global.currentLanguage]|lowercase }} de se connecter et de consulter son planning et bien plus...">Compte RESA_Membre</label>
+            <p *ngIf="!memberAssociated(formMember)" class="text-danger mb-1">Pour que le {{ settings.staff_word_single[global.currentLanguage]|lowercase }} est accès à son planning, veuillez le relier à un compte wordpress existant ou créer un compte.</p>
+            <select *ngIf="staffUsers.length > 0" class="form-control mt-md-2" (change)="initializationPermissions(formMember)" [(ngModel)]="formMember.idCustomerLinked">
+              <option *ngFor="let user of staffUsers" [value]="user.ID">{{ getDisplayName(user, formMember)}}</option>
+            </select>
+            <button *ngIf="memberAssociated(formMember)" class="btn btn-warning btn-info mt-md-2" type="button" (click)="clearIdCustomerLinked(formMember)">Effacer</button>
+            <button *ngIf="formMember.idCustomerLinked == -1" class="btn btn-default btn-info mt-md-2" [disabled]="!canCreateRESAMembre(formMember)" type="button" (click)="createRESAMember(formMember)">Créer un compte</button>
+            <a class="btn btn-default btn-info mt-md-2" *ngIf="formMember.idCustomerLinked > -1" href="{{ settings.editUserLink + '' + formMember.idCustomerLinked }}" target="_blank">Editer compte wordpress</a>
+            <p class="text-danger mb-1 mt-md-1" *ngIf="formMember.email.length == 0">Une adresse email est obligatoire pour créer un compte RESA_Membre</p>
+            <p class="text-danger mb-1 mt-md-1" *ngIf="formMember.nickname.length == 0">Un pseudo est obligatoire pour créer un compte RESA_Membre</p>
+          </div>
+          <div class="form-group" *ngIf="memberAssociated(formMember)">
+            <label class="font-weight-bold">Droits accordés au {{ settings.staff_word_single[global.currentLanguage]|lowercase }}</label>
+            <div class="form-check">
+              <input class="form-check-input" id="permission_only_appointments" type="checkbox" [(ngModel)]="formMember.permissions.only_appointments" />
+              <label class="form-check-label" for="permission_only_appointments">Afficher uniquement les réservations du {{ settings.staff_word_single[global.currentLanguage]|lowercase }} au planning&nbsp;</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="permission_old_appointments" type="checkbox" [(ngModel)]="formMember.permissions.old_appointments" />
+              <label class="form-check-label" for="permission_old_appointments">Afficher les réservations passées</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="permission_display_customer" type="checkbox" [(ngModel)]="formMember.permissions.display_customer" />
+              <label class="form-check-label" for="permission_display_customer">Afficher les informations du client</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="permission_display_total" type="checkbox" [(ngModel)]="formMember.permissions.display_total" />
+              <label class="form-check-label" for="permission_display_total">Afficher le total du prix</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="permission_display_payments" type="checkbox" [(ngModel)]="formMember.permissions.display_payments" />
+              <label class="form-check-label" for="permission_display_payments">Afficher l'état de paiement</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="permission_display_numbers" type="checkbox" [(ngModel)]="formMember.permissions.display_numbers" />
+              <label class="form-check-label" for="permission_display_numbers">Afficher le nombre de personnes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" id="permission_display_bookings_tab" type="checkbox" [(ngModel)]="formMember.permissions.display_bookings_tab" />
+              <label class="form-check-label" for="permission_display_bookings_tab">Accès à l'onglet réservations</label>
+            </div>
+          </div>
+          </div>
+          <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab11-tab" id="tab11">
+            <ngb-tabset #tabsRules="ngbTabset" (tabChange)="addMemberAvailabilityIfClickOnAdd($event, tabsRules)">
+              <ngb-tab id="tab-rule-{{ i }}"  title="{{ getTabName(memberAvailability, i) }}" *ngFor="let memberAvailability of formMember.memberAvailabilities; index as i">
+                <ng-template ngbTabContent>
+                  <div class="bg-light container-fluid flex-fill p-sm-3 p-1">
+                    <input type="text" class="form-control mb-3" placeholder="Règle n°{{ (i + 1) }}" [(ngModel)]="memberAvailability.name">
+                    <div class="border border-top-0 border-left-0 border-bottom-0 pr-4" style="min-width: 390px; max-width: 100%;">
+                      <h4 class="mb-md-3 text-center">Horaires</h4>
+                      <div class="container text-center">
+                        <table class="table text-right bg-white" style="margin-left: auto; margin-right: auto;">
+                          <tbody>
+                            <tr>
+                              <td class="font-weight-bold align-middle">Commence à</td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <div class="resa-slot-time">
+                                    <span class="btn-plus" (click)="addValue(memberAvailability, 'hours', 1, 1, 'start')">+</span>
+                                    <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" step="1" max="23" min="0"  [(ngModel)]="memberAvailability.startHours" (ngModelChange)="generateStartTime(memberAvailability)">
+                                    <span class="btn-moins" (click)="addValue(memberAvailability, 'hours', 1, -1, 'start')">-</span>
+                                  </div>
+                                  <span class="pr-2">h</span>
+                                  <div class="resa-slot-time">
+                                    <span class="btn-plus" (click)="addValue(memberAvailability, 'minutes', 15, 1, 'start')">+</span>
+                                    <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" value="0" step="15" max="59" min="0" [(ngModel)]="memberAvailability.startMinutes" (ngModelChange)="generateStartTime(memberAvailability)">
+                                    <span class="btn-moins" (click)="addValue(memberAvailability, 'minutes', 15, -1, 'start')">-</span>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="font-weight-bold align-middle">Fini à</td>
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <div class="resa-slot-time">
+                                    <span class="btn-plus" (click)="addValue(memberAvailability, 'hours', 1, 1, 'end')">+</span>
+                                    <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" step="1" max="23" min="0"  [(ngModel)]="memberAvailability.endHours" (ngModelChange)="generateEndTime(memberAvailability)">
+                                    <span class="btn-moins"(click)="addValue(memberAvailability, 'hours', 1, -1, 'end')">-</span>
+                                  </div>
+                                  <span class="pr-2">h</span>
+                                  <div class="resa-slot-time">
+                                    <span class="btn-plus" (click)="addValue(memberAvailability, 'minutes', 15, 1, 'end')">+</span>
+                                    <input type="number" class="form-control resa-slot-hour border-0 text-center pt-1 pb-1 pl-0 pr-0" placeholder="0" value="0" step="15" max="59" min="0" [(ngModel)]="memberAvailability.endMinutes" (ngModelChange)="generateEndTime(memberAvailability)">
+                                    <span class="btn-moins"(click)="addValue(memberAvailability, 'minutes', 15, -1, 'end')">-</span>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <hr class="mt-3 mb-3"/>
+                      <h4>Calendrier</h4>
+                      <hr class="mt-3 mb-3"/>
+                      <calendar [disabled]="memberAvailability.synchronized" [datesModel]="memberAvailability.dates" (ngDatesModel)="setMemberAvailabilityDates(memberAvailability,$event)"></calendar>
+                      <a href="javascript:void(0)" (click)="formMember.advancedCalendarOptions = !formMember.advancedCalendarOptions">
+                        Afficher/Masquer les options avancées des calendriers
+                      </a>
+                      <hr class="mt-3 mb-3"/>
+                      <div *ngIf="formMember.advancedCalendarOptions">
+                        <h5>Synchroniser un calendrier</h5>
+                        <p class="mb-0">Veuillez sélectionner le calendrier à synchroniser</p>
+                        <p class="text-danger font-italic mb-0">Attention cela remplacera le calendrier actuel ! Vous ne pourrez pas éditer le calendrier ici. Veuillez vous rendre dans <a href="javascript:void(0)" (click)="goCalendars(d)">la section calendrier</a></p>
+                        <div class="form-group d-flex">
+                          <select class="form-control m-1" [(ngModel)]="memberAvailability.idCalendar">
+                            <option [hidden]="calendar.type != 0" *ngFor="let calendar of settings.calendars" [value]="calendar.id">
+                              {{ calendar.name }}<span *ngIf="memberAvailability.synchronized && memberAvailability.idCalendar == calendar.id">(synchroniser)</span>
+                            </option>
+                          </select>
+                          <button type="button" class="btn m-1 btn-outline-success" (click)="synchronizeCalendar(memberAvailability, i)">Synchroniser</button>
+                          <button [disabled]="memberAvailability.idCalendar.length == 0" type="button" class="btn m-1 btn-outline-warning" (click)="disynchronizeCalendar(memberAvailability, i)">Désynchroniser</button>
+                        </div>
+                        <hr class="mt-3 mb-3"/>
+                        <h5>Copier un calendrier existant pour le modifer</h5>
+                        <p class="mb-0">Veuillez sélectionner le calendrier à copier.</p>
+                        <p class="text-danger font-italic mb-0">Attention cela remplacera le calendrier et synchronisera le calendrier de cette règle !</p>
+                        <div class="form-group d-flex">
+                          <select class="form-control m-1" [(ngModel)]="memberAvailability.idCalendarTemporary">
+                            <option [hidden]="calendar.type != 0" *ngFor="let calendar of settings.calendars" [value]="calendar.id">
+                              {{ calendar.name }}
+                            </option>
+                          </select>
+                          <button type="button" class="btn m-1 btn-outline-success" (click)="copyCalendar(memberAvailability, i)">Copier</button>
+                        </div>
+                        <hr class="mt-3 mb-3"/>
+                        <span *ngIf="!memberAvailability.synchronized">
+                          <h5>Sauvegarder ce calendrier pour le réutiliser</h5>
+                          <p class="mb-0">Veuillez choisir un nom pour sauvegarder le calendrier.</p>
+                          <p class="text-danger font-italic mb-0">Si ce nom existe déjà, vous allez modifier le calendrier existant.</p>
+                          <div class="form-group d-flex">
+                            <input class="form-control m-1" placeholder="Nom du calendrier" [(ngModel)]="memberAvailability.nameCalendar">
+                            <button class="btn m-1 btn-outline-success" type="button" (click)="saveCalendar(memberAvailability, i)">Sauvegarder</button>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="border border-top-0 border-left-0 border-bottom-0 pr-4" style="min-width: 390px; max-width: 100%;">
+                      <h4>Activité(s) gérée(s)</h4>
+                      <p>Ajouter des activités que le {{ settings.staff_word_single[global.currentLanguage]|lowercase }} peut encadrer</p>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="d-lg-table-cell d-md-none d-sm-none d-none">Activité</th>
+                            <th class="d-lg-table-cell d-md-none d-sm-none d-none">Capacité</th>
+                            <th class="text-right">
+                              <button type="button" class="btn btn-sm btn-outline-success" (click)="addAttachService(memberAvailability)">+ Ajouter une activité</button>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="d-lg-table-row d-sm-flex d-flex d-md-flex flex-md-row flex-column justify-content-sm-center justify-content-center align-items-sm-center align-items-center justify-content-md-center align-items-md-start flex-sm-row flex-sm-wrap bg-white border-top-0 border-right-0 border-left-0 border" *ngFor="let memberAvailabilityService of memberAvailability.memberAvailabilityServices; index as i">
+                            <td scope="row" class="font-weight-bold text-center border-0">
+                              <select class="form-control" [(ngModel)]="memberAvailabilityService.idService">
+                                <option *ngFor="let service of services" [value]="service.id">{{ getServiceName(service) }}</option>
+                              </select>
+                            </td>
+                            <td scope="row" class="font-weight-bold text-center border-0">
+                              <input type="number" class="form-control" [(ngModel)]="memberAvailabilityService.capacity">
+                            </td>
+                            <td class="text-right border-0">
+                              <button class="btn btn-sm btn-outline-danger align-items-center d-inline-flex justify-content-center align-content-center mr-null mb-null ml-null dashicons dashicons-trash" (click)="removeAttachService(memberAvailability, i)"></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <button type="button" class="btn btn-sm ml-md-2 btn-outline-danger" (click)="removeMemberAvailability(i)"> Supprimer la règle</button>
+                    <button type="button" class="btn btn-sm ml-md-2 btn-outline-warning" (click)="duplicateMemberAvailability(i, tabsRules)"> Dupliquer la règle</button>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab id="tab-add-rule">
+                <ng-template ngbTabTitle title="Ajouter une règle">+ Ajouter une règle</ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+          <div class="tab-pane pt-sm-2" role="tabpanel" aria-labelledby="tab12-tab" id="tab12">
+            <div class="border border-top-0 border-left-0 border-bottom-0 pr-4" style="min-width: 390px; max-width: 100%;">
+              <h4>Activités partagées</h4>
+              <p>Il est possible de définir des activités partagées qui pourront être encadrées simultanéement sur le même créneau par le {{ settings.staff_word_single[global.currentLanguage]|lowercase }}. Pour cela vous devez créer des liaisons entre les activités et définir la règle de calcul de la capacité.</p>
+              <div class="bg-light" *ngFor="let memberLink of formMember.memberLinks; index as i">
+                <table class="table border">
+                  <thead>
+                    <tr>
+                      <th class="d-lg-table-cell d-md-none d-sm-none d-none">Liaison {{ (i + 1) }}</th>
+                      <th class="text-right">
+                        <button type="button" class="btn btn-sm btn-outline-success" (click)="addMemberLinkService(memberLink)">+ Ajouter une activité</button>
+                        <button type="button" class="btn btn-sm ml-md-2 btn-outline-danger" (click)="removeMemberLink(i)"> Supprimer la liaison</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="d-lg-table-row d-sm-flex d-flex d-md-flex flex-md-row flex-column justify-content-sm-center justify-content-center align-items-sm-center align-items-center justify-content-md-center align-items-md-start flex-sm-row flex-sm-wrap border-top-0 border-right-0 border-left-0 border" *ngFor="let memberLinkService of memberLink.memberLinkServices; index as j">
+                      <td scope="row" class="font-weight-bold text-center border-0">
+                        <select class="form-control" [(ngModel)]="memberLinkService.idService">
+                          <option [hidden]="!isServiceInMemberAvailabilities(service) || isServiceUsed(service)" *ngFor="let service of services" [value]="service.id">{{ getServiceName(service) }}</option>
+                        </select>
+                      </td>
+                      <td class="text-right border-0">
+                        <button class="btn btn-sm btn-outline-danger align-items-center d-inline-flex justify-content-center align-content-center mr-null mb-null ml-null dashicons dashicons-trash" (click)="deleteMemberLinkService(memberLink, j)">
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="form-group">
+                  <label class="font-weight-bold">Règle de calcul de la capacité</label>
+                  <div class="form-check">
+                    <input class="form-check-input" id="capacity_cumulated_{{ i }}" type="radio" name="rules_capacity_{{ i }}" [(ngModel)]="memberLink.typeCapacityMethod" value="0" />
+                    <label class="form-check-label" for="capacity_cumulated_{{ i }}">Capacité cumulée</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" id="capacity_serv_max_{{ i }}" type="radio" name="rules_capacity_{{ i }}" [(ngModel)]="memberLink.typeCapacityMethod" value="1" />
+                    <label class="form-check-label" for="capacity_serv_max_{{ i }}">Capacité d'activité maximum</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" id="capacity_serv_min_{{ i }}" type="radio" name="rules_capacity_{{ i }}" [(ngModel)]="memberLink.typeCapacityMethod" value="2" />
+                    <label class="form-check-label" for="capacity_serv_min_{{ i }}">Capacité d'activité minimum</label>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-success" (click)="addMemberLink()">+ Créer une liaison</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" type="button" (click)="closeMemberModal(c)">Modifier</button>
+      </div>
+    </ng-template>
+  </div>
+<div id="page_content" class="container p-sm-2" *ngIf="settings == null" style="max-width: 1400px; margin-left: auto; margin-right: auto;"></div>
+<div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>

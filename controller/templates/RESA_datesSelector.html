@@ -1,0 +1,15 @@
+<style>
+  .full button {
+    background-color: limegreen  !important;
+    color: black;
+  }
+</style>
+<label>
+  <input type="checkbox" ng-model="model.selected" />
+  <span ng-show="model.selected">Ajouter dates</span><span ng-hide="model.selected">Supprime dates</span> (a traduire)
+</label>
+<div uib-datepicker ng-model="model.date" class="resa_calendar_box resa_calendar" datepicker-options="model.datepicker_options"></div>
+<button type="button" class="btn btn-default resa_btn" ng-click="selectAllDaysOnThisMounth()">Appliquer sur le mois de {{ model.lastDate|date:'MMM'}}</button>
+<button type="button" class="btn btn-default resa_btn" ng-click="selectAllWeekEndOnThisMounth()">Appliquer sur les weekend du mois de {{ model.lastDate|date:'MMM'}}</button>
+<button type="button" class="btn btn-default resa_btn" ng-click="clearAll()">Tout supprimer</button>
+<button ng-disabled="!model.changed" type="button" class="btn btn-default resa_btn" ng-click="save()">Sauvegarder</button>

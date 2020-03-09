@@ -1,0 +1,309 @@
+<div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+<div class="resa_reservation {{ booking.idPaymentState }}" *ngIf="booking" [ngClass]="{'quote': booking.quotation, 'valid': !booking.quotation && booking.status=='ok', 'pending': !booking.quotation && booking.status=='waiting', 'cancelled': !booking.quotation && booking.status=='cancelled', 'abandonned': !booking.quotation && booking.status=='abandonned'}">
+  <div class="reservation_client">
+    <div class="resa_id">N°{{ booking.realIdCreation }}</div>
+    <div *ngIf="booking.customer != null" class="client_name">
+      <span *ngIf="booking.customer.lastName.length > 0" class="client_lastname">{{ booking.customer.lastName | htmlSpecialDecode }}</span>
+      <span *ngIf="booking.customer.firstName.length > 0" class="client_firstname"> {{booking.customer.firstName | htmlSpecialDecode }}</span>
+    </div>
+    <div *ngIf="booking.customer != null" class="client_company">
+      <span *ngIf="booking.customer.company.length > 0"> {{ booking.customer.company | htmlSpecialDecode }}</span>
+      <span *ngIf="booking.customer.phone.length > 0"><span *ngIf="booking.customer.company.length > 0"><br /></span>{{ booking.customer.phone | formatPhone }}</span>
+      <span *ngIf="booking.customer.phone2.length > 0"><span *ngIf="booking.customer.company.length > 0 || booking.customer.phone.length > 0"><br /></span>{{ booking.customer.phone2 | formatPhone }}</span>
+    </div>
+    <div *ngIf="booking.customer!=null && booking.customer.privateNotes.length > 0" ngbTooltip="{{ booking.customer.privateNotes|htmlSpecialDecode }}" class="client_note on">
+      1 Note Client
+    </div>
+  </div>
+  <div class="reservation_states">
+    <div class="states_state state_valid">Validée</div>
+    <div class="states_state state_quote">{{ getQuotationName() }}</div>
+    <div class="states_state state_cancelled">Annulée</div>
+    <div class="states_state state_abandonned">Abandonnée</div>
+    <div class="states_state state_pending">{{ getWaitingName() }}</div>
+    <div class="states_state state_inerror">Erreur</div>
+    <div class="states_state state_incomplete">Incomplète</div>
+    <div *ngIf="booking.idPaymentState != null" class="states_paiement" [ngbTooltip]="tipPayments" tooltipClass="tooltip-participants">
+      <div class="state_paiement paiement_none">Pas de paiement</div>
+      <div class="state_paiement paiement_incomplete">
+        <span *ngIf="!isDeposit()">Acompte</span>
+        <span *ngIf="isDeposit()">Caution</span>
+      </div>
+      <div class="state_paiement paiement_done">Encaissée</div>
+      <div class="state_paiement paiement_overpaiement">Trop perçu</div>
+      <div class="state_paiement paiement_remboursement">Remboursement dû</div>
+      <div class="state_paiement paiement_remboursement_done">Remboursement complet</div>
+    </div>
+    <ng-template #tipPayments>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Montant</th>
+            <th>Type de paiement</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [hidden]="payment.state == 'pending'" *ngFor="let payment of booking.payments">
+            <td>{{ payment.paymentDate | parseDate | date:'dd MMMM yyyy HH:mm':'':'fr' }}
+            <del class="text-danger" *ngIf="payment.state=='cancelled'"><br />Annulé</del></td>
+            <td *ngIf="payment.repayment">{{ payment.value | negative | number:'1.2':'fr'  }}{{ settings.currency }}</td>
+            <td *ngIf="!payment.repayment">{{ payment.value | number:'1.2':'fr'  }}{{ settings.currency }}</td>
+            <td>
+              <span *ngIf="payment.isReceipt != null && payment.isReceipt && payment.value >= 0">[Acompte]</span>
+              <span *ngIf="payment.isReceipt != null && payment.isReceipt && payment.value < 0">[Remboursement acompte]</span>
+              {{ getPaymentName(payment.type, payment.name) }}
+            </td>
+            <td>{{ payment.note }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+    <div class="states_paiement_value" *ngIf="booking.totalPrice != null">
+      <span *ngIf="booking.status != 'cancelled' && booking.status != 'abandonned'">
+        <span *ngIf="booking.paymentsCaisseOnlineDone || (!isCaisseOnlineActivated() && round(booking.totalPrice - booking.needToPay) > 0)">
+          {{ round(booking.totalPrice - booking.needToPay) | number:'1.2':'fr'  }}{{ settings.currency }} /
+        </span> {{ booking.totalPrice | number:'1.2':'fr' }} {{ settings.currency }}
+      </span>
+      <span *ngIf="(booking.status == 'cancelled' || booking.status == 'abandonned') && booking.needToPay < 0 && (booking.paymentsCaisseOnlineDone || !isCaisseOnlineActivated())">
+        {{ -(booking.needToPay - booking.totalPrice) | number:'1.2':'fr'  }}{{ settings.currency }}
+      </span>
+      <a *ngIf="isCaisseOnlineActivated()" (click)="getPaymentsForBooking(booking)" href="javascript:void(0)">Paiements</a>
+      <a *ngIf="!isCaisseOnlineActivated() && isStripeConnect()" (click)="getStripeChargeForTransactionId(booking)" href="javascript:void(0)">Paiements</a>
+    </div>
+  </div>
+  <div class="reservation_notes">
+    <div *ngIf="booking.note != null" class="reservation_private_note" ngbTooltip="{{ booking.note|htmlSpecialDecode }}" [ngClass]="{'on': booking.note.length > 0, 'off': booking.note.length == 0}">
+      Note privée
+    </div>
+    <div *ngIf="booking.publicNote != null" class="reservation_public_note" ngbTooltip="{{ booking.publicNote|htmlSpecialDecode }}" [ngClass]="{'on': booking.publicNote.length > 0, 'off': booking.publicNote.length == 0}">
+      Note publique
+    </div>
+    <div *ngIf="booking.customerNote != null" class="reservation_customer_note" ngbTooltip="{{ booking.customerNote|htmlSpecialDecode }}" [ngClass]="{'on': booking.customerNote.length > 0, 'off': booking.customerNote.length == 0}">
+      Remarque cliente
+    </div>
+    <div class="reservation_member_note" ngbTooltip="{{ booking.staffNote|htmlSpecialDecode }}" [ngClass]="{'on': booking.staffNote.length > 0, 'off': booking.staffNote.length == 0}">
+      Note {{ global.getTextByLocale(settings.staff_word_many)|htmlSpecialDecode }}
+    </div>
+  </div>
+  <div class="reservation_suivi">
+    <div class="suivi_title">
+      <div class="title_date">Créée le </div>
+      <div class="title_time">à</div>
+      <div class="title_user">par</div>
+    </div>
+    <div class="suivi_content">
+      <div class="content_date">{{ booking.creationDate | parseDate | date:'dd MMMM yyyy':'':'fr' }}</div>
+      <div class="content_time">{{ booking.creationDate | parseDate | date:'HH:mm':'':'fr' }}</div>
+      <div class="content_user">{{ booking.userCreator }}</div>
+    </div>
+  </div>
+  <div class="reservation_actions">
+    <button class="bg-secondary btn-dashicons dashicons dashicons-image-rotate" ngbTooltip="Fake" [hidden]="true">Fake</button>
+    <button class="bg-secondary btn-dashicons dashicons dashicons-image-rotate" ngbTooltip="Recharger les données" (click)="reloadBooking()"></button>
+    <button *ngIf="isRESAManager() && isDisplayButton('modify')" class="bg-primary btn-dashicons dashicons dashicons-edit" ngbTooltip="Modifier" (click)="goEditBooking()"></button>
+    <button *ngIf="isRESAManager() && isDisplayButton('customer') && booking.customer != null" class="bg-primary btn-dashicons dashicons dashicons-admin-users" ngbTooltip="Fiche client" (click)="goCustomer(booking.customer.ID)"></button>
+    <button *ngIf="isRESAManager() && isDisplayButton('notification')" class="bg-secondary btn-dashicons dashicons dashicons-email-alt" ngbTooltip="Envoyer une notification" (click)="openNotification()"></button>
+    <button *ngIf="isRESAManager() && isDisplayButton('askPayment')" class="bg-success btn-dashicons dashicons dashicons-money" ngbTooltip="Demande de paiement" (click)="openAskPayment()"></button>
+    <button *ngIf="isRESAManager() && isDisplayButton('receipt')" class="bg-secondary btn-dashicons dashicons dashicons-format-aside" ngbTooltip="Reçu/Devis" (click)="openReceipt()"></button>
+    <button class="bg-secondary btn-dashicons dashicons dashicons-cart" ngbTooltip="Envoyer la réservation sur la caisse" *ngIf="isRESAManager() && isCaisseOnlineActivated() && !booking.quotation && isDisplayButton('pushCash')" (click)="payBookingCaisseOnline(booking)"></button>
+    <button class="bg-secondary btn-dashicons dashicons dashicons-tag" *ngIf="isRESAManager() && !isCaisseOnlineActivated() && !booking.quotation && isDisplayButton('changePaymentState')"
+    (click)="openPaymentStateDialog(contentPaymentState)" ngbTooltip="Changer l'état de paiement"></button>
+    <button class="bg-secondary btn-dashicons dashicons dashicons-update" *ngIf="isRESAManager() && isCaisseOnlineActivated() && !booking.quotation && isDisplayButton('updatePaymentState')" ngbTooltip="Mettre à jour état paiement" (click)="calculateBookingPaymentState()"></button>
+    <button class="bg-danger btn-dashicons dashicons dashicons-cart" *ngIf="canStripeRefound()" ngbTooltip="Rembourser les paiements associés" (click)="openRefundStripePayment(contentRefundStripePaymentBooking)"></button>
+  </div>
+  <div class="reservation_bookings">
+    <div class="booking" [ngClass]="{'confirmed':appointment.state == 'ok','not_confirmed':appointment.state == 'waiting','cancelled':appointment.state == 'cancelled' || appointment.state == 'abandonned'}" *ngFor="let appointment of booking.appointments">
+      <div class="booking_date">
+        {{ appointment.startDate | parseDate | date:'dd MMMM yyyy':'':'fr' }}
+        <button class="bg-secondary btn-dashicons dashicons dashicons-calendar-alt" ngbTooltip="Charger ce jour là" (click)="goCalendar(appointment.startDate)"></button>
+      </div>
+      <div class="booking_hour">
+        <span *ngIf="!appointment.noEnd">
+          {{ appointment.startDate | parseDate | date:'HH:mm':'':'fr' }} à {{ appointment.endDate | parseDate | date:'HH:mm':'':'fr' }}
+        </span>
+        <span *ngIf="appointment.noEnd">
+          A partir de {{ appointment.startDate | parseDate | date:'HH:mm':'':'fr' }}
+        </span>
+      </div>
+      <ng-template #tipParticipants>
+        <div *ngIf="appointment.askParticipants">
+          <h4>Participants</h4>
+          <span *ngFor="let appointmentNumberPrice of appointment.appointmentNumberPrices">
+            <table *ngIf="appointmentNumberPrice.participantsParameter != ''" class="table">
+              <thead>
+                <tr>
+                  <td *ngFor="let field of getParticipantsParameter(appointmentNumberPrice.participantsParameter).fields">
+                    {{ global.getTextByLocale(field.name)| htmlSpecialDecode }}
+                  </td>
+                  <td *ngIf="global.groupsManagement">
+                    Groupe
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let participant of appointmentNumberPrice.participants">
+                  <td *ngFor="let field of getParticipantsParameter(appointmentNumberPrice.participantsParameter).fields">{{ global.getTextByLocale(field.prefix) }}{{ getParticipantFieldName(participant, field) }}{{ global.getTextByLocale(field.suffix) }}
+                  </td>
+                  <td *ngIf="global.groupsManagement">
+                    {{ participant.meta_group }}
+                  </td>
+                </tr>
+              </tbody>
+              <!--
+              <tfoot  *ngIf="backendCtrl.isDisplaySum(appointmentNumberPrice.participantsParameter).fields)">
+                <tr>
+                  <td *ngFor="let field of getParticipantsParameter(backendCtrl.getServicePriceAppointment(backendCtrl.getServiceById(appointment.idService),appointmentNumberPrice.idPrice).participantsParameter).fields"><span *ngIf="field.displaySum">Somme : {{ global.getTextByLocale(field.prefix,'<?php echo get_locale(); ?>') }}{{ backendCtrl.getDisplaySum(field, appointmentNumberPrice.participants) }}{{ global.getTextByLocale(field.suffix,'<?php echo get_locale(); ?>') }}</span></td>
+                </tr>
+              </tfoot>
+              //-->
+            </table>
+          </span>
+        </div>
+      </ng-template>
+      <div  *ngIf="appointment.numbers != null" class="booking_nb_people" [ngbTooltip]="tipParticipants"  tooltipClass="tooltip-participants">
+        {{ appointment.numbers }} pers.
+        <span class="dashicons dashicons-groups dashicons-sm" *ngIf="appointment.askParticipants"> </span>
+      </div>
+      <div class="booking_states">
+        <div class="states_state state_confirmed">Confirmée</div>
+        <div class="states_state state_not_confirmed">Non confirmée</div>
+        <div class="states_state state_cancelled">Annulée</div>
+        <div class="states_state state_inerror">Erreur</div>
+        <div class="states_state state_incomplete">Incomplète</div>
+      </div>
+      <div class="booking_place"><span *ngIf="appointment.idPlace != '' && getPlaceById(appointment.idPlace)">{{ global.getTextByLocale(getPlaceById(appointment.idPlace).name) }}</span></div>
+      <div class="booking_service">{{ appointment.service | htmlSpecialDecode }}</div>
+      <div class="booking_prices">
+        <div class="prices_price" *ngFor="let appointmentNumberPrice of appointment.appointmentNumberPrices">
+          <span class="price_nb" *ngIf="appointmentNumberPrice.number != null">{{ appointmentNumberPrice.number }}</span>
+          <span class="price_name"> {{ appointmentNumberPrice.name | htmlSpecialDecode }}
+            <span *ngIf="appointmentNumberPrice.equipments.length > 0">
+              ({{ appointmentNumberPrice.equipments[0]|htmlSpecialDecode }})
+            </span>
+          </span>
+          <span class="price_value" *ngIf="!appointmentNumberPrice.deactivated && appointmentNumberPrice.totalPrice != null">
+            <span *ngIf="appointmentNumberPrice.totalPrice != 0">{{ appointmentNumberPrice.totalPrice }} {{ settings.currency }}</span>
+            <span *ngIf="appointmentNumberPrice.totalPrice == 0"> ??? {{ settings.currency }}</span>
+          </span>
+        </div>
+      </div>
+      <div class="booking_members">
+        <div class="member" *ngFor="let appointmentMember of appointment.appointmentMembers">{{ appointmentMember.name|htmlSpecialDecode }}<br /></div>
+      </div>
+      <div class="booking_tags">
+        <div [hidden]="!getTagById(idTag)" class="tag {{ getTagById(idTag).color }}" *ngFor="let idTag of appointment.tags">
+          {{ global.getTextByLocale(getTagById(idTag).title) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #contentPaymentState let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Changement de l'état de paiement</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    Etat de paiement actuel :
+    <span class="font-weight-bold text-success">
+      <span *ngIf="booking.paymentState == 'noPayment'">Pas de paiement</span>
+      <span *ngIf="booking.paymentState == 'advancePayment'">Acompte</span>
+      <span *ngIf="booking.paymentState == 'deposit'">Caution</span>
+      <span *ngIf="booking.paymentState == 'complete'">Encaissée</span>
+    </span>
+    <div class="mt-2">
+      <div class="form-group">
+        <label class="font-weight-bold" for="formNewPaymentState"> Nouvel état de paiement </label>
+        <select id="formNewPaymentState" class="form-control" [(ngModel)]="newPaymentState">
+          <option value="noPayment">Pas de paiement</option>
+          <option value="advancePayment">Acompte</option>
+          <option value="deposit">Caution</option>
+          <option value="complete">Encaissée</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" [disabled]="!isOkPaymentStatus()" (click)="c(true)" >Valider le changement</button>
+    <button class="btn btn-danger" (click)="d()">Fermer</button>
+  </div>
+</ng-template>
+
+<ng-template #contentRefundStripePaymentBooking let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Remboursement</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body" style="max-height:75vh; overflow: auto;">
+    <div class="bg-light p-2">
+      <h5>Paiements non remboursé</h5>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Référence</th>
+            <th>Montant</th>
+            <th *ngIf="formRefundStripePayment.allPayments.length > 1">Remboursement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [hidden]="payment.state == 'pending'" *ngFor="let payment of formRefundStripePayment.allPayments" [ngClass]="{'bg-success':formRefundStripePayment.payment != null && formRefundStripePayment.payment.id === payment.id}" (click)="selectPaymentToRefund(payment)">
+            <td>{{ payment.paymentDate | parseDate | date:'dd MMMM yyyy HH:mm':'':'fr' }}</td>
+            <td>{{ payment.idReference }}</td>
+            <td>
+              {{ payment.value | number:'1.2':'fr'  }}{{ settings.currency }}
+              <span *ngIf="(payment.value - payment.amountRefundable) > 0">
+                <br />Déjà remboursé : {{ (payment.value - payment.amountRefundable) | number:'1.2':'fr'  }}{{ settings.currency }}
+              </span>
+            </td>
+            <td *ngIf="formRefundStripePayment.allPayments.length > 1"><button *ngIf="formRefundStripePayment.payment == null || formRefundStripePayment.payment.id !== payment.id" class="btn btn-danger">Remboursement</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-light p-2" *ngIf="formRefundStripePayment.payment != null">
+      <h5>Sélectionner le motif du remboursement</h5>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="reasonRequested" id="reasonRequested" [value]="'requested_by_customer'" [(ngModel)]="formRefundStripePayment.reason">
+        <label class="form-check-label" for="reasonRequested">Annulation</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="reasonFraude" id="reasonFraude" [value]="'fraudulent'"
+         [(ngModel)]="formRefundStripePayment.reason">
+        <label class="form-check-label" for="reasonFraude">Fraude</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="reasonDuplicate" id="reasonDuplicate" [value]="'duplicate'"
+         [(ngModel)]="formRefundStripePayment.reason">
+        <label class="form-check-label" for="reasonDuplicate">Paiement dupliqué</label>
+      </div>
+    </div>
+    <div class="bg-light p-2"  *ngIf="formRefundStripePayment.payment != null">
+      <h5>Sélectionner le montant du remboursement</h5>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="reasonAmountTotal" id="reasonAmountTotal" [value]="'all'"
+         [(ngModel)]="formRefundStripePayment.typeAmount" (ngModelChange)="formRefundStripePayment.amount = formRefundStripePayment.maxAmount">
+        <label class="form-check-label" for="reasonAmountTotal">Rembourser la totalité</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="reasonOtherAmount" id="reasonOtherAmount" [value]="'other'"
+         [(ngModel)]="formRefundStripePayment.typeAmount">
+        <label class="form-check-label" for="reasonOtherAmount">Autre montant</label>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input type="number" class="form-control" id="refoundAmount" [disabled]="formRefundStripePayment.typeAmount != 'other'" [(ngModel)]="formRefundStripePayment.amount">
+          <div class="input-group-prepend">
+            <div class="input-group-text">€</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" [disabled]="!isValidRefundStripePayment()" (click)="confirmRefund(c)">Valider</button>
+  </div>
+</ng-template>

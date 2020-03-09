@@ -1,0 +1,564 @@
+/*** couleurs
+
+vert : #08a8d7;
+rgba(0, 168, 215, 0.9);
+
+vert clair : #08c9f3;
+
+
+blanc : white;
+noir : black;
+gris : #424242;
+
+***/
+
+/** navigation step **/
+
+#steps_navigation{
+z-index:1;
+background-color:white;
+padding:20px 0px;
+}
+
+#steps_navigation .step_item{
+	text-decoration:none !important;
+	color:#08a8d7;
+	background-color:transparent;
+}
+.step_item.not_active_yet{
+	color:white;
+}
+.step_item.active, .step_item:hover{
+	color:white;
+}
+
+.step_item::before{
+	content: '';
+    height: 0px;
+    border: 1px solid #08a8d7;
+    z-index: 0;
+    display: block;
+    position: relative;
+    top: 32px;
+    right: 50%;
+    width: 100%;
+}
+#steps_navigation .step_item.not_active_yet::before{
+    border: 1px solid #424242;
+}
+#steps_navigation .step_item.active::before{
+    border: 1px solid #08a8d7;
+}
+
+#steps_navigation .step_item .step_number {
+	z-index:3;
+	color:#08a8d7;
+	background-color:white;
+	border:1px solid #08a8d7;
+	text-decoration:none;
+	font-size:18px;
+	margin: 0px auto;
+}
+#steps_navigation .step_item.not_active_yet .step_number {
+	color:white;
+	background-color:#424242;
+	border:1px solid #424242;
+	font-size:18px;
+	margin: 0px auto;
+}
+#steps_navigation .step_item.active .step_number, #steps_navigation .step_item:hover .step_number {
+	color:white;
+	background-color:#08a8d7;
+	border:1px solid #08a8d7;
+	font-size:18px;
+	margin: 0px auto;
+}
+
+#steps_navigation .step_item .step_text  {
+	font-weight:normal;
+	color:#08a8d7;
+	padding: 15px 0px 0px 0px ;
+}
+#steps_navigation .step_item.not_active_yet .step_text  {
+	color:#424242;
+	font-weight:normal;
+	padding: 15px 0px 0px 0px ;
+}
+#steps_navigation .step_item.active .step_text, #steps_navigation .step_item:hover .step_text  {
+	color:#08a8d7;
+	font-weight:normal;
+	padding: 15px 0px 0px 0px ;
+}
+
+/*** étape 1 lieu **/
+
+#step1_content::before{
+	display:block;
+	position:absolute;
+	width:100%;
+	content:"Veuillez choisir un point de dépôt";
+	text-align:center;
+	font-size:20px;
+	font-weight:bold;
+	padding:5px 0px 25px 0px;
+	margin-top:-50px;
+}
+
+#step1_content{
+	display:flex;
+	flex-wrap: no-wrap;
+	padding-top:40px;
+}
+
+#step1_content .place{
+	background-color:white;
+	color:#08a8d7;
+	border:1px solid #08a8d7 !important;
+	border:none;
+	box-sizing:border-box;
+	padding:60px 25px 80px 25px;
+	flex-grow:1;
+	width:25%;
+	text-decoration:none !important;
+}
+
+#step1_content .place:hover, #step1_content .place.active{
+	background-color:#08a8d7;
+	color:white;
+	/*border:1px solid #08a8d7;*/
+	border:none;
+}
+
+#step1_content .place .place_title {
+	color:#08a8d7;
+	font-size: 1.8em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+}
+#step1_content .place .place_description {
+	color:black;
+	font-size: 1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+}
+#step1_content .place:hover .place_title, #step1_content .place.active .place_title, #step1_content .place:hover .place_description, #step1_content .place.active .place_description{
+	color:white;
+}
+
+/* place design */
+#step1_content .place h2,#step1_content .place p {
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius:20px;
+	padding:10px 6px;
+	box-sizing:border-box;
+}
+#step1_content .place:hover h2,#step1_content .place:hover p, #step1_content .place.active h2,#step1_content .place.active p {
+	background-color: rgba(0, 168, 215, 0.9);
+}
+
+#step1_content .place.cours{
+	background-image:url('https://resa-online.fr/wp-content/uploads/2018/03/cours2.jpg');
+	background-cover:cover;
+	background-position:center center;
+}
+
+#step1_content .place.outdoor{
+	background-image:url('https://resa-online.fr/wp-content/uploads/2018/03/activite.jpg');
+	background-cover:cover;
+	background-position:center center;
+}
+
+
+
+/*** étape 2 service **/
+
+#step2_content{
+	/*display:flex;*/
+}
+
+
+#step2_content::before{
+	display:block;
+	width:100%;
+	content:"Veuillez choisir le service";
+	text-align:center;
+	font-size:20px;
+	font-weight:bold;
+	padding:5px 0px 25px 0px;
+}
+
+#step2_content{
+	display:flex;
+	flex-wrap: wrap;
+}
+
+#step2_content .place{
+	background-color:white;
+	color:#08a8d7;
+	border:1px solid #08a8d7 !important;
+	border:none;
+	box-sizing:border-box;
+	padding:60px 25px 80px 25px;
+	width:32%;
+	text-decoration:none !important;
+}
+
+
+#step2_content .category {
+}
+
+
+#step2_content .category .category_title {
+	color:#08a8d7;
+	font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+}
+
+#step2_content .service{
+	background-color:white;
+	color:#08a8d7;
+	border:1px solid #08a8d7;
+	box-sizing:border-box;
+	padding:15px;
+	width:100%;
+	text-decoration:none !important;
+	margin-bottom:20px;
+}
+
+#step2_content .service:hover{
+	background-color:#08a8d7;
+	color:white;
+	border:1px solid #08a8d7;
+}
+
+#step2_content .service_content , #step2_content .service:hover .service_content{
+	background-color:transparent;
+	color:inherit;
+	border:none;
+}
+
+
+#step2_content .service .service_title {
+	color:#08a8d7;
+	font-size: 1.8em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+}
+#step2_content .service .service_description {
+	color:black;
+	font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+}
+#step2_content .service:hover .service_title, #step2_content .service.active .service_title, #step2_content .service:hover .service_description, #step2_content .service.active .service_description{
+	color:white;
+}
+
+
+
+
+/** en-tête lieu et services **/
+
+#selected_place{
+	padding: 30px;
+    background-color: white;
+    margin: 20px 0px;
+    text-align: center;
+}
+
+#selected_place .place_title{
+	color:#08a8d7;
+    font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+}
+
+#selected_place .place_description {
+	color:black;
+    font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: center;
+	margin:0px;
+	padding:0px;
+}
+
+#selected_service {
+	padding: 30px;
+    background-color: white;
+    margin: 20px 0px;
+    text-align: left;
+}
+#selected_service .service_title{
+	color:#08a8d7;
+    font-size: 2.2em;
+    line-height: 1.4em;
+	font-weight:bolder;
+	text-align: left;
+	margin:0px;
+	padding:0px;
+}
+#selected_service .service_description {
+	color:black;
+    font-size: 1.1em;
+    line-height: 1.4em;
+	font-weight:normal;
+	text-align: left;
+	margin:0px;
+	padding:0px;
+}
+
+#steps_content {
+    background-color: white;
+    padding: 20px 10px;
+	box-sizing:border-box;
+}
+
+#step3_content .step3_1_title, #step3_content .step3_2_title, #step3_content .step3_3_title, #step3_content .step3_4_title {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+#step3_content .step3_1_title::after{
+	display:block;
+	content:"(date de dépôt de vos chaussures)" !important;
+	font-size:14px;
+	font-style:italic;
+	font-weight:normal;
+}
+
+#step3_content .step3_2_title::after{
+	display:block;
+	content:"(Créneau de dépôt de vos chaussures)" !important;
+	font-size:14px;
+	font-style:italic;
+	font-weight:normal;
+}
+
+.add_service_date_btns{
+	display:none !important;
+}
+
+/** calendrier**/
+
+#step3_1 .calendrier {
+    margin: 10px 0px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#ro_front_formulaire .calendrier thead .btn{
+	border:1px solid #08a8d7;
+	box-sizing:border-box;
+}
+
+#ro_front_formulaire .calendrier tbody .btn{
+	font-size: 14px;
+    font-weight: normal;
+}
+
+#step3_1 .calendrier tr, #step3_1 .calendrier thead th, #step3_1 .calendrier td{
+    border:none;
+	color:black;
+}
+
+#ro_front_formulaire .calendrier tbody .btn.active {
+    color: white;
+    background-color: #08c9f3;
+}
+
+/** creneau **/
+
+#step3_2 .creneau{
+	max-width:100%;
+	border: 1px solid #08a8d7;
+	color:#08a8d7;
+}
+#step3_2 .creneau:hover {
+    background-color: #08a8d7;
+    color: white;
+}
+#step3_2 .creneau.active{
+    background-color: #08a8d7;
+    color: white;
+}
+
+/** date et creneau recap **/
+
+#step3_date_recap, #step3_creneau_recap{
+	background-color: #000000;
+    color: white;
+}
+#step3_date_recap .gras, #step3_creneau_recap .gras{
+    color: #08a8d7;
+}
+
+/** tarifs et extra **/
+
+#step3_3 .price {
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+}
+
+#step3_3 .price , #step3_4 .extra{
+	background-color:transparent;
+	color:black;
+	border:1px solid #08a8d7;
+}
+#step3_3 .price .price_title, #step3_4 .extra .extra_title {
+	color:#08a8d7;
+}
+
+#step3_3 .price_value, #step3_4 .extra_value{
+	font-size:26px;
+	line-height:1.2em;
+	color:#08a8d7;
+}
+#step3_3 .price_unit , #step3_4 .extra_unit{
+	font-size:18px;
+	line-height:1.2em;
+	color:black;
+}
+#step3_3 .price_quantity_title  , #step3_4 .extra_quantity_title{
+	display:none;
+}
+
+#ro_front_formulaire .add_date_step_link, #ro_front_formulaire .add_service_step_link , #ro_front_formulaire .previous_step_link , #ro_front_formulaire .next_step_link, #ro_front_formulaire .btn_add_coupon {
+	color:white !important;
+	background-color:#08a8d7;
+	border:1px solid #08a8d7;
+	text-decoration:none !important;
+}
+#ro_front_formulaire .add_date_step_link:hover, #ro_front_formulaire .add_service_step_link:hover , #ro_front_formulaire .previous_step_link:hover , #ro_front_formulaire .next_step_link:hover {
+	color:#08a8d7 !important;
+	background-color:white;
+}
+
+
+#step6_1 .order_recap{
+	color:black;
+}
+
+
+#step6_2{
+	background-color:white;
+}
+
+#step6_2 .paiement_methods form label{
+	padding:20px 0px 0px 0px
+}
+
+#step6_2 .paiement_methods form label .description{
+	display: block;
+    margin-top: -20px;
+    line-height: 14px !important;
+    font-size: 14px;
+    float: left;
+}
+
+#step6_2 .account label{
+	line-height:1.3em;
+	padding-top:20px;
+}
+
+#step6_2 .paiement_validation{
+	border-top:1px solid black;
+	margin-top:25px;
+}
+
+#step6_2 .paiement_validation_title{4
+font-weight:bold;
+text-align:center;
+margin-top:30px;
+}
+
+/*** cart ***/
+#cart{
+	background-color:#e9e9e9;
+}
+
+#cart .cart_title {
+    text-align: center;
+    margin: 5px 0px;
+    color: black;
+    font-weight: bolder;
+    font-size: 24px !important;
+}
+
+#cart .service_title {
+	color:black;
+    font-weight: normal;
+    font-size: 24px;
+    padding-bottom: 10px;
+    margin-top: 25px;
+}
+
+#cart .cart_row {
+    color: white;
+    background-color: #08a8d7;
+    border: 1px solid #08a8d7;
+	grid-row-gap: 0px;
+}
+
+#cart .cart_row .date, #cart .cart_row .creneau{
+	font-size:18px;
+	font-weight:normal;
+	line-height:1.2em;
+	background-color:#424242;
+}
+
+.cart_coupon{
+	display:flex;
+	justify-content:center;
+}
+.cart_coupon h4{
+	align-self:center;
+	padding:10px;
+	margin:0px;
+}
+.cart_coupon input{
+	width:auto !important;
+	min-width:100px;
+	margin: 0px 15px;
+	align-self:center;
+}
+
+#ro_front_formulaire .cart_add_coupon_title{
+	font-size:18px;
+}
+
+#ro_front_formulaire .btn_add_coupon {
+	border:1px solid white !important;
+	border-radius:0px;
+	color:white !important;
+	background-color:#08a8d7;
+	font-size:16px;
+	font-weight:bold;
+	padding: 6px;
+}
+
+#ro_front_formulaire .btn_add_coupon:hover {
+	border:1px solid #08a8d7 !important;
+	color:#08a8d7 !important;
+	background-color:white;
+}
+
+.date_selected::before {
+	content:"Dépôt des chaussures en point relais : ";
+	font-size:16px;
+	font-weight:bold;
+	color:white;
+}
+
+.cart_row  .date_selected .date, .cart_row  .date_selected .creneau{
+	color:white;
+}

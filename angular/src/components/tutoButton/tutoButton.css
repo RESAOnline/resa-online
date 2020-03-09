@@ -1,0 +1,19 @@
+
+.btn-icone-dashicons{
+    width: auto;
+    height: auto;
+    margin: 0px 10px 0px 0px;
+    font-size: 1.4rem;
+}
+
+.btn-youtube {
+  color:white;
+  background-color: #FF0000;
+  border:1px solid #FF0000;
+}
+
+.btn-youtube:hover {
+  color:white;
+  background-color: #C40000;
+  border:1px solid #C40000;
+}

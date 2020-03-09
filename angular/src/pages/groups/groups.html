@@ -1,0 +1,174 @@
+<div id="page_content" class="container p-sm-2" style="max-width: 85vw; margin-left: auto; margin-right: auto;">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-1 border-bottom">
+    <h1>Groupes ({{ groups.length }})</h1>
+    <div>
+      <button type="button" class="btn btn-sm btn-success" [disabled]="canDeactivate() || launchActionSave" (click)="save()"><span *ngIf="!launchActionSave">Sauvegarder</span><span *ngIf="launchActionSave">Sauvegarde en cours...</span></button>
+    </div>
+  </div>
+  <input class="form-control mt-md-3" id="service_search" type="text" placeholder="Recherche..." [(ngModel)]="formGroups.search" (ngModelChange)="calculateDisplayGroups()">
+  <table class="table mt-3" id="services_list">
+    <thead>
+      <tr>
+        <th class="text-left"><a href="javascript:void(0)" (click)="displayGroupsOrderBy('activated')">Activé</a></th>
+        <th><a href="javascript:void(0)" (click)="displayGroupsOrderBy('name')">Nom</a></th>
+        <th><a href="javascript:void(0)" (click)="displayGroupsOrderBy('service')">Service</a></th>
+        <th *ngIf="settings != null && settings.places.length > 0">
+          <a href="javascript:void(0)" (click)="displayGroupsOrderBy('place')">Lieu</a>
+          <div class="form-check" *ngFor="let place of settings.places">
+            <input class="form-check-input" id="formInput_{{ place.id }}" type="checkbox" value="{{ place.id }}" [checked]="formGroups.places.indexOf(place.id) != -1" (change)="switchFormGroupsPlace(place.id)" />
+            <label class="form-check-label font-weight-normal" for="formInput_{{ place.id }}">{{ place.name[global.currentLanguage]}}</label>
+          </div>
+        </th>
+        <th class="text-right">
+          <button type="button" class="btn btn-sm btn-outline-success" (click)="addGroup(content)">+ Nouveau groupe</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of displayGroups; index as i">
+        <th scope="row" class="text-left">
+          <span class="switch switch-sm">
+            <input class="switch" id="group{{ i }}_activated" type="checkbox" (ngModelChange)="updateGroup(group)" [(ngModel)]="group.activated">
+            <label for="group{{ i }}_activated" ngbTooltip="Activer / Désactiver"></label>
+          </span>
+        </th>
+        <th scope="row"><span ngbTooltip="La couleur associée à ce groupe" class="color_badge" [ngStyle]="{'background-color': group.color }"></span> {{ group.name }}</th>
+        <td>{{ getServiceName(group.idService) }}</td>
+        <td *ngIf="settings != null && settings.places.length > 0">{{ getPlaceName(group.idPlace) }}</td>
+        <td class="text-right" nowrap>
+          <button class="btn btn-sm btn-outline-info m-1" (click)="modifyGroup(content, group)">Modifier</button>
+          <button class="btn btn-sm btn-outline-warning m-1" (click)="duplicateGroup(content, group)">Dupliquer</button>
+          <button class="btn btn-sm btn-outline-danger m-1" (click)="deleteGroup(group)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modifier le groupe {{ formGroup.name }}</h4>
+      <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+    </div>
+    <div class="modal-body">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" href="#tab10" data-toggle="tab" role="tab" aria-controls="tab10" aria-expanded="true">Général</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab11" data-toggle="tab" role="tab" aria-controls="tab11" aria-expanded="true">Filtres</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active pt-sm-2" id="tab10" role="tabpanel" aria-labelledby="tab10-tab">
+          <div class="form-group">
+            <label class="font-weight-bold" for="formGName" title="Nom">Nom</label>
+            <input class="form-control" id="formGName" type="text" placeholder="Nom" [(ngModel)]="formGroup.name" />
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formGPresentation">Description</label>
+            <textarea class="form-control" id="formGPresentation" rows="3" [(ngModel)]="formGroup.presentation"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formGColor" ngbTooltip="Couleur sur le planning">Couleur</label>
+            <input class="form-control h-50" id="formGColor" type="color" [(ngModel)]="formGroup.color" />
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formGCapacity" title="Capacité">Capacité</label>
+            <input class="form-control" id="formGCapacity" type="number" placeholder="0" [(ngModel)]="formGroup.max" />
+          </div>
+        </div>
+        <div class="tab-pane pt-sm-2" id="tab11" role="tabpanel" aria-labelledby="tab11-tab">
+          <p>Les filtres vous permettent de créer automatiquement des groupes en fonction des lieux, des activités et des informations des participants</p>
+          <div class="form-group" *ngIf="settings.places.length > 0">
+            <label class="font-weight-bold" for="formGPlace">Lieu</label>
+            <select class="form-control mt-md-2" id="formGPlace" [(ngModel)]="formGroup.idPlace">
+              <option *ngFor="let place of settings.places" [value]="place.id">{{ global.getTextByLocale(place.name) }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" for="formGService">Activité</label>
+            <select class="form-control mt-md-2" id="formGService" [(ngModel)]="formGroup.idService" (ngModelChange)="formGroup.idServicePrices = []">
+              <option *ngFor="let service of services" [hidden]="service.places.indexOf(formGroup.idPlace) == -1 && service.places.length > 0" [value]="service.id"><span *ngIf="service.places.length > 0">[<span *ngFor="let place of service.places; index as i"><span *ngIf="i > 0">,</span>{{ getPlaceName(place) }}</span>] </span> {{ global.getTextByLocale(service.name) }}</option>
+            </select>
+          </div>
+          <div class="form-group" *ngIf="false">
+            <label class="font-weight-bold">Tarif</label>
+            <table class="table" id="prices_list" *ngIf="getServiceById(formGroup.idService)">
+              <tr *ngFor="let idServicePrice of formGroup.idServicePrices; index as i">
+                <td class="text-right">
+                  <select class="form-control mt-md-2" [(ngModel)]="formGroup.idServicePrices[i]">
+                    <option *ngFor="let price of getServiceById(formGroup.idService).prices">{{ global.getTextByLocale(price.name) }}({{ price.slug }})</option>
+                  </select>
+                </td>
+                <td class="text-right">
+                  <button class="btn btn-sm btn-outline-danger m-1" (click)="formGroup.idServicePrices.splice(i, 1)">Supprimer</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-right" colspan="2">
+                  <button class="btn btn-sm btn-outline-success" type="button" (click)="formGroup.idServicePrices.push(-1)">+ Ajouter un tarif</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold">Informations des participants</label>
+            <p>Filtrer en fonction des informations des participants</p>
+            <div *ngIf="getParticipantFields(formGroup) == null && getServiceById(formGroup.idService) != null && formGroup.idServicePrices.length > 0 && formGroup.idServicePrices[0] != -1" class="bg-danger">Ce tarif n'a pas de paramètres participants défini</div>
+            <table class="table mt-3" id="services_list" *ngIf="getParticipantFields(formGroup) != null">
+              <thead>
+                <tr>
+                  <th>Champ</th>
+                  <th>Valeur</th>
+                  <th class="text-right">
+                    <button type="button" class="btn btn-sm btn-outline-success" (click)="formGroup.variableOptions.push({varname:'', value:''})">+ Ajouter un filtre</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let option of formGroup.variableOptions; index as i">
+                  <td scope="row">
+                    <select class="form-control mt-md-2" [(ngModel)]="option.varname">
+                      <option *ngFor="let field of getParticipantFields(formGroup).fields" [value]="field.varname">{{ global.getTextByLocale(field.name) }}</option>
+                    </select>
+                  </td>
+                  <td *ngIf="getParticipantField(getParticipantFields(formGroup), option.varname)">
+                    <select *ngIf="getParticipantField(getParticipantFields(formGroup), option.varname).type == 'select'" class="form-control mt-md-2" [(ngModel)]="option.value">
+                      <option *ngFor="let option of getParticipantField(getParticipantFields(formGroup), option.varname).options" [value]="option.id">{{ option.name[global.currentLanguage] }}</option>
+                    </select>
+                    <input *ngIf="getParticipantField(getParticipantFields(formGroup), option.varname).type == 'text'" class="form-control mt-md-2" type="text" [(ngModel)]="option.value" />
+                    <input *ngIf="getParticipantField(getParticipantFields(formGroup), option.varname).type == 'number'" class="form-control mt-md-2" type="number" [(ngModel)]="option.value" />
+                  </td>
+                  <td class="text-right">
+                    <button class="btn btn-sm btn-outline-danger m-1" (click)="formGroup.variableOptions.splice(i, 1)">Supprimer</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group">
+            <label class="font-weight-bold" ngbTooltip="Ceci créer un groupe pour chaque réservation.">Créer un groupe par réservation</label>
+            <p>Si vous sélectionnez "OUI", cela créera un groupe à chaque réservation. Dans le cas où l'on veut regrouper tous les participants d'une même réservation ! (tout niveau, age, autre confondu)</p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="oneByBooking" id="formGOneByBookingTrue" [value]="true" [(ngModel)]="formGroup.oneByBooking">
+                <label class="form-check-label" for="formGOneByBookingTrue">Oui</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="oneByBooking" id="formGOneByBookingFalse" [value]="false"  [(ngModel)]="formGroup.oneByBooking">
+                <label class="form-check-label" for="formGOneByBookingFalse">Non (par défaut)</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="bg-danger text-white pull-left param_infos" *ngIf="!isOkGroup()">
+        <span *ngIf="formGroup.name === ''">- Veuillez définir le nom du groupe<br /></span>
+        <span *ngIf="formGroup.idService == -1">- Veuillez attacher une activité au groupe<br /></span>
+      </div>
+      <button class="btn btn-success" type="button" [disabled]="!isOkGroup()" (click)="closeGroupModal(c)">Modifier</button>
+    </div>
+  </ng-template>
+</div>
+<div *ngIf="settings == null" class="sLoader_bg"><div class="sLoader"></div></div>

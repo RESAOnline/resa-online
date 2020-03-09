@@ -1,0 +1,1258 @@
+/***** liste des couleurs  de base
+
+
+
+>>> Couleur de base
+
+#ccc  &   #cccccc
+
+clack
+
+white
+
+red
+
+#21bd18
+
+#fcb912
+
+#e5e5e5
+
+#b2b2b2
+
+#393939
+
+#f03917
+
+
+
+
+
+>>> couleur Ecole de ski 360
+
+
+
+bleu  #23bae0
+
+rose  #f400d0
+
+
+
+****/
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+/***************** general ******************/
+/** transition 200ms **/
+
+.t200all {
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+}
+#ro_front_formulaire input,
+#ro_front_formulaire select {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    border-style: solid;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #ccc;
+}
+#ro_front_formulaire .btn {
+    border: 1px solid #23bae0;
+    background-color: #23bae0;
+    color: white;
+}
+#ro_front_formulaire .btn:hover {
+    background-color: #f400d0;
+    color: white;
+    border: 1px solid #f400d0;
+}
+.input_error {
+    color: red;
+    background-color: white;
+}
+.input_valid {
+    color: #21bd18;
+    background-color: white;
+}
+.input_info {
+    color: #fcb912;
+    background-color: white;
+}
+#ro_front_formulaire .gras,
+#ro_front_formulaire b {
+    color: #23bae0;
+    font-weight: bolder;
+}
+/***************** mobile first design **************/
+
+.step_item {
+    background-color: #23bae0;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    color: white;
+}
+#steps_navigation .not_active_yet {
+    background-color: #cccccc;
+    color: white;
+}
+.step_item.active .step_number {
+    color: white;
+}
+.step_item.active .step_text {
+    color: white;
+}
+.step_item.active,
+.step_item:hover {
+    color: white;
+    background-color: #f400d0;
+}
+/********** ETAPE 1 : CHOIX LIEU **********/
+
+#step1_content .place {
+    border: 1px solid #23bae0;
+    background-color: #23bae0;
+    color: white;
+}
+#step1_content .place .place_description {
+    color: white;
+}
+#step1_content .place .place_title {
+    color: white;
+    font-size: 2.6em;
+    line-height: 1.2em;
+    padding-top: 40px;
+    margin-bottom: 0px;
+}
+#step1_content .place .place_description:hover,
+#step1_content .place .place_title:hover {
+    color: white;
+}
+#step1_content .place:hover {
+    background-color: #f400d0;
+    color: white;
+    border: 1px solid #f400d0;
+}
+#step1_content .place.active {
+    background-color: #f400d0;
+    color: #23bae0;
+    border: 1px solid #f400d0;
+}
+#step1_content .place.active #step1_content .place .place_title {
+    text-decoration: underline;
+}
+
+.category_title{
+	text-align:center;
+}
+
+/********** ETAPE 2 : CHOIX SERVICE **********/
+
+#step2_content .category_title {
+    color: #f400d0;
+    font-size: 2em;
+    line-height: 2.2em;
+	text-align:center;
+}
+#step2_content .service {
+    color: white;
+    margin-bottom: 5px
+}
+#step2_content .service:hover {
+    color: white;
+}
+#step2_content .service_content {
+    background-color: transparent;
+}
+#step2_content .service:hover .service_content {
+    background-color: #f400d0;
+}
+#step2_content .service .service_description {
+    color: white;
+    font-size: 1em;
+    line-height: 1.4em;
+    padding: 8px;
+    text-align: justify;
+}
+#step2_content .service .service_title {
+    color: white;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    line-height: 1.2em;
+    padding: 8px;
+    margin-bottom: 0px;
+}
+#step2_content .service .service_description {} #ro_front_formulaire #selected_place .place_title {
+    font-size: 1.3em;
+}
+#ro_front_formulaire #selected_place .place_description {
+    font-size: 1.1em;
+}
+#ro_front_formulaire #selected_service .service_title {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center;
+}
+/********** ETAPE 3 : CHOIX DATE **********/
+/***** CALENDRIER *****/
+
+#ro_front_formulaire .calendrier tbody .btn {
+    color: white;
+}
+#ro_front_formulaire .calendrier tbody .btn.active {
+    color: white;
+    background-color: #f400d0;
+}
+/***** dates selections *****/
+
+#step3_1 .date_selection {
+    background-color: white;
+    border: 1px solid #23bae0;
+    color: #23bae0;
+}
+#step3_1 .date_selection.active {
+    background-color: #23bae0;
+    color: white;
+}
+/***** CRENEAU *****/
+
+#step3_2 {} #step3_2 .creneau {
+    background-color: white;
+    border: 1px solid #23bae0;
+    color: #23bae0;
+}
+#step3_2 .morning_title,
+#step3_2 .afternoon_title {
+    background-color: white;
+}
+#step3_2 .creneau:hover {
+    background-color: #23bae0;
+    color: white;
+}
+#step3_2 .creneau.active {
+    background-color: #23bae0;
+    color: white;
+}
+#step3_2 .creneau.not_avalaible {
+    background-color: #cccccc;
+    background: repeating-linear-gradient( 45deg, #cccccc, #cccccc 10px, #b2b2b2 10px, #b2b2b2 20px);
+    color: white;
+}
+/***** PRICE *****/
+
+#step3_3 {} #step3_3 .price {
+    background-color: white;
+    border: 1px solid #23bae0;
+}
+#step3_3 .price .price_title {
+    color: #23bae0;
+}
+#step3_3 .price .price_value {
+    font-size: 1.8em;
+    color: #23bae0;
+}
+#step3_3 .price .price_value .price_unit {
+    font-size: inherit;
+    color: #23bae0;
+}
+#step3_3 .price_quantity_input {
+    border: 1px solid #23bae0;
+}
+/***** EXTRA *****/
+
+#step3_4 .extra {
+    background-color: white;
+    border: 1px solid #23bae0;
+}
+#step3_4 .extra_quantity_input {
+    border: 1px solid #23bae0;
+}
+#step3_4 .extra_quantity_minus_btn,
+#step3_4 .extra_quantity_plus_btn {
+    background-color: #23bae0;
+    color: white;
+}
+#step3_4 .extra_quantity_minus_btn:hover,
+#step3_4 .extra_quantity_plus_btn:hover {
+    background-color: white;
+    color: #23bae0;
+    border: 1px solid #23bae0;
+}
+#step3_4 .extra_add_to_cart .extra_add_btn {
+    background-color: #23bae0;
+    color: white;
+}
+#step3_4 .extra_add_to_cart .extra_add_btn:hover {
+    background-color: white;
+    color: #23bae0;
+    border: 1px solid #23bae0;
+}
+#step3_4 .extra_add_to_cart .extra_add_btn:hover {
+    background-color: white;
+    color: #23bae0;
+    border: 1px solid #23bae0;
+}
+/********** ETAPE 4 : Informations personnelles **********/
+/********** ETAPE 5 : RECAP **********/
+
+.order_recap_left .order_recap_price_quantity {
+    background-color: #e5e5e5;
+}
+.order_recap_left .order_recap_price_quantity_separator {
+    background-color: #e5e5e5;
+}
+.order_recap_center .order_recap_price_title {
+    background-color: #e5e5e5;
+}
+.order_recap_right .order_recap_price_total {
+    background-color: #e5e5e5;
+}
+/***** Client information *****/
+
+#step5 .clients_informations {
+    background-color: #cccccc;
+}
+/********** ETAPE 6 : RECAP & paiement **********/
+/**** ETAPE 6_1 : RECAPITULATIF ****/
+/**** ETAPE 6_2 : PAIEMENT ****/
+
+#step6_2 {
+    background-color: #e5e5e5;
+}
+#step6_2 .paiement_text {
+    background-color: white;
+}
+#step6_2 .paiement_methods form .method {
+    background-color: white;
+}
+#step6_2 .paiement_validation_form {
+    background-color: white;
+}
+#step6_2 .paiement_validation_btn {
+    background-color: #23bae0;
+    color: white;
+}
+#step6_2 .paiement_validation_btn:hover {
+    background-color: #393939;
+    color: white;
+}
+/********** ETAPE 7 : Confirmation **********/
+/********** CART **********/
+
+#cart {
+    background-color: #e5e5e5;
+}
+#cart .service_title {
+    border-bottom: 1px solid #23bae0;
+}
+/** tarif **/
+
+#cart .cart_row {
+    background-color: white;
+}
+/** supprimer **/
+
+#cart .cart_row .delete_price .delete_price_btn {
+    color: #f03917;
+    background-color: #e5e5e5;
+}
+/** reduction **/
+
+#cart .reduction_row {
+    background-color: white;
+}
+/** sous total **/
+
+#cart .creneau_sous_total {
+    color: #23bae0;
+}
+#cart .cart_total {
+    color: white;
+    background-color: #23bae0;
+}
+/***** NAVIGATION ENTRE ETAPES *****/
+
+#next_step_nav a {
+    background-color: #23bae0;
+    color: white;
+}
+#next_step_nav a:hover {
+    background-color: #f400d0;
+}
+/***** ajouter une date / un service *****/
+
+#ro_front_formulaire .add_service_step_link,
+#ro_front_formulaire .add_date_step_link {
+    background-color: #23bae0;
+    color: white;
+}
+#ro_front_formulaire .add_service_step_link:hover,
+#ro_front_formulaire .add_date_step_link:hover {
+    background-color: #f400d0;
+}
+/***************************************
+
+---------      CSS GRID        ---------
+
+***************************************/
+
+@supports(display:grid) {
+    @media screen and (min-width: 500px) {
+        .step_item::before {
+            border: 1px solid #23bae0;
+        }
+        .step_item.not_active_yet::before {
+            border: 1px solid #cccccc;
+        }
+        #steps_navigation .step_item,
+        #steps_navigation .step_item:hover,
+        #steps_navigation .step_item.not_active_yet {
+            background-color: transparent;
+        }
+        #steps_navigation .step_item.active {
+            background-color: transparent;
+        }
+        #steps_navigation .step_item {
+            background-color: inherit;
+        }
+        .step_item .step_number {
+            background-color: #e5e5e5;
+            color: #23bae0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .step_item.active .step_text,
+        .step_item:hover .step_text {
+            color: #23bae0;
+        }
+        .step_item.active .step_number,
+        .step_item:hover .step_number {
+            background-color: #23bae0;
+            color: white;
+        }
+        .step_item.not_active_yet .step_number,
+        .step_item.not_yet_active:hover .step_number {
+            background-color: #cccccc;
+            color: white;
+        }
+        #steps_navigation .step_item .step_text {
+            font-size: 1.1em;
+            font-family: 'Roboto', sans-serif;
+            color: #23bae0;
+        }
+        #steps_navigation .step_item.not_active_yet .step_text {
+            color: #cccccc;
+        }
+        #step2_content {
+            display: flex;
+        }
+        #step2_content .category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            border-bottom: 1px solid #f400d0;
+            padding-bottom: 10px;
+            flex: 1;
+        }
+        #step2_content .service {
+            color: white;
+            border: none;
+            margin: 10px;
+            flex-grow: 0;
+            flex: 0;
+            align-self: stretch;
+        }
+        #step2_content .service:hover {
+            color: white;
+            border: none;
+        }
+        #step2_content .service_content {
+            background-color: transparent;
+            padding: 5px 5px;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+        #step2_content .service:hover .service_content {
+            background-color: rgba(244, 0, 208, 0.7);
+        }
+        #step2_content .service:hover .service_title {
+            background-color: rgba(0, 0, 0, 0.0);
+            color: white;
+        }
+        #step2_content .service .service_title {
+            color: black;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            line-height: 1.6em;
+            padding: 8px 5px;
+            margin-bottom: 0px;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-weight: bold;
+        }
+        #step2_content .service .service_description {
+            color: white;
+            font-size: 1em;
+            line-height: 1.4em;
+            padding: 8px;
+            text-align: justify;
+            display: none;
+        }
+        #step2_content .category_title {
+            margin: 10px 5px;
+            flex-grow: 0;
+            min-width: 20%;
+            text-align: left;
+        }
+		
+        /** iages des services **/
+        /*
+		#step2_content .cours_particulier_ski {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-ski.jpg');
+            background-size: cover;
+        }
+        #step2_content .particulier_snow_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-Snowboard.jpg');
+            background-size: cover;
+        }
+        #step2_content .journee_engagement_enfants_ski {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Guide-journée-ski.jpg');
+            background-size: cover;
+        }
+        #step2_content .journee_snow_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-guide-journée-Snowboard.jpg');
+            background-size: cover;
+        }
+        #step2_content .premiere_glisse_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-1ere-glisse.jpg');
+            background-size: cover;
+        }
+        #step2_content .collectifs_enfants_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-collectifs-enfants.jpg');
+            background-size: cover;
+        }
+        #step2_content .collectif_adultes_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-sollectifs-adultes.jpg');
+            background-size: cover;
+        }
+        #step2_content .collectifs_snowboard_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-collectifs-Snowboard.jpg');
+            background-size: cover;
+        }
+        #step2_content .ski_club_360 {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-ski-club-360.jpg');
+            background-size: cover;
+        }
+        #step2_content .hors_piste_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Stages-Hors-piste.jpg');
+            background-size: cover;
+        }
+        #step2_content .cours_ski_fond_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-ski-nordique.jpg');
+            background-size: cover;
+        }
+        #step2_content .raquette_samoens {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Sorties-Raquettes.jpg');
+            background-size: cover;
+        }
+		*/
+/* Les gets */
+/*
+        #step2_content .cours_particulier_ski_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-ski.jpg');
+            background-size: cover;
+        }
+        #step2_content .particulier_snow_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-Snowboard.jpg');
+            background-size: cover;
+        }
+        #step2_content .journee_engagement_enfants_ski_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Guide-journée-ski.jpg');
+            background-size: cover;
+        }
+        #step2_content .journee_snow_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-guide-journée-Snowboard.jpg');
+            background-size: cover;
+        }
+        #step2_content .premiere_glisse_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-1ere-glisse.jpg');
+            background-size: cover;
+        }
+        #step2_content .collectifs_enfants_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-collectifs-enfants.jpg');
+            background-size: cover;
+        }
+        #step2_content .collectif_adultes_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-sollectifs-adultes.jpg');
+            background-size: cover;
+        }
+        #step2_content .collectifs_snowboard_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-collectifs-Snowboard.jpg');
+            background-size: cover;
+        }
+        #step2_content .hors_piste_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Stages-Hors-piste.jpg');
+            background-size: cover;
+        }
+        #step2_content .cours_ski_fond_les_gets {
+            background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-ski-nordique.jpg');
+            background-size: cover;
+        }
+		*/
+        /***** liste des couleurs  de base
+
+
+
+
+
+
+
+>>> Couleur de base
+
+
+
+#ccc  &   #cccccc
+
+
+
+clack
+
+
+
+white
+
+
+
+red
+
+
+
+#21bd18
+
+
+
+#fcb912
+
+
+
+#e5e5e5
+
+
+
+#b2b2b2
+
+
+
+#393939
+
+
+
+#f03917
+
+
+
+
+
+
+
+
+
+
+
+>>> couleur Ecole de ski 360
+
+
+
+
+
+
+
+bleu  #23bae0
+
+
+
+rose  #f400d0
+
+
+
+
+
+
+
+****/
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        /***************** general ******************/
+        /** transition 200ms **/
+
+        .t200all {
+            -webkit-transition: all 200ms ease-in-out;
+            -moz-transition: all 200ms ease-in-out;
+            -ms-transition: all 200ms ease-in-out;
+            -o-transition: all 200ms ease-in-out;
+            transition: all 200ms ease-in-out;
+        }
+        #ro_front_formulaire input,
+        #ro_front_formulaire select {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            border-style: solid;
+            border-top: 1px solid #cccccc;
+            border-bottom: 1px solid #ccc;
+            border-left: 1px solid #cccccc;
+            border-right: 1px solid #ccc;
+        }
+        #ro_front_formulaire .btn {
+            border: 1px solid #23bae0;
+            background-color: #23bae0;
+            color: white;
+        }
+        #ro_front_formulaire .btn:hover {
+            background-color: #f400d0;
+            color: white;
+            border: 1px solid #f400d0;
+        }
+        .input_error {
+            color: red;
+            background-color: white;
+        }
+        .input_valid {
+            color: #21bd18;
+            background-color: white;
+        }
+        .input_info {
+            color: #fcb912;
+            background-color: white;
+        }
+        #ro_front_formulaire .gras,
+        #ro_front_formulaire b {
+            color: #23bae0;
+            font-weight: bolder;
+        }
+        #ro_front_formulaire #welcome_texts a {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        /***************** mobile first design **************/
+
+        .step_item {
+            background-color: #23bae0;
+            border-left: 1px solid white;
+            border-right: 1px solid white;
+            color: white;
+        }
+        #steps_navigation .not_active_yet {
+            background-color: #cccccc;
+            color: white;
+        }
+        .step_item.active .step_number {
+            color: white;
+        }
+        .step_item.active .step_text {
+            color: white;
+        }
+        .step_item.active,
+        .step_item:hover {
+            color: white;
+            background-color: #f400d0;
+        }
+        /********** ETAPE 1 : CHOIX LIEU **********/
+
+        #step1_content .place {
+            border: 1px solid #23bae0;
+            background-color: #23bae0;
+            color: white;
+        }
+        #step1_content .place .place_description {
+            color: white;
+        }
+        #step1_content .place .place_title {
+            color: white;
+            font-size: 2.6em;
+            line-height: 1.2em;
+            padding-top: 40px;
+            margin-bottom: 0px;
+        }
+        #step1_content .place .place_description:hover,
+        #step1_content .place .place_title:hover {
+            color: white;
+        }
+        #step1_content .place:hover {
+            background-color: #f400d0;
+            color: white;
+            border: 1px solid #f400d0;
+        }
+        #step1_content .place.active {
+            background-color: #f400d0;
+            color: #23bae0;
+            border: 1px solid #f400d0;
+        }
+        #step1_content .place.active #step1_content .place .place_title {
+            text-decoration: underline;
+        }
+        /********** ETAPE 2 : CHOIX SERVICE **********/
+
+        #step2_content .category_title {
+            color: #f400d0;
+            font-size: 1.8em;
+            line-height: 1.3em;
+        }
+        #step2_content .service {
+            color: white;
+            margin-bottom: 5px
+        }
+        #step2_content .service:hover {
+            color: white;
+        }
+        #step2_content .service_content {
+            background-color: transparent;
+        }
+        #step2_content .service:hover .service_content {
+            background-color: #f400d0;
+        }
+        #step2_content .service .service_description {
+            color: white;
+            font-size: 1em;
+            line-height: 1.4em;
+            padding: 8px;
+            text-align: justify;
+        }
+        #step2_content .service .service_title {
+            color: white;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            line-height: 1.2em;
+            padding: 8px;
+            margin-bottom: 0px;
+        }
+        #step2_content .service .service_description {} #ro_front_formulaire #selected_place .place_title {
+            font-size: 1.3em;
+        }
+        #ro_front_formulaire #selected_place .place_description {
+            font-size: 1.1em;
+        }
+        #ro_front_formulaire #selected_service .service_title {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        /********** ETAPE 3 : CHOIX DATE **********/
+        /***** CALENDRIER *****/
+
+        #ro_front_formulaire .calendrier tbody .btn {
+            color: white;
+        }
+        #ro_front_formulaire .calendrier tbody .btn.active {
+            color: white;
+            background-color: #f400d0;
+        }
+        /***** dates selections *****/
+
+        #step3_1 .date_selection {
+            background-color: white;
+            border: 1px solid #23bae0;
+            color: #23bae0;
+        }
+        #step3_1 .date_selection.active {
+            background-color: #23bae0;
+            color: white;
+        }
+        /***** CRENEAU *****/
+
+        #step3_2 {} #step3_2 .creneau {
+            background-color: white;
+            border: 1px solid #23bae0;
+            color: #23bae0;
+        }
+        #step3_2 .morning_title,
+        #step3_2 .afternoon_title {
+            background-color: white;
+        }
+        #step3_2 .creneau:hover {
+            background-color: #23bae0;
+            color: white;
+        }
+        #step3_2 .creneau.active {
+            background-color: #23bae0;
+            color: white;
+        }
+        #step3_2 .creneau.not_avalaible {
+            background-color: #cccccc;
+            background: repeating-linear-gradient( 45deg, #cccccc, #cccccc 10px, #b2b2b2 10px, #b2b2b2 20px);
+            color: white;
+        }
+        /***** PRICE *****/
+
+        #step3_3 {} #step3_3 .price {
+            background-color: white;
+            border: 1px solid #23bae0;
+        }
+        #step3_3 .price .price_title {
+            color: #23bae0;
+        }
+        #step3_3 .price .price_value {
+            font-size: 1.8em;
+            color: #23bae0;
+        }
+        #step3_3 .price .price_value .price_unit {
+            font-size: inherit;
+            color: #23bae0;
+        }
+        #step3_3 .price_quantity_input {
+            border: 1px solid #23bae0;
+        }
+        /***** EXTRA *****/
+
+        #step3_4 .extra {
+            background-color: white;
+            border: 1px solid #23bae0;
+        }
+        #step3_4 .extra_quantity_input {
+            border: 1px solid #23bae0;
+        }
+        #step3_4 .extra_quantity_minus_btn,
+        #step3_4 .extra_quantity_plus_btn {
+            background-color: #23bae0;
+            color: white;
+        }
+        #step3_4 .extra_quantity_minus_btn:hover,
+        #step3_4 .extra_quantity_plus_btn:hover {
+            background-color: white;
+            color: #23bae0;
+            border: 1px solid #23bae0;
+        }
+        #step3_4 .extra_add_to_cart .extra_add_btn {
+            background-color: #23bae0;
+            color: white;
+        }
+        #step3_4 .extra_add_to_cart .extra_add_btn:hover {
+            background-color: white;
+            color: #23bae0;
+            border: 1px solid #23bae0;
+        }
+        #step3_4 .extra_add_to_cart .extra_add_btn:hover {
+            background-color: white;
+            color: #23bae0;
+            border: 1px solid #23bae0;
+        }
+        /********** ETAPE 4 : Informations personnelles **********/
+        /********** ETAPE 5 : RECAP **********/
+
+        .order_recap_left .order_recap_price_quantity {
+            background-color: #e5e5e5;
+        }
+        .order_recap_left .order_recap_price_quantity_separator {
+            background-color: #e5e5e5;
+        }
+        .order_recap_center .order_recap_price_title {
+            background-color: #e5e5e5;
+        }
+        .order_recap_right .order_recap_price_total {
+            background-color: #e5e5e5;
+        }
+        /***** Client information *****/
+
+        #step5 .clients_informations {
+            background-color: #cccccc;
+        }
+        /********** ETAPE 6 : RECAP & paiement **********/
+        /**** ETAPE 6_1 : RECAPITULATIF ****/
+        /**** ETAPE 6_2 : PAIEMENT ****/
+
+        #step6_2 {
+            background-color: #e5e5e5;
+        }
+        #step6_2 .paiement_text {
+            background-color: white;
+        }
+        #step6_2 .paiement_methods form .method {
+            background-color: white;
+        }
+        #step6_2 .paiement_validation_form {
+            background-color: white;
+        }
+        #step6_2 .paiement_validation_btn {
+            background-color: #23bae0;
+            color: white;
+        }
+        #step6_2 .paiement_validation_btn:hover {
+            background-color: #393939;
+            color: white;
+        }
+        /********** ETAPE 7 : Confirmation **********/
+        /********** CART **********/
+
+        #cart {
+            background-color: #e5e5e5;
+        }
+        #cart .service_title {
+            border-bottom: 1px solid #23bae0;
+        }
+        /** tarif **/
+
+        #cart .cart_row {
+            background-color: white;
+        }
+        /** supprimer **/
+
+        #cart .cart_row .delete_price .delete_price_btn {
+            color: #f03917;
+            background-color: #e5e5e5;
+        }
+        /** reduction **/
+
+        #cart .reduction_row {
+            background-color: white;
+        }
+        /** sous total **/
+
+        #cart .creneau_sous_total {
+            color: #23bae0;
+        }
+        #cart .cart_total {
+            color: white;
+            background-color: #23bae0;
+        }
+        /***** NAVIGATION ENTRE ETAPES *****/
+
+        #next_step_nav a {
+            background-color: #23bae0;
+            color: white;
+        }
+        #next_step_nav a:hover {
+            background-color: #f400d0;
+        }
+        /***** ajouter une date / un service *****/
+
+        #ro_front_formulaire .add_service_step_link,
+        #ro_front_formulaire .add_date_step_link {
+            background-color: #23bae0;
+            color: white;
+        }
+        #ro_front_formulaire .add_service_step_link:hover,
+        #ro_front_formulaire .add_date_step_link:hover {
+            background-color: #f400d0;
+        }
+        /***************************************
+
+
+
+---------      CSS GRID        ---------
+
+
+
+***************************************/
+
+        @supports(display:grid) {
+            @media screen and (min-width: 500px) {
+                .step_item::before {
+                    border: 1px solid #23bae0;
+                }
+                .step_item.not_active_yet::before {
+                    border: 1px solid #cccccc;
+                }
+                #steps_navigation .step_item,
+                #steps_navigation .step_item:hover,
+                #steps_navigation .step_item.not_active_yet {
+                    background-color: transparent;
+                }
+                #steps_navigation .step_item.active {
+                    background-color: transparent;
+                }
+                #steps_navigation .step_item {
+                    background-color: inherit;
+                }
+                .step_item .step_number {
+                    background-color: #e5e5e5;
+                    color: #23bae0;
+                    font-family: 'Roboto', sans-serif;
+                }
+                .step_item.active .step_text,
+                .step_item:hover .step_text {
+                    color: #23bae0;
+                }
+                .step_item.active .step_number,
+                .step_item:hover .step_number {
+                    background-color: #23bae0;
+                    color: white;
+                }
+                .step_item.not_active_yet .step_number,
+                .step_item.not_yet_active:hover .step_number {
+                    background-color: #cccccc;
+                    color: white;
+                }
+                #steps_navigation .step_item .step_text {
+                    font-size: 1.1em;
+                    font-family: 'Roboto', sans-serif;
+                    color: #23bae0;
+                }
+                #steps_navigation .step_item.not_active_yet .step_text {
+                    color: #cccccc;
+                }
+                #step2_content {
+                    display: flex;
+                }
+                #step2_content .category {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                    border-bottom: 1px solid #f400d0;
+                    padding-bottom: 10px;
+                    flex: 1;
+                }
+                #step2_content .service {
+                    color: white;
+                    border: none;
+                    margin: 10px;
+                    flex-grow: 0;
+                    flex: 0;
+                    align-self: center;
+                }
+                #step2_content .service:hover {
+                    color: white;
+                    border: none;
+                }
+                #step2_content .service_content {
+                    background-color: transparent;
+                    padding: 5px 5px;
+                    margin-bottom: 5px;
+                    box-sizing: border-box;
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+                }
+                #step2_content .service:hover .service_content {
+                    background-color: rgba(244, 0, 208, 0.7);
+                }
+                #step2_content .service:hover .service_title {
+                    background-color: rgba(0, 0, 0, 0.0);
+                    color: white;
+                }
+                #step2_content .service .service_title {
+                    color: black;
+                    font-size: 1.2em;
+                    text-transform: uppercase;
+                    line-height: 1.6em;
+                    padding: 8px 5px;
+                    margin-bottom: 0px;
+                    background-color: rgba(255, 255, 255, 0.9);
+                    font-weight: bold;
+                }
+                #step2_content .service .service_description {
+                    color: white;
+                    font-size: 1em;
+                    line-height: 1.4em;
+                    padding: 8px;
+                    text-align: justify;
+                    display: none;
+                }
+                #step2_content .category_title {
+                    margin: 10px 5px;
+                    flex-grow: 0;
+                    min-width: 20%;
+                    text-align: center;
+                }
+                /** iages des services **/
+				/*
+                #step2_content .cours_particulier_ski {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-ski.jpg');
+                    background-size: cover;
+                }
+                #step2_content .particulier_snow_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-Snowboard.jpg');
+                    background-size: cover;
+                }
+                #step2_content .journee_engagement_enfants_ski {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Guide-journée-ski.jpg');
+                    background-size: cover;
+                }
+                #step2_content .journee_snow_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-guide-journée-Snowboard.jpg');
+                    background-size: cover;
+                }
+                #step2_content .premiere_glisse_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-1ere-glisse.jpg');
+                    background-size: cover;
+                }
+                #step2_content .collectifs_enfants_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-collectifs-enfants.jpg');
+                    background-size: cover;
+                }
+                #step2_content .collectif_adultes_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-sollectifs-adultes.jpg');
+                    background-size: cover;
+                }
+                #step2_content .collectifs_snowboard_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-cours-collectifs-Snowboard.jpg');
+                    background-size: cover;
+                }
+                #step2_content .ski_club_360 {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-ski-club-360.jpg');
+                    background-size: cover;
+                }
+                #step2_content .hors_piste_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Stages-Hors-piste.jpg');
+                    background-size: cover;
+                }
+                #step2_content .cours_ski_fond_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Cours-privés-ski-nordique.jpg');
+                    background-size: cover;
+                }
+                #step2_content .raquette_samoens {
+                    background-image: url('https://resa-ecoledeski360.fr/wp-content/uploads/2017/11/ESI-samoens-Sorties-Raquettes.jpg');
+                    background-size: cover;
+                }
+				*/
+                #step3_3 .price {
+                    background-color: #e5e5e5;
+                }
+                #step3_4 .extra {
+                    background-color: #e5e5e5;
+                }
+                #cart .cart_row .date {
+                    background-color: #e5e5e5;
+                }
+                #cart .cart_row .creneau {
+                    background-color: #e5e5e5;
+                }
+                #ro_front_formulaire .paiement_methods .method.cheque .cheque .description {
+                    font-size: 14px;
+					line-height:15px;
+					margin-top:18px;
+					display:block;
+					padding:12px;
+					width:100%;
+                }
+				#ro_front_formulaire .paiement_methods .method.cheque .cheque .description p{
+					margin:0px 0px 5px 0px;
+                }
+            }
+        }
+        #step3_3 .price {
+            background-color: #e5e5e5;
+        }
+        #step3_4 .extra {
+            background-color: #e5e5e5;
+        }
+        #cart .cart_row .date {
+            background-color: #e5e5e5;
+        }
+        #cart .cart_row .creneau {
+            background-color: #e5e5e5;
+        }
+        .method.cheque .cheque .description {
+            font-size: 14px;
+        }
+    }
+}

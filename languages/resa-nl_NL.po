@@ -1,0 +1,3583 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl_NL\n"
+
+msgid "facebook_link_title"
+msgstr "Verbinding maken met Facebook"
+
+msgid "notifications_booking_link_title"
+msgstr ""
+
+msgid "modify_link_title"
+msgstr "Wijzig"
+
+msgid "notifications_payment_link_title"
+msgstr ""
+
+msgid "notifications_quotation_link_title"
+msgstr ""
+
+msgid "notifications_account_link_title"
+msgstr ""
+
+msgid "notifications_ask_account_link_title"
+msgstr ""
+
+msgid "display_bill_link_title"
+msgstr ""
+
+msgid "continue_booking_link_title"
+msgstr ""
+
+msgid "extract_all_data_link_title"
+msgstr ""
+
+msgid "extract_init_data_appointments_link_title"
+msgstr ""
+
+msgid "extract_init_data_customers_link_title"
+msgstr ""
+
+msgid "extract_init_data_services_link_title"
+msgstr ""
+
+msgid "extract_init_data_staff_link_title"
+msgstr ""
+
+msgid "extract_init_data_reductions_link_title"
+msgstr ""
+
+msgid "delete_all_bookings_link_title"
+msgstr ""
+
+msgid "clear_all_data_link_title"
+msgstr ""
+
+msgid "import_all_data_link_title"
+msgstr ""
+
+msgid "verify_license_link_title"
+msgstr ""
+
+msgid "force_cashpad_synchronization_link_title"
+msgstr ""
+
+msgid "add_an_another_date_link_title"
+msgstr "Voeg een andere datum toe"
+
+msgid "print_link_title"
+msgstr "Afdrukken"
+
+msgid "accept_quotation_link_title"
+msgstr "Accepteer offerte"
+
+msgid "refuse_quotation_link_title"
+msgstr "Offerte weigeren"
+
+msgid "save_link_title"
+msgstr "Bespaar"
+
+msgid "connection_link_title"
+msgstr ""
+
+msgid "add_static_group_link_title"
+msgstr ""
+
+msgid "add_member_link_title"
+msgstr ""
+
+msgid "remove_member_link_title"
+msgstr ""
+
+msgid "duplicate_member_link_title"
+msgstr ""
+
+msgid "up_link_title"
+msgstr ""
+
+msgid "add_link_title"
+msgstr "Voeg  toe"
+
+msgid "delete_link_title"
+msgstr "Verwijder"
+
+msgid "uncancel_link_title"
+msgstr ""
+
+msgid "unpending_link_title"
+msgstr ""
+
+msgid "unwaiting_link_title"
+msgstr ""
+
+msgid "unabandonned_link_title"
+msgstr ""
+
+msgid "recalculate_link_title"
+msgstr ""
+
+msgid "down_link_title"
+msgstr ""
+
+msgid "ok_link_title"
+msgstr "Valideer"
+
+msgid "close_link_title"
+msgstr "Sluit"
+
+msgid "cancel_link_title"
+msgstr "Annuleer"
+
+msgid "remove_link_title"
+msgstr ""
+
+msgid "duplicate_link_title"
+msgstr ""
+
+msgid "see_all_bookings_link_title"
+msgstr ""
+
+msgid "return_link_title"
+msgstr ""
+
+msgid "return_customers_link_title"
+msgstr ""
+
+msgid "previous_link_title"
+msgstr ""
+
+msgid "next_link_title"
+msgstr ""
+
+msgid "today_link_title"
+msgstr ""
+
+msgid "month_link_title"
+msgstr ""
+
+msgid "week_link_title"
+msgstr ""
+
+msgid "day_link_title"
+msgstr ""
+
+msgid "add_in_basket_link_title"
+msgstr ""
+
+msgid "add_another_activity_link_title"
+msgstr ""
+
+msgid "remove_service_constraint_link_title"
+msgstr ""
+
+msgid "remove_condition_link_title"
+msgstr ""
+
+msgid "add_condition_link_title"
+msgstr ""
+
+msgid "add_date_link_title"
+msgstr ""
+
+msgid "add_time_link_title"
+msgstr ""
+
+msgid "add_days_link_title"
+msgstr ""
+
+msgid "remove_rule_link_title"
+msgstr ""
+
+msgid "duplicate_rule_link_title"
+msgstr ""
+
+msgid "add_rule_link_title"
+msgstr ""
+
+msgid "remove_service_link_title"
+msgstr ""
+
+msgid "add_service_link_title"
+msgstr ""
+
+msgid "duplicate_service_link_title"
+msgstr ""
+
+msgid "remove_link_link_title"
+msgstr ""
+
+msgid "add_link_link_title"
+msgstr ""
+
+msgid "remove_price_list_link_title"
+msgstr ""
+
+msgid "add_price_list_link_title"
+msgstr ""
+
+msgid "add_option_link_title"
+msgstr ""
+
+msgid "update_services_link_title"
+msgstr ""
+
+msgid "remove_timeslot_link_title"
+msgstr ""
+
+msgid "duplicate_timeslot_link_title"
+msgstr ""
+
+msgid "add_dates_link_title"
+msgstr ""
+
+msgid "add_timeslot_link_title"
+msgstr ""
+
+msgid "update_members_link_title"
+msgstr ""
+
+msgid "update_static_groups_link_title"
+msgstr ""
+
+msgid "add_new_payment_link_title"
+msgstr ""
+
+msgid "add_new_repayment_link_title"
+msgstr ""
+
+msgid "synchronization_payments_cashpad_link_title"
+msgstr ""
+
+msgid "attach_booking_link_title"
+msgstr ""
+
+msgid "ask_payment_link_title"
+msgstr ""
+
+msgid "add_customer_link_title"
+msgstr ""
+
+msgid "delete_customer_link_title"
+msgstr ""
+
+msgid "merge_customer_link_title"
+msgstr ""
+
+msgid "clear_synchronization_cashpad_customer_link_title"
+msgstr ""
+
+msgid "choose_customer_link_title"
+msgstr ""
+
+msgid "choose_this_customer_link_title"
+msgstr ""
+
+msgid "load_period_link_title"
+msgstr ""
+
+msgid "reload_link_title"
+msgstr ""
+
+msgid "add_coupon_link_title"
+msgstr "Bonnen toevoegen"
+
+msgid "valid_form_link_title"
+msgstr ""
+
+msgid "valid_form_process_link_title"
+msgstr "Validatie aan de gang, wacht even..."
+
+msgid "modification_in_progress_link_title"
+msgstr "Wijziging aan de gang, wacht even..."
+
+msgid "process_reductions_feedback"
+msgstr "Proces reducties, wacht even..."
+
+msgid "previous_step_link_title"
+msgstr "Vorige stap"
+
+msgid "next_step_link_title"
+msgstr "Volgende stap"
+
+msgid "calendar_link_title"
+msgstr ""
+
+msgid "bookings_list_link_title"
+msgstr ""
+
+msgid "appointments_list_link_title"
+msgstr ""
+
+msgid "load_appointments_passed_link_title"
+msgstr ""
+
+msgid "see_booking_link_title"
+msgstr ""
+
+msgid "add_booking_link_title"
+msgstr ""
+
+msgid "add_info_calendar_link_title"
+msgstr ""
+
+msgid "add_service_constraint_link_title"
+msgstr ""
+
+msgid "add_reduction_link_title"
+msgstr ""
+
+msgid "remove_reduction_link_title"
+msgstr ""
+
+msgid "duplicate_reduction_link_title"
+msgstr ""
+
+msgid "update_reductions_link_title"
+msgstr ""
+
+msgid "delete_application_link_title"
+msgstr ""
+
+msgid "add_application_link_title"
+msgstr ""
+
+msgid "add_conditions_link_title"
+msgstr ""
+
+msgid "add_valid_basket_link_title"
+msgstr ""
+
+msgid "and_add_condition_link_title"
+msgstr ""
+
+msgid "remove_reduction_conditions_link_title"
+msgstr ""
+
+msgid "duplication_reduction_conditions_link_title"
+msgstr ""
+
+msgid "add_case_condition_link_title"
+msgstr ""
+
+msgid "remove_case_condition_link_title"
+msgstr ""
+
+msgid "add_case_link_title"
+msgstr ""
+
+msgid "remove_case_link_title"
+msgstr ""
+
+msgid "see_customer_link_title"
+msgstr ""
+
+msgid "update_booking_link_title"
+msgstr ""
+
+msgid "add_appointment_link_title"
+msgstr ""
+
+msgid "add_resa_shortcode_title_link"
+msgstr ""
+
+msgid "add_resa_form_shortcode_title_link"
+msgstr ""
+
+msgid "define_custom_timeslot_link_title"
+msgstr ""
+
+msgid "add_custom_timeslot_link_title"
+msgstr ""
+
+msgid "load_day_timeslots_link_title"
+msgstr ""
+
+msgid "add_resa_page_shortcode_title_link"
+msgstr ""
+
+msgid "add_resa_price_shortcode_title_link"
+msgstr ""
+
+msgid "add_form_link_shortcode_title_link"
+msgstr ""
+
+msgid "add_booking_details_title_link"
+msgstr ""
+
+msgid "add_link_account_title_link"
+msgstr ""
+
+msgid "add_link_payment_booking_title_link"
+msgstr ""
+
+msgid "add_customer_lastname_title_link"
+msgstr ""
+
+msgid "add_customer_firstname_title_link"
+msgstr ""
+
+msgid "add_customer_login_title_link"
+msgstr ""
+
+msgid "add_customer_company_title_link"
+msgstr ""
+
+msgid "add_total_price_title_link"
+msgstr ""
+
+msgid "add_booking_line_title_link"
+msgstr ""
+
+msgid "add_booking_advancePayment_title_link"
+msgstr ""
+
+msgid "add_booking_note_title_link"
+msgstr ""
+
+msgid "edit_customer_title_link"
+msgstr ""
+
+msgid "add_custom_reductions_link_title"
+msgstr ""
+
+msgid "reinitialize_link_title"
+msgstr ""
+
+msgid "add_language_link_title"
+msgstr ""
+
+msgid "remove_language_link_title"
+msgstr ""
+
+msgid "cancel_booking_link_title"
+msgstr ""
+
+msgid "delete_booking_link_title"
+msgstr ""
+
+msgid "save_booking_link_title"
+msgstr ""
+
+msgid "save_booking_in_progress_link_title"
+msgstr ""
+
+msgid "pay_booking_link_title"
+msgstr ""
+
+msgid "send_message_booking_link_title"
+msgstr ""
+
+msgid "to_login_link_title"
+msgstr "Inloggen"
+
+msgid "to_logout_link_title"
+msgstr ""
+
+msgid "logout_link_title"
+msgstr "Uitloggen"
+
+msgid "fotgotten_password_link_title"
+msgstr "Wachtwoord vergeten"
+
+msgid "change_user_link_title"
+msgstr ""
+
+msgid "new_booking_link_title"
+msgstr "Nieuwe reservering"
+
+msgid "add_price_shortcode_link_title"
+msgstr ""
+
+msgid "add_state_parameters_link_title"
+msgstr ""
+
+msgid "add_custom_tag_link_title"
+msgstr ""
+
+msgid "add_form_shortcode_link_title"
+msgstr ""
+
+msgid "add_custom_payment_type_link_title"
+msgstr ""
+
+msgid "add_service_category_link_title"
+msgstr ""
+
+msgid "add_new_participant_parameter_link_title"
+msgstr ""
+
+msgid "add_new_participant_field_link_title"
+msgstr ""
+
+msgid "add_place_link_title"
+msgstr ""
+
+msgid "delete_custom_payment_type_link_title"
+msgstr ""
+
+msgid "delete_service_category_link_title"
+msgstr ""
+
+msgid "unselected_all_services_filter_link_title"
+msgstr ""
+
+msgid "selected_all_services_filter_link_title"
+msgstr ""
+
+msgid "price_shortcode_dialog_title"
+msgstr ""
+
+msgid "form_shortcode_dialog_title"
+msgstr ""
+
+msgid "form_shortcode_dialog_description"
+msgstr ""
+
+msgid "form_shortcode_dialog_button"
+msgstr ""
+
+msgid "form_shortcode_game_dialog_title"
+msgstr ""
+
+msgid "form_shortcode_game_dialog_description1"
+msgstr ""
+
+msgid "form_shortcode_game_dialog_description2"
+msgstr ""
+
+msgid "form_shortcode_game_account_dialog_button"
+msgstr ""
+
+msgid "form_shortcode_game_bill_button"
+msgstr ""
+
+msgid "form_shortcode_price_dialog_title"
+msgstr ""
+
+msgid "form_shortcode_price_dialog_description"
+msgstr ""
+
+msgid "form_shortcode_price_dialog_button"
+msgstr ""
+
+msgid "form_shortcode_link_form_dialog_title"
+msgstr ""
+
+msgid "form_shortcode_link_form_dialog_description"
+msgstr ""
+
+msgid "form_shortcode_link_form_dialog_button"
+msgstr ""
+
+msgid "login_details_customer"
+msgstr ""
+
+msgid "company_details_customer"
+msgstr ""
+
+msgid "first_name_details_customer"
+msgstr ""
+
+msgid "last_name_details_customer"
+msgstr ""
+
+msgid "phone_details_customer"
+msgstr ""
+
+msgid "email_details_customer"
+msgstr ""
+
+msgid "private_notes_details_customer"
+msgstr ""
+
+msgid "register_date_details_customer"
+msgstr ""
+
+msgid "address_details_customer"
+msgstr ""
+
+msgid "postal_code_details_customer"
+msgstr ""
+
+msgid "town_details_customer"
+msgstr ""
+
+msgid "country_details_customer"
+msgstr ""
+
+msgid "combinable_capacity_radio_title_staff"
+msgstr ""
+
+msgid "max_capacity_radio_title_staff"
+msgstr ""
+
+msgid "min_capacity_radio_title_staff"
+msgstr ""
+
+msgid "cash_payment_type_radio_title"
+msgstr "Contante betaling"
+
+msgid "cheque_payment_type_radio_title"
+msgstr "Betaling per cheque"
+
+msgid "card_payment_type_radio_title"
+msgstr "Kaartbetaling"
+
+msgid "transfer_payment_type_radio_title"
+msgstr ""
+
+msgid "paypal_payment_type_radio_title"
+msgstr ""
+
+msgid "systempay_payment_type_radio_title"
+msgstr "Online betaling"
+
+msgid "monetico_payment_type_radio_title"
+msgstr "Online betaling"
+
+msgid "paybox_payment_type_radio_title"
+msgstr "Online betaling"
+
+msgid "cashpad_payment_type_radio_title"
+msgstr ""
+
+msgid "activate_payment_checkbox_title"
+msgstr ""
+
+msgid "send_email_to_customer_checkbox_title"
+msgstr ""
+
+msgid "create_customer_account_checkbox_title"
+msgstr ""
+
+msgid "extract_for_new_intall_checkbox_title"
+msgstr ""
+
+msgid "load_options_checkbox_title"
+msgstr ""
+
+msgid "load_customers_checkbox_title"
+msgstr ""
+
+msgid "delete_wp_resa_customers_checkbox_title"
+msgstr ""
+
+msgid "stop_advance_payment_checkbox_title"
+msgstr ""
+
+msgid "activated_checkbox_title"
+msgstr ""
+
+msgid "default_parameter_checkbox_title"
+msgstr ""
+
+msgid "custom_prices_list_checkbox_title"
+msgstr ""
+
+msgid "all_prices_list_checkbox_title"
+msgstr ""
+
+msgid "prices_list_checkbox_title"
+msgstr ""
+
+msgid "prices_list_thresholded_checkbox_title"
+msgstr ""
+
+msgid "activate_min_quantity_checkbox_title"
+msgstr ""
+
+msgid "activate_max_quantity_checkbox_title"
+msgstr ""
+
+msgid "is_an_extra_checkbox_title"
+msgstr ""
+
+msgid "maximum_usage_checkbox_title"
+msgstr ""
+
+msgid "notification_checkbox_title_services"
+msgstr ""
+
+msgid "display_checkbox_before_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "staff_management_checkbox_title_settings"
+msgstr ""
+
+msgid "staff_old_appointments_displayed_checkbox_title_settings"
+msgstr ""
+
+msgid "staff_display_customer_checkbox_title_settings"
+msgstr ""
+
+msgid "staff_display_total_checkbox_title_settings"
+msgstr ""
+
+msgid "staff_display_payments_checkbox_title_settings"
+msgstr ""
+
+msgid "staff_display_numbers_checkbox_title_settings"
+msgstr ""
+
+msgid "display_tva_on_bill_checkbox_title_settings"
+msgstr ""
+
+msgid "ask_currency_checkbox_title_settings"
+msgstr ""
+
+msgid "ask_advance_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "on_the_spot_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "transfer_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "cheque_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "paypal_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "systempay_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "paypal_payment_title_settings"
+msgstr ""
+
+msgid "systempay_payment_title_settings"
+msgstr ""
+
+msgid "notification_customer_account_creation_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_customer_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_customer_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_quotation_customer_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_emails_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_emails_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_emails_quotation_answered_checkbox_title_settings"
+msgstr ""
+
+msgid "list_emails_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_staff_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_customer_need_payment_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_after_appointment_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_no_response_quotation_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_after_appointment_days_checkbox_title_settings"
+msgstr ""
+
+msgid "notification_no_response_quotation_days_checkbox_title_settings"
+msgstr ""
+
+msgid "custom_capacity_checkbox_title_services"
+msgstr ""
+
+msgid "no_end_checkbox_title"
+msgstr ""
+
+msgid "no_staff_gestion_checkbox_title_services"
+msgstr ""
+
+msgid "exclusive_timeslot_checkbox_title_services"
+msgstr ""
+
+msgid "overcapacity_timeslot_checkbox_title_services"
+msgstr ""
+
+msgid "allow_inconsistencies_checkbox_title"
+msgstr ""
+
+msgid "exclusive_title_services"
+msgstr ""
+
+msgid "ask_participants_title_services"
+msgstr ""
+
+msgid "cashing_title_services"
+msgstr ""
+
+msgid "cashing_title_reductions"
+msgstr ""
+
+msgid "exclusive_service_checkbox_title"
+msgstr ""
+
+msgid "ask_participants_services_checkbox_title"
+msgstr ""
+
+msgid "activated_tva_services_checkbox_title"
+msgstr ""
+
+msgid "activated_tva_reductions_checkbox_title"
+msgstr ""
+
+msgid "activated_advance_payment_services_checkbox_title"
+msgstr ""
+
+msgid "activated_filter_by_reductions_checkbox_title"
+msgstr ""
+
+msgid "merge_customer_field_title"
+msgstr ""
+
+msgid "options_field_title"
+msgstr ""
+
+msgid "place_field_title"
+msgstr ""
+
+msgid "service_field_title"
+msgstr ""
+
+msgid "service_price_list_field_title"
+msgstr ""
+
+msgid "slug_field_title"
+msgstr ""
+
+msgid "category_field_title"
+msgstr ""
+
+msgid "places_field_title"
+msgstr ""
+
+msgid "name_field_title"
+msgstr ""
+
+msgid "max_persons_field_title"
+msgstr ""
+
+msgid "mention_field_title"
+msgstr ""
+
+msgid "phone_field_title"
+msgstr "Telefoon"
+
+msgid "phone2_field_title"
+msgstr "Telefoon 2"
+
+msgid "private_notes_field_title"
+msgstr ""
+
+msgid "notify_email_field_title"
+msgstr ""
+
+msgid "address_field_title"
+msgstr "Adres"
+
+msgid "postal_code_field_title"
+msgstr "Postcode"
+
+msgid "town_field_title"
+msgstr "Stad"
+
+msgid "country_field_title"
+msgstr "Land"
+
+msgid "siret_field_title"
+msgstr "SIRET"
+
+msgid "legal_form_field_title"
+msgstr "Rechtsvorm (SA, SAS, ...)"
+
+msgid "tva_field_title"
+msgstr ""
+
+msgid "advance_payment_field_title"
+msgstr ""
+
+msgid "amount_field_title"
+msgstr "Bedrag"
+
+msgid "company_field_title"
+msgstr "Bedrijfsnaam"
+
+msgid "company_account_field_title"
+msgstr ""
+
+msgid "participants_field_title"
+msgstr "Deelnemers"
+
+msgid "see_settings_field_title"
+msgstr ""
+
+msgid "one_by_booking_field_title"
+msgstr ""
+
+msgid "login_paypal_field_title_settings"
+msgstr ""
+
+msgid "password_paypal_field_title_settings"
+msgstr ""
+
+msgid "sign_paypal_field_title_settings"
+msgstr ""
+
+msgid "id_shop_systempay_field_title_settings"
+msgstr ""
+
+msgid "certificate_systempay_field_title_settings"
+msgstr ""
+
+msgid "mode_systempay_field_title_settings"
+msgstr ""
+
+msgid "sender_name_field_title_settings"
+msgstr ""
+
+msgid "sender_email_field_title_settings"
+msgstr ""
+
+msgid "currency_field_title_settings"
+msgstr ""
+
+msgid "bill_informations_field_title_settings"
+msgstr ""
+
+msgid "payment_not_activated_field_title_settings"
+msgstr ""
+
+msgid "tva_field_title_settings"
+msgstr ""
+
+msgid "checkbox_text_field_title_settings"
+msgstr ""
+
+msgid "company_name_field_title_settings"
+msgstr ""
+
+msgid "address_field_title_settings"
+msgstr ""
+
+msgid "phone_field_title_settings"
+msgstr "Telefoonnummer"
+
+msgid "phone2_field_title_settings"
+msgstr "Telefoon 2 nummer"
+
+msgid "company_type_field_title_settings"
+msgstr ""
+
+msgid "siret_field_title_settings"
+msgstr ""
+
+msgid "client_id_field_title_settings"
+msgstr ""
+
+msgid "client_secret_field_title_settings"
+msgstr ""
+
+msgid "return_url_success_field_title_settings"
+msgstr ""
+
+msgid "return_url_error_field_title_settings"
+msgstr ""
+
+msgid "site_url_title_settings"
+msgstr ""
+
+msgid "installation_id_field_title_settings"
+msgstr ""
+
+msgid "user_token_field_title_settings"
+msgstr ""
+
+msgid "user_email_field_title_settings"
+msgstr ""
+
+msgid "display_remaining_position_overcapacity_field_title_settings"
+msgstr ""
+
+msgid "participants_parameters_label_title_settings"
+msgstr ""
+
+msgid "participants_field_varname_title_settings"
+msgstr ""
+
+msgid "participants_field_name_title_settings"
+msgstr ""
+
+msgid "participants_field_type_title_settings"
+msgstr ""
+
+msgid "participants_field_prefix_suffix_title_settings"
+msgstr ""
+
+msgid "participants_field_mandatory_title_settings"
+msgstr ""
+
+msgid "participants_field_options_description_settings"
+msgstr ""
+
+msgid "participants_field_presentation_title_settings"
+msgstr ""
+
+msgid "place_slug_title_settings"
+msgstr ""
+
+msgid "place_name_title_settings"
+msgstr ""
+
+msgid "place_presentation_title_settings"
+msgstr ""
+
+msgid "add_new_activity_text_button_title_settings"
+msgstr ""
+
+msgid "informations_customer_text_field_title_settings"
+msgstr ""
+
+msgid "informations_payment_text_field_title_settings"
+msgstr ""
+
+msgid "informations_confirmation_text_field_title_settings"
+msgstr ""
+
+msgid "license_manager_url_title_settings"
+msgstr ""
+
+msgid "license_key_title_settings"
+msgstr ""
+
+msgid "informations_license_bad_license_field_title_settings"
+msgstr ""
+
+msgid "resa_plugin_desactivated_settings"
+msgstr ""
+
+msgid "resa_plugin_failed_connection_settings"
+msgstr ""
+
+msgid "user_text_title_settings"
+msgstr ""
+
+msgid "last_name_field_title"
+msgstr "Achternaam"
+
+msgid "first_name_field_title"
+msgstr "Voornaam"
+
+msgid "nickname_field_title"
+msgstr ""
+
+msgid "email_field_title"
+msgstr "E-mail"
+
+msgid "password_field_title"
+msgstr "Wachtwoord"
+
+msgid "confirm_password_field_title"
+msgstr "Bevestig wachtwoord"
+
+msgid "login_field_title"
+msgstr ""
+
+msgid "presentation_field_title"
+msgstr ""
+
+msgid "color_field_title"
+msgstr ""
+
+msgid "months_field_title"
+msgstr ""
+
+msgid "weeks_field_title"
+msgstr ""
+
+msgid "days_field_title"
+msgstr ""
+
+msgid "hours_field_title"
+msgstr ""
+
+msgid "date_field_title"
+msgstr ""
+
+msgid "start_date_field_title"
+msgstr ""
+
+msgid "end_date_field_title"
+msgstr ""
+
+msgid "customer_name_field_title"
+msgstr ""
+
+msgid "description_field_title"
+msgstr ""
+
+msgid "subject_message_field_title"
+msgstr ""
+
+msgid "content_message_field_title"
+msgstr ""
+
+msgid "merge_appointments_field_title"
+msgstr ""
+
+msgid "parameter_name_field_title_settings"
+msgstr ""
+
+msgid "parameter_state_field_title_settings"
+msgstr ""
+
+msgid "parameter_paiement_field_title_settings"
+msgstr ""
+
+msgid "parameter_state_after_payment_field_title_settings"
+msgstr ""
+
+msgid "parameter_state_form_field_title_settings"
+msgstr ""
+
+msgid "parameter_capacity_field_title_settings"
+msgstr ""
+
+msgid "tag_id_field_title_settings"
+msgstr ""
+
+msgid "tag_name_field_title_settings"
+msgstr ""
+
+msgid "tag_color_field_title_settings"
+msgstr ""
+
+msgid "company_table_header"
+msgstr ""
+
+msgid "display_name_table_header"
+msgstr ""
+
+msgid "first_name_table_header"
+msgstr ""
+
+msgid "phone_table_header"
+msgstr ""
+
+msgid "last_name_table_header"
+msgstr ""
+
+msgid "email_table_header"
+msgstr ""
+
+msgid "number_bookings_table_header"
+msgstr ""
+
+msgid "amount_paid_table_header"
+msgstr ""
+
+msgid "need_paid_table_header"
+msgstr ""
+
+msgid "details_table_header"
+msgstr ""
+
+msgid "number_table_header"
+msgstr "Aantal"
+
+msgid "activity_table_header"
+msgstr "Activiteit"
+
+msgid "prices_list_table_header"
+msgstr "Prijslijst"
+
+msgid "number_field_title"
+msgstr ""
+
+msgid "price_list_field_title"
+msgstr ""
+
+msgid "register_date_table_header"
+msgstr ""
+
+msgid "customer_table_header"
+msgstr ""
+
+msgid "service_table_header"
+msgstr ""
+
+msgid "price_list_table_header"
+msgstr ""
+
+msgid "date_table_header"
+msgstr ""
+
+msgid "hours_table_header"
+msgstr ""
+
+msgid "place_table_header"
+msgstr ""
+
+msgid "staff_table_header"
+msgstr ""
+
+msgid "price_table_header"
+msgstr "Prijs"
+
+msgid "amount_table_header"
+msgstr ""
+
+msgid "payment_date_field_title"
+msgstr ""
+
+msgid "note_field_title"
+msgstr ""
+
+msgid "last_booking_title"
+msgstr "Laatste reservering"
+
+msgid "advance_payment_text_field_settings"
+msgstr ""
+
+msgid "payment_type_table_header"
+msgstr ""
+
+msgid "id_booking_table_header"
+msgstr ""
+
+msgid "note_table_header"
+msgstr ""
+
+msgid "staff_note_table_header"
+msgstr ""
+
+msgid "repayment_table_header"
+msgstr ""
+
+msgid "paiement_table_header"
+msgstr ""
+
+msgid "bookings_table_header"
+msgstr ""
+
+msgid "reductions_table_header"
+msgstr ""
+
+msgid "actions_table_header"
+msgstr ""
+
+msgid "total_price_ht_table_header"
+msgstr ""
+
+msgid "total_price_ttc_table_header"
+msgstr ""
+
+msgid "total_price_table_header"
+msgstr ""
+
+msgid "tva_table_header"
+msgstr ""
+
+msgid "state_table_header"
+msgstr ""
+
+msgid "no_payment_state"
+msgstr ""
+
+msgid "incomplete_payment_state"
+msgstr ""
+
+msgid "complete_payment_state"
+msgstr ""
+
+msgid "repayment_state"
+msgstr ""
+
+msgid "stripe_description_sentence"
+msgstr "Voer uw betalingsgegevens in"
+
+msgid "browser_not_compatible_sentence"
+msgstr "Het kan zijn dat uw browser uw boekingservaring wijzigt, we raden u aan om Google Chrome of Mozilla Firefox te gebruiken."
+
+msgid "parameter_capacity_used_sentence"
+msgstr ""
+
+msgid "general_conditions_sentence"
+msgstr "Voorwaarden en condities"
+
+msgid "select_date_and_timeslot_sentence"
+msgstr ""
+
+msgid "absent_definition_sentence"
+msgstr "U kunt de afwezigheid op bepaalde dagen in het winkelwagentje aangeven."
+
+msgid "authorized_url_sentence_settings"
+msgstr ""
+
+msgid "need_bill_id_sentence"
+msgstr ""
+
+msgid "accept_the_general_condition_sentence"
+msgstr ""
+
+msgid "choose_condition_sentence_reductions"
+msgstr ""
+
+msgid "member_not_deletable_sentence_staff"
+msgstr ""
+
+msgid "staff_management_desactivated_sentence_services"
+msgstr ""
+
+msgid "no_associate_membe_sentence"
+msgstr ""
+
+msgid "you_are_sentence_form"
+msgstr ""
+
+msgid "customer_informations_title_form"
+msgstr ""
+
+msgid "another_customer_informations_title_form"
+msgstr ""
+
+msgid "advance_payment_title_settings"
+msgstr ""
+
+msgid "advance_payment_title_form"
+msgstr ""
+
+msgid "need_deconnection_for_ask_account_sentence"
+msgstr "Ontkoppeling nodig voor een rekeningaanvraag"
+
+msgid "fill_register_form_sentence"
+msgstr ""
+
+msgid "fill_login_form_sentence"
+msgstr ""
+
+msgid "connected_with_sentence"
+msgstr "Je bent aan het loggen als"
+
+msgid "add_payment_for_customer_sentence"
+msgstr ""
+
+msgid "add_repayment_for_customer_sentence"
+msgstr ""
+
+msgid "attach_booking_for_customer_sentence"
+msgstr ""
+
+msgid "code_here_sentence"
+msgstr ""
+
+msgid "not_an_email_address_sentence"
+msgstr "Dit is geen geldige e-mail"
+
+msgid "fill_this_form_sentence"
+msgstr ""
+
+msgid "ask_payment_disabled_sentence"
+msgstr ""
+
+msgid "selected_service_sentence"
+msgstr "U heeft gekozen voor"
+
+msgid "selected_place_sentence"
+msgstr "U heeft de plaats gekozen"
+
+msgid "selected_sentence"
+msgstr "U heeft gekozen voor"
+
+msgid "is_not_you_sentence"
+msgstr ""
+
+msgid "already_register_sentence"
+msgstr "Bent u al klant bij ons? Login"
+
+msgid "create_account_sentence"
+msgstr "Maak een account aan"
+
+msgid "create_account_request_sentence"
+msgstr "Verzoek om een account aan te maken"
+
+msgid "create_account_by_facebook_sentence"
+msgstr "Verbinding met uw Facebook-account"
+
+msgid "create_account_request_done_sentence"
+msgstr "De aanvraag voor een account is succesvol afgerond"
+
+msgid "recap_booking_sentence"
+msgstr "Samenvatting van uw reservering"
+
+msgid "recap_quotation_sentence"
+msgstr "Samenvatting van uw offerte"
+
+msgid "form_deactivated_text"
+msgstr "Vorm gedesactiveerd"
+
+msgid "redict_to_payment_page_sentence"
+msgstr "Validatie aan de gang, wacht even..."
+
+msgid "customer_error_feedback"
+msgstr "Ongeldige klant"
+
+msgid "voucher_error_feedback"
+msgstr "Voucher niet gevonden of niet geldig"
+
+msgid "basket_error_feedback"
+msgstr "Ongeldige mand"
+
+msgid "checkbox_payment_error_feedback"
+msgstr "Controleer de voorwaarden en condities"
+
+msgid "expired_token_error_feedback"
+msgstr "De login link is verlopen, neem contact met ons op of log in met uw login gegevens !"
+
+msgid "type_payment_error_feedback"
+msgstr "Kies uw betaalmethode"
+
+msgid "form_participants_sentence"
+msgstr "Vul voor elke deelnemer de volgende gegevens in."
+
+msgid "add_payment_dialog_title"
+msgstr ""
+
+msgid "add_repayment_dialog_title"
+msgstr ""
+
+msgid "ask_payment_dialog_title"
+msgstr ""
+
+msgid "display_appointment_dialog_title"
+msgstr ""
+
+msgid "display_bill_dialog_title"
+msgstr ""
+
+msgid "add_booking_dialog_title"
+msgstr ""
+
+msgid "pay_booking_dialog_title"
+msgstr ""
+
+msgid "add_new_customer_dialog_title"
+msgstr ""
+
+msgid "add_info_calendar_dialog_title"
+msgstr ""
+
+msgid "edit_info_calendar_dialog_title"
+msgstr ""
+
+msgid "add_service_constraint_dialog_title"
+msgstr ""
+
+msgid "edit_service_constraint_dialog_title"
+msgstr ""
+
+msgid "choose_customer_dialog_title"
+msgstr ""
+
+msgid "edit_customer_dialog_title"
+msgstr ""
+
+msgid "merge_customer_dialog_title"
+msgstr ""
+
+msgid "capacity_for_service_title_staff"
+msgstr ""
+
+msgid "share_services_title_staff"
+msgstr ""
+
+msgid "all_payments_section_title"
+msgstr ""
+
+msgid "price_list_title_service"
+msgstr ""
+
+msgid "parameters_title_service"
+msgstr ""
+
+msgid "notification_title_service"
+msgstr ""
+
+msgid "priority_title_services"
+msgstr ""
+
+msgid "rules_of_booking_title_services"
+msgstr ""
+
+msgid "return_urls_title_settings"
+msgstr ""
+
+msgid "google_calendar_title_settings"
+msgstr ""
+
+msgid "activate_synchronization_google_calendar_field_title_settings"
+msgstr ""
+
+msgid "cashpad_title_settings"
+msgstr ""
+
+msgid "activate_synchronization_cashpad_field_title_settings"
+msgstr ""
+
+msgid "company_informations_title_settings"
+msgstr ""
+
+msgid "new_customer_form_title"
+msgstr ""
+
+msgid "booking_recapitulative_form_title"
+msgstr ""
+
+msgid "basket_recapitulative_form_title"
+msgstr "Winkelwagen"
+
+msgid "basket_description_sentence"
+msgstr ""
+
+msgid "booking_recapitulative_description_sentence"
+msgstr ""
+
+msgid "ask_payment_for_sentence"
+msgstr ""
+
+msgid "min_time_booking_title_services"
+msgstr ""
+
+msgid "max_time_booking_title_services"
+msgstr ""
+
+msgid "staff_title_form"
+msgstr ""
+
+msgid "custom_reductions_title_form"
+msgstr ""
+
+msgid "coupons_title_form"
+msgstr ""
+
+msgid "bookings_details_title"
+msgstr ""
+
+msgid "customer_informations_title"
+msgstr ""
+
+msgid "payment_type_title"
+msgstr ""
+
+msgid "assigned_staff_title"
+msgstr ""
+
+msgid "details_price_list_title"
+msgstr ""
+
+msgid "payment_method_title"
+msgstr "Betalingswijze"
+
+msgid "services_title"
+msgstr ""
+
+msgid "customers_title"
+msgstr ""
+
+msgid "staff_title"
+msgstr ""
+
+msgid "groups_title"
+msgstr ""
+
+msgid "payments_title"
+msgstr ""
+
+msgid "statistics_title"
+msgstr ""
+
+msgid "reductions_title"
+msgstr ""
+
+msgid "bill_title"
+msgstr ""
+
+msgid "bill_advance_payment_title"
+msgstr ""
+
+msgid "all_services_title"
+msgstr ""
+
+msgid "bookings_title"
+msgstr ""
+
+msgid "general_title"
+msgstr ""
+
+msgid "conditions_title"
+msgstr ""
+
+msgid "the_cases_title"
+msgstr ""
+
+msgid "resa_custom_user_data_title"
+msgstr ""
+
+msgid "choose_your_activities_title_from"
+msgstr ""
+
+msgid "choose_a_category_title_from"
+msgstr ""
+
+msgid "agenda_title"
+msgstr ""
+
+msgid "timeslots_title"
+msgstr ""
+
+msgid "customer_name_title"
+msgstr ""
+
+msgid "Bookings_type__title"
+msgstr ""
+
+msgid "timeslots_by_day_title"
+msgstr ""
+
+msgid "timeslots_on_many_days_title"
+msgstr ""
+
+msgid "schedule_title"
+msgstr ""
+
+msgid "promo_code_title"
+msgstr ""
+
+msgid "use_promo_code_title"
+msgstr ""
+
+msgid "service_title"
+msgstr ""
+
+msgid "price_list_title"
+msgstr ""
+
+msgid "quantity_title"
+msgstr ""
+
+msgid "filters_title"
+msgstr ""
+
+msgid "filters_by_services_title"
+msgstr ""
+
+msgid "filters_by_reductions_title"
+msgstr ""
+
+msgid "send_email_to_customer_title"
+msgstr ""
+
+msgid "reduction_applications_title"
+msgstr ""
+
+msgid "booking_amount_title"
+msgstr ""
+
+msgid "booking_date_title"
+msgstr ""
+
+msgid "all_booking_option"
+msgstr ""
+
+msgid "same_date_option"
+msgstr ""
+
+msgid "same_appointment_option"
+msgstr ""
+
+msgid "all_bookings_of_customer_option"
+msgstr ""
+
+msgid "fixed_amount_on_sub_total_title"
+msgstr ""
+
+msgid "purcent_on_sub_total_title"
+msgstr ""
+
+msgid "fixed_amount_on_price_title"
+msgstr ""
+
+msgid "change_price_list_value_title"
+msgstr ""
+
+msgid "quatity_given_title"
+msgstr ""
+
+msgid "custom_text_title"
+msgstr ""
+
+msgid "sub_total_of_booking_title"
+msgstr ""
+
+msgid "on_the_conditions_reduction_title"
+msgstr ""
+
+msgid "anothers_cases_title"
+msgstr ""
+
+msgid "on_same_date_title"
+msgstr ""
+
+msgid "on_same_appointment_title"
+msgstr ""
+
+msgid "on_the_booking_title"
+msgstr ""
+
+msgid "appointment_amount_title"
+msgstr ""
+
+msgid "appointment_date_title"
+msgstr ""
+
+msgid "appointment_time_title"
+msgstr ""
+
+msgid "booking_time_title"
+msgstr ""
+
+msgid "booking_register_date_title"
+msgstr ""
+
+msgid "days_title"
+msgstr ""
+
+msgid "customer_title"
+msgstr ""
+
+msgid "for_company_account_title"
+msgstr ""
+
+msgid "not_for_company_account_title"
+msgstr ""
+
+msgid "on_the_spot_payment_title"
+msgstr "Contante betaling"
+
+msgid "later_payment_title"
+msgstr "Betaal later"
+
+msgid "transfer_payment_title"
+msgstr ""
+
+msgid "cheque_payment_title"
+msgstr "Betaling per cheque"
+
+msgid "paypal_payment_title"
+msgstr "Paypal"
+
+msgid "systempay_payment_title"
+msgstr "Online betaling"
+
+msgid "monetico_payment_title"
+msgstr "Online betaling"
+
+msgid "cashpad_payment_title"
+msgstr ""
+
+msgid "customer_payment_title"
+msgstr "Betaling aan de klant"
+
+msgid "defer_payment_title"
+msgstr "Uitstel van betaling"
+
+msgid "settings_title"
+msgstr "Instellingen"
+
+msgid "system_info_title"
+msgstr "Systeeminfo"
+
+msgid "parameters_title"
+msgstr "Instellingen"
+
+msgid "export_import_title"
+msgstr ""
+
+msgid "saved_alert_title"
+msgstr ""
+
+msgid "custom_quantity_to_title"
+msgstr ""
+
+msgid "added_more_or_equals_to_title"
+msgstr ""
+
+msgid "mutual_more_or_equals_to_title"
+msgstr ""
+
+msgid "mutual_bracket_title"
+msgstr ""
+
+msgid "equals_to_title"
+msgstr ""
+
+msgid "not_equals_to_title"
+msgstr ""
+
+msgid "more_or_equals_to_title"
+msgstr ""
+
+msgid "less_than_title"
+msgstr ""
+
+msgid "bracket_title"
+msgstr ""
+
+msgid "begin_before_title"
+msgstr ""
+
+msgid "all_payments_title"
+msgstr ""
+
+msgid "all_terminated_payments_title"
+msgstr ""
+
+msgid "all_incompleted_payments_title"
+msgstr ""
+
+msgid "none_payments_title"
+msgstr ""
+
+msgid "incomplete_payments_title"
+msgstr ""
+
+msgid "complete_payments_title"
+msgstr ""
+
+msgid "over_payments_title"
+msgstr ""
+
+msgid "repayment_incompleted_payments_title"
+msgstr ""
+
+msgid "repayment_completed_payments_title"
+msgstr ""
+
+msgid "all_waiting_payments_title"
+msgstr ""
+
+msgid "all_needed_repayment_title"
+msgstr ""
+
+msgid "after_before_title"
+msgstr ""
+
+msgid "before_to_title"
+msgstr ""
+
+msgid "after_to_title"
+msgstr ""
+
+msgid "General_title_settings"
+msgstr ""
+
+msgid "Staff_title_settings"
+msgstr ""
+
+msgid "Synchronization_title_settings"
+msgstr ""
+
+msgid "Parameters_title_settings"
+msgstr ""
+
+msgid "Payment_title_settings"
+msgstr ""
+
+msgid "Notifications_title_settings"
+msgstr ""
+
+msgid "Form_title_settings"
+msgstr ""
+
+msgid "License_title_settings"
+msgstr ""
+
+msgid "Select_word"
+msgstr "Selecteer"
+
+msgid "Validation_word"
+msgstr "Bevestiging"
+
+msgid "Send_quotation_request_word"
+msgstr "Offerteaanvraag versturen"
+
+msgid "Coupon_word"
+msgstr "Voucher"
+
+msgid "Timeslot_word"
+msgstr "Van"
+
+msgid "Morning_word"
+msgstr "Ochtend"
+
+msgid "Afternoon_word"
+msgstr "Namiddag"
+
+msgid "Place_word"
+msgstr ""
+
+msgid "Activity_word"
+msgstr "Activiteit"
+
+msgid "Activities_word"
+msgstr "Activiteiten"
+
+msgid "Tax_es_word"
+msgstr "Belastingen"
+
+msgid "IVAT_word"
+msgstr "Belasting"
+
+msgid "note_word"
+msgstr "Noot:"
+
+msgid "Before_word"
+msgstr "Voor"
+
+msgid "After_word"
+msgstr "Na"
+
+msgid "select_mandatory_price_words"
+msgstr "Selecteer de gewenste prijzen"
+
+msgid "Participants_words"
+msgstr "Deelnemers"
+
+msgid "min_number_persons_words"
+msgstr "Min. aantal per persoon"
+
+msgid "max_number_persons_words"
+msgstr "Maximum aantal per persoon"
+
+msgid "price_number_persons_words"
+msgstr ""
+
+msgid "by_page_words"
+msgstr ""
+
+msgid "turnover_on_period_words"
+msgstr ""
+
+msgid "staff_note_words"
+msgstr ""
+
+msgid "actual_site_url_words"
+msgstr ""
+
+msgid "not_same_password_words"
+msgstr "Niet hetzelfde wachtwoord."
+
+msgid "bad_password_words"
+msgstr "Uw wachtwoord moet meer dan 6 tekens bevatten, een hoofdletter, een kleine letter en een cijfer hebben!"
+
+msgid "No_category_words"
+msgstr ""
+
+msgid "No_place_words"
+msgstr ""
+
+msgid "No_tag_words"
+msgstr ""
+
+msgid "off_schedule_words"
+msgstr ""
+
+msgid "custom_line_words"
+msgstr ""
+
+msgid "Select_timeslot_words"
+msgstr ""
+
+msgid "Reselect_timeslot_words"
+msgstr ""
+
+msgid "not_to_pay_advance_payment_amount_words"
+msgstr "Volledige betaling"
+
+msgid "advance_payment_amount_words"
+msgstr "Stortingsbedrag"
+
+msgid "Unknown_customer_words"
+msgstr ""
+
+msgid "timeslot_on_date_words"
+msgstr ""
+
+msgid "loading_data_words"
+msgstr ""
+
+msgid "See_booking_details_words"
+msgstr "Zie boekingsdetails"
+
+msgid "See_quotation_details_words"
+msgstr "Zie de details van de offertes"
+
+msgid "See_the_receipt_words"
+msgstr "Zie het ontvangstbewijs"
+
+msgid "See_the_quotation_words"
+msgstr "Zie het citaat"
+
+msgid "Paid_this_booking_words"
+msgstr "Betaalde deze boeking"
+
+msgid "created_on_words"
+msgstr "Gemaakt op"
+
+msgid "loading_word"
+msgstr "Laden..."
+
+msgid "loading_customer_data_words"
+msgstr "Het laden van klantgegevens..."
+
+msgid "specify_absences_words"
+msgstr "Specificeer afwezigheden"
+
+msgid "Promo_word"
+msgstr "Promotie"
+
+msgid "Capacity_word"
+msgstr "Capaciteit"
+
+msgid "Price_list_word"
+msgstr "Prijslijst"
+
+msgid "Price_word"
+msgstr "Prijs"
+
+msgid "Full_word"
+msgstr "Volledig"
+
+msgid "Members_word"
+msgstr "Leden"
+
+msgid "Member_word"
+msgstr "Lid"
+
+msgid "Participant_word"
+msgstr "Deelnemers"
+
+msgid "booking_note_words"
+msgstr ""
+
+msgid "booking_public_note_words"
+msgstr ""
+
+msgid "booking_staff_note_words"
+msgstr ""
+
+msgid "Value_coupon_words"
+msgstr "Grotere waarde"
+
+msgid "Vat_word"
+msgstr "Belasting"
+
+msgid "Booking_s_word"
+msgstr "Boeking(en)"
+
+msgid "booking_s_word"
+msgstr "boeking(en)"
+
+msgid "customer_s_word"
+msgstr ""
+
+msgid "appointment_s_word"
+msgstr ""
+
+msgid "Payment_methods_words"
+msgstr "Betalingsmethode(n)"
+
+msgid "no_staff_gestions_words"
+msgstr ""
+
+msgid "added_between_words"
+msgstr ""
+
+msgid "between_word"
+msgstr ""
+
+msgid "Assigned_to_words"
+msgstr ""
+
+msgid "have_a_note_words"
+msgstr ""
+
+msgid "Customer_word"
+msgstr ""
+
+msgid "customer_word"
+msgstr ""
+
+msgid "and_quantity_words"
+msgstr ""
+
+msgid "by_person_words"
+msgstr "per persoon"
+
+msgid "Reduction_word_form"
+msgstr ""
+
+msgid "Reduction_word"
+msgstr ""
+
+msgid "Quantity_word"
+msgstr ""
+
+msgid "Available_word"
+msgstr ""
+
+msgid "Rule_word"
+msgstr ""
+
+msgid "Condition_word"
+msgstr ""
+
+msgid "Number_of_persons_word"
+msgstr "Aantal personen"
+
+msgid "positions_word"
+msgstr "overige plaatsen"
+
+msgid "remaining_positions_word"
+msgstr "Nog steeds beschikbaar"
+
+msgid "Redirection_word_form"
+msgstr "U wordt doorgestuurd"
+
+msgid "Redirection_2_word_form"
+msgstr "Omleiding in uitvoering"
+
+msgid "update_booking_word"
+msgstr "Update reservering in uitvoering"
+
+msgid "if_on_words_reductions"
+msgstr ""
+
+msgid "there_are_words"
+msgstr ""
+
+msgid "value_word"
+msgstr ""
+
+msgid "date_word"
+msgstr "datum"
+
+msgid "Date_word"
+msgstr "Datum"
+
+msgid "Date_and_hours_word"
+msgstr "Datum / uur"
+
+msgid "Dates_and_hours_word"
+msgstr "Data / uren"
+
+msgid "Hours_word"
+msgstr "Uren"
+
+msgid "Dates_word"
+msgstr "Data"
+
+msgid "Time_word"
+msgstr "Tijd"
+
+msgid "Start_time_word"
+msgstr ""
+
+msgid "End_time_word"
+msgstr ""
+
+msgid "Month_word"
+msgstr ""
+
+msgid "Day_word"
+msgstr ""
+
+msgid "day_word"
+msgstr ""
+
+msgid "days_word"
+msgstr ""
+
+msgid "to_word"
+msgstr "-"
+
+msgid "from_word"
+msgstr ""
+
+msgid "to2_word"
+msgstr "naar"
+
+msgid "from2_word"
+msgstr "van"
+
+msgid "begin_word"
+msgstr ""
+
+msgid "by_word"
+msgstr ""
+
+msgid "on_word"
+msgstr ""
+
+msgid "and_word"
+msgstr ""
+
+msgid "Or_word"
+msgstr ""
+
+msgid "And_word"
+msgstr ""
+
+msgid "OR_word"
+msgstr ""
+
+msgid "AND_word"
+msgstr ""
+
+msgid "need_word"
+msgstr ""
+
+msgid "Outstanding_word"
+msgstr ""
+
+msgid "assigned_word"
+msgstr ""
+
+msgid "bookings_word"
+msgstr ""
+
+msgid "persons_word"
+msgstr "personen"
+
+msgid "person_word"
+msgstr "persoon"
+
+msgid "Close_word"
+msgstr "Sluit"
+
+msgid "Today_word"
+msgstr ""
+
+msgid "Clear_word"
+msgstr ""
+
+msgid "Add_timeslot_custom_words"
+msgstr ""
+
+msgid "Customer_note_word"
+msgstr "Noot:"
+
+msgid "Amount_to_be_paid_words"
+msgstr "Te betalen bedrag"
+
+msgid "Payment_word"
+msgstr "Betaling"
+
+msgid "payment_word"
+msgstr "betaling"
+
+msgid "expired_word"
+msgstr "verlopen"
+
+msgid "Confirmation_word"
+msgstr "Bevestig"
+
+msgid "Repayment_word"
+msgstr "Terugbetaling"
+
+msgid "Booking_of_words"
+msgstr "Boeking van"
+
+msgid "Payment_of_words"
+msgstr "Betaling van"
+
+msgid "Repayment_of_words"
+msgstr "Terugbetaling van"
+
+msgid "participants_list_words"
+msgstr "Lijst van deelnemers"
+
+msgid "Welcome_word"
+msgstr ""
+
+msgid "Link_word"
+msgstr ""
+
+msgid "Number_word"
+msgstr ""
+
+msgid "remaining_word"
+msgstr ""
+
+msgid "Availability_word"
+msgstr ""
+
+msgid "Not_availability_word"
+msgstr ""
+
+msgid "number_word"
+msgstr ""
+
+msgid "total_price_word"
+msgstr ""
+
+msgid "Step_word_form"
+msgstr ""
+
+msgid "Sub_total_word"
+msgstr "Subtotaal"
+
+msgid "Total_word"
+msgstr "Totaal"
+
+msgid "in_total_words"
+msgstr "in totaal"
+
+msgid "from_price_words"
+msgstr "Van"
+
+msgid "amount_to_be_paid_words"
+msgstr "Bedrag aan rechten"
+
+msgid "Total_booking_words"
+msgstr "Totaal"
+
+msgid "Advance_payment_words"
+msgstr "Voorschot"
+
+msgid "Remaining_to_pay_words"
+msgstr ""
+
+msgid "Total_advance_payment_word"
+msgstr ""
+
+msgid "Service_word"
+msgstr "Service"
+
+msgid "Services_word"
+msgstr "Diensten"
+
+msgid "link_form_words"
+msgstr ""
+
+msgid "link_name_words"
+msgstr ""
+
+msgid "capacity_word"
+msgstr ""
+
+msgid "ok_word"
+msgstr ""
+
+msgid "cancelled_word"
+msgstr ""
+
+msgid "pending_word"
+msgstr ""
+
+msgid "abandonned_word"
+msgstr ""
+
+msgid "deleted_word"
+msgstr ""
+
+msgid "updated_word"
+msgstr ""
+
+msgid "waiting_word"
+msgstr ""
+
+msgid "Absent_word"
+msgstr ""
+
+msgid "Present_word"
+msgstr ""
+
+msgid "filter_ok_word"
+msgstr "Ok"
+
+msgid "filter_waiting_word"
+msgstr "Niet bevestigd"
+
+msgid "filter_cancelled_word"
+msgstr "Geannuleerd"
+
+msgid "filter_abandonned_word"
+msgstr "Verlaten"
+
+msgid "on_sub_total_words"
+msgstr ""
+
+msgid "on_price_list_words"
+msgstr ""
+
+msgid "new_price_list_words"
+msgstr ""
+
+msgid "required_word"
+msgstr "verplicht"
+
+msgid "facultative_word"
+msgstr "facultatief"
+
+msgid "payment_title_custom_payment_types"
+msgstr ""
+
+msgid "category_of_services_words"
+msgstr ""
+
+msgid "form_steps_title"
+msgstr ""
+
+msgid "custom_css_words"
+msgstr ""
+
+msgid "form_participants_parameters_title"
+msgstr ""
+
+msgid "Default_word"
+msgstr "Standaard"
+
+msgid "New_field_word"
+msgstr "Nieuw veld"
+
+msgid "Category_word"
+msgstr "Categorie"
+
+msgid "Your_bookings_words"
+msgstr "Uw boekingen"
+
+msgid "Your_quotations_words"
+msgstr "Uw offertes"
+
+msgid "inconsistencies_allowed_words"
+msgstr ""
+
+msgid "offer_quantity_words"
+msgstr "aangeboden hoeveelheid"
+
+msgid "offer_quantities_words"
+msgstr "aangeboden hoeveelheden"
+
+msgid "automatic_validation_parameter_words"
+msgstr "Automatische validatie"
+
+msgid "automatic_validation_parameter_description_words"
+msgstr "Reserveringen worden standaard gevalideerd (ongeacht of er een betaling is of niet)."
+
+msgid "payment_validation_parameter_words"
+msgstr "Validatie tot betaling"
+
+msgid "payment_validation_parameter_description_words"
+msgstr "Reserveringen worden opgeslagen met de status wachtend en plaatsen worden niet geblokkeerd. Als er voor deze reservering een betaling wordt gedaan, wordt de status gevalideerd en worden de plaatsen geblokkeerd."
+
+msgid "payment_booking_validation_parameter_words"
+msgstr "Online betaling"
+
+msgid "payment_booking_validation_parameter_description_words"
+msgstr "Reserveringen worden opgeslagen en plaatsen worden gereserveerd. Als de online betaling wordt geweigerd gaat de reservering in verlaten staat en worden de plaatsen vrijgegeven."
+
+msgid "to_define_words"
+msgstr ""
+
+msgid "custom_reduction_words"
+msgstr ""
+
+msgid "booking_cancelled_words"
+msgstr ""
+
+msgid "booking_abandoned_words"
+msgstr ""
+
+msgid "booking_pending_words"
+msgstr ""
+
+msgid "booking_abandonned_words"
+msgstr ""
+
+msgid "Payment_for_words"
+msgstr ""
+
+msgid "Search_word"
+msgstr ""
+
+msgid "appointment_details_words"
+msgstr ""
+
+msgid "Informations_word"
+msgstr ""
+
+msgid "Complementary_informations_words"
+msgstr "Further information"
+
+msgid "Sunday_word"
+msgstr ""
+
+msgid "Monday_word"
+msgstr ""
+
+msgid "Tuesday_word"
+msgstr ""
+
+msgid "Wednesday_word"
+msgstr ""
+
+msgid "Thursday_word"
+msgstr ""
+
+msgid "Friday_word"
+msgstr ""
+
+msgid "Saturday_word"
+msgstr ""
+
+msgid "January_word"
+msgstr ""
+
+msgid "February_word"
+msgstr ""
+
+msgid "March_word"
+msgstr ""
+
+msgid "April_word"
+msgstr ""
+
+msgid "May_word"
+msgstr ""
+
+msgid "June_word"
+msgstr ""
+
+msgid "July_word"
+msgstr ""
+
+msgid "August_word"
+msgstr ""
+
+msgid "September_word"
+msgstr ""
+
+msgid "October_word"
+msgstr ""
+
+msgid "November_word"
+msgstr ""
+
+msgid "December_word"
+msgstr ""
+
+msgid "Green_word"
+msgstr ""
+
+msgid "Yellow_word"
+msgstr ""
+
+msgid "Orange_word"
+msgstr ""
+
+msgid "Brown_word"
+msgstr ""
+
+msgid "Red_word"
+msgstr ""
+
+msgid "Blue_word"
+msgstr ""
+
+msgid "Error_word"
+msgstr "Fout: "
+
+msgid "Staff_member_words"
+msgstr ""
+
+msgid "your_bookings_words"
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "all_word"
+msgstr ""
+
+msgid "ok_status_word"
+msgstr "Valideer"
+
+msgid "cancelled_status_word"
+msgstr "Geannuleerd"
+
+msgid "pending_status_word"
+msgstr ""
+
+msgid "waiting_status_word"
+msgstr "Wachtend op"
+
+msgid "abandonned_status_word"
+msgstr ""
+
+msgid "updated_status_word"
+msgstr ""
+
+msgid "sign_word"
+msgstr ""
+
+msgid "today_word"
+msgstr ""
+
+msgid "Upcoming_word"
+msgstr ""
+
+msgid "tomorrow_word"
+msgstr ""
+
+msgid "yesterday_word"
+msgstr ""
+
+msgid "all_date_words"
+msgstr ""
+
+msgid "status_word"
+msgstr "Status"
+
+msgid "quotation_word"
+msgstr "Citaat"
+
+msgid "booking_status_ok_word"
+msgstr "Voltooid"
+
+msgid "booking_status_waiting_word"
+msgstr "Wachtend op"
+
+msgid "booking_status_cancelled_word"
+msgstr "Geannuleerd"
+
+msgid "payment_status_complete_word"
+msgstr "Verhuurd"
+
+msgid "payment_status_deposit_word"
+msgstr "Storten"
+
+msgid "payment_status_advancePayment_word"
+msgstr "Voorschot"
+
+msgid "payment_status_noPayment_word"
+msgstr "Geen betaling"
+
+msgid "booking_status_quotation_word"
+msgstr "Wachten op uw validatie"
+
+msgid "booking_status_quotation_request_word"
+msgstr "Wachten op ons validatie"
+
+msgid "ask_payment_words"
+msgstr ""
+
+msgid "add_in_basket_success"
+msgstr ""
+
+msgid "associated_booking_words"
+msgstr ""
+
+msgid "see_bookings_for_words"
+msgstr ""
+
+msgid "in_seven_days_words"
+msgstr ""
+
+msgid "Hello_word"
+msgstr "Hi"
+
+msgid "already_customer_words"
+msgstr "Bent u al klant?"
+
+msgid "already_customer_here_words"
+msgstr "heb je een account bij ons?"
+
+msgid "need_connection_words"
+msgstr "Gelieve in te loggen om toegang te krijgen tot het formulier."
+
+msgid "can_not_display_form_words"
+msgstr "U heeft geen recht op toegang tot dit formulier, neem contact met ons op om dit probleem op te lossen."
+
+msgid "If_yes_words"
+msgstr "Als u"
+
+msgid "you_is_not_words"
+msgstr "Ben jij niet"
+
+msgid "connect_you_to_account_words"
+msgstr "Log in met uw account"
+
+msgid "else_continue_your_first_booking_words"
+msgstr "Anders gaat u verder met uw eerste reservering."
+
+msgid "Modify_your_personal_informations_words"
+msgstr "Wijzig uw persoonlijke gegevens."
+
+msgid "Modify_your_password"
+msgstr "Wachtwoord wijzigen ?"
+
+msgid "Booking_word"
+msgstr "Reservering"
+
+msgid "booking_status_words"
+msgstr "Boekingsstatus"
+
+msgid "payment_status_words"
+msgstr "Betalingsstatus"
+
+msgid "booking_first_date_link_word"
+msgstr "op"
+
+msgid "booking_created_words"
+msgstr "Gemaakt op"
+
+msgid "quotation_first_date_words"
+msgstr "Citaat op"
+
+msgid "quotation_created_words"
+msgstr "Gemaakt op"
+
+msgid "Your_payments_words"
+msgstr "Uw betalingen"
+
+msgid "online_receipt_words"
+msgstr "Online ontvangstbewijs"
+
+msgid "RESA_Customer"
+msgstr "Klant"
+
+msgid "RESA_Staff"
+msgstr "Personeel"
+
+msgid "RESA_Manager"
+msgstr "Manager"
+
+msgid "Type_account_customer_word"
+msgstr "Klantenserviceaccount"
+
+msgid "Type_account_company_word"
+msgstr "Bedrijfsrekening"
+
+msgid "cancel_payment_title_dialog"
+msgstr ""
+
+msgid "cancel_payment_text_dialog"
+msgstr ""
+
+msgid "cancel_payment_confirmButton_dialog"
+msgstr ""
+
+msgid "cancel_payment_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_cancel_booking_title_dialog"
+msgstr ""
+
+msgid "ask_cancel_booking_text_dialog"
+msgstr ""
+
+msgid "ask_cancel_booking_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_cancel_booking_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_delete_booking_title_dialog"
+msgstr ""
+
+msgid "ask_delete_booking_text_dialog"
+msgstr ""
+
+msgid "ask_delete_booking_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_delete_booking_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_cancel_appointment_title_dialog"
+msgstr ""
+
+msgid "ask_cancel_appointment_text_dialog"
+msgstr ""
+
+msgid "ask_cancel_appointment_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_cancel_appointment_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_uncancel_appointment_title_dialog"
+msgstr ""
+
+msgid "ask_uncancel_appointment_text_dialog"
+msgstr ""
+
+msgid "ask_uncancel_appointment_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_uncancel_appointment_cancelButton_dialog"
+msgstr ""
+
+msgid "delete_info_calendar_title_dialog"
+msgstr ""
+
+msgid "delete_info_calendar_text_dialog"
+msgstr ""
+
+msgid "delete_info_calendar_confirmButton_dialog"
+msgstr ""
+
+msgid "delete_info_calendar_cancelButton_dialog"
+msgstr ""
+
+msgid "delete_service_constraint_title_dialog"
+msgstr ""
+
+msgid "delete_service_constraint_text_dialog"
+msgstr ""
+
+msgid "delete_service_constraint_confirmButton_dialog"
+msgstr ""
+
+msgid "delete_service_constraint_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_delete_service_text_title_dialog"
+msgstr ""
+
+msgid "ask_delete_service_text_dialog"
+msgstr ""
+
+msgid "ask_delete_service_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_delete_service_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_delete_bookings_title_dialog"
+msgstr ""
+
+msgid "ask_delete_bookings_text_dialog"
+msgstr ""
+
+msgid "ask_delete_bookings_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_delete_bookings_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_clear_all_data_title_dialog"
+msgstr ""
+
+msgid "ask_clear_all_data_text_dialog"
+msgstr ""
+
+msgid "ask_clear_all_data_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_clear_all_data_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_delete_reduction_text_title_dialog"
+msgstr ""
+
+msgid "ask_delete_reduction_text_dialog"
+msgstr ""
+
+msgid "ask_delete_reduction_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_delete_reduction_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_delete_staff_member_text_title_dialog"
+msgstr ""
+
+msgid "ask_delete_staff_member_text_dialog"
+msgstr ""
+
+msgid "ask_delete_staff_member_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_delete_staff_member_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_send_email_to_customer_title_dialog"
+msgstr ""
+
+msgid "ask_send_email_to_customer_text_dialog"
+msgstr ""
+
+msgid "ask_send_email_to_customer_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_send_email_to_customer_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_send_email_creation_account_title_dialog"
+msgstr ""
+
+msgid "ask_send_email_creation_account_text_dialog"
+msgstr ""
+
+msgid "ask_send_email_creation_account_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_send_email_creation_account_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_delete_customer_title_dialog"
+msgstr ""
+
+msgid "ask_delete_customer_text_dialog"
+msgstr ""
+
+msgid "ask_delete_customer_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_delete_customer_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_clear_synchronization_cashpad_customer_title_dialog"
+msgstr ""
+
+msgid "ask_clear_synchronization_cashpad_customer_text_dialog"
+msgstr ""
+
+msgid "ask_clear_synchronization_cashpad_customer_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_clear_synchronization_cashpad_customer_cancelButton_dialog"
+msgstr ""
+
+msgid "accept_quotation_title_dialog"
+msgstr "Weet je het zeker ?"
+
+msgid "accept_quotation_text_dialog"
+msgstr "Accepteer je dit citaat?"
+
+msgid "accept_quotation_confirmButton_dialog"
+msgstr "Ja"
+
+msgid "accept_quotation_cancelButton_dialog"
+msgstr "Annuleer"
+
+msgid "accept_quotation_success_dialog"
+msgstr "Offerte aanvaard"
+
+msgid "refuse_quotation_title_dialog"
+msgstr "Weet je het zeker ?"
+
+msgid "refuse_quotation_text_dialog"
+msgstr "Weigert u dit citaat?"
+
+msgid "refuse_quotation_confirmButton_dialog"
+msgstr "Ja"
+
+msgid "refuse_quotation_cancelButton_dialog"
+msgstr "Annuleer"
+
+msgid "refuse_quotation_success_dialog"
+msgstr "Offerte geweigerd"
+
+msgid "modify_your_informations_title_dialog"
+msgstr "Weet je het zeker ?"
+
+msgid "modify_your_informations_text_dialog"
+msgstr "Heeft u uw gegevens gewijzigd ?"
+
+msgid "modify_your_informations_confirmButton_dialog"
+msgstr "Ja"
+
+msgid "modify_your_informations_cancelButton_dialog"
+msgstr "Annuleer"
+
+msgid "forgotten_password_title_dialog"
+msgstr "Wachtwoord vergeten?"
+
+msgid "forgotten_password_text_dialog"
+msgstr "Voer uw e-mailadres in"
+
+msgid "forgotten_password_confirmButton_dialog"
+msgstr "Stuur"
+
+msgid "forgotten_password_cancelButton_dialog"
+msgstr "Annuleer"
+
+msgid "forgotten_password_inputPlaceholder_dialog"
+msgstr "Email"
+
+msgid "delete_group_title_dialog"
+msgstr ""
+
+msgid "delete_group_text_dialog"
+msgstr ""
+
+msgid "delete_group_confirmButton_dialog"
+msgstr ""
+
+msgid "delete_group_cancelButton_dialog"
+msgstr ""
+
+msgid "remove_member_group_title_dialog"
+msgstr ""
+
+msgid "remove_member_group_text_dialog"
+msgstr ""
+
+msgid "remove_member_group_confirmButton_dialog"
+msgstr ""
+
+msgid "remove_member_group_cancelButton_dialog"
+msgstr ""
+
+msgid "change_member_group_title_dialog"
+msgstr ""
+
+msgid "change_member_group_text_dialog"
+msgstr ""
+
+msgid "change_member_confirmButton_dialog"
+msgstr ""
+
+msgid "change_member_cancelButton_dialog"
+msgstr ""
+
+msgid "change_member_place_group_title_dialog"
+msgstr ""
+
+msgid "change_member_place_group_text_dialog"
+msgstr ""
+
+msgid "change_member_place_confirmButton_dialog"
+msgstr ""
+
+msgid "change_member_place_cancelButton_dialog"
+msgstr ""
+
+msgid "change_members_group_title_dialog"
+msgstr ""
+
+msgid "change_members_group_text_dialog"
+msgstr ""
+
+msgid "change_members_group_confirmButton_dialog"
+msgstr ""
+
+msgid "change_members_group_cancelButton_dialog"
+msgstr ""
+
+msgid "change_members_group_place_title_dialog"
+msgstr ""
+
+msgid "change_members_group_place_text_dialog"
+msgstr ""
+
+msgid "change_members_group_place_confirmButton_dialog"
+msgstr ""
+
+msgid "change_members_group_place_cancelButton_dialog"
+msgstr ""
+
+msgid "change_participants_group_title_dialog"
+msgstr ""
+
+msgid "change_participants_group_text_dialog"
+msgstr ""
+
+msgid "change_participants_group_confirmButton_dialog"
+msgstr ""
+
+msgid "change_participants_group_cancelButton_dialog"
+msgstr ""
+
+msgid "no_bill_error"
+msgstr ""
+
+msgid "shortcode_price_error"
+msgstr ""
+
+msgid "authentication_error"
+msgstr "Authenticatiefout"
+
+msgid "payment_online_error"
+msgstr "Online betaling is op dit moment niet beschikbaar, probeer het later nog eens."
+
+msgid "type_payment_unauthorized_error"
+msgstr "De door u gekozen betaalmethode is niet toegestaan"
+
+msgid "authentication_or_register_error"
+msgstr "Authenticatie of registratiefout"
+
+msgid "authentication_or_register_reload_error"
+msgstr "Authenticatie of registratie fout, gelieve opnieuw te laden"
+
+msgid "register_error"
+msgstr "Registratiefout"
+
+msgid "login_already_exist_error"
+msgstr "Inloggen bestaat al"
+
+msgid "email_already_exist_error"
+msgstr "E-mail bestaat al"
+
+msgid "phone_already_exist_error"
+msgstr "Telefoon bestaat al in de database"
+
+msgid "bad_password_error"
+msgstr "bad password format"
+
+msgid "not_validate_account_error"
+msgstr "Account valideert de fout niet"
+
+msgid "can_not_delete_customer_error"
+msgstr "Kan deze klant niet verwijderen"
+
+msgid "can_not_cancel_payment_error"
+msgstr "Kan deze betaling niet annuleren"
+
+msgid "customer_unknown_error"
+msgstr "Onbekende klant"
+
+msgid "save_booking_error_unknown_price"
+msgstr "Onbekende prijs"
+
+msgid "save_booking_error_price_not_activated"
+msgstr "Prijs niet geactiveerd"
+
+msgid "not_enough_equipments"
+msgstr "Niet genoeg apparatuur"
+
+msgid "save_booking_error_price_not_for_type_account"
+msgstr "Deze prijs kan niet worden gekozen voor dit type gebruikersaccount."
+
+msgid "save_booking_error_price_unavailable"
+msgstr "Prijs niet beschikbaar "
+
+msgid "save_booking_error_number_price"
+msgstr "Slecht aantal personen voor deze prijs"
+
+msgid "no_mandatory_price_error_number_price"
+msgstr "De reservering bevat niet alle vereiste prijzen"
+
+msgid "need_participants_informations_error"
+msgstr "Foutieve informatie voor deelnemers"
+
+msgid "save_booking_error_max_capacity_reach"
+msgstr "Max. capaciteitsbereik"
+
+msgid "error_no_price_list_capacity_reach"
+msgstr "Onbekende prijs, capaciteitsbereik"
+
+msgid "save_booking_error_person_attribution"
+msgstr "Foutieve persoonstoewijzing"
+
+msgid "save_booking_error_timeslot_not_found"
+msgstr "Tijdslot niet gevonden"
+
+msgid "save_booking_error_empty_form"
+msgstr "Empty form"
+
+msgid "empty_field_participant_form_error"
+msgstr "Vul alle gegevens van de deelnemers in om verder te gaan"
+
+msgid "create_new_version_bookings_error"
+msgstr "Deze boeking/offerte is verlopen, laadt u de pagina opnieuw op en hervat uw actie."
+
+msgid "choose_a_date"
+msgstr "Kies een datum"
+
+msgid "choose_dates"
+msgstr "Kies data"
+
+msgid "choose_a_timeslot"
+msgstr "Kies een tijdslot"
+
+msgid "choose_a_price"
+msgstr "Selecteer een prijs"
+
+msgid "choose_the_prices"
+msgstr "Selecteer prijzen"
+
+msgid "addons_and_extras_words"
+msgstr ""
+
+msgid "choose_the_number"
+msgstr ""
+
+msgid "agenda_description_service"
+msgstr ""
+
+msgid "min_time_booking_description_service"
+msgstr ""
+
+msgid "max_time_booking_description_service"
+msgstr ""
+
+msgid "exclusif_service_description_service"
+msgstr ""
+
+msgid "priority_description_service"
+msgstr ""
+
+msgid "service_prices_description_service"
+msgstr ""
+
+msgid "name_mention_descriptions_price_words"
+msgstr ""
+
+msgid "error_service_parameters_deprecated_form"
+msgstr ""
+
+msgid "validation_before_payment_step_title"
+msgstr ""
+
+msgid "validation_before_payment_step"
+msgstr ""
+
+msgid "customer_account_url_title"
+msgstr ""
+
+msgid "languages_title"
+msgstr ""
+
+msgid "participants_parameter_title"
+msgstr ""
+
+msgid "Places_of_site_settings_title"
+msgstr ""
+
+msgid "staff_management_title"
+msgstr ""
+
+msgid "staff_word_many_title"
+msgstr ""
+
+msgid "staff_word_single_title"
+msgstr ""
+
+msgid "staff_appointment_display_title"
+msgstr ""
+
+msgid "calendar_title"
+msgstr ""
+
+msgid "calendar_start_time_title"
+msgstr ""
+
+msgid "calendar_end_time_title"
+msgstr ""
+
+msgid "calendar_enabled_days_front_color_title"
+msgstr ""
+
+msgid "calendar_disabled_days_front_color_title"
+msgstr ""
+
+msgid "calendar_info_calendar_color_title"
+msgstr ""
+
+msgid "calendar_service_constraint_color_title"
+msgstr ""
+
+msgid "calendar_split_time_title"
+msgstr ""
+
+msgid "data_and_saveguard_title"
+msgstr ""
+
+msgid "debug_initialization_json_title"
+msgstr ""
+
+msgid "states_parameters_informations_title"
+msgstr ""
+
+msgid "custom_tags_informations_title"
+msgstr ""
+
+msgid "billing_informations_title"
+msgstr ""
+
+msgid "currencies_title"
+msgstr ""
+
+msgid "payment_activate_title"
+msgstr ""
+
+msgid "shortcode_available_title"
+msgstr ""
+
+msgid "sender_informations_title"
+msgstr ""
+
+msgid "customer_notification_title"
+msgstr ""
+
+msgid "customer_notification_quotation_title"
+msgstr ""
+
+msgid "emails_notification_title"
+msgstr ""
+
+msgid "emails_notification_payment_title"
+msgstr ""
+
+msgid "emails_notification_quotation_accepted_title"
+msgstr ""
+
+msgid "customer_account_creation_notification_title"
+msgstr ""
+
+msgid "customer_payment_notification_title"
+msgstr ""
+
+msgid "staff_notification_title"
+msgstr ""
+
+msgid "after_appointment_notification_title"
+msgstr ""
+
+msgid "no_response_quotation_notification_title"
+msgstr ""
+
+msgid "agenda_description_staff"
+msgstr ""
+
+msgid "share_services_description_staff"
+msgstr ""
+
+msgid "rule_of_capacity_computation_title_staff"
+msgstr ""
+
+msgid "conditions_description_reduction"
+msgstr ""
+
+msgid "reduction_applications_description"
+msgstr ""
+
+msgid "apply_reduction_title"
+msgstr ""
+
+msgid "Import_progress_words"
+msgstr ""
+
+msgid "customer_account_page_name"
+msgstr "Klantenserviceaccount"
+
+msgid "customer_form_page_name"
+msgstr "Klantenformulier"
+
+msgid "error_activated_service_dialog_title"
+msgstr ""
+
+msgid "service_has_no_rules_dialog_text"
+msgstr ""
+
+msgid "service_has_no_scedule_provide_dialog_text"
+msgstr ""
+
+msgid "service_has_no_timeslot_dialog_text"
+msgstr ""
+
+msgid "service_has_no_price_dialog_text"
+msgstr ""
+
+msgid "service_has_no_activated_price_dialog_text"
+msgstr ""
+
+msgid "service_has_no_price_positive_dialog_text"
+msgstr ""
+
+msgid "ask_continue_save_service_text_title_dialog"
+msgstr ""
+
+msgid "ask_continue_save_service_text_dialog"
+msgstr ""
+
+msgid "ask_continue_save_service_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_continue_save_service_cancelButton_dialog"
+msgstr ""
+
+msgid "ask_stop_payment_title_dialog"
+msgstr "De betaling stopzetten ?"
+
+msgid "ask_stop_payment_text_dialog"
+msgstr "Wilt u de betaling stopzetten ?"
+
+msgid "ask_stop_payment_confirmButton_dialog"
+msgstr "Ok"
+
+msgid "ask_stop_payment_cancelButton_dialog"
+msgstr "Annuleer"
+
+msgid "error_activated_member_dialog_title"
+msgstr ""
+
+msgid "member_has_no_rules_dialog_text"
+msgstr ""
+
+msgid "member_has_no_scedule_provide_dialog_text"
+msgstr ""
+
+msgid "ask_continue_save_member_text_title_dialog"
+msgstr ""
+
+msgid "ask_continue_save_member_text_dialog"
+msgstr ""
+
+msgid "ask_continue_save_member_confirmButton_dialog"
+msgstr ""
+
+msgid "ask_continue_save_member_cancelButton_dialog"
+msgstr ""
+
+msgid "add_booking_ok_dialog"
+msgstr ""
+
+msgid "no_customer_account_words"
+msgstr ""
+
+msgid "company_account_words"
+msgstr ""
+
+msgid "customer_synchronized_with_cashpad_words"
+msgstr ""
+
+msgid "payment_synchronized_with_cashpad_words"
+msgstr ""
+
+msgid "Actual_selected_words"
+msgstr ""
+
+msgid "Not_enough_capacity_words"
+msgstr ""
+
+msgid "Complete_words"
+msgstr ""
+
+msgid "capacity_alert_name"
+msgstr ""
+
+msgid "capacity_alert_description"
+msgstr ""
+
+msgid "reductions_alert_name"
+msgstr ""
+
+msgid "reductions_alert_description"
+msgstr ""
+
+msgid "timeslot_alert_name"
+msgstr ""
+
+msgid "timeslot_alert_description"
+msgstr ""
+
+msgid "equipments_alert_name"
+msgstr "Uitrustingswaarschuwing"
+
+msgid "equipments_alert_description"
+msgstr "Uitrustingswaarschuwing"
+
+msgid "see_notice"
+msgstr ""
+
+msgid "edit_notice"
+msgstr ""
+
+msgid "merge_notice"
+msgstr ""
+
+msgid "send_email_creation_account_notice"
+msgstr ""
+
+msgid "send_email_creation_account_feedback"
+msgstr ""
+
+msgid "send_email_to_customer_feedback"
+msgstr ""
+
+msgid "clear_all_data_feedback"
+msgstr ""
+
+msgid "cashpad_no_payment_possible_description"
+msgstr ""
+
+msgid "pub_resa_words"
+msgstr "Beheer uw boekingen met RESA Online (resa-online.fr)"
+
+msgid "participant_selector_title_dialog"
+msgstr "Selecteer een reeds aanwezige deelnemer"
+
+msgid "my_reservations"
+msgstr "Mijn boekingen"
+
+msgid "my_quotations"
+msgstr "Mijn offertes"
+
+msgid "my_personal_informations"
+msgstr "Mijn persoonlijke gegevens"
+
+msgid "see_bookings"
+msgstr "Zie boekingen"
+
+msgid "see_quotations"
+msgstr "Zie citaten"
+
+msgid "to_come"
+msgstr "Komen"
+
+msgid "past"
+msgstr "Verleden"
+
+msgid "all_feminin"
+msgstr "alle"
+
+msgid "gdpr_accept_to_save_data"
+msgstr "Ik accepteer de beveiliging van deze informatie als onderdeel van het beheer van mijn reserveringen op deze site."
+
+msgid "accept_register_newsletters"
+msgstr "Ik ga akkoord met het ontvangen van promotionele informatie per e-mail"
+
+msgid "gdpr_message_no_item_deleted"
+msgstr "Wij kunnen uw gegevens niet verwijderen voordat al uw boekingen zijn gemaakt."
+
+msgid "gdpr_message_item_deleted"
+msgstr "We bewaren de gegevens van uw boekingen, maar we verwijderen alle links tussen u en hen."
+
+msgid "gdpr_account_informations"
+msgstr "Voor elk verzoek in het kader van de GRPD wet, neem dan contact met ons op via e-mail."

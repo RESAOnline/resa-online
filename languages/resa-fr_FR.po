@@ -1,0 +1,3708 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 1.8.11\n"
+
+msgid "facebook_link_title"
+msgstr "Connexion avec Facebook"
+
+msgid "notifications_booking_link_title"
+msgstr "Réservations"
+
+msgid "notifications_payment_link_title"
+msgstr "Paiements"
+
+msgid "notifications_quotation_link_title"
+msgstr "Devis"
+
+msgid "notifications_account_link_title"
+msgstr "Création de compte"
+
+msgid "notifications_ask_account_link_title"
+msgstr "Demande de compte"
+
+msgid "display_bill_link_title"
+msgstr "Reçu"
+
+msgid "continue_booking_link_title"
+msgstr "Ajouter d'autres activités"
+
+msgid "extract_all_data_link_title"
+msgstr "Extraire données RESA"
+
+msgid "extract_init_data_appointments_link_title"
+msgstr "Extraire données d'initialisation des réservations"
+
+msgid "extract_init_data_customers_link_title"
+msgstr "Extraire données d'initialisation des clients"
+
+msgid "extract_init_data_services_link_title"
+msgstr "Extraire données d'initialisation des services"
+
+msgid "extract_init_data_staff_link_title"
+msgstr "Extraire données d'initialisation des membres"
+
+msgid "extract_init_data_reductions_link_title"
+msgstr "Extraire données d'initialisation des reductions"
+
+msgid "delete_all_bookings_link_title"
+msgstr "Supprimer toutes les réservations"
+
+msgid "clear_all_data_link_title"
+msgstr "Supprimer toutes les données"
+
+msgid "import_all_data_link_title"
+msgstr "Importer données RESA"
+
+msgid "verify_license_link_title"
+msgstr "Vérifier mise à jour"
+
+msgid "force_cashpad_synchronization_link_title"
+msgstr "Forcer cashpad synchronisation"
+
+msgid "force_caisse_online_synchronization_link_title"
+msgstr "Forcer caisse online synchronisation"
+
+msgid "clear_caisse_online_synchronization_customer_link_title"
+msgstr "Supprimer la synchronisation de tous les clients"
+
+msgid "add_an_another_date_link_title"
+msgstr "Ajouter une autre date"
+
+msgid "print_link_title"
+msgstr "Imprimer"
+
+msgid "accept_quotation_link_title"
+msgstr "Accepter le devis"
+
+msgid "refuse_quotation_link_title"
+msgstr "Refuser le devis"
+
+msgid "save_link_title"
+msgstr "Sauvegarder"
+
+msgid "connection_link_title"
+msgstr "Connexion"
+
+msgid "add_static_group_link_title"
+msgstr "Ajouter un groupe"
+
+msgid "add_member_link_title"
+msgstr "Ajouter un membre du personnel"
+
+msgid "remove_member_link_title"
+msgstr "Supprimer le membre du personnel"
+
+msgid "duplicate_member_link_title"
+msgstr "Dupliquer le membre du personnel"
+
+msgid "up_link_title"
+msgstr "Haut"
+
+msgid "add_link_title"
+msgstr "Ajouter"
+
+msgid "delete_link_title"
+msgstr "Supprimer"
+
+msgid "modify_link_title"
+msgstr "Modifier"
+
+msgid "uncancel_link_title"
+msgstr "Dé-annuler"
+
+msgid "unpending_link_title"
+msgstr "N'est plus en attente"
+
+msgid "unwaiting_link_title"
+msgstr "Valider la disponibilité"
+
+msgid "unabandonned_link_title"
+msgstr "Plus abandonné"
+
+msgid "recalculate_link_title"
+msgstr "Recalculer"
+
+msgid "down_link_title"
+msgstr "Bas"
+
+msgid "ok_link_title"
+msgstr "Valider"
+
+msgid "close_link_title"
+msgstr "Fermer"
+
+msgid "cancel_link_title"
+msgstr "Annuler"
+
+msgid "remove_link_title"
+msgstr "Supprimer"
+
+msgid "duplicate_link_title"
+msgstr "Dupliquer"
+
+msgid "see_all_bookings_link_title"
+msgstr "Voir toutes vos réservations"
+
+msgid "return_link_title"
+msgstr "Retour"
+
+msgid "return_customers_link_title"
+msgstr "Retour à la liste des clients"
+
+msgid "previous_link_title"
+msgstr "Précédent"
+
+msgid "next_link_title"
+msgstr "Suivant"
+
+msgid "today_link_title"
+msgstr "Aujourd'hui"
+
+msgid "month_link_title"
+msgstr "Mois"
+
+msgid "week_link_title"
+msgstr "Semaine"
+
+msgid "day_link_title"
+msgstr "Jour"
+
+msgid "add_in_basket_link_title"
+msgstr "Ajouter au panier"
+
+msgid "add_another_activity_link_title"
+msgstr "Ajouter une autre activité"
+
+msgid "remove_service_constraint_link_title"
+msgstr "Supprimer la contrainte"
+
+msgid "remove_condition_link_title"
+msgstr "Supprimer la condition"
+
+msgid "add_condition_link_title"
+msgstr "Ajouter une condition"
+
+msgid "add_date_link_title"
+msgstr "Ajouter une date"
+
+msgid "add_time_link_title"
+msgstr "Ajouter une heure"
+
+msgid "add_days_link_title"
+msgstr "Ajouter les jours"
+
+msgid "remove_rule_link_title"
+msgstr "Supprimer la règle"
+
+msgid "duplicate_rule_link_title"
+msgstr "Dupliquer la règle"
+
+msgid "add_rule_link_title"
+msgstr "Ajouter une règle"
+
+msgid "remove_service_link_title"
+msgstr "Supprimer le service"
+
+msgid "add_service_link_title"
+msgstr "Ajouter un service"
+
+msgid "duplicate_service_link_title"
+msgstr "Dupliquer le service"
+
+msgid "remove_link_link_title"
+msgstr "Supprimer la liaison"
+
+msgid "add_link_link_title"
+msgstr "Ajouter une liaison"
+
+msgid "remove_price_list_link_title"
+msgstr "Supprimer le tarif"
+
+msgid "add_price_list_link_title"
+msgstr "Ajouter un tarif"
+
+msgid "add_option_link_title"
+msgstr "Ajouter une option"
+
+msgid "update_services_link_title"
+msgstr "Sauvegarder les modifications"
+
+msgid "remove_timeslot_link_title"
+msgstr "Supprimer le creneaux"
+
+msgid "duplicate_timeslot_link_title"
+msgstr "Dupliquer le creneaux"
+
+msgid "add_dates_link_title"
+msgstr "Ajouter des dates"
+
+msgid "add_timeslot_link_title"
+msgstr "Ajouter un creneaux"
+
+msgid "update_members_link_title"
+msgstr "Sauvegarder les modifications"
+
+msgid "update_static_groups_link_title"
+msgstr "Sauvegarder les modifications"
+
+msgid "add_new_payment_link_title"
+msgstr "Ajouter un nouveau paiement"
+
+msgid "add_new_repayment_link_title"
+msgstr "Ajouter un nouveau remboursement"
+
+msgid "synchronization_payments_cashpad_link_title"
+msgstr "Synchroniser paiements avec cashpad"
+
+msgid "attach_booking_link_title"
+msgstr "Attacher une réservation"
+
+msgid "ask_payment_link_title"
+msgstr "Demander un paiement"
+
+msgid "add_customer_link_title"
+msgstr "Ajouter un client"
+
+msgid "delete_customer_link_title"
+msgstr "Supprimer ce client"
+
+msgid "merge_customer_link_title"
+msgstr "Fusionner ce client"
+
+msgid "clear_synchronization_cashpad_customer_link_title"
+msgstr "Supprimer la synchronisation avec Cashpad"
+
+msgid "choose_customer_link_title"
+msgstr "Rechercher un client"
+
+msgid "choose_this_customer_link_title"
+msgstr "Choisir"
+
+msgid "load_period_link_title"
+msgstr "Charger la période"
+
+msgid "reload_link_title"
+msgstr "Recharger"
+
+msgid "add_coupon_link_title"
+msgstr "Ajouter un coupon"
+
+msgid "valid_form_link_title"
+msgstr "Valider"
+
+msgid "valid_form_process_link_title"
+msgstr "Validation en cours, veuillez patienter..."
+
+msgid "modification_in_progress_link_title"
+msgstr "Modification en cours, veuillez patienter..."
+
+msgid "process_reductions_feedback"
+msgstr "Calcul des réductions en cours, veuillez patienter..."
+
+msgid "previous_step_link_title"
+msgstr "Étape précédente"
+
+msgid "next_step_link_title"
+msgstr "Étape suivante"
+
+msgid "calendar_link_title"
+msgstr "Calendrier"
+
+msgid "bookings_list_link_title"
+msgstr "Liste des réservations"
+
+msgid "appointments_list_link_title"
+msgstr "Liste des rendez-vous"
+
+msgid "load_appointments_passed_link_title"
+msgstr "Charger les réservations passées"
+
+msgid "see_booking_link_title"
+msgstr "Voir la réservation"
+
+msgid "add_booking_link_title"
+msgstr "Ajouter une réservation"
+
+msgid "add_info_calendar_link_title"
+msgstr "Ajouter une information"
+
+msgid "add_service_constraint_link_title"
+msgstr "Ajouter une contrainte"
+
+msgid "add_reduction_link_title"
+msgstr "Ajouter une réduction"
+
+msgid "remove_reduction_link_title"
+msgstr "Supprimer la réduction"
+
+msgid "duplicate_reduction_link_title"
+msgstr "Dupliquer cette réduction"
+
+msgid "update_reductions_link_title"
+msgstr "Sauvegarder les modifications"
+
+msgid "delete_application_link_title"
+msgstr "Supprimer l'application"
+
+msgid "add_application_link_title"
+msgstr "Ajouter une application"
+
+msgid "add_conditions_link_title"
+msgstr "Ajouter une condition"
+
+msgid "add_valid_basket_link_title"
+msgstr "Valider / Ajouter"
+
+msgid "and_add_condition_link_title"
+msgstr "ET"
+
+msgid "remove_reduction_conditions_link_title"
+msgstr "Supprimer les conditions"
+
+msgid "duplication_reduction_conditions_link_title"
+msgstr "Dupliquer les conditions"
+
+msgid "add_case_condition_link_title"
+msgstr "ET"
+
+msgid "remove_case_condition_link_title"
+msgstr "Supprimer"
+
+msgid "add_case_link_title"
+msgstr "OU"
+
+msgid "remove_case_link_title"
+msgstr "Supprimer"
+
+msgid "see_customer_link_title"
+msgstr "Voir client"
+
+msgid "update_booking_link_title"
+msgstr "Modifier"
+
+msgid "add_appointment_link_title"
+msgstr "Ajouter un rendez-vous"
+
+msgid "add_resa_shortcode_title_link"
+msgstr "Ajouter shortcode RESA"
+
+msgid "add_resa_form_shortcode_title_link"
+msgstr "Formulaire de réservation"
+
+msgid "define_custom_timeslot_link_title"
+msgstr "Définir un créneau personnaliser"
+
+msgid "add_custom_timeslot_link_title"
+msgstr "Ajouter le créneau personnaliser"
+
+msgid "load_day_timeslots_link_title"
+msgstr "Charger les données pour ce jour là"
+
+msgid "add_resa_page_shortcode_title_link"
+msgstr "Pages"
+
+msgid "ask_account_form_shortcode_title_link"
+msgstr "Demande de compte"
+
+msgid "add_resa_price_shortcode_title_link"
+msgstr "Tarifs"
+
+msgid "add_form_link_shortcode_title_link"
+msgstr "Lien formulaire"
+
+msgid "add_booking_details_title_link"
+msgstr "Ajouter detail reservation RESA"
+
+msgid "add_link_account_title_link"
+msgstr "Ajouter un lien d'autoconnexion vers le compte"
+
+msgid "add_link_payment_booking_title_link"
+msgstr "Ajouter un lien vers le paiement de la réservation"
+
+msgid "add_customer_lastname_title_link"
+msgstr "Ajouter nom du client"
+
+msgid "add_customer_firstname_title_link"
+msgstr "Ajouter prénom du client"
+
+msgid "add_customer_login_title_link"
+msgstr "Ajouter login du client"
+
+msgid "add_customer_company_title_link"
+msgstr "Ajouter entreprise du client"
+
+msgid "add_total_price_title_link"
+msgstr "Ajouter prix total"
+
+msgid "add_booking_line_title_link"
+msgstr "Ajouter ligne détails reservation RESA"
+
+msgid "add_booking_advancePayment_title_link"
+msgstr "Ajouter de l'acompte de la reservation"
+
+msgid "add_booking_note_title_link"
+msgstr "Ajouter la note publique de la réservation"
+
+msgid "add_booking_id_title_link"
+msgstr "Ajouter l'id de la réservation"
+
+msgid "edit_customer_title_link"
+msgstr "Éditer client"
+
+msgid "add_custom_reductions_link_title"
+msgstr "Ajouter une ligne personnalisée"
+
+msgid "reinitialize_link_title"
+msgstr "Réinitialiser"
+
+msgid "add_language_link_title"
+msgstr "Ajouter une langue"
+
+msgid "remove_language_link_title"
+msgstr "Supprimer cette langue"
+
+msgid "cancel_booking_link_title"
+msgstr "Annuler réservation"
+
+msgid "delete_booking_link_title"
+msgstr "Supprimer réservation"
+
+msgid "save_booking_link_title"
+msgstr "Enregistrer et fermer la réservation"
+
+msgid "save_booking_in_progress_link_title"
+msgstr "Enregistrement de la réservation en cours..."
+
+msgid "pay_booking_link_title"
+msgstr "Payer la réservation"
+
+msgid "send_message_booking_link_title"
+msgstr "Renvoyer message réservation"
+
+msgid "to_login_link_title"
+msgstr "Se connecter"
+
+msgid "to_logout_link_title"
+msgstr "Se déconnecter"
+
+msgid "logout_link_title"
+msgstr "Déconnexion"
+
+msgid "fotgotten_password_link_title"
+msgstr "Mot de passe oublié"
+
+msgid "change_user_link_title"
+msgstr "Changer de compte"
+
+msgid "new_booking_link_title"
+msgstr "Nouvelle réservation"
+
+msgid "add_price_shortcode_link_title"
+msgstr "Ajouter le tarif"
+
+msgid "add_state_parameters_link_title"
+msgstr "Ajouter un nouveau parametrage d'état"
+
+msgid "add_custom_tag_link_title"
+msgstr "Ajouter un nouveau tag"
+
+msgid "add_form_shortcode_link_title"
+msgstr "Ajouter le formulaire"
+
+msgid "add_vat_link_title"
+msgstr "Ajouter une TVA"
+
+msgid "add_type_account_link_title"
+msgstr "Ajouter un type de compte"
+
+msgid "add_custom_payment_type_link_title"
+msgstr "Ajouter un nouveau type de paiement"
+
+msgid "add_service_category_link_title"
+msgstr "Ajouter une nouvelle categorie de services"
+
+msgid "add_new_participant_parameter_link_title"
+msgstr "Ajouter un nouveau réglage"
+
+msgid "add_new_participant_field_link_title"
+msgstr "Ajouter un nouveau champs"
+
+msgid "add_place_link_title"
+msgstr "Ajouter un lieu"
+
+msgid "delete_custom_payment_type_link_title"
+msgstr "Supprimer ce type de paiement"
+
+msgid "delete_service_category_link_title"
+msgstr "Supprimer cette catégorie"
+
+msgid "unselected_all_services_filter_link_title"
+msgstr "Désélectionner tous les services"
+
+msgid "selected_all_services_filter_link_title"
+msgstr "Sélectionner tous les services"
+
+msgid "price_shortcode_dialog_title"
+msgstr "Ajout d'un tarif"
+
+msgid "form_shortcode_dialog_title"
+msgstr "Ajout d'un formulaire"
+
+msgid "form_shortcode_dialog_description"
+msgstr "Veuillez sélectionner les services affichés dans le formulaire"
+
+msgid "form_shortcode_dialog_button"
+msgstr "Ajout d'un formulaire"
+
+msgid "form_shortcode_game_dialog_title"
+msgstr "Ajouter le shortcode des pages \"mon compte\" et \"reçu\"."
+
+msgid "form_shortcode_game_dialog_description1"
+msgstr "La page mon comtpe affiche le formulaire de connexion lorsque le visiteur n'est pas connecté et les informations de réservation du client lorsqu'il est connecté."
+
+msgid "form_shortcode_game_dialog_description2"
+msgstr "La page reçu affiche le reçu de la réservation une fois que celle-ci est payé."
+
+msgid "form_shortcode_game_account_dialog_button"
+msgstr "Page mon compte."
+
+msgid "form_shortcode_game_bill_button"
+msgstr "Page Reçu"
+
+msgid "form_shortcode_price_dialog_title"
+msgstr "Ajouter le tarif d'un service"
+
+msgid "form_shortcode_price_dialog_description"
+msgstr "Cela permet d'avoir les tarifs toujours à jours sur votre site."
+
+msgid "form_shortcode_price_dialog_button"
+msgstr "Ajouter le tarif"
+
+msgid "form_shortcode_link_form_dialog_title"
+msgstr "Ajouter le lien vers le formulaire"
+
+msgid "form_shortcode_link_form_dialog_description"
+msgstr "Cela permet d'ajouter un lien vers le formulaire pré-remplit."
+
+msgid "form_shortcode_link_form_dialog_button"
+msgstr "Ajouter le lien formulaire"
+
+msgid "login_details_customer"
+msgstr "Identifiant"
+
+msgid "company_details_customer"
+msgstr "Entreprise"
+
+msgid "first_name_details_customer"
+msgstr "Prénom"
+
+msgid "last_name_details_customer"
+msgstr "Nom"
+
+msgid "phone_details_customer"
+msgstr "Téléphone"
+
+msgid "email_details_customer"
+msgstr "Email"
+
+msgid "private_notes_details_customer"
+msgstr "Note privée"
+
+msgid "register_date_details_customer"
+msgstr "Date d'inscription"
+
+msgid "address_details_customer"
+msgstr "Adresse"
+
+msgid "postal_code_details_customer"
+msgstr "Code postal"
+
+msgid "town_details_customer"
+msgstr "Ville"
+
+msgid "country_details_customer"
+msgstr "Pays"
+
+msgid "combinable_capacity_radio_title_staff"
+msgstr "Capacité cumulée"
+
+msgid "max_capacity_radio_title_staff"
+msgstr "Capacité du service maximum"
+
+msgid "min_capacity_radio_title_staff"
+msgstr "Capacité du service minimum"
+
+msgid "cash_payment_type_radio_title"
+msgstr "En espèce"
+
+msgid "cheque_payment_type_radio_title"
+msgstr "Par chèque"
+
+msgid "card_payment_type_radio_title"
+msgstr "Par carte bleue"
+
+msgid "transfer_payment_type_radio_title"
+msgstr "Par virement bancaire"
+
+msgid "paypal_payment_type_radio_title"
+msgstr "Par Paypal"
+
+msgid "systempay_payment_type_radio_title"
+msgstr "Par SystemPay"
+
+msgid "monetico_payment_type_radio_title"
+msgstr "Par Monetico Paiement"
+
+msgid "stripe_payment_type_radio_title"
+msgstr "Par Stripe"
+
+msgid "paybox_payment_type_radio_title"
+msgstr "Par Paybox"
+
+msgid "swikly_payment_type_radio_title"
+msgstr "Avec Swikly"
+
+msgid "cashpad_payment_type_radio_title"
+msgstr "Par CashPad"
+
+msgid "activate_payment_checkbox_title"
+msgstr "Activer le paiement sur le formulaire"
+
+msgid "send_email_to_customer_checkbox_title"
+msgstr "Envoyer email au client"
+
+msgid "create_customer_account_checkbox_title"
+msgstr "Créer compte client"
+
+msgid "extract_for_new_intall_checkbox_title"
+msgstr "Extraire les réglages (services, membres, réservations, options) pour une nouvelle installation"
+
+msgid "load_options_checkbox_title"
+msgstr "Charger les réglages"
+
+msgid "load_customers_checkbox_title"
+msgstr "Charger les clients"
+
+msgid "delete_wp_resa_customers_checkbox_title"
+msgstr "Supprimer les clients RESA avec compte wordpress"
+
+msgid "stop_advance_payment_checkbox_title"
+msgstr "Empêcher l'acompte"
+
+msgid "activated_checkbox_title"
+msgstr "Activer"
+
+msgid "default_parameter_checkbox_title"
+msgstr "Réglages par défaut"
+
+msgid "custom_prices_list_checkbox_title"
+msgstr "Tarifs/Extras personnalisés"
+
+msgid "all_prices_list_checkbox_title"
+msgstr "Tous les tarifs/extras"
+
+msgid "prices_list_checkbox_title"
+msgstr "Tarif normal"
+
+msgid "prices_list_thresholded_checkbox_title"
+msgstr "Tarif variable"
+
+msgid "activate_min_quantity_checkbox_title"
+msgstr "Activer quantité minimale"
+
+msgid "activate_max_quantity_checkbox_title"
+msgstr "Activer quantité maximale"
+
+msgid "is_an_extra_checkbox_title"
+msgstr "Extra (ne compte pas dans la capacité)"
+
+msgid "maximum_usage_checkbox_title"
+msgstr "Utilisation maximum"
+
+msgid "notification_checkbox_title_services"
+msgstr "Activer l'envoi lorsqu'une nouvelle réservation est enregistré pour ce service"
+
+msgid "display_checkbox_before_payment_checkbox_title_settings"
+msgstr "Afficher une case à cocher obligatoire avant l'étape de paiement."
+
+msgid "staff_management_checkbox_title_settings"
+msgstr "Activer la gestion du personnel"
+
+msgid "groups_management_checkbox_title_settings"
+msgstr "Activer la gestion des groupes"
+
+msgid "staff_old_appointments_displayed_checkbox_title_settings"
+msgstr "Afficher le chargement des vieux rendez-vous dans le planning"
+
+msgid "staff_display_customer_checkbox_title_settings"
+msgstr "Afficher les informations du client sur le rendez-vous"
+
+msgid "staff_display_total_checkbox_title_settings"
+msgstr "Afficher le total du prix sur le rendez-vous"
+
+msgid "staff_display_payments_checkbox_title_settings"
+msgstr "Afficher l'état du paiement sur le rendez-vous"
+
+msgid "staff_display_numbers_checkbox_title_settings"
+msgstr "Afficher le nombre de personnes sur le rendez-vous"
+
+msgid "staff_display_bookings_tab_checkbox_title_settings"
+msgstr "Afficher l'onglet réservations"
+
+msgid "display_tva_on_bill_checkbox_title_settings"
+msgstr "Afficher la TVA sur le reçu"
+
+msgid "ask_currency_checkbox_title_settings"
+msgstr "Demander la devise"
+
+msgid "ask_advance_payment_checkbox_title_settings"
+msgstr "Activer le paiement d'un acompte"
+
+msgid "on_the_spot_payment_checkbox_title_settings"
+msgstr "Autoriser le paiement sur place"
+
+msgid "transfer_payment_checkbox_title_settings"
+msgstr "Autoriser le paiement par virement bancaire"
+
+msgid "cheque_payment_checkbox_title_settings"
+msgstr "Autoriser le paiement par envoie de chèques"
+
+msgid "paypal_payment_checkbox_title_settings"
+msgstr "Autoriser paiement par PayPal"
+
+msgid "systempay_payment_checkbox_title_settings"
+msgstr "Autoriser le paiement par SystemPay"
+
+msgid "paypal_payment_title_settings"
+msgstr "Affichage formulaire client"
+
+msgid "systempay_payment_title_settings"
+msgstr "Affichage formulaire client"
+
+msgid "notification_customer_account_creation_checkbox_title_settings"
+msgstr "Activer l'envoie lorsque le client créé un compte"
+
+msgid "notification_customer_password_reinit_checkbox_title_settings"
+msgstr "Activer l'envoie lorsque le RESA Manager cliquer sur reinitialisation du mot de passe"
+
+msgid "notification_customer_payment_checkbox_title_settings"
+msgstr "Activer l'envoie lorsqu'une une réservation est payée à distance"
+
+msgid "notification_customer_checkbox_title_settings"
+msgstr "Activer l'envoie lorsqu'une nouvelle réservation est enregistrée"
+
+msgid "notification_quotation_customer_backend_checkbox_title_settings"
+msgstr "Activer l'envoie lorsqu'un nouveau devis est enregistré"
+
+msgid "notification_quotation_customer_checkbox_title_settings"
+msgstr "Activer l'envoie lorsque le client créé un devis"
+
+msgid "notification_quotation_accepted_customer_checkbox_title_settings"
+msgstr "Activer l'envoie à un client lorsque son devis est accepté"
+
+msgid "notification_emails_checkbox_title_settings"
+msgstr "Activer l'envoie lorsqu'une nouvelle réservation est enregistrée"
+
+msgid "notification_emails_payment_checkbox_title_settings"
+msgstr "Activer l'envoie lorsqu'une nouvelle réservation est payée"
+
+msgid "notification_emails_quotation_answered_checkbox_title_settings"
+msgstr "Activer l'envoie d'un message lorsqu'un devis obtient une réponse du client"
+
+msgid "notification_emails_quotation_requests_checkbox_title_settings"
+msgstr "Activer l'envoie d'un message lorsqu'un devis est créé par un client"
+
+msgid "list_emails_checkbox_title_settings"
+msgstr "Liste des emails séparés par des virgules (example1@gmail.com,example2@gmail.com)"
+
+msgid "notification_staff_checkbox_title_settings"
+msgstr "Activer l'envoi lorsqu'une nouvelle réservation est enregistré pour un membre du personnel"
+
+msgid "notification_customer_need_payment_checkbox_title_settings"
+msgstr "Notification de demande de paiement à un client"
+
+msgid "notification_after_appointment_checkbox_title_settings"
+msgstr "Activer l'envoie lorsque le rendez-vous a été fait"
+
+msgid "notification_no_response_quotation_checkbox_title_settings"
+msgstr "Activer la relance lorsqu'un devis n'a pas eu de réponse"
+
+msgid "notification_after_appointment_days_checkbox_title_settings"
+msgstr "Nombre de jours d'envoie après le rendez-vous"
+
+msgid "notification_no_response_quotation_days_checkbox_title_settings"
+msgstr "Relance après X jours sans réponse"
+
+msgid "notification_no_response_quotation_times_checkbox_title_settings"
+msgstr "Nombre de relance maximale"
+
+msgid "custom_capacity_checkbox_title_services"
+msgstr "Capacité personnalisée"
+
+msgid "no_end_checkbox_title"
+msgstr "Ne pas afficher heure de fin"
+
+msgid "no_staff_gestion_checkbox_title_services"
+msgstr "Pas d'attribution du personnel"
+
+msgid "exclusive_timeslot_checkbox_title_services"
+msgstr "Créneau exclusif"
+
+msgid "overcapacity_timeslot_checkbox_title_services"
+msgstr "Autoriser surcapacité"
+
+msgid "allow_inconsistencies_checkbox_title"
+msgstr "Autoriser les incohérences"
+
+msgid "exclusive_title_services"
+msgstr "Service exclusif"
+
+msgid "ask_participants_title_services"
+msgstr "Demande d'informations de participants"
+
+msgid "cashing_title_services"
+msgstr "Encaissement"
+
+msgid "cashing_title_reductions"
+msgstr "Encaissement"
+
+msgid "exclusive_service_checkbox_title"
+msgstr "Ce service exclusif"
+
+msgid "ask_participants_services_checkbox_title"
+msgstr "Activer la demande d'information des participants"
+
+msgid "activated_tva_services_checkbox_title"
+msgstr "Activer TVA pour ce service"
+
+msgid "activated_tva_reductions_checkbox_title"
+msgstr "Activer TVA pour cette réduction"
+
+msgid "activated_advance_payment_services_checkbox_title"
+msgstr "Activer acompte pour ce service"
+
+msgid "activated_filter_by_reductions_checkbox_title"
+msgstr "Activer le filtre par réduction"
+
+msgid "merge_customer_field_title"
+msgstr "Choisissez le client à fusionner"
+
+msgid "options_field_title"
+msgstr "Options"
+
+msgid "place_field_title"
+msgstr "Lieu"
+
+msgid "service_field_title"
+msgstr "Service"
+
+msgid "service_price_list_field_title"
+msgstr "Tarifs du service"
+
+msgid "slug_field_title"
+msgstr "Slug"
+
+msgid "category_field_title"
+msgstr "Catégorie"
+
+msgid "places_field_title"
+msgstr "Lieux"
+
+msgid "name_field_title"
+msgstr "Nom"
+
+msgid "max_persons_field_title"
+msgstr "Maximum de personnes"
+
+msgid "mention_field_title"
+msgstr "Mention"
+
+msgid "phone_field_title"
+msgstr "Téléphone"
+
+msgid "phone2_field_title"
+msgstr "Téléphone 2"
+
+msgid "private_notes_field_title"
+msgstr "Note privée"
+
+msgid "notify_email_field_title"
+msgstr "Envoyer un message au nouvel utilisateur à propos de son compte."
+
+msgid "address_field_title"
+msgstr "Adresse"
+
+msgid "postal_code_field_title"
+msgstr "Code postal"
+
+msgid "town_field_title"
+msgstr "Ville"
+
+msgid "country_field_title"
+msgstr "Pays"
+
+msgid "siret_field_title"
+msgstr "Siret"
+
+msgid "legal_form_field_title"
+msgstr "Forme juridique (SA, SAS, ...)"
+
+msgid "tva_field_title"
+msgstr "TVA (en %)"
+
+msgid "advance_payment_field_title"
+msgstr "Acompte (en %)"
+
+msgid "amount_field_title"
+msgstr "Montant"
+
+msgid "company_field_title"
+msgstr "Entreprise"
+
+msgid "company_account_field_title"
+msgstr "Compte entreprise ?"
+
+msgid "participants_field_title"
+msgstr "Participants"
+
+msgid "see_settings_field_title"
+msgstr "Peut modifier la configuration de RESA"
+
+msgid "one_by_booking_field_title"
+msgstr "Un groupe par réservation"
+
+msgid "idShop_paypal_field_title_settings"
+msgstr "ID Marchand"
+
+msgid "mode_paypal_field_title_settings"
+msgstr "Mode"
+
+msgid "id_shop_systempay_field_title_settings"
+msgstr "Identifiant boutique"
+
+msgid "certificate_systempay_field_title_settings"
+msgstr "Certificat"
+
+msgid "mode_systempay_field_title_settings"
+msgstr "Mode"
+
+msgid "criticity_field_title_settings"
+msgstr "Importance"
+
+msgid "log_text_field_title_settings"
+msgstr "Texte de la notification"
+
+msgid "sender_name_field_title_settings"
+msgstr "Nom de l'expéditeur"
+
+msgid "sender_email_field_title_settings"
+msgstr "Courriel de l'expéditeur"
+
+msgid "currency_field_title_settings"
+msgstr "Symbole de la devise à afficher"
+
+msgid "bill_informations_field_title_settings"
+msgstr "Informations complémentaire à afficher sur le reçu"
+
+msgid "payment_not_activated_field_title_settings"
+msgstr "Message à afficher si le paiement est désactivé"
+
+msgid "tva_field_title_settings"
+msgstr "Taux de la TVA (en %)"
+
+msgid "vat_label_field_title_settings"
+msgstr "Libellé"
+
+msgid "vat_name_field_title_settings"
+msgstr "Nom public"
+
+msgid "checkbox_text_field_title_settings"
+msgstr "Texte à afficher à coté de la case à coché obligatoire "
+
+msgid "company_name_field_title_settings"
+msgstr "Nom de la société"
+
+msgid "address_field_title_settings"
+msgstr "Adresse"
+
+msgid "phone_field_title_settings"
+msgstr "Numéro de téléphone"
+
+msgid "phone2_field_title_settings"
+msgstr "Numéro de téléphone 2"
+
+msgid "company_type_field_title_settings"
+msgstr "Type de société"
+
+msgid "siret_field_title_settings"
+msgstr "Siret"
+
+msgid "client_id_field_title_settings"
+msgstr "Id Client"
+
+msgid "client_secret_field_title_settings"
+msgstr "Secret Client"
+
+msgid "return_url_success_field_title_settings"
+msgstr "Url de retour en cas de succès de la transaction"
+
+msgid "return_url_error_field_title_settings"
+msgstr "Url de retour en cas d'échec de la transaction"
+
+msgid "quotation_return_url_success_field_title_settings"
+msgstr "Url de retour en cas de succès d'ajout d'un DEVIS'"
+
+msgid "site_url_title_settings"
+msgstr "Site URL"
+
+msgid "installation_id_field_title_settings"
+msgstr "Id installation"
+
+msgid "user_token_field_title_settings"
+msgstr "Cashpad Token"
+
+msgid "user_email_field_title_settings"
+msgstr "Cashpad Email"
+
+msgid "license_id_field_title_settings"
+msgstr "Id License"
+
+msgid "display_remaining_position_overcapacity_field_title_settings"
+msgstr "Afficher places restantes pour les créneaux avec surcapacité"
+
+msgid "participants_parameters_label_title_settings"
+msgstr "Nom du réglage"
+
+msgid "participants_field_varname_title_settings"
+msgstr "Nom de la variable"
+
+msgid "participants_field_name_title_settings"
+msgstr "Nom du champs"
+
+msgid "participants_field_type_title_settings"
+msgstr "Type du champs"
+
+msgid "participants_field_prefix_suffix_title_settings"
+msgstr "Préfixe/Suffixe"
+
+msgid "participants_field_mandatory_title_settings"
+msgstr "Champs obligatoire"
+
+msgid "participants_field_options_description_settings"
+msgstr "Éléments séparé par des virgules"
+
+msgid "participants_field_presentation_title_settings"
+msgstr "Description"
+
+msgid "place_slug_title_settings"
+msgstr "Slug du lieu"
+
+msgid "place_name_title_settings"
+msgstr "Nom du lieu"
+
+msgid "place_presentation_title_settings"
+msgstr "Description du lieu"
+
+msgid "add_new_activity_text_button_title_settings"
+msgstr "Texte du bouton afin d'ajouter d'autres rendez-vous dans la réservation"
+
+msgid "informations_customer_text_field_title_settings"
+msgstr "Affichage informations client dans l'étape des clients"
+
+msgid "informations_payment_text_field_title_settings"
+msgstr "Affichage informations paiement dans l'étape de paiement"
+
+msgid "informations_confirmation_text_field_title_settings"
+msgstr "Affichage informations paiement dans l'étape de confirmation"
+
+msgid "quotation_informations_confirmation_text_field_title_settings"
+msgstr "Affichage informations paiement dans l'étape de confirmation en mode DEVIS"
+
+msgid "customer_note_text_field_title_settings"
+msgstr "Affichage dans la remarque cliente"
+
+msgid "license_manager_url_title_settings"
+msgstr "Adresse du site du manager de licence"
+
+msgid "license_key_title_settings"
+msgstr "Clé du produit"
+
+msgid "informations_license_bad_license_field_title_settings"
+msgstr "Affichage lorsque la licence n'est plus valide"
+
+msgid "resa_plugin_desactivated_settings"
+msgstr "Votre plugin est désactivé ! Contacter le support de RESA-Online !"
+
+msgid "resa_plugin_failed_connection_settings"
+msgstr "Impossible de vérifier la license ! Contacter le support de RESA-Online !"
+
+msgid "user_text_title_settings"
+msgstr "Texte à afficher aux utilisateurs"
+
+msgid "last_name_field_title"
+msgstr "Nom de famille"
+
+msgid "first_name_field_title"
+msgstr "Prénom"
+
+msgid "nickname_field_title"
+msgstr "Surnom"
+
+msgid "email_field_title"
+msgstr "Email"
+
+msgid "password_field_title"
+msgstr "Mot de passe"
+
+msgid "confirm_password_field_title"
+msgstr "Confirmer mot de passe"
+
+msgid "login_field_title"
+msgstr "Login"
+
+msgid "presentation_field_title"
+msgstr "Présentation"
+
+msgid "color_field_title"
+msgstr "Couleur"
+
+msgid "months_field_title"
+msgstr "Mois"
+
+msgid "weeks_field_title"
+msgstr "Semaines"
+
+msgid "days_field_title"
+msgstr "Jours"
+
+msgid "hours_field_title"
+msgstr "Heures"
+
+msgid "date_field_title"
+msgstr "Date"
+
+msgid "start_date_field_title"
+msgstr "Date de début"
+
+msgid "end_date_field_title"
+msgstr "Date de fin"
+
+msgid "customer_name_field_title"
+msgstr "Nom du client"
+
+msgid "description_field_title"
+msgstr "Description"
+
+msgid "subject_message_field_title"
+msgstr "Sujet du message"
+
+msgid "content_message_field_title"
+msgstr "Contenue du message"
+
+msgid "merge_appointments_field_title"
+msgstr "Fusionner les rendez-vous (somme des quantités)"
+
+msgid "type_account_id_field_title_settings"
+msgstr "Id du type de compte"
+
+msgid "type_account_name_field_title_settings"
+msgstr "Nom du type de compte"
+
+msgid "parameter_name_field_title_settings"
+msgstr "Nom du réglage"
+
+msgid "parameter_state_field_title_settings"
+msgstr "Etat du réglage"
+
+msgid "parameter_paiement_field_title_settings"
+msgstr "Paiement à la réservation"
+
+msgid "parameter_state_after_payment_field_title_settings"
+msgstr "Etat du parametrage après paiement"
+
+msgid "parameter_state_form_field_title_settings"
+msgstr "Texte à afficher sur le formulaire"
+
+msgid "parameter_capacity_field_title_settings"
+msgstr "Compte dans capacité"
+
+msgid "tag_id_field_title_settings"
+msgstr "Id du tag"
+
+msgid "tag_name_field_title_settings"
+msgstr "Nom du tag"
+
+msgid "tag_color_field_title_settings"
+msgstr "Color du tag"
+
+msgid "company_table_header"
+msgstr "Entreprise"
+
+msgid "display_name_table_header"
+msgstr "Nom affiché"
+
+msgid "first_name_table_header"
+msgstr "Prénom"
+
+msgid "phone_table_header"
+msgstr "Téléphone"
+
+msgid "last_name_table_header"
+msgstr "Nom"
+
+msgid "email_table_header"
+msgstr "Email"
+
+msgid "number_bookings_table_header"
+msgstr "Nombre de réservations"
+
+msgid "amount_paid_table_header"
+msgstr "Montant payé"
+
+msgid "need_paid_table_header"
+msgstr "Restant à payer"
+
+msgid "details_table_header"
+msgstr "Détails"
+
+msgid "number_table_header"
+msgstr "Nombre"
+
+msgid "activity_table_header"
+msgstr "Activité"
+
+msgid "prices_list_table_header"
+msgstr "Tarifs"
+
+msgid "number_field_title"
+msgstr "Nombre"
+
+msgid "price_list_field_title"
+msgstr "Tarif"
+
+msgid "register_date_table_header"
+msgstr "Date d'enregistrement"
+
+msgid "customer_table_header"
+msgstr "Client"
+
+msgid "service_table_header"
+msgstr "Service"
+
+msgid "price_list_table_header"
+msgstr "Tarif"
+
+msgid "date_table_header"
+msgstr "Date"
+
+msgid "hours_table_header"
+msgstr "Heures"
+
+msgid "place_table_header"
+msgstr "Lieu"
+
+msgid "staff_table_header"
+msgstr "Membres"
+
+msgid "price_table_header"
+msgstr "Prix"
+
+msgid "amount_table_header"
+msgstr "Montant"
+
+msgid "payment_date_field_title"
+msgstr "Date du paiement"
+
+msgid "note_field_title"
+msgstr "Note privée"
+
+msgid "last_booking_title"
+msgstr "Dernière réservation"
+
+msgid "advance_payment_text_field_settings"
+msgstr "Intitulé de la case à cocher"
+
+msgid "payment_type_table_header"
+msgstr "Type de paiement"
+
+msgid "id_booking_table_header"
+msgstr "ID réservation"
+
+msgid "note_table_header"
+msgstr "Note privée"
+
+msgid "staff_note_table_header"
+msgstr "Note membre"
+
+msgid "repayment_table_header"
+msgstr "Remboursement"
+
+msgid "paiement_table_header"
+msgstr "Paiement"
+
+msgid "bookings_table_header"
+msgstr "Réservation(s)"
+
+msgid "reductions_table_header"
+msgstr "Réductions(s)"
+
+msgid "actions_table_header"
+msgstr "Actions"
+
+msgid "total_price_ht_table_header"
+msgstr "Prix HT"
+
+msgid "total_price_ttc_table_header"
+msgstr "Prix TTC"
+
+msgid "total_price_table_header"
+msgstr "Prix total"
+
+msgid "tva_table_header"
+msgstr "TVA"
+
+msgid "type_account_table_header"
+msgstr "Type de compte"
+
+msgid "state_table_header"
+msgstr "État"
+
+msgid "no_payment_state"
+msgstr "Pas de paiement"
+
+msgid "incomplete_payment_state"
+msgstr "Paiement incomplet"
+
+msgid "complete_payment_state"
+msgstr "Paiement complet"
+
+msgid "repayment_state"
+msgstr "Remboursement"
+
+msgid "stripe_description_sentence"
+msgstr "Veuillez entrer vos informations de paiements"
+
+msgid "browser_not_compatible_sentence"
+msgstr "Il se peut que votre navigateur altère votre expérience de réservation, nous vous conseillons d'utiliser Google Chrome ou Mozilla Firefox."
+
+msgid "parameter_capacity_used_sentence"
+msgstr "Ce réglage est utilisé (il ne peux pas être supprimé)"
+
+msgid "general_conditions_sentence"
+msgstr "Conditions générales"
+
+msgid "select_date_and_timeslot_sentence"
+msgstr "Veuillez sélectionner une date et un créneau"
+
+msgid "absent_definition_sentence"
+msgstr "Vous pourrez précisez des absence sur certains jours dans le panier."
+
+msgid "authorized_url_sentence_settings"
+msgstr "URL d'autorisation"
+
+msgid "need_bill_id_sentence"
+msgstr "Pensez à préciser le numéro du reçu lors du paiement"
+
+msgid "accept_the_general_condition_sentence"
+msgstr "Accepter les conditions générales"
+
+msgid "choose_condition_sentence_reductions"
+msgstr "Choisissez vos conditions"
+
+msgid "member_not_deletable_sentence_staff"
+msgstr "Ce membre n'est pas supprimable car il attaché à un creneaux"
+
+msgid "staff_management_desactivated_sentence_services"
+msgstr "Gestion du personnel désactivé"
+
+msgid "no_associate_membe_sentence"
+msgstr "Pas de personnel associé"
+
+msgid "you_are_sentence_form"
+msgstr "Vous êtes"
+
+msgid "customer_informations_title_form"
+msgstr "Informations client"
+
+msgid "another_customer_informations_title_form"
+msgstr "Informations autre client"
+
+msgid "advance_payment_title_settings"
+msgstr "Paiement d'un acompte"
+
+msgid "advance_payment_title_form"
+msgstr "Acompte"
+
+msgid "need_deconnection_for_ask_account_sentence"
+msgstr "Veuillez vous déconnecter afin de pouvoir faire une demande de compte"
+
+msgid "fill_register_form_sentence"
+msgstr "Veuillez renseigner les champs ci-dessous"
+
+msgid "fill_login_form_sentence"
+msgstr "Veuillez vous connecter"
+
+msgid "connected_with_sentence"
+msgstr "Vous êtes connectez en tant que"
+
+msgid "add_payment_for_customer_sentence"
+msgstr "Ajout d'un paiement pour"
+
+msgid "add_repayment_for_customer_sentence"
+msgstr "Ajout d'un remboursement pour"
+
+msgid "attach_booking_for_customer_sentence"
+msgstr "Attacher un payment à une réservation"
+
+msgid "code_here_sentence"
+msgstr "Code ici"
+
+msgid "not_an_email_address_sentence"
+msgstr "Ceci n'est pas un email valide"
+
+msgid "fill_this_form_sentence"
+msgstr "Sinon veuillez remplir le formulaire suivant"
+
+msgid "ask_payment_disabled_sentence"
+msgstr "Veuillez renseigner le lien vers le compte client dans les réglages"
+
+msgid "selected_service_sentence"
+msgstr "Vous avez sélectionné le service"
+
+msgid "selected_place_sentence"
+msgstr "Vous avez sélectionné le lieu"
+
+msgid "selected_sentence"
+msgstr "Vous avez sélectionné le"
+
+msgid "is_not_you_sentence"
+msgstr "Ce n'est pas vous ?"
+
+msgid "already_register_sentence"
+msgstr "Déjà client chez nous ? Connectez-vous"
+
+msgid "create_account_sentence"
+msgstr "Créer votre compte"
+
+msgid "create_account_request_sentence"
+msgstr "Demande de création de compte"
+
+msgid "create_account_by_facebook_sentence"
+msgstr "Connexion avec votre compte Facebook"
+
+msgid "create_account_request_done_sentence"
+msgstr "La demande de compte a bien été effectuée"
+
+msgid "recap_booking_sentence"
+msgstr "Récapitulatif de votre réservation"
+
+msgid "recap_quotation_sentence"
+msgstr "Récapitulatif de votre devis"
+
+msgid "form_deactivated_text"
+msgstr "Formulaire désactivé"
+
+msgid "expired_token_error_feedback"
+msgstr "Le lien de connexion a expiré, veuillez nous contacter ou connectez-vous avec vos identifiants !"
+
+msgid "checkbox_payment_error_feedback"
+msgstr "Veuillez cocher les conditions générales"
+
+msgid "customer_error_feedback"
+msgstr "Utilisateur non valide"
+
+msgid "voucher_error_feedback"
+msgstr "Coupon non trouvé ou plus valide"
+
+msgid "basket_error_feedback"
+msgstr "Panier non valide"
+
+msgid "type_payment_error_feedback"
+msgstr "Veuillez choisir votre moyen de paiement"
+
+msgid "redict_to_payment_page_sentence"
+msgstr "Validation en cours, veuillez patienter..."
+
+msgid "form_participants_sentence"
+msgstr "Pour chaque participant, veuillez renseigner les informations suivantes nécessaires."
+
+msgid "add_payment_dialog_title"
+msgstr "Ajout d'un paiement"
+
+msgid "add_repayment_dialog_title"
+msgstr "Ajout d'un remboursement"
+
+msgid "ask_payment_dialog_title"
+msgstr "Demande d'un paiement"
+
+msgid "display_appointment_dialog_title"
+msgstr "Affichage d'un rendez-vous"
+
+msgid "display_bill_dialog_title"
+msgstr "Affichage du reçu"
+
+msgid "add_booking_dialog_title"
+msgstr "Ajout d'une réservation"
+
+msgid "pay_booking_dialog_title"
+msgstr "Encaisser paiement"
+
+msgid "add_new_customer_dialog_title"
+msgstr "Ajout d'un nouveau client"
+
+msgid "add_info_calendar_dialog_title"
+msgstr "Ajout d'une information"
+
+msgid "edit_info_calendar_dialog_title"
+msgstr "Edition d'une information"
+
+msgid "add_service_constraint_dialog_title"
+msgstr "Ajout d'une contrainte sur un service"
+
+msgid "edit_service_constraint_dialog_title"
+msgstr "Edition d'une contrainte sur un service"
+
+msgid "choose_customer_dialog_title"
+msgstr "Choix d'un client"
+
+msgid "edit_customer_dialog_title"
+msgstr "Modifier les informations du client"
+
+msgid "merge_customer_dialog_title"
+msgstr "Fusionner deux clients"
+
+msgid "capacity_for_service_title_staff"
+msgstr "Capacités associées aux services"
+
+msgid "share_services_title_staff"
+msgstr "Services partagés"
+
+msgid "all_payments_section_title"
+msgstr "Tous les paiements"
+
+msgid "price_list_title_service"
+msgstr "Tarifs/Extras du service"
+
+msgid "parameters_title_service"
+msgstr "Paramétrage d'enregistrement du rendez-vous"
+
+msgid "notification_title_service"
+msgstr "Notification"
+
+msgid "priority_title_services"
+msgstr "Priorités"
+
+msgid "rules_of_booking_title_services"
+msgstr "Règles de réservation"
+
+msgid "return_urls_title_settings"
+msgstr "URL de retour"
+
+msgid "google_calendar_title_settings"
+msgstr "Google calendar"
+
+msgid "activate_synchronization_google_calendar_field_title_settings"
+msgstr "Activer la synchronisation avec Google Calendar"
+
+msgid "cashpad_title_settings"
+msgstr "Cashpad"
+
+msgid "caisse_online_title_settings"
+msgstr "Caisse Online"
+
+msgid "activate_synchronization_cashpad_field_title_settings"
+msgstr "Activer la synchronisation Cashpad"
+
+msgid "activate_synchronization_caisse_online_field_title_settings"
+msgstr "Activer la synchronisation Caisse Online"
+
+msgid "company_informations_title_settings"
+msgstr "Informations de la société"
+
+msgid "new_customer_form_title"
+msgstr "Nouveau client"
+
+msgid "booking_recapitulative_form_title"
+msgstr "Récapitulatif & paiement"
+
+msgid "basket_recapitulative_form_title"
+msgstr "Récapitulatif"
+
+msgid "basket_description_sentence"
+msgstr "Ajouter d’autres services / modifier ou supprimer votre selection."
+
+msgid "booking_recapitulative_description_sentence"
+msgstr "Vérifier votre selection & choisissez un mode de réglement"
+
+msgid "ask_payment_for_sentence"
+msgstr "Demander un paiement pour le client "
+
+msgid "min_time_booking_title_services"
+msgstr "Minimum de temps avant une réservation"
+
+msgid "max_time_booking_title_services"
+msgstr "Maximum de temps avant une réservation"
+
+msgid "staff_title_form"
+msgstr "Personnel"
+
+msgid "custom_reductions_title_form"
+msgstr "Réductions personnalisées"
+
+msgid "coupons_title_form"
+msgstr "Coupons"
+
+msgid "bookings_details_title"
+msgstr "Détails de la réservation"
+
+msgid "customer_informations_title"
+msgstr "Informations client"
+
+msgid "payment_type_title"
+msgstr "Type de paiement"
+
+msgid "assigned_staff_title"
+msgstr "Membre(s) assigné(s) au rendez-vous"
+
+msgid "details_price_list_title"
+msgstr "Détails des tarifs"
+
+msgid "payment_method_title"
+msgstr "Moyen de paiement"
+
+msgid "services_title"
+msgstr "Services"
+
+msgid "customers_title"
+msgstr "Clients"
+
+msgid "staff_title"
+msgstr "Personnel"
+
+msgid "groups_title"
+msgstr "Groupes"
+
+msgid "payments_title"
+msgstr "Paiements"
+
+msgid "statistics_title"
+msgstr "Statistiques"
+
+msgid "reductions_title"
+msgstr "Réductions"
+
+msgid "bill_title"
+msgstr "Reçu"
+
+msgid "bill_advance_payment_title"
+msgstr "Reçu d'acompte"
+
+msgid "all_services_title"
+msgstr "Tous les services"
+
+msgid "bookings_title"
+msgstr "Réservations"
+
+msgid "general_title"
+msgstr "Général"
+
+msgid "conditions_title"
+msgstr "Conditions"
+
+msgid "the_cases_title"
+msgstr "Les cas"
+
+msgid "resa_custom_user_data_title"
+msgstr "Données personnalisées pour RESA"
+
+msgid "choose_your_activities_title_from"
+msgstr "Choisissez vos activitées"
+
+msgid "choose_a_category_title_from"
+msgstr "Choisir une catégorie"
+
+msgid "agenda_title"
+msgstr "Agenda"
+
+msgid "timeslots_title"
+msgstr "Créneaux"
+
+msgid "customer_name_title"
+msgstr "Nom du client"
+
+msgid "Bookings_type__title"
+msgstr "Type de réservation"
+
+msgid "timeslots_by_day_title"
+msgstr "Par jour"
+
+msgid "timeslots_on_many_days_title"
+msgstr "Sur plusieurs jours"
+
+msgid "schedule_title"
+msgstr "Disponibilité"
+
+msgid "promo_code_title"
+msgstr "Un code promo"
+
+msgid "use_promo_code_title"
+msgstr "Quantité"
+
+msgid "service_title"
+msgstr "Service"
+
+msgid "price_list_title"
+msgstr "Tarif"
+
+msgid "quantity_title"
+msgstr "Numbre"
+
+msgid "filters_title"
+msgstr "Filtres"
+
+msgid "filters_by_services_title"
+msgstr "Filtre par service"
+
+msgid "filters_by_reductions_title"
+msgstr "Filtre par réduction"
+
+msgid "send_email_to_customer_title"
+msgstr "Envoyé email reservation"
+
+msgid "reduction_applications_title"
+msgstr "Application"
+
+msgid "booking_amount_title"
+msgstr "Montant de la réservation"
+
+msgid "booking_date_title"
+msgstr "Date de la réservation"
+
+msgid "all_booking_option"
+msgstr "Toute la réservation"
+
+msgid "same_date_option"
+msgstr "une même date"
+
+msgid "same_appointment_option"
+msgstr "un même créneau"
+
+msgid "all_bookings_of_customer_option"
+msgstr "la totalité des réservations de ce client"
+
+msgid "fixed_amount_on_sub_total_title"
+msgstr "un montant fixe du sous total"
+
+msgid "purcent_on_sub_total_title"
+msgstr "un pourcentage du sous total"
+
+msgid "fixed_amount_on_price_title"
+msgstr "un montant fixe sur le tarif unitaire"
+
+msgid "change_price_list_value_title"
+msgstr "le tarif unitaire devient"
+
+msgid "quatity_given_title"
+msgstr "une quantité offerte"
+
+msgid "custom_text_title"
+msgstr "un texte personnalisé"
+
+msgid "sub_total_of_booking_title"
+msgstr "le sous total de la réservation"
+
+msgid "on_the_conditions_reduction_title"
+msgstr "sur les conditions cette réduction"
+
+msgid "anothers_cases_title"
+msgstr "les cas suivant"
+
+msgid "on_same_date_title"
+msgstr "sur la même date"
+
+msgid "on_same_appointment_title"
+msgstr "sur le même créneau"
+
+msgid "on_the_booking_title"
+msgstr "sur toute la réservation"
+
+msgid "appointment_amount_title"
+msgstr "le montant total"
+
+msgid "appointment_date_title"
+msgstr "la date du créneau"
+
+msgid "appointment_time_title"
+msgstr "heure du créneau"
+
+msgid "booking_time_title"
+msgstr "Heure de la réservation"
+
+msgid "booking_register_date_title"
+msgstr "Date enregistrement de la réservation"
+
+msgid "days_title"
+msgstr "Jours"
+
+msgid "customer_title"
+msgstr "Client"
+
+msgid "for_company_account_title"
+msgstr "Pour les comptes entreprises"
+
+msgid "not_for_company_account_title"
+msgstr "Autre comptes que les comptes entreprises"
+
+msgid "on_the_spot_payment_title"
+msgstr "Paiement sur place"
+
+msgid "later_payment_title"
+msgstr "Payer plus tard"
+
+msgid "transfer_payment_title"
+msgstr "Paiement par transfert"
+
+msgid "cheque_payment_title"
+msgstr "Paiement par chèque"
+
+msgid "paypal_payment_title"
+msgstr "Paiement par PayPal"
+
+msgid "systempay_payment_title"
+msgstr "Paiement par SystemPay"
+
+msgid "monetico_payment_title"
+msgstr "Paiement par Monetico Paiement"
+
+msgid "stripe_payment_title"
+msgstr "Paiement par Stripe"
+
+msgid "paybox_payment_title"
+msgstr "Paiement par Paybox"
+
+msgid "swikly_payment_title"
+msgstr "Paiement avec Swikly"
+
+msgid "cashpad_payment_title"
+msgstr "Paiement par CashPad"
+
+msgid "customer_payment_title"
+msgstr "Paiement par compte client"
+
+msgid "defer_payment_title"
+msgstr "Paiement différé"
+
+msgid "settings_title"
+msgstr "Réglages"
+
+msgid "system_info_title"
+msgstr "System Info"
+
+msgid "parameters_title"
+msgstr "Réglages"
+
+msgid "saved_alert_title"
+msgstr "Toutes les modifications ont été sauvegardées."
+
+msgid "custom_quantity_to_title"
+msgstr "Quantité personnalisée"
+
+msgid "added_more_or_equals_to_title"
+msgstr "Additionné est supérieur ou égal à"
+
+msgid "mutual_more_or_equals_to_title"
+msgstr "Commun est supérieur ou égal à"
+
+msgid "mutual_bracket_title"
+msgstr "Commun par tranche de"
+
+msgid "equals_to_title"
+msgstr "est égal à"
+
+msgid "not_equals_to_title"
+msgstr "n'est pas égal à"
+
+msgid "more_or_equals_to_title"
+msgstr "est supérieur ou égal à"
+
+msgid "less_than_title"
+msgstr "est inférieur à"
+
+msgid "bracket_title"
+msgstr "par tranche de"
+
+msgid "begin_before_title"
+msgstr "débute avant"
+
+msgid "all_payments_title"
+msgstr "Tous les paiements"
+
+msgid "all_terminated_payments_title"
+msgstr "Tous les paiements terminés"
+
+msgid "all_incompleted_payments_title"
+msgstr "Tous les paiements incomplet"
+
+msgid "none_payments_title"
+msgstr "Pas de paiement"
+
+msgid "incomplete_payments_title"
+msgstr "Acompte/Caution"
+
+msgid "deposit_payments_title"
+msgstr "Caution"
+
+msgid "complete_payments_title"
+msgstr "Encaissé"
+
+msgid "over_payments_title"
+msgstr "Trop perçu"
+
+msgid "repayment_incompleted_payments_title"
+msgstr "Remboursement dû"
+
+msgid "repayment_completed_payments_title"
+msgstr "Remboursement complet"
+
+msgid "all_waiting_payments_title"
+msgstr "Tous les paiements en attente"
+
+msgid "all_needed_repayment_title"
+msgstr "Ceux ayant besoin de remboursement"
+
+msgid "after_before_title"
+msgstr "débute après"
+
+msgid "before_to_title"
+msgstr "avant le"
+
+msgid "after_to_title"
+msgstr "après le"
+
+msgid "General_title_settings"
+msgstr "Informations générales"
+
+msgid "Roles_title_settings"
+msgstr "Informations sur les roles"
+
+msgid "Synchronization_title_settings"
+msgstr "Synchronisation"
+
+msgid "Parameters_title_settings"
+msgstr "Paramétrages des états et tags"
+
+msgid "Payment_title_settings"
+msgstr "Paiement/Reçu"
+
+msgid "Notifications_title_settings"
+msgstr "Notifications"
+
+msgid "Form_title_settings"
+msgstr "Formulaire"
+
+msgid "License_title_settings"
+msgstr "Licence"
+
+msgid "Select_word"
+msgstr "Sélectionner"
+
+msgid "Validation_word"
+msgstr "Validation"
+
+msgid "Send_quotation_request_word"
+msgstr "Envoyer demande de devis"
+
+msgid "Coupon_word"
+msgstr "Coupon"
+
+msgid "Timeslot_word"
+msgstr "Créneau"
+
+msgid "Morning_word"
+msgstr "Matin"
+
+msgid "Afternoon_word"
+msgstr "Après-midi"
+
+msgid "Place_word"
+msgstr "Lieu"
+
+msgid "Activity_word"
+msgstr "Activité"
+
+msgid "Activities_word"
+msgstr "Activités"
+
+msgid "Price_list_word"
+msgstr "Tarifs"
+
+msgid "Tax_es_word"
+msgstr "Taxe(s)"
+
+msgid "IVAT_word"
+msgstr "TTC"
+
+msgid "note_word"
+msgstr "Note"
+
+msgid "Before_word"
+msgstr "Avant"
+
+msgid "After_word"
+msgstr "Après"
+
+msgid "select_mandatory_price_words"
+msgstr "Sélectionnez les tarifs requis"
+
+msgid "Participants_words"
+msgstr "Participants"
+
+msgid "min_number_persons_words"
+msgstr "Min nombre personnes"
+
+msgid "max_number_persons_words"
+msgstr "Max nombre personnes"
+
+msgid "price_number_persons_words"
+msgstr "Tarif"
+
+msgid "by_page_words"
+msgstr "par page"
+
+msgid "turnover_on_period_words"
+msgstr "Chiffre d'affaire sur la période"
+
+msgid "staff_note_words"
+msgstr "Note pour les membres"
+
+msgid "actual_site_url_words"
+msgstr "Site URL actuel"
+
+msgid "not_same_password_words"
+msgstr "Le mot de passe n'est pas le même"
+
+msgid "bad_password_words"
+msgstr "Votre mot de passe doit contenir plus de 6 caractères, posséder au moins une majuscule, une minuscule et au moins un chiffre !"
+
+msgid "No_category_words"
+msgstr "Pas de catégorie"
+
+msgid "No_place_words"
+msgstr "Pas de lieu"
+
+msgid "No_tag_words"
+msgstr "Pas de tag"
+
+msgid "off_schedule_words"
+msgstr "Hors horaire"
+
+msgid "custom_line_words"
+msgstr "Ligne personnalisée"
+
+msgid "Select_timeslot_words"
+msgstr "Selectionnez un créneaux"
+
+msgid "Reselect_timeslot_words"
+msgstr "Reselectionnez le créneaux"
+
+msgid "not_to_pay_advance_payment_amount_words"
+msgstr "Payer la totalité"
+
+msgid "advance_payment_amount_words"
+msgstr "Payer un acompte de"
+
+msgid "Unknown_customer_words"
+msgstr "Client inconnu"
+
+msgid "timeslot_on_date_words"
+msgstr "Créneaux du "
+
+msgid "loading_data_words"
+msgstr "Chargement de données nécessaires..."
+
+msgid "customer_not_found_words"
+msgstr "Compte utilisateur non trouvé"
+
+msgid "See_booking_details_words"
+msgstr "Voir le détail de la réservation"
+
+msgid "See_quotation_details_words"
+msgstr "Voir le détail du devis"
+
+msgid "Paid_this_booking_words"
+msgstr "Payer cette réservation"
+
+msgid "See_the_receipt_words"
+msgstr "Voir le reçu"
+
+msgid "See_the_quotation_words"
+msgstr "Voir le devis"
+
+msgid "created_on_words"
+msgstr "Créé le"
+
+msgid "loading_word"
+msgstr "Chargement..."
+
+msgid "loading_customer_data_words"
+msgstr "Chargement des données client..."
+
+msgid "specify_absences_words"
+msgstr "Préciser des absences"
+
+msgid "Promo_word"
+msgstr "Promo"
+
+msgid "Capacity_word"
+msgstr "Capacité"
+
+msgid "Price_word"
+msgstr "Prix"
+
+msgid "Full_word"
+msgstr "Complet"
+
+msgid "Members_word"
+msgstr "Membres"
+
+msgid "Member_word"
+msgstr "Membre"
+
+msgid "Participant_word"
+msgstr "Participant"
+
+msgid "booking_note_words"
+msgstr "Note privée de la réservation"
+
+msgid "booking_public_note_words"
+msgstr "Note publique de la réservation"
+
+msgid "booking_staff_note_words"
+msgstr "Note pour les membres"
+
+msgid "Value_coupon_words"
+msgstr "Valeur du coupon"
+
+msgid "Vat_word"
+msgstr "TVA"
+
+msgid "Booking_s_word"
+msgstr "Réservation(s)"
+
+msgid "booking_s_word"
+msgstr "réservation(s)"
+
+msgid "customer_s_word"
+msgstr "client(s)"
+
+msgid "appointment_s_word"
+msgstr "rendez-vous"
+
+msgid "Payment_methods_words"
+msgstr "Moyen de paiement"
+
+msgid "no_staff_gestions_words"
+msgstr "Pas de gestion du personnel"
+
+msgid "added_between_words"
+msgstr "ajoutés entre"
+
+msgid "between_word"
+msgstr "entre"
+
+msgid "Assigned_to_words"
+msgstr "Assigné à"
+
+msgid "have_a_note_words"
+msgstr "contient une note"
+
+msgid "Customer_word"
+msgstr "Client"
+
+msgid "customer_word"
+msgstr "client"
+
+msgid "and_quantity_words"
+msgstr "et la quantité"
+
+msgid "by_person_words"
+msgstr "par personne"
+
+msgid "Reduction_word_form"
+msgstr "Réduction"
+
+msgid "Reduction_word"
+msgstr "Réduction"
+
+msgid "Quantity_word"
+msgstr "Quantité"
+
+msgid "Available_word"
+msgstr "Disponible"
+
+msgid "Rule_word"
+msgstr "Règle"
+
+msgid "Condition_word"
+msgstr "Condition"
+
+msgid "Number_of_persons_word"
+msgstr "Nombre de personnes"
+
+msgid "positions_word"
+msgstr "places"
+
+msgid "remaining_positions_word"
+msgstr "places restantes"
+
+msgid "Redirection_word_form"
+msgstr "Vous allez être redirigé"
+
+msgid "Redirection_2_word_form"
+msgstr "Redirection en cours"
+
+msgid "update_booking_word"
+msgstr "Mise à jour de la réservation"
+
+msgid "if_on_words_reductions"
+msgstr "Sur"
+
+msgid "there_are_words"
+msgstr "Si il y a"
+
+msgid "value_word"
+msgstr "valeur"
+
+msgid "date_word"
+msgstr "date"
+
+msgid "Date_word"
+msgstr "Date"
+
+msgid "Date_and_hours_word"
+msgstr "Date / heures"
+
+msgid "Dates_and_hours_word"
+msgstr "Dates / heures"
+
+msgid "Hours_word"
+msgstr "Heures"
+
+msgid "Dates_word"
+msgstr "Dates"
+
+msgid "Time_word"
+msgstr "Heure"
+
+msgid "Start_time_word"
+msgstr "Heure de début"
+
+msgid "End_time_word"
+msgstr "Heure de fin"
+
+msgid "Month_word"
+msgstr "Mois"
+
+msgid "Day_word"
+msgstr "Jour"
+
+msgid "day_word"
+msgstr "jour"
+
+msgid "days_word"
+msgstr "jours"
+
+msgid "to_word"
+msgstr "à"
+
+msgid "from_word"
+msgstr "de"
+
+msgid "to2_word"
+msgstr "au"
+
+msgid "from2_word"
+msgstr "du"
+
+msgid "begin_word"
+msgstr "A partir de"
+
+msgid "by_word"
+msgstr "par"
+
+msgid "on_word"
+msgstr "sur"
+
+msgid "and_word"
+msgstr "et il y a"
+
+msgid "Or_word"
+msgstr "Ou"
+
+msgid "And_word"
+msgstr "Et (ajouter un argument)"
+
+msgid "OR_word"
+msgstr "OU"
+
+msgid "AND_word"
+msgstr "ET"
+
+msgid "need_word"
+msgstr "à besoin"
+
+msgid "Outstanding_word"
+msgstr "Restant dû"
+
+msgid "assigned_word"
+msgstr "assigné"
+
+msgid "bookings_word"
+msgstr "réservations"
+
+msgid "persons_word"
+msgstr "personnes"
+
+msgid "person_word"
+msgstr "personne"
+
+msgid "Close_word"
+msgstr "Fermer"
+
+msgid "Today_word"
+msgstr "Aujourd'hui"
+
+msgid "Clear_word"
+msgstr "Effacer"
+
+msgid "Add_timeslot_custom_words"
+msgstr "Ajout d'un créneau personnalisé"
+
+msgid "Customer_note_word"
+msgstr "Remarque"
+
+msgid "Amount_to_be_paid_words"
+msgstr "Montant à payer"
+
+msgid "Payment_word"
+msgstr "Paiement"
+
+msgid "payment_word"
+msgstr "paiement"
+
+msgid "expired_word"
+msgstr "expiré"
+
+msgid "Confirmation_word"
+msgstr "Confirmation"
+
+msgid "Repayment_word"
+msgstr "Remboursement"
+
+msgid "Booking_of_words"
+msgstr "Réservation du"
+
+msgid "Payment_of_words"
+msgstr "Paiement du"
+
+msgid "Repayment_of_words"
+msgstr "Remboursement du"
+
+msgid "participants_list_words"
+msgstr "Liste des participants"
+
+msgid "Welcome_word"
+msgstr "Bienvenue"
+
+msgid "Link_word"
+msgstr "Liaison"
+
+msgid "Number_word"
+msgstr "Nombre"
+
+msgid "remaining_word"
+msgstr "restant"
+
+msgid "Availability_word"
+msgstr "Disponible"
+
+msgid "Not_availability_word"
+msgstr "Non disponible"
+
+msgid "number_word"
+msgstr "nombre"
+
+msgid "total_price_word"
+msgstr "total price"
+
+msgid "Step_word_form"
+msgstr "Étape"
+
+msgid "Sub_total_word"
+msgstr "Sous-total"
+
+msgid "Total_word"
+msgstr "Total"
+
+msgid "in_total_words"
+msgstr "au total"
+
+msgid "from_price_words"
+msgstr "A partir de"
+
+msgid "amount_to_be_paid_words"
+msgstr "Montant dû"
+
+msgid "Total_booking_words"
+msgstr "Total de la réservation"
+
+msgid "Advance_payment_words"
+msgstr "Acompte"
+
+msgid "Remaining_to_pay_words"
+msgstr "Reste à payer"
+
+msgid "Total_advance_payment_word"
+msgstr "Total (Acompte)"
+
+msgid "Service_word"
+msgstr "Service"
+
+msgid "Services_word"
+msgstr "Services"
+
+msgid "link_form_words"
+msgstr "Lien du formulaire"
+
+msgid "link_name_words"
+msgstr "Nom du lien"
+
+msgid "capacity_word"
+msgstr "capacité"
+
+msgid "ok_word"
+msgstr "ok"
+
+msgid "cancelled_word"
+msgstr "annulé"
+
+msgid "pending_word"
+msgstr "en attente de paiement"
+
+msgid "abandonned_word"
+msgstr "abandonné"
+
+msgid "deleted_word"
+msgstr "supprimé"
+
+msgid "updated_word"
+msgstr "mise a jour"
+
+msgid "waiting_word"
+msgstr "en attente de validation"
+
+msgid "Absent_word"
+msgstr "Absent"
+
+msgid "Present_word"
+msgstr "Présent"
+
+msgid "filter_ok_word"
+msgstr "Validée"
+
+msgid "filter_waiting_word"
+msgstr "Non confirmée"
+
+msgid "filter_cancelled_word"
+msgstr "Annulée"
+
+msgid "filter_abandonned_word"
+msgstr "Abandonnée"
+
+msgid "on_sub_total_words"
+msgstr "sur le sous-total"
+
+msgid "on_price_list_words"
+msgstr "sur le tarif unitaire"
+
+msgid "new_price_list_words"
+msgstr "nouveau tarif"
+
+msgid "required_word"
+msgstr "obligatoire*"
+
+msgid "facultative_word"
+msgstr "facultatif"
+
+msgid "payment_title_custom_payment_types"
+msgstr "Type de paiements personnalisé"
+
+msgid "category_of_services_words"
+msgstr "Catégorie des services"
+
+msgid "form_steps_title"
+msgstr "Titre des étapes du formulaire"
+
+msgid "custom_css_words"
+msgstr "Fichier CSS chargé dans le formulaire (fichiers doivent etre dans css\\css_custom, ne pas mettre .css, séparer le nom des fichiers par une virgule)"
+
+msgid "form_participants_parameters_title"
+msgstr "Champs des participants du formulaire"
+
+msgid "Default_word"
+msgstr "Défaut"
+
+msgid "New_field_word"
+msgstr "Nouveau champs"
+
+msgid "Category_word"
+msgstr "Catégorie"
+
+msgid "Your_bookings_words"
+msgstr "Vos réservations"
+
+msgid "Your_quotations_words"
+msgstr "Vos devis"
+
+msgid "inconsistencies_allowed_words"
+msgstr "Incohérences autorisées"
+
+msgid "offer_quantity_words"
+msgstr "quantité offerte"
+
+msgid "offer_quantities_words"
+msgstr "quantités offertes"
+
+msgid "automatic_validation_parameter_words"
+msgstr "Validation automatique"
+
+msgid "automatic_validation_parameter_description_words"
+msgstr "Les réservations sont validées par défaut (peu importe si il y a un paiement ou non)."
+
+msgid "payment_validation_parameter_words"
+msgstr "Validation au paiement"
+
+msgid "payment_validation_parameter_description_words"
+msgstr "Les réservations sont enregistrées avec l'état en attente et les places ne sont pas bloquées. Si un paiement est effectué pour cette réservation, l'état passe en validé et les places sont bloquées."
+
+msgid "payment_booking_validation_parameter_words"
+msgstr "Paiement en ligne"
+
+msgid "payment_booking_validation_parameter_description_words"
+msgstr "Les réservations sont enregistrées et les places réservées. Si le paiement en ligne est rejeté la réservation passe en état abandonnée et les places sont libérées."
+
+msgid "to_define_words"
+msgstr "A définir"
+
+msgid "custom_reduction_words"
+msgstr "Réduction personnalisée"
+
+msgid "booking_cancelled_words"
+msgstr "Réservation annulée"
+
+msgid "booking_abandoned_words"
+msgstr "Réservation abandonnée"
+
+msgid "booking_pending_words"
+msgstr "Réservation en attente"
+
+msgid "booking_abandonned_words"
+msgstr "Réservation abandonnée"
+
+msgid "Payment_for_words"
+msgstr "Paiement pour"
+
+msgid "Search_word"
+msgstr "Rechercher"
+
+msgid "appointment_details_words"
+msgstr "Détails du rendez-vous"
+
+msgid "Informations_word"
+msgstr "Informations"
+
+msgid "Complementary_informations_words"
+msgstr "Informations complémentaires"
+
+msgid "Sunday_word"
+msgstr "Dimanche"
+
+msgid "Monday_word"
+msgstr "Lundi"
+
+msgid "Tuesday_word"
+msgstr "Mardi"
+
+msgid "Wednesday_word"
+msgstr "Mercredi"
+
+msgid "Thursday_word"
+msgstr "Jeudi"
+
+msgid "Friday_word"
+msgstr "Vendredi"
+
+msgid "Saturday_word"
+msgstr "Samedi"
+
+msgid "January_word"
+msgstr "Janvier"
+
+msgid "February_word"
+msgstr "Février"
+
+msgid "March_word"
+msgstr "Mars"
+
+msgid "April_word"
+msgstr "Avril"
+
+msgid "May_word"
+msgstr "Mai"
+
+msgid "June_word"
+msgstr "Juin"
+
+msgid "July_word"
+msgstr "Juillet"
+
+msgid "August_word"
+msgstr "Août"
+
+msgid "September_word"
+msgstr "Septembre"
+
+msgid "October_word"
+msgstr "Octobre"
+
+msgid "November_word"
+msgstr "Novembre"
+
+msgid "December_word"
+msgstr "Décembre"
+
+msgid "Green_word"
+msgstr "Vert"
+
+msgid "Yellow_word"
+msgstr "Jaune"
+
+msgid "Orange_word"
+msgstr "Orange"
+
+msgid "Brown_word"
+msgstr "Marron"
+
+msgid "Red_word"
+msgstr "Rouge"
+
+msgid "Blue_word"
+msgstr "Bleu"
+
+msgid "Error_word"
+msgstr "Erreur : "
+
+msgid "Staff_member_words"
+msgstr "Membre du personnel"
+
+msgid "your_bookings_words"
+msgstr "Vos réservations"
+
+msgid "Priority"
+msgstr "Priorité"
+
+msgid "all_word"
+msgstr "Tous"
+
+msgid "ok_status_word"
+msgstr "Validé"
+
+msgid "cancelled_status_word"
+msgstr "Annulé"
+
+msgid "pending_status_word"
+msgstr "En attente (bientot supprimé)"
+
+msgid "waiting_status_word"
+msgstr "En attente de validation"
+
+msgid "abandonned_status_word"
+msgstr "Abandonné"
+
+msgid "updated_status_word"
+msgstr "Modifié"
+
+msgid "sign_word"
+msgstr "Signe"
+
+msgid "today_word"
+msgstr "Aujourd'hui"
+
+msgid "Upcoming_word"
+msgstr "A venir"
+
+msgid "tomorrow_word"
+msgstr "Demain"
+
+msgid "yesterday_word"
+msgstr "Hier"
+
+msgid "all_date_words"
+msgstr "Toutes"
+
+msgid "status_word"
+msgstr "État"
+
+msgid "quotation_word"
+msgstr "Devis"
+
+msgid "booking_status_ok_word"
+msgstr "Confirmée"
+
+msgid "booking_status_waiting_word"
+msgstr "En attente"
+
+msgid "booking_status_cancelled_word"
+msgstr "Annulée"
+
+msgid "payment_status_complete_word"
+msgstr "Encaissé"
+
+msgid "payment_status_advancePayment_word"
+msgstr "Acompte"
+
+msgid "payment_status_deposit_word"
+msgstr "Caution"
+
+msgid "payment_status_noPayment_word"
+msgstr "Pas de paiement"
+
+msgid "booking_status_quotation_word"
+msgstr "En attente de votre validation"
+
+msgid "booking_status_quotation_request_word"
+msgstr "En attente de validation"
+
+msgid "ask_payment_words"
+msgstr "Demande de paiement"
+
+msgid "add_in_basket_success"
+msgstr "Ajouté avec succès"
+
+msgid "associated_booking_words"
+msgstr "Réservation associée"
+
+msgid "see_bookings_for_words"
+msgstr "Voir les réservations pour"
+
+msgid "in_seven_days_words"
+msgstr "Les 7 prochains jours"
+
+msgid "Hello_word"
+msgstr "Bonjour"
+
+msgid "already_customer_words"
+msgstr "êtes-vous déjà client ?"
+
+msgid "already_customer_here_words"
+msgstr "vous avez un compte chez nous ?"
+
+msgid "need_connection_words"
+msgstr "Veuillez-vous connecter pour accéder au formulaire."
+
+msgid "can_not_display_form_words"
+msgstr "Vous n'avez pas les droits pour acceder à ce formulaire, veuillez nous contacter pour résoudre ce problème."
+
+msgid "If_yes_words"
+msgstr "Si oui"
+
+msgid "you_is_not_words"
+msgstr "Ce n'est pas vous"
+
+msgid "connect_you_to_account_words"
+msgstr "connectez-vous avec votre compte"
+
+msgid "else_continue_your_first_booking_words"
+msgstr "Sinon continuer votre première réservation."
+
+msgid "Modify_your_personal_informations_words"
+msgstr "Modifiez vos informations personnelles."
+
+msgid "Modify_your_password"
+msgstr "Modifiez votre mot de passe ?"
+
+msgid "Booking_word"
+msgstr "Réservation"
+
+msgid "booking_status_words"
+msgstr "État de la réservation"
+
+msgid "payment_status_words"
+msgstr "État du paiement"
+
+msgid "booking_first_date_link_word"
+msgstr "du"
+
+msgid "booking_created_words"
+msgstr "Créée le"
+
+msgid "quotation_first_date_words"
+msgstr "Devis du"
+
+msgid "quotation_created_words"
+msgstr "Créé le"
+
+msgid "Your_payments_words"
+msgstr "Vos paiements"
+
+msgid "online_receipt_words"
+msgstr "Reçu de votre réservation en ligne"
+
+msgid "RESA_Customer"
+msgstr "Client RESA"
+
+msgid "RESA_Staff"
+msgstr "Membre RESA"
+
+msgid "RESA_Manager"
+msgstr "Manager RESA"
+
+msgid "Type_account_customer_word"
+msgstr "Compte client"
+
+msgid "Type_account_company_word"
+msgstr "Compte entreprise"
+
+msgid "cancel_payment_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "cancel_payment_text_dialog"
+msgstr "Annuler ce paiement, il ne sera plus affiché sur le reçu ?"
+
+msgid "cancel_payment_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "cancel_payment_cancelButton_dialog"
+msgstr "Non"
+
+msgid "ask_cancel_booking_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_cancel_booking_text_dialog"
+msgstr "Annuler cette réservation ?"
+
+msgid "ask_cancel_booking_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_cancel_booking_cancelButton_dialog"
+msgstr "Non"
+
+msgid "ask_delete_booking_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_delete_booking_text_dialog"
+msgstr "Supprimer cette réservation (irremédiable) ?"
+
+msgid "ask_delete_booking_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_delete_booking_cancelButton_dialog"
+msgstr "Non"
+
+msgid "ask_cancel_appointment_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_cancel_appointment_text_dialog"
+msgstr "Annuler ce rendez-vous ?"
+
+msgid "ask_cancel_appointment_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_cancel_appointment_cancelButton_dialog"
+msgstr "Non"
+
+msgid "ask_uncancel_appointment_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_uncancel_appointment_text_dialog"
+msgstr "Dé-annuler ce rendez-vous ?"
+
+msgid "ask_uncancel_appointment_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_uncancel_appointment_cancelButton_dialog"
+msgstr "Non"
+
+msgid "delete_info_calendar_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "delete_info_calendar_text_dialog"
+msgstr "Supprimez cette information ?"
+
+msgid "delete_info_calendar_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "delete_info_calendar_cancelButton_dialog"
+msgstr "Non"
+
+msgid "delete_service_constraint_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "delete_service_constraint_text_dialog"
+msgstr "Supprimez cette contrainte ?"
+
+msgid "delete_service_constraint_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "delete_service_constraint_cancelButton_dialog"
+msgstr "Non"
+
+msgid "ask_delete_service_text_title_dialog"
+msgstr "Supprimer le service"
+
+msgid "ask_delete_service_text_dialog"
+msgstr "Supprimer le service"
+
+msgid "ask_delete_service_confirmButton_dialog"
+msgstr "Supprimer"
+
+msgid "ask_delete_service_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_delete_bookings_title_dialog"
+msgstr "Supprimer les réservations ?"
+
+msgid "ask_delete_bookings_text_dialog"
+msgstr "Attention ceci est définitif !"
+
+msgid "ask_delete_bookings_confirmButton_dialog"
+msgstr "Supprimer"
+
+msgid "ask_delete_bookings_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_clear_all_data_title_dialog"
+msgstr "Supprimer les donnéees ?"
+
+msgid "ask_clear_all_data_text_dialog"
+msgstr "Attention ceci est définitif et cela prend quelques minutes, attendre le feedback !"
+
+msgid "ask_clear_all_data_confirmButton_dialog"
+msgstr "Supprimer"
+
+msgid "ask_clear_all_data_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_delete_reduction_text_title_dialog"
+msgstr "Supprimer la réduction"
+
+msgid "ask_delete_reduction_text_dialog"
+msgstr "Supprimer la réduction"
+
+msgid "ask_delete_reduction_confirmButton_dialog"
+msgstr "Supprimer"
+
+msgid "ask_delete_reduction_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_delete_staff_member_text_title_dialog"
+msgstr "Supprimer le membre"
+
+msgid "ask_delete_staff_member_text_dialog"
+msgstr "Supprimer le membre"
+
+msgid "ask_delete_staff_member_confirmButton_dialog"
+msgstr "Supprimer"
+
+msgid "ask_delete_staff_member_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_send_email_to_customer_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_send_email_to_customer_text_dialog"
+msgstr "Envoyer cet email au client ?"
+
+msgid "ask_send_email_to_customer_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_send_email_to_customer_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_send_email_creation_account_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_send_email_creation_account_text_dialog"
+msgstr "Envoyer email de génération de mot de passe au client ?"
+
+msgid "ask_send_email_creation_account_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_send_email_creation_account_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_delete_customer_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_delete_customer_text_dialog"
+msgstr "Voulez-vous vraiment supprimer ce client ?"
+
+msgid "ask_delete_customer_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_delete_customer_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_clear_synchronization_cashpad_customer_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "ask_clear_synchronization_cashpad_customer_text_dialog"
+msgstr "Voulez-vous vraiment supprimer la synchronisation avec Cashpad pour ce client ? Attention vérifiez que le client n est plus enregistré dans Cashpad"
+
+msgid "ask_clear_synchronization_cashpad_customer_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "ask_clear_synchronization_cashpad_customer_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "accept_quotation_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "accept_quotation_text_dialog"
+msgstr "Voulez-vous accepter ce devis ?"
+
+msgid "accept_quotation_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "accept_quotation_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "accept_quotation_success_dialog"
+msgstr "Devis accepté"
+
+msgid "refuse_quotation_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "refuse_quotation_text_dialog"
+msgstr "Voulez-vous refuser ce devis ?"
+
+msgid "refuse_quotation_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "refuse_quotation_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "refuse_quotation_success_dialog"
+msgstr "Devis refusé"
+
+msgid "modify_your_informations_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "modify_your_informations_text_dialog"
+msgstr "Voulez-vous vraiment modifier vos informations ?"
+
+msgid "modify_your_informations_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "modify_your_informations_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "forgotten_password_title_dialog"
+msgstr "Mot de passe oublié ?"
+
+msgid "forgotten_password_text_dialog"
+msgstr "Entrez votre addresse email"
+
+msgid "forgotten_password_confirmButton_dialog"
+msgstr "Envoyer"
+
+msgid "forgotten_password_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "forgotten_password_inputPlaceholder_dialog"
+msgstr "Email"
+
+msgid "delete_group_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "delete_group_text_dialog"
+msgstr "Voulez-vous supprimer ce groupe ?"
+
+msgid "delete_group_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "delete_group_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "remove_member_group_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "remove_member_group_text_dialog"
+msgstr "Voulez-vous retirer ce moniteur du groupe ?"
+
+msgid "remove_member_group_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "remove_member_group_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "change_member_group_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "change_member_group_text_dialog"
+msgstr "Ce moniteur est déjà dans un group, voulez vous le changer de groupe ?"
+
+msgid "change_member_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "change_member_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "change_member_place_group_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "change_member_place_group_text_dialog"
+msgstr "Voulez-vous attribuer ce moniteur du groupe malgré son lieu ?"
+
+msgid "change_member_place_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "change_member_place_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "change_members_group_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "change_members_group_text_dialog"
+msgstr "Des moniteurs sélectionnés appartiennent déjà à un autre groupe, voulez-vous les changer ?"
+
+msgid "change_members_group_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "change_members_group_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "change_members_group_place_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "change_members_group_place_text_dialog"
+msgstr "Des moniteurs sélectionnés n exercent pas dans ce lieu, voulez-vous les attribués ?"
+
+msgid "change_members_group_place_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "change_members_group_place_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "change_participants_group_title_dialog"
+msgstr "Êtes-vous sur ?"
+
+msgid "change_participants_group_text_dialog"
+msgstr "Des participants sélectionnés appartiennent déjà à un autre groupe, voulez-vous les changer ?"
+
+msgid "change_participants_group_confirmButton_dialog"
+msgstr "Oui"
+
+msgid "change_participants_group_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "no_bill_error"
+msgstr "Pas de facture"
+
+msgid "shortcode_price_error"
+msgstr "Erreur de tarif"
+
+msgid "authentication_error"
+msgstr "Échec de l'authenfication."
+
+msgid "payment_online_error"
+msgstr "Le paiement en ligne n'est pas accessible pour le moment, veuillez réessayer plus tard"
+
+msgid "type_payment_unauthorized_error"
+msgstr "Le moyen de paiement qui vous avez choisi n'est pas autorisé"
+
+msgid "authentication_or_register_error"
+msgstr "Échec de l'authenfication ou de la création de compte"
+
+msgid "authentication_or_register_reload_error"
+msgstr "Échec de l'authenfication ou de la création de compte, veuillez recharger"
+
+msgid "register_error"
+msgstr "Échec lors de la création de compte"
+
+msgid "login_already_exist_error"
+msgstr "Un compte est déjà enregistré avec ce nom"
+
+msgid "email_already_exist_error"
+msgstr "Un compte est déjà enregistré avec cette adresse mail"
+
+msgid "phone_already_exist_error"
+msgstr "Un compte est déjà enregistré avec ce numéro de téléphone"
+
+msgid "bad_password_error"
+msgstr "Mauvais format de mot de passe"
+
+msgid "not_validate_account_error"
+msgstr "Ce compte client n'a pas été validé, veuillez le valider"
+
+msgid "can_not_delete_customer_error"
+msgstr "Le client ne peut pas être supprimé"
+
+msgid "can_not_cancel_payment_error"
+msgstr "Le paiement ne peut pas être annulé"
+
+msgid "customer_unknown_error"
+msgstr "Client inconnu"
+
+msgid "save_booking_error_unknown_price"
+msgstr "Prix inconnu"
+
+msgid "save_booking_error_price_not_activated"
+msgstr "Prix désactivé"
+
+msgid "not_enough_equipments"
+msgstr "Pas assez de matériels"
+
+msgid "save_booking_error_price_not_for_type_account"
+msgstr "Ce prix ne peut pas être choisi pour ce type de compte utilisateur"
+
+msgid "save_booking_error_price_unavailable"
+msgstr "Prix indisponible"
+
+msgid "save_booking_error_number_price"
+msgstr "Le nombre de personnes ne respecte pas les règles du prix"
+
+msgid "no_mandatory_price_error_number_price"
+msgstr "La réservation ne contient pas tous les tarifs requis"
+
+msgid "need_participants_informations_error"
+msgstr "Veuillez renseigner les informations de chaque participant"
+
+msgid "save_booking_error_max_capacity_reach"
+msgstr "La capacité maximale a été atteinte"
+
+msgid "error_no_price_list_capacity_reach"
+msgstr "Veuillez sélectionner un tarif"
+
+msgid "save_booking_error_person_attribution"
+msgstr "Problème dans l'attribution des créneaux et des membres"
+
+msgid "save_booking_error_timeslot_not_found"
+msgstr "Le créneau n'est pas valide"
+
+msgid "save_booking_error_empty_form"
+msgstr "Formulaire vide"
+
+msgid "empty_field_participant_form_error"
+msgstr "Veuillez remplir toutes les informations des participants pour continuer"
+
+msgid "create_new_version_bookings_error"
+msgstr "Cette réservation/devis a expiré, veuillez recharger la page et recommencer votre action"
+
+msgid "choose_a_date"
+msgstr "Choisir une date"
+
+msgid "choose_dates"
+msgstr "Choisir des dates"
+
+msgid "choose_a_timeslot"
+msgstr "Choisir un creneau"
+
+msgid "choose_a_price"
+msgstr "Choisir le tarif"
+
+msgid "choose_the_prices"
+msgstr "Choisir les tarifs"
+
+msgid "addons_and_extras_words"
+msgstr "Suppléments & extras"
+
+msgid "choose_the_number"
+msgstr "Nombre de personnes"
+
+msgid "agenda_description_service"
+msgstr "Dans cette partie, vous pouvez configurer l'agenda du service : le délai minimum et maximum de réservation, les périodes de disponibilités du service, les creneaux disponibles pour chaque période ainsi que de nombreux paramètres. Un aperçu en temps réel de vos réglages s'affichent en bas de cette section pour vous aidez."
+
+msgid "min_time_booking_description_service"
+msgstr "Cela vous permet d'empêcher une réservation faites au dernier moment."
+
+msgid "max_time_booking_description_service"
+msgstr "Cela vous permet d'empêcher une réservation faites trop loin dans le temps."
+
+msgid "exclusif_service_description_service"
+msgstr "Cela signifie qu'un membre du personnel affecté à ce service ne peut pas effectuer un autre service en même temps que celui-ci. Ce service n'apparaitra pas dans les services partager du personnel."
+
+msgid "priority_description_service"
+msgstr "Vous permet de définir quel membre du personnel doit être mis sur la réservation en priorité."
+
+msgid "service_prices_description_service"
+msgstr "Si vous supprimer un prix, cela peut empêcher la validation des réservations déjà en cours."
+
+msgid "name_mention_descriptions_price_words"
+msgstr "Nom, mention, description, prix"
+
+msgid "error_service_parameters_deprecated_form"
+msgstr "veuillez recommencer cette sélection."
+
+msgid "validation_before_payment_step_title"
+msgstr "Validation avant l'étape de paiement"
+
+msgid "validation_before_payment_step"
+msgstr "Validation avant l'étape de paiement"
+
+msgid "customer_account_url_title"
+msgstr "URL du compte client"
+
+msgid "languages_title"
+msgstr "Langages"
+
+msgid "participants_parameter_title"
+msgstr "Paramétrage des participants"
+
+msgid "types_accounts_title"
+msgstr "Types de comptes"
+
+msgid "Places_of_site_settings_title"
+msgstr "Lieux du site"
+
+msgid "staff_management_title"
+msgstr "Gestion du personnel"
+
+msgid "groups_management_title"
+msgstr "Gestion des groupes"
+
+msgid "staff_word_many_title"
+msgstr "Mot utilisé dans l'interface au pluriel (membres, guides, moniteurs ?)"
+
+msgid "staff_word_single_title"
+msgstr "Mot utilisé dans l'interface au singulier (membre, guide, moniteur ?)"
+
+msgid "staff_appointment_display_title"
+msgstr "Informations sur les rendez-vous"
+
+msgid "types_accounts_display_title"
+msgstr "Types de comptes client"
+
+msgid "calendar_title"
+msgstr "Calendrier"
+
+msgid "calendar_start_time_title"
+msgstr "Heure de départ des jours du calendrier"
+
+msgid "calendar_end_time_title"
+msgstr "Heure de fin des jours du calendrier"
+
+msgid "calendar_enabled_days_front_color_title"
+msgstr "Couleur des jours disponibles du calendrier du formulaire"
+
+msgid "calendar_disabled_days_front_color_title"
+msgstr "Couleur des jours indisponibles du calendrier du formulaire"
+
+msgid "calendar_info_calendar_color_title"
+msgstr "Couleur des informations du calendrier"
+
+msgid "calendar_service_constraint_color_title"
+msgstr "Couleur des contraintes sur les services du calendrier"
+
+msgid "calendar_split_time_title"
+msgstr "Afficher toutes les X minutes"
+
+msgid "data_and_saveguard_title"
+msgstr "Données & sauvegarde"
+
+msgid "debug_initialization_json_title"
+msgstr "Debug JSON d'initialisation"
+
+msgid "states_parameters_informations_title"
+msgstr "Créer type de réglages des états des rendez-vous"
+
+msgid "custom_tags_informations_title"
+msgstr "Personnalisation des tags"
+
+msgid "billing_informations_title"
+msgstr "Informations de facturation"
+
+msgid "vat_list_title"
+msgstr "Liste des TVA"
+
+msgid "currencies_title"
+msgstr "Devises"
+
+msgid "payment_activate_title"
+msgstr "Activer/Désactiver paiement dans le formulaire"
+
+msgid "log_notifications_title"
+msgstr "Centre de notifications"
+
+msgid "shortcode_available_title"
+msgstr "Shortcode disponible"
+
+msgid "sender_informations_title"
+msgstr "Informations sur l'expéditeur"
+
+msgid "customer_notification_title"
+msgstr "CLIENT : Notification au client lors de la réservation"
+
+msgid "customer_notification_quotation_customer_title"
+msgstr "CLIENT : Notification au client lorsqu'il crée un nouveau"
+
+msgid "customer_notification_quotation_accepted_title"
+msgstr "CLIENT : Notification au client lorsque son devis est accepté"
+
+msgid "customer_notification_quotation_title"
+msgstr "CLIENT : Notification au client lors de la création d'un devis"
+
+msgid "emails_notification_title"
+msgstr "Notification aux emails lors de la réservation"
+
+msgid "emails_notification_payment_title"
+msgstr "Notification aux emails lors du paiement d'une réservation"
+
+msgid "emails_notification_quotation_request_title"
+msgstr "Notification aux emails lorqu'un devis est créer par un client"
+
+msgid "emails_notification_quotation_accepted_title"
+msgstr "Notification aux emails lorqu'un devis est accepté"
+
+msgid "customer_account_creation_notification_title"
+msgstr "CLIENT : Notification lors de la création d'un compte"
+
+msgid "customer_password_reinit_notification_title"
+msgstr "CLIENT : Notification lors l'envoie de reinitialisation de mot de passe"
+
+msgid "customer_payment_notification_title"
+msgstr "CLIENT : Notification lors d'un paiement client à distance"
+
+msgid "staff_notification_title"
+msgstr "PERSONNEL : Notification au membre du personnel lors d'une réservation"
+
+msgid "after_appointment_notification_title"
+msgstr "CLIENT : Notification au client lors le rendez-vous a été fait"
+
+msgid "no_response_quotation_notification_title"
+msgstr "CLIENT : Notification au client lorqu'il n'a pas répondu au devis"
+
+msgid "agenda_description_staff"
+msgstr "Dans cette cette, vous pouvez configurer l'agenda pour ce membre du personnel : les horaires, les périodes de disponibilité, les services que peut effectuer ce membre et la capacité."
+
+msgid "share_services_description_staff"
+msgstr "Il est possible de définir des services partagés qui pourront être effectué simultanéement sur le même creneau par le membre du personnel. Pour cela vous devez créer des liaisons entre les services et définir la règle de calcul de la capacité."
+
+msgid "rule_of_capacity_computation_title_staff"
+msgstr "Règle de calcul de la capacité"
+
+msgid "conditions_description_reduction"
+msgstr "La section condition, permet de définir dans quel cas une réduction est détectée. L'algorithme va regarder les conditions défini ci-dessous et analyser le panier du client. Si les conditions sont présentes dans le panier, alors la réservation sera elligible à la réduction et sera appliquer selon les conditions d'application défini dans la section suivante : Application."
+
+msgid "reduction_applications_description"
+msgstr "La section application, permet de définir ce que fait la réduction et aussi ou et comment elle s'applique. Pour cela vous devez définir les effets et ensuite définir dans quel cas s'applique la réduction."
+
+msgid "apply_reduction_title"
+msgstr "Appliquer la réduction"
+
+msgid "Import_progress_words"
+msgstr "Importation en cours..."
+
+msgid "customer_account_page_name"
+msgstr "Compte client"
+
+msgid "customer_form_page_name"
+msgstr "Formulaire client"
+
+msgid "error_activated_service_dialog_title"
+msgstr "Impossible d activer le service"
+
+msgid "service_has_no_rules_dialog_text"
+msgstr "Le service ne possède pas de règles"
+
+msgid "service_has_no_scedule_provide_dialog_text"
+msgstr "Le service ne possède pas de disponibilité"
+
+msgid "service_has_no_timeslot_dialog_text"
+msgstr "Le service ne possède pas de créneaux"
+
+msgid "service_has_no_price_dialog_text"
+msgstr "Le service ne possède pas de prix"
+
+msgid "service_has_no_activated_price_dialog_text"
+msgstr "Le service ne possède pas de prix activé"
+
+msgid "service_has_no_price_positive_dialog_text"
+msgstr "Tous les prix doivent être positif"
+
+msgid "service_has_same_slug_dialog_text"
+msgstr "Le slug de ce service est déjà utilisé par un autre"
+
+msgid "service_price_has_same_slug_dialog_text"
+msgstr "Des tarifs de ce service ont le slug identique"
+
+msgid "ask_continue_save_service_text_title_dialog"
+msgstr "Erreur service"
+
+msgid "ask_continue_save_service_text_dialog"
+msgstr "ne respecte plus les conditions d activations, il a été automatiquement désactivé. Voulez-vous continuer la sauvegarde ?"
+
+msgid "ask_continue_save_service_confirmButton_dialog"
+msgstr "Continuer"
+
+msgid "ask_continue_save_service_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "ask_stop_payment_title_dialog"
+msgstr "Annuler ?"
+
+msgid "ask_stop_payment_text_dialog"
+msgstr "Voulez-vous stopper l'étape de paiement ?"
+
+msgid "ask_stop_payment_confirmButton_dialog"
+msgstr "Continuer"
+
+msgid "ask_stop_payment_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "error_activated_member_dialog_title"
+msgstr "Impossible d activer le membre"
+
+msgid "member_has_no_rules_dialog_text"
+msgstr "Le membre ne possède pas de règles"
+
+msgid "member_has_no_scedule_provide_dialog_text"
+msgstr "Le membre ne possède pas de disponibilité"
+
+msgid "ask_continue_save_member_text_title_dialog"
+msgstr "Erreur member"
+
+msgid "ask_continue_save_member_text_dialog"
+msgstr "ne respecte plus les conditions d activations, il a été automatiquement désactivé. Voulez-vous continuer la sauvegarde ?"
+
+msgid "ask_continue_save_member_confirmButton_dialog"
+msgstr "Continuer"
+
+msgid "ask_continue_save_member_cancelButton_dialog"
+msgstr "Annuler"
+
+msgid "add_booking_ok_dialog"
+msgstr "La réservation a été ajoutée avec success"
+
+msgid "no_customer_account_words"
+msgstr "Pas de compte client"
+
+msgid "company_account_words"
+msgstr "Compte entreprise"
+
+msgid "customer_synchronized_with_cashpad_words"
+msgstr "Compte client synchronisé avec cashpad"
+
+msgid "payment_synchronized_with_cashpad_words"
+msgstr "Paiement synchronisé avec cashpad"
+
+msgid "Actual_selected_words"
+msgstr "Actuellement sélectionné"
+
+msgid "Not_enough_capacity_words"
+msgstr "Pas assez de place disponible"
+
+msgid "Complete_words"
+msgstr "Complet"
+
+msgid "capacity_alert_name"
+msgstr "Problème de surcapacité"
+
+msgid "capacity_alert_description"
+msgstr "Il y a un problème de surcapacité à cette date"
+
+msgid "reductions_alert_name"
+msgstr "Changement de réductions"
+
+msgid "reductions_alert_description"
+msgstr "Il y a eu un changement de réductions dût à la modification d une réservation"
+
+msgid "timeslot_alert_name"
+msgstr "Hors créneau"
+
+msgid "timeslot_alert_description"
+msgstr "Ce rendez-vous est hors créneau"
+
+msgid "equipments_alert_name"
+msgstr "Problème d'attribution du matériel"
+
+msgid "equipments_alert_description"
+msgstr "Est attribué plus d'équipements que prévu"
+
+msgid "see_notice"
+msgstr "Voir"
+
+msgid "edit_notice"
+msgstr "Modifier"
+
+msgid "merge_notice"
+msgstr "Fusionner"
+
+msgid "send_email_creation_account_notice"
+msgstr "Envoyer email de création de compte"
+
+msgid "send_email_creation_account_feedback"
+msgstr "Email envoyé"
+
+msgid "send_email_to_customer_feedback"
+msgstr "Email envoyé"
+
+msgid "clear_all_data_feedback"
+msgstr "Suppression des données effectuée"
+
+msgid "cashpad_no_payment_possible_description"
+msgstr "Veuillez ajouter le paiement dans cashpad"
+
+msgid "pub_resa_words"
+msgstr "Gérez vos réservations avec RESA Online (resa-online.fr)"
+
+msgid "participant_selector_title_dialog"
+msgstr "Sélectionner un participant déjà présent"
+
+msgid "my_reservations"
+msgstr "Mes réservations"
+
+msgid "my_quotations"
+msgstr "Mes devis"
+
+msgid "my_personal_informations"
+msgstr "Mes informations personnelles"
+
+msgid "see_bookings"
+msgstr "Voir les réservations"
+
+msgid "see_quotations"
+msgstr "Voir les devis"
+
+msgid "to_come"
+msgstr "A venir"
+
+msgid "past"
+msgstr "Passée(s)"
+
+msgid "all_feminin"
+msgstr "Toute(s)"
+
+msgid "gdpr_accept_to_save_data"
+msgstr "J'accepte la sauvegarde de ces informations dans le cadre de la gestion de mes réservations sur ce site"
+
+msgid "accept_register_newsletters"
+msgstr "J'accepte de recevoir des informations promotionnelles par email"
+
+msgid "gdpr_message_no_item_deleted"
+msgstr "Nous ne pouvons pas supprimer vos données tant que toutes vos réservations ne sont pas passées."
+
+msgid "gdpr_message_item_deleted"
+msgstr "Nous retenons les données de vos réservations mais nous supprimons tous liens entre vous et elles."
+
+msgid "gdpr_account_informations"
+msgstr "Pour toute demande dans le cadre de la loi RGPD, veuillez nous contacter par email."

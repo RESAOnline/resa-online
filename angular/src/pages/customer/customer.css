@@ -1,0 +1,139 @@
+.form-group {
+  line-height: 1;
+  width: 350px;
+  margin: 0px 0px 5px 0px;
+}
+.client_informations{
+  border:1px solid #e6e6e6;
+  padding:10px;
+  text-align:center;
+}
+
+.client_informations .client_information_line{
+	display:flex;
+	line-height:22px;
+}
+
+.client_informations .client_information_line{
+	display:flex;
+	line-height:22px;
+}
+.client_informations .client_information_line.center{
+	justify-content: center;
+	margin:5px 0px;
+}
+
+.client_informations .client_information_line label{
+	width:40%;
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	text-align:right;
+}
+.client_informations .client_information_line div{
+	width:60%;
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	font-weight:bold;
+	text-align:left;
+}
+.client_informations .client_information_line input{
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	font-weight:bold;
+	text-align:left;
+}
+.client_informations .client_information_line select{
+	box-sizing:border-box;
+	margin:0px;
+	padding:3px 5px;
+	max-width: 201px;
+	min-width: 201px;
+	font-weight:bold;
+	text-align:left;
+}
+
+.client_informations .client_information_line.reverse label{
+	width:70%;
+	text-align:left;
+}
+.client_informations .client_information_line.reverse div{
+	width:30%;
+	text-align:right;
+}
+
+.client_balance{
+	line-height:2em;
+	padding:10px 10px;
+	text-align:center;
+	color:white;
+	font-size:24px;
+	font-weight:600;
+	margin:5px 0px;
+}
+
+.balance_null{
+	background-color:#27b673;
+}
+.balance_negative{
+	background-color:#d62c2c;
+}
+.balance_positive{
+	background-color:#dfb70c;
+}
+
+.client_historic{
+	border:1px solid #e6e6e6;
+	padding:10px;
+	text-align:center;
+}
+
+.client_historic_title{
+text-align:center;
+}
+
+#historic_filter{
+	display:flex;
+	justify-content:center;
+}
+#historic_filter div{
+	cursor:pointer;
+	padding:8px 15px;
+	font-weight:600px;
+	font-size:15px;
+}
+#historic_filter div.active{
+	text-decoration:underline;
+}
+
+#historic_content{
+	max-height:60vh;
+	overflow:auto;
+}
+
+#historic_content table{
+	width:100%;
+	border-collapse:collapse;
+}
+#historic_content th{
+	padding:4px;
+	border:1px solid #cccccc;
+	background-color: #cccccc;
+}
+
+#historic_content tr{
+	border-bottom:1px solid #cccccc;
+}
+#historic_content td{
+	padding:9px 4px;
+}
+
+
+.client_reservations{
+	border:1px solid #e6e6e6;
+	padding:10px;
+	text-align:center;
+	background-color:#f1f1f1;
+}

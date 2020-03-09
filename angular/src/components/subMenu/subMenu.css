@@ -1,0 +1,75 @@
+.current-date {
+  color: black;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.btn-outline-success {
+  background-color: white;
+  color:#26b673;
+  border:2px solid #26b673;
+}
+
+.btn-outline-success:hover {
+  background-color: #26b673;
+  color:white;
+  border:2px solid #26b673;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled).active {
+  background-color: #26b673;
+  color:white;
+  border:2px solid #26b673;
+}
+
+.btn-dashicons {
+  background-color: #26b673;
+  color:white;
+  border:2px solid #26b673;
+}
+
+.btn-dashicons:hover {
+  background-color: #219e63;
+}
+
+.btn-success {
+  background-color: #26b673;
+  color:white;
+}
+
+.btn-success:hover {
+  background-color: #219e63;
+}
+
+ngb-datepicker {
+  background-color:white;
+  position:absolute;
+  top:50px;
+  left:120px;
+  z-index:200;
+}
+
+#menuDropDown {
+  text-align: left !important;
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .submenu {
+    flex-direction: column;
+  }
+
+  .current-date {
+    font-size: 12px;
+  }
+
+  #menuButtons {
+    display:none;
+  }
+
+  #menuDropDown {
+    display: inline-block;
+  }
+
+}

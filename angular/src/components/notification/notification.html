@@ -1,0 +1,234 @@
+<div class="modal-header">
+  <h4 class="modal-title">Envoyer une notification au client</h4>
+  <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="dismiss()">&times;</button>
+</div>
+<div class="modal-body">
+  <div *ngIf="launchAction" class="sLoader_bg"><div class="sLoader"></div></div>
+  <div *ngIf="settings">
+    <booking [booking]="booking" [settings]="settings" [displayButtons]="{notification:false, askPayment:false, pushCash:false, changePaymentState:false, updatePaymentState:false}" (close)="close($event)"></booking>
+  </div>
+  <div class="client_notifications" *ngIf="settings">
+    <div class="notifications_email">
+      <h3 class="notifications_email_title">Notifications emails</h3>
+      <div class="text-warning" *ngIf="settings.customer_account_url == null || settings.customer_account_url.length == 0">Le lien vers le compte client n'est pas défini !</div>
+      <div class="text-warning" *ngIf="customer.email == null || customer.email.length == 0">L'email de ce client n'est pas défini !</div>
+      <div class="notification">
+        <div class="notif_title">Réinitialisation du mot de passe</div>
+        <button [disabled]="!notificationCustomerAccountEmailOk()" class="btn btn-success btn_wide notif_btn" (click)="sentMessagePasswordReinitialization()">Envoyer</button>
+        <span class="text-warning" *ngIf="!settings.notifications.notification_customer_password_reinit"><br />Notification réinitialisation email désactivée</span>
+        <span class="text-warning" *ngIf="settings.customer_account_url.length == 0"><br />Lien du compte client erroné</span>
+      </div>
+      <div class="notification" *ngIf="!isQuotation() && !noBooking()">
+        <div class="notif_title">Récapitulatif de la réservation</div>
+         <button [disabled]="!notificationBookingEmailOk()" class="btn btn-success btn_wide notif_btn" (click)="displayEmailBookingContent()">Editer</button>
+        <span class="text-warning" *ngIf="customer.email == null || customer.email.length == 0"><br />Ce client ne possède pas d'adresse email</span>
+        <span class="text-warning" *ngIf="!settings.notifications.notification_customer_booking"><br />Notification désactivée dans les réglages</span>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+      <div class="notification" *ngIf="!isQuotation() && !noBooking()">
+        <div class="notif_title">Demande de paiement</div>
+        <button [disabled]="!canNotifyCustomer()" class="btn btn-success btn_wide notif_btn" (click)="displayAskPaymentEmailContent()">Editer</button>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+      <div class="notification" *ngIf="!isQuotation() && !noBooking()">
+        <div class="notif_title">Demande d'avis client</div>
+        <button [disabled]="!notificationAfterBookingEmailOk()" class="btn btn-success btn_wide notif_btn" (click)="displayAfterAppointmentEmailContent()">Editer</button>
+        <span class="text-warning" *ngIf="customer.email == null || customer.email.length == 0"><br />Ce client ne possède pas d'adresse email</span>
+        <span class="text-warning" *ngIf="!settings.notifications.notification_after_appointment"><br />Notification désactivée dans les réglages</span>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+      <div class="notification" *ngIf="isQuotation() && !isQuotationRequest()  && !noBooking()">
+        <div class="notif_title">Rappel devis en attente / Nouveau devis</div>
+        <button [disabled]="!notificationBookingEmailOk()" class="btn btn-success btn_wide notif_btn" (click)="displayEmailBookingQuotationContent()">Editer</button>
+        <span class="text-warning" *ngIf="customer.email == null || customer.email.length == 0">Ce client ne possède pas d'adresse email</span>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+      <div class="notification" *ngIf="isQuotation() && !isQuotationRequest() && !noBooking()">
+        <div class="notif_title">Envoyer devis et demande de paiement</div>
+        <button [disabled]="!canNotifyCustomer()" class="btn btn-success btn_wide notif_btn" (click)="displayAskPaymentEmailContent()">Editer</button>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+      <div class="notification" *ngIf="isQuotation() && isQuotationRequest()">
+        <div class="notif_title">Accepter ce devis</div>
+        <button [disabled]="!notificationBookingEmailOk()" class="btn btn-success btn_wide notif_btn" (click)="displayAcceptQuotationContent()">Editer</button>
+        <span class="text-warning" *ngIf="!settings.notifications.notification_quotation_accepted_customer"><br />Notification accepté devis désactivée</span>
+        <span class="text-warning" *ngIf="customer.email == null || customer.email.length == 0">Ce client ne possède pas d'adresse email</span>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+      <div class="notification" *ngIf="isQuotation() && isQuotationRequest() && !noBooking()">
+        <div class="notif_title">Accepter ce devis et demande de paiement</div>
+        <button [disabled]="!canNotifyCustomer()" class="btn btn-success btn_wide notif_btn" (click)="displayAcceptQuotationAndAskPaymentContent()">Editer</button>
+        <span class="text-warning" *ngIf="!settings.notifications.notification_quotation_accepted_customer"><br />Notification accepté devis désactivée</span>
+        <span class="text-warning" *ngIf="customer.email == null || customer.email.length == 0">Ce client ne possède pas d'adresse email</span>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+      <div class="notification">
+        <div class="notif_title">Email libre</div>
+        <button [disabled]="!canNotifyCustomer()" class="btn btn-success btn_wide notif_btn" (click)="displayCustomEmailContent()">Rédiger</button>
+        <span class="text-warning" *ngIf="customer.email == null || customer.email.length == 0">Ce client ne possède pas d'adresse email</span>
+        <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      </div>
+    </div>
+    <!--
+    <div class="notifications_sms">
+      <h3 class="notifications_sms_title">Notifications sms</h3>
+      <p>Bientôt disponible...</p>
+      <div class="notification no">
+        <div class="notif_title">Création du compte client </div>
+        <input class="btn notif_btn" value="Envoyer" />
+      </div>
+      <div class="notification no">
+        <div class="notif_title">Réinitialisation du mot de passe </div>
+        <input class="btn notif_btn" value="Envoyer" />
+      </div>
+      <div class="notification no">
+        <div class="notif_title">Récapitulatif de la réservation</div>
+        <input class="btn notif_btn" value="Envoyer" />
+      </div>
+      <div class="notification no">
+        <div class="notif_title">Demande de paiement</div>
+        <input class="btn notif_btn" value="Envoyer" />
+      </div>
+      <div class="notification no">
+        <div class="notif_title">Email libre</div>
+        <textarea class="notif_textare"></textarea>
+        <input class="btn notif_btn" value="Envoyer" />
+      </div>
+    </div>
+    //-->
+  </div>
+  <div class="email_notification_content" [hidden]="!displayEmailContent" *ngIf="settings">
+    <div class="notification_content_options">
+      <div class="ask_paiement" *ngIf="typeEmailContent == 'askPayment' || typeEmailContent == 'acceptQuotationAndAskPayment'">
+        <h3 class="text-left content_options_title">Options de demande de paiement</h3>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <div class="ask_paiement_metods">
+                <div class="value btn_wide">Total réservation  : {{ getTotalAmount() }}{{ settings.currency }}</div>
+                <h5>Moyens de paiement proposées</h5>
+                <div [hidden]="!payment.activated || payment.id=='onTheSpot' || payment.id=='later' || payment.custom ||  !getTypeAccountOfCustomer().paymentsTypeList[payment.id]" class="ask_paiement_metod" *ngFor="let payment of settings.paymentsTypeList; index as i">
+                  <input id="input{{ i }}" type="checkbox" [(ngModel)]="paymentsType[payment.id]"  />
+                  <label for="input{{ i }}">{{ payment.title }}</label>
+                </div>
+              </div>
+              <div class="text-danger font-weight-bold" *ngIf="generatePaymentTypeArray().length == 0">
+                Veuillez sélectionner un moyen de paiement !
+              </div>
+            </div>
+            <div class="col-sm">
+              <h5>Demande expire après : </h5>
+              <div class="form-inline mb-1">
+                <select id="acompte" class="form-control" style="width:80px;" [(ngModel)]="expiredDays">
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>10</option>
+                  <option>20</option>
+                  <option>30</option>
+                </select>
+                <label class="ml-3" for="acompte">Jours</label>
+              </div>
+              Date d'expiration : {{ getExpirationDate() |  date:'dd MMMM yyyy à HH:mm':'':'fr' }}
+              <div class="mt-3" *ngIf="canPayAdvancePayment()">
+                <h5>Autoriser le paiement d'un acompte</h5>
+                <div class="form-group form-check">
+                  <input id="nAcompte" type="checkbox" class="form-check-input" [(ngModel)]="advancePayment" />
+                  <label class="form-check-label" for="nAcompte">Acompte</label>
+                </div>
+              </div>
+              <div *ngIf="!canPayAdvancePayment()">
+                <b class="text-warning"><br />Attention, ce type de compte n'est pas autorisé à payer un acompte !</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notification_content_render">
+      <h3 class="content_render_title">Aperçu de l'email</h3>
+      <div class="content_render_template form-inline d-flex justify-content-center">
+        Charger template :
+        <select class="form-control" [(ngModel)]="indexTemplate">
+          <option [value]="-1" [selected]="indexTemplate == -1">Par défaut</option>
+          <option [value]="i" *ngFor="let notification of settings.notifications.notifications_templates; index as i">
+            {{ notification.name }}
+          </option>
+        </select>
+        <input (click)="changeTemplate()" class="btn btn-primary" type="button" value="Charger ce template" />
+        <input *ngIf="indexTemplate >= 0" [disabled]="launchNotificationAction" (click)="deleteTemplate()" class="btn btn-danger" type="button" value="Supprimer ce template" />
+      </div>
+      <div class="resa_lang" *ngIf="settings.languages.length > 1">
+        <span [ngClass]="{'active_lang': currentLanguage == language}" (click)="setCurrentLanguage(language)" *ngFor="let language of settings.languages">
+          <img [src]="'assets/image/flags/' + language + '.png'" alt="">
+        </span>
+      </div>
+      <div class="d-flex justify-content-center form-inline" *ngIf="settings.senders.length > 1">
+        <label for="notificationSender mr-2">Email d'envoie</label>
+        <select id="notificationSender" class="form-control w-50"  [(ngModel)]="currentSender">
+          <option *ngFor="let sender of settings.senders" [ngValue]="sender">{{ sender.sender_name }}<{{ sender.sender_email }}></option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-center form-inline">
+        <label for="notificationSubject mr-2">Sujet de l'email</label>
+        <input id="notificationSubject" class="form-control w-50" type="text" value="Sujet de l'email ici" [(ngModel)]="subject[currentLanguage]" />
+        <button class="btn btn-success ml-5" (click)="addPicture(contentImage)">Ajouter image</button>
+      </div>
+      <div id="resa_form" class="content_render_editor">
+        <app-tinymce id="" [(ngModel)]="message[currentLanguage]" #tinymce="tinymce"></app-tinymce>
+      </div>
+      <div class="text-warning font-weight-bold" *ngIf="isRESAAdminOrStaff()">Shortcode du lien compte client et du lien de paiement sont désactivés pour les managers et les admins !!!</div>
+      <div class="text-warning font-weight-bold" *ngIf="isNotWpRESACustomer()">Cet utilisateur ne possède pas de compte sur le site, il ne pourra pas payer ou voir ses réservations</div>
+      <span class="text-warning" *ngIf="customer.email == null || customer.email.length == 0">Ce client ne possède pas d'adresse email</span>
+      <span class="text-warning" *ngIf="customer.deactivateEmail"><br />Ce client ne souhaite plus recevoir de notification</span>
+      <div class="row">
+        <div class="col text-center">
+          <h5>Envoyer / Annuler</h5>
+          <div *ngIf="(typeEmailContent == 'askPayment' || typeEmailContent == 'acceptQuotationAndAskPayment') && alreadyAskPayment()" class="text-warning">Cette réservation possède déjà une demande de paiement mais vous pouvez toujours en refaire une nouvelle.</div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxNotCloseAfterSend" id="notificationNotClose">
+            <label class="form-check-label" for="notificationNotClose">
+              Ne pas fermer la fenêtre après l'envoie de la notification !
+            </label>
+          </div>
+          <button [disabled]="!canToSendEmail()" class="btn btn-success" (click)="sendEmailNotification();">Envoyer au client</button>
+          <button class="btn btn-danger" (click)="displayEmailContent = false">Annuler</button>
+          <div class="text-danger font-weight-bold" *ngIf="isNotWpRESACustomer() && (haveLinkCustomerAccount(message[currentLanguage]) || haveLinkPaymentBooking(message[currentLanguage]))">
+            Ce client n'a pas de compte sur le site, vous ne pouvez pas lui envoyer un lien de connexion à son compte ! Veuillez enlever le lien du message pour continuer ou lui créer un compte sur le site.
+          </div>
+        </div>
+        <div class="col text-center">
+          <h5>Envoyer un aperçu à l'adresse :</h5>
+          <div class="form-inline d-flex justify-content-center">
+            <input class="form-control" [disabled]="!canToSendEmail()" type="text" [(ngModel)]="currentPreviousEmail" />
+            <button [disabled]="!canToSendEmail() || currentPreviousEmail.length == 0" class="btn btn-success" (click)="sendCustomEmail(currentPreviousEmail, false)">Envoyer</button>
+          </div>
+        </div>
+        <div class="col text-center">
+          <h5>Enregistrer comme template :</h5>
+          <div class="form-inline d-flex justify-content-center">
+            <input class="form-control" [(ngModel)]="nameTemplate" type="text" value="Nom du template" />
+            <input *ngIf="indexTemplate > -1" [disabled]="nameTemplate.length == 0" (click)="editTemplate()" class="btn btn-primary" type="button" value="Enregistrer" />
+            <input (click)="createTemplate()" [disabled]="nameTemplate.length == 0" class="btn btn-primary" type="button" value="Créer nouveau template" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger" (click)="dismiss()">Fermer</button>
+</div>
+
+<ng-template #contentImage let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Sélection de l'image</h4>
+    <button class="close" type="button" data-dismiss="modal" aria-hidden="true" (click)="d(0)">&times;</button>
+  </div>
+  <div class="modal-body">
+    <image-selector (imageSelected)="c($event)"></image-selector>
+  </div>
+  <div class="modal-footer">
+  </div>
+</ng-template>
