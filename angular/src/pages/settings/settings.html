@@ -62,7 +62,7 @@
           <a class="nav-link" [ngClass]="{'active':initTab == 14}" (click)="initTab = 14" href="#tab014" data-toggle="tab" role="tab" aria-controls="tab014" aria-expanded="true">Facebook</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active':initTab == 12}" (click)="initTab = 12" href="#tab012" data-toggle="tab" role="tab" aria-controls="tab012" aria-expanded="true">Support/Mise à jour</a>
+          <a class="nav-link" [ngClass]="{'active':initTab == 12}" (click)="initTab = 12" href="#tab012" data-toggle="tab" role="tab" aria-controls="tab012" aria-expanded="true">Mise à jour</a>
         </li>
       </ul>
     </div>
@@ -245,12 +245,6 @@
                     </tr>
                   </tbody>
                 </table>
-                <div>
-                  <p class="font-italic">
-                    Toutes les langues ne sont pas présentes dans la liste car les pages clientes n'ont pas été traduite !<br />
-                    Si vous voulez nous aider à les traduire, contactez-nous sur le <a href="{{ global.supportURL }}" target="_blank">support</a> de RESA Online
-                  </p>
-                </div>
               </section>
               <ng-template #languageContent let-c="close" let-d="dismiss">
                 <div class="modal-header">
@@ -650,10 +644,6 @@
               <label class="font-weight-bold" for="formColorsBtnHover" >Couleur des boutons au passage de la souris</label>
               <input class="form-control h-50" id="formColorsBtnHover" type="color" [(ngModel)]="settings.colors.secondaryColor" (ngModelChange)="setToSave(true)" />
             </div>
-            <p class="font-italic">
-              Nous proposons sur devis l'intégration de quelques éléments aux pages clientes afin qu'elles collent mieux avec votre thème Wordpress et votre identité visuelle.<br />
-              Contactez nous sur notre <a href="{{ supportURL }}" target="_blank">support</a>
-            </p>
           </section>
           <section class="bg-light p-2 mt-2 mb-2">
             <h3>Couleur du calendrier sur le formulaire</h3>
@@ -950,7 +940,7 @@
                 <li class="nav-item">
                   <a class="nav-link" [ngClass]="{'active':isTabPaymentClassic()}" href="#moyenPaiementGeneral" data-toggle="tab" role="tab" aria-controls="moyenPaiementGeneral" aria-expanded="true">Paiements classiques</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="settings.stripe_connect_conditions_validated" >
                   <a class="nav-link" [ngClass]="{'active':isTabPaymentStripeConnect()}" href="#stripeConnect" data-toggle="tab" role="tab" aria-controls="stripeConnect" aria-expanded="true">Paiement en ligne</a>
                 </li>
                 <li *ngIf="caisseOnlineInstalled"  class="nav-item">
@@ -999,7 +989,7 @@
                     </div>
                   </section>
                 </div>
-                <div class="tab-pane" [ngClass]="{'active':isTabPaymentStripeConnect()}" role="tabpanel" aria-labelledby="stripe-tab" id="stripeConnect">
+                <div class="tab-pane" *ngIf="settings.stripe_connect_conditions_validated" [ngClass]="{'active':isTabPaymentStripeConnect()}" role="tabpanel" aria-labelledby="stripe-tab" id="stripeConnect">
                   <section class="p-2 mt-2 mb-2 bg-light">
                     <h3>Paiement en ligne avec Stripe Connect</h3>
                     <p class="p-2">
@@ -1566,6 +1556,7 @@
               Aucun mise à jour en attente.
             </p>
           </section>
+          <!--
           <section class="p-2 mt-2 mb-2 bg-light">
             <h3>Support</h3>
             <p>
@@ -1579,7 +1570,6 @@
               <a *ngIf="configurationFileURL" href="{{ configurationFileURL }}" download>Voir le fichier de configuration</a>
             </p>
           </section>
-          <!--
           <section class="p-2 mt-2 mb-2 bg-light">
             <h3>Exporter/Importer les données</h3>
             <div>

@@ -2,8 +2,8 @@
 
 abstract class RESA_UpdatesManager
 {
-	private static $versions = array('1.6.2', '1.6.3', '1.6.4', '1.7.0', '1.7.1', '1.7.2', '1.7.3', '1.7.4', '1.8.0', '1.8.1', '1.8.2', '1.8.3', '1.8.4', '1.8.5', '1.9.0', '1.9.1', '1.9.2', '1.9.3', '1.9.4', '1.9.5', '1.9.6', '1.9.7', '1.9.8', '1.9.9', '1.10.0', '1.11.0', '1.11.1', '1.11.2', '1.11.3', '1.11.4', '1.11.5', '1.11.6', '2.0.0', '2.0.1', '2.0.2', '2.0.3', '2.0.4', '2.0.5', '2.0.6', '2.1.0', '2.1.1', '2.1.2', '2.1.3', '2.1.4', '2.2.0', '2.2.1', '2.2.2', '2.2.3', '2.2.4', '2.2.5', '2.2.6');
-	private static $mapFunctionsToVersions =  array ('update_1_6_2', 'update_1_6_3', 'update_1_6_4', 'update_1_7_0', 'update_1_7_1', 'update_1_7_2', 'update_1_7_3', 'update_1_7_4', 'update_1_8_0', 'update_1_8_1', 'update_1_8_2', 'update_1_8_3', 'update_1_8_4', 'update_1_8_5', 'update_1_9_0', 'update_1_9_1', 'update_1_9_2', 'update_1_9_3', 'update_1_9_4', 'update_1_9_5', 'update_1_9_6', 'update_1_9_7', 'update_1_9_8', 'update_1_9_9', 'update_1_10_0', 'update_1_11_0', 'update_1_11_1', 'update_1_11_2', 'update_1_11_3', 'update_1_11_4', 'update_1_11_5', 'update_1_11_6', 'update_2_0_0', 'update_2_0_1', 'update_2_0_2', 'update_2_0_3', 'update_2_0_4', 'update_2_0_5', 'update_2_0_6', 'update_2_1_0', 'update_2_1_1', 'update_2_1_2', 'update_2_1_3', 'update_2_1_4', 'update_2_2_0', 'update_2_2_1', 'update_2_2_2', 'update_2_2_3', 'update_2_2_4', 'update_2_2_5', 'update_2_2_6');
+	private static $versions = array('1.6.2', '1.6.3', '1.6.4', '1.7.0', '1.7.1', '1.7.2', '1.7.3', '1.7.4', '1.8.0', '1.8.1', '1.8.2', '1.8.3', '1.8.4', '1.8.5', '1.9.0', '1.9.1', '1.9.2', '1.9.3', '1.9.4', '1.9.5', '1.9.6', '1.9.7', '1.9.8', '1.9.9', '1.10.0', '1.11.0', '1.11.1', '1.11.2', '1.11.3', '1.11.4', '1.11.5', '1.11.6', '2.0.0', '2.0.1', '2.0.2', '2.0.3', '2.0.4', '2.0.5', '2.0.6', '2.1.0', '2.1.1', '2.1.2', '2.1.3', '2.1.4', '2.2.0', '2.2.1', '2.2.2', '2.2.3', '2.2.4', '2.2.5', '2.2.6', '2.2.7');
+	private static $mapFunctionsToVersions =  array ('update_1_6_2', 'update_1_6_3', 'update_1_6_4', 'update_1_7_0', 'update_1_7_1', 'update_1_7_2', 'update_1_7_3', 'update_1_7_4', 'update_1_8_0', 'update_1_8_1', 'update_1_8_2', 'update_1_8_3', 'update_1_8_4', 'update_1_8_5', 'update_1_9_0', 'update_1_9_1', 'update_1_9_2', 'update_1_9_3', 'update_1_9_4', 'update_1_9_5', 'update_1_9_6', 'update_1_9_7', 'update_1_9_8', 'update_1_9_9', 'update_1_10_0', 'update_1_11_0', 'update_1_11_1', 'update_1_11_2', 'update_1_11_3', 'update_1_11_4', 'update_1_11_5', 'update_1_11_6', 'update_2_0_0', 'update_2_0_1', 'update_2_0_2', 'update_2_0_3', 'update_2_0_4', 'update_2_0_5', 'update_2_0_6', 'update_2_1_0', 'update_2_1_1', 'update_2_1_2', 'update_2_1_3', 'update_2_1_4', 'update_2_2_0', 'update_2_2_1', 'update_2_2_2', 'update_2_2_3', 'update_2_2_4', 'update_2_2_5', 'update_2_2_6', 'update_2_2_7');
 
 	public static function updatePlugin()
 	{
@@ -453,6 +453,10 @@ abstract class RESA_UpdatesManager
 
 	public static function update_2_2_6(){
 		update_option('resa_plugin_version', '2.2.6');
+	}
+
+	public static function update_2_2_7(){
+		update_option('resa_plugin_version', '2.2.7');
 	}
 
 	public static function updateCustomers(){

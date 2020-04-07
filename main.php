@@ -3,7 +3,7 @@
 Plugin Name: Resa Online
 Plugin URI:https://resa-online.fr
 Description: RESA Online logiciel de réservation et gestion de planning
-Version: 2.2.6
+Version: 2.2.7
 Author: 360-online
 Author URI:https://360-online.fr/
 Text Domain: resa

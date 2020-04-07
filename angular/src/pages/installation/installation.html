@@ -185,12 +185,6 @@
             </div>
             <textarea class="form-control" rows="3" [(ngModel)]="settings.cheque_text[global.currentLanguage]" (ngModelChange)="setToSave(true)"></textarea>
           </div>
-          <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" id="formOnline" type="checkbox" [(ngModel)]="settings.online" (ngModelChange)="setToSave(true)" />
-              <label class="form-check-label" for="formOnline"><b>Paiement en ligne avec (à configurer plus tard)</b></label>
-            </div>
-          </div>
         </div>
       </section>
       <div class="d-flex justify-content-between p-3">

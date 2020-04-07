@@ -44,15 +44,6 @@ Apportez à vos client une expérience agréable, fluide et la plus simple possi
 
 #GRATUIT #FIABLE #PERFORMANT #EVOLUTIF​
 
-
-= Qui sommes-nous ? =
-
-Nous sommes la société 360-Online, composé d'une équipe à taille humaine soudée et dynamique.
-
-Nous assurons un support payant, des développements sur mesure à la demande ainsi que la stabilité, les corrections et l'évolution du plugin RESA-Online.
-
-Plus d'informations sur notre [site internet RESA-Online.fr](https://resa-online.fr/ "RESA-Online")
-
 = Idéal pour gérer les activités =
 
 * Parc accrobranche / parc aventure,
@@ -85,10 +76,9 @@ De manière générale, vous pouvez :
 * Créer des scénarios de réservation ultra paramétrable,
 * Filtrer les réservations,
 
-= INFOS Support =
+= Code source =
 
-RESA-Online est 100% gratuit, le support quand à lui est payant.
-Pour toutes vos questions et demandes de support veuillez nous écrire à l'adresse support@resa-online.fr ou passer par [la page support](https://resa-online.fr/support-resa-online/)
+https://github.com/RESAOnline/resa-online
 
 == Installation ==
 
@@ -107,6 +97,9 @@ Cette section explique comment installer le plugin et le faire fonctionner.
 5. screenshot-5.jpg
 
 == Changelog ==
+= 2.2.7 =
+* Suppression de RESA Stripe connect
+
 = 2.2.4, 2.2.5, 2.2.6 =
 * Affichage des contraintes dans le planning des membres
 * Filtre des paiements dans la liste des réservations

@@ -40,8 +40,6 @@
           </div>
         </div>
         <a class="btn btn-sm mr-1 btn-outline-light" href="{{ getWpBackendLink() }}">Quitter</a>
-        <a class="btn btn-sm btn-success mr-1" target="_blank" href="{{ global.supportURL }}">Support</a>
-        <a class="btn btn-sm btn-success mr-1" target="_blank" href="https://www.facebook.com/RESA-Online-485177045231268/">Facebook</a>
       </div>
     </div>
   </div>
@@ -57,7 +55,7 @@
         <button *ngIf="isRESAManager()" class="btn btn-dashicons dashicons dashicons-admin-users"  ngbTooltip="Clients" (click)="goCustomers()"></button>
         <button *ngIf="isRESAManager() && global.caisseOnline.installed && global.caisseOnline.activated" class="btn btn-dashicons dashicons dashicons-cart" ngbTooltip="Caisse Online" (click)="goCaisseOnline()" ngbTooltip="Aller sur Caisse Online"></button>
         <button *ngIf="isRESAManager() && global.swiklyLink != ''" class="btn btn-dashicons font-weight-bold" ngbTooltip="Swikly" (click)="goSwikly()" ngbTooltip="Aller sur Swikly" style="font-size:30px">S</button>
-        <button *ngIf="isRESAManager() && !global.caisseOnline.installed" class="btn btn-dashicons dashicons dashicons-cart" ngbTooltip="Paiement en ligne" (click)="goStripeConnect()" ngbTooltip="Paiement en ligne"></button>
+        <button *ngIf="isRESAManager() && !global.caisseOnline.installed && global.stripeConnect.activated" class="btn btn-dashicons dashicons dashicons-cart" ngbTooltip="Paiement en ligne" (click)="goStripeConnect()" ngbTooltip="Paiement en ligne"></button>
         <div *ngIf="isRESAManager()" class="dropdown mr-1" ngbTooltip="Statistiques"  placement="left">
           <button class="btn btn-dashicons dashicons dashicons-chart-line" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -89,10 +87,7 @@
             <button class="dropdown-item" (click)="goSettings()"><span *ngIf="isSettings()">> </span>Réglages avancés</button>
           </div>
         </div>
-        <resaNews [RESANewsLastViewNumber]="RESANewsLastViewNumber"></resaNews>
-        <!--
-        <a class="btn btn-dashicons-outline dashicons dashicons-facebook-alt" ngbTooltip="Facebook" target="_blank" href="https://www.facebook.com/RESA-Online-485177045231268/"></a>
-        //-->
+        <!-- <resaNews [RESANewsLastViewNumber]="RESANewsLastViewNumber"></resaNews> //-->
         <a class="btn btn-dashicons-outline dashicons dashicons-editor-help" ngbTooltip="Aide" target="_blank" href="{{ global.supportURL }}"></a>
         <div style="font-size: 13px; color:white" class=" mr-1 ml-1 d-none d-md-block">
           Bienvenue {{ getCurrentUser().login }}<br />
@@ -121,7 +116,4 @@
 <div class="container p-sm-2" *ngIf="isUserNull()">
   <p *ngIf="initFailed" class="mb-0 mt-0 bg-warning text-center">Erreur de connexion au wordpress, veuillez réessayer : <a href="{{ getWpBackendLink() }}">Retour</a></p>
   <div *ngIf="!initFailed" class="sLoader_bg"><div class="sLoader"></div></div>
-</div>
-<div id="resa_footer" *ngIf="!isUserNull() && isDisplayFooter()" style="max-width: 1400px; margin-left: auto; margin-right: auto;">
-  <p class="text-left font-italic small">Vous aimez RESA Online ? Veuillez nous laisser une note <a href="https://wordpress.org/support/plugin/resa-online/reviews/" target="_blank">★★★★★</a>. Nous apprécions vraiment votre soutien !</p>
 </div>
